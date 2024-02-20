@@ -6,12 +6,7 @@ export default defineNuxtConfig({
   ssr: false,
   srcDir: "src/",
   css: ["@/styles/global.scss"],
-  modules: [
-    "nuxt-simple-sitemap",
-    ["@storyblok/nuxt", { accessToken: process.env.STORYBLOK_KEY }],
-    "nuxt-jsonld",
-    "dayjs-nuxt",
-  ],
+  modules: ["nuxt-simple-sitemap", "nuxt-jsonld", "dayjs-nuxt"],
 
   dayjs: {
     locales: ["fr"],
