@@ -1,7 +1,4 @@
-<script setup>
-const key = process.env.API_KEY;
-</script>
+<script setup></script>
 <template>
-  <h1>Hello</h1>
-  {{ key }}
+  <h1>HELLO</h1>
 </template>

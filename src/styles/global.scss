@@ -216,6 +216,15 @@ details > summary::-webkit-details-marker /* Safari */ {
   font-weight: $skinny-thick;
 }
 
+.base-text {
+  font-size: 1rem;
+  font-weight: $skinny;
+
+  @media (min-width: $tablet-screen) {
+    font-size: 1.1rem;
+  }
+}
+
 //ANIMATIONS
 @keyframes fading {
   from {

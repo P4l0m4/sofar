@@ -7,16 +7,16 @@ $super-big-screen: 2400px;
 //COLORS
 $base-color: #f7f7f7;
 $primary-color: #fffdfa;
-$text-color: #202020;
+$secondary-color: #146594;
+$text-color: #00324f;
 $text-color-alt: $primary-color;
 
-$text-color-faded: rgba($text-color, 0.8);
-$primary-color-faded: rgba(247, 247, 247, 0.8);
-$secondary-color: #1eb2bc;
+$text-color-faded: rgba($text-color, 0.6);
+$primary-color-faded: rgba($primary-color, 0.8);
 $secondary-color-faded: rgba($secondary-color, 0.4);
 
 //BORDERS
-$radius: 8px;
+$radius: 20px;
 
 //SHADOWS
 $shadow: 0px 0px 10px rgba(0, 0, 0, 0.04);

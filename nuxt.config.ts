@@ -1,7 +1,3 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
-
-import { getBlogPages, getPortfolioPages } from "./src/utils/sitemap.js";
-
 export default defineNuxtConfig({
   ssr: false,
   srcDir: "src/",
@@ -22,15 +18,6 @@ export default defineNuxtConfig({
       },
     },
   },
-  // sitemap: {
-  //   sitemaps: true,
-  //   siteUrl: "https://tekilawebfactory.com",
-  //   urls: async () => {
-  //     const blogPages = await getBlogPages();
-  //     const portfolioPages = await getPortfolioPages();
-  //     return [...blogPages, ...portfolioPages];
-  //   },
-  // },
   vue: {
     compilerOptions: {
       isCustomElement: (tag) =>
@@ -57,7 +44,7 @@ export default defineNuxtConfig({
           async: true,
         },
       ],
-      htmlAttrs: { lang: "fr" },
+      htmlAttrs: { lang: "en" },
     },
   },
 });
