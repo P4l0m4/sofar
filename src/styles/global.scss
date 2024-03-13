@@ -1,26 +1,20 @@
 @font-face {
   font-family: "Custom";
-  src: url(@/assets/fonts/figtree/Figtree-Regular.ttf) format("truetype");
+  src: url(@/assets/fonts/figtree/Suisse-Intl-Regular.otf) format("truetype");
   font-display: swap;
   font-weight: 400;
 }
 @font-face {
   font-family: "Custom";
-  src: url(@/assets/fonts/figtree/Figtree-Medium.ttf) format("truetype");
-  font-display: swap;
-  font-weight: 500;
-}
-@font-face {
-  font-family: "Custom";
-  src: url(@/assets/fonts/figtree/Figtree-SemiBold.ttf) format("truetype");
+  src: url(@/assets/fonts/figtree/Suisse-Intl-Book.otf) format("truetype");
   font-display: swap;
   font-weight: 600;
 }
 @font-face {
   font-family: "Custom";
-  src: url(@/assets/fonts/figtree/Figtree-Black.ttf) format("truetype");
+  src: url(@/assets/fonts/figtree/Suisse-Intl-Bold.otf) format("truetype");
   font-display: swap;
-  font-weight: 900;
+  font-weight: 800;
 }
 
 *,
@@ -124,7 +118,7 @@ input[type="number"] {
 .button-primary {
   background-color: $text-color;
   color: $primary-color;
-  transition: 0.2s ease;
+  transition: 0.4s ease;
   position: relative;
 
   &:hover {
@@ -150,7 +144,7 @@ input[type="number"] {
   font-size: $small-text;
   text-decoration: underline;
   opacity: 0.8;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.4s ease;
   color: $secondary-color;
 
   &:hover {
@@ -159,7 +153,7 @@ input[type="number"] {
 }
 
 .scale-on-hover {
-  transition: transform 0.2s ease-in-out;
+  transition: transform 0.4s;
 
   &:hover {
     transform: scale(1.04) !important;
@@ -209,8 +203,9 @@ details > summary::-webkit-details-marker /* Safari */ {
 
 .titles {
   font-size: $titles;
-  font-weight: $overweight;
+  font-weight: $thick;
 }
+
 .subtitles {
   font-size: $subtitles;
   font-weight: $skinny-thick;
