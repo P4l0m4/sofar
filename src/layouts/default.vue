@@ -1,7 +1,4 @@
-<script setup>
-import NavigationComponent from "~/Components/NavigationComponent.vue";
-</script>
-
+<script setup></script>
 <template>
   <NavigationComponent />
   <main>

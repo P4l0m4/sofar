@@ -2,10 +2,25 @@
 import { ref } from "vue";
 
 const hoveredElements = ref([]);
+
+const isMenuOpen = ref(false);
 </script>
 <template>
   <aside class="aside">
-    <nav class="aside__nav">
+    <div
+      class="aside__invisible"
+      v-if="isMenuOpen"
+      @click="isMenuOpen = false"
+      @onmouseenter="isMenuOpen = false"
+    ></div>
+    <button class="aside__menu" v-if="!isMenuOpen" @click="isMenuOpen = true">
+      <img
+        class="aside__menu__icon"
+        src="@/assets/icons/menu.svg"
+        alt="menu icon"
+      />
+    </button>
+    <nav class="aside__nav" v-if="isMenuOpen">
       <ul class="aside__nav__ul">
         <li
           class="aside__nav__ul__li scale-on-hover"
@@ -51,7 +66,7 @@ const hoveredElements = ref([]);
               }"
               ><img
                 class="aside__nav__ul__li__sublinks__link__icon"
-                src="@/assets/icons/concierge.svg"
+                src="@/assets/icons/award_star.svg"
                 alt="menu icon booking"
               />Private jet charters</NuxtLink
             >
@@ -67,7 +82,7 @@ const hoveredElements = ref([]);
               }"
               ><img
                 class="aside__nav__ul__li__sublinks__link__icon"
-                src="@/assets/icons/concierge.svg"
+                src="@/assets/icons/business_center.svg"
                 alt="menu icon booking"
               />Business charters</NuxtLink
             >
@@ -83,7 +98,7 @@ const hoveredElements = ref([]);
               }"
               ><img
                 class="aside__nav__ul__li__sublinks__link__icon"
-                src="@/assets/icons/concierge.svg"
+                src="@/assets/icons/group_add.svg"
                 alt="menu icon booking"
               />Family jet charters</NuxtLink
             >
@@ -131,7 +146,7 @@ const hoveredElements = ref([]);
               }"
               ><img
                 class="aside__nav__ul__li__sublinks__link__icon"
-                src="@/assets/icons/concierge.svg"
+                src="@/assets/icons/coffee.svg"
                 alt="menu icon booking"
               />Private jet amenities</NuxtLink
             >
@@ -147,7 +162,7 @@ const hoveredElements = ref([]);
               }"
               ><img
                 class="aside__nav__ul__li__sublinks__link__icon"
-                src="@/assets/icons/concierge.svg"
+                src="@/assets/icons/network_node.svg"
                 alt="menu icon booking"
               />Off fleet requests</NuxtLink
             >
@@ -163,7 +178,7 @@ const hoveredElements = ref([]);
               }"
               ><img
                 class="aside__nav__ul__li__sublinks__link__icon"
-                src="@/assets/icons/concierge.svg"
+                src="@/assets/icons/attach_money.svg"
                 alt="menu icon booking"
               />Prices</NuxtLink
             >
@@ -180,7 +195,7 @@ const hoveredElements = ref([]);
               }"
               ><img
                 class="aside__nav__ul__li__sublinks__link__icon"
-                src="@/assets/icons/concierge.svg"
+                src="@/assets/icons/service_toolbox.svg"
                 alt="menu icon booking"
               />Aircraft management</NuxtLink
             >
@@ -362,14 +377,47 @@ const hoveredElements = ref([]);
 }
 
 .aside {
+  z-index: 3;
   position: fixed;
   inset: 0 0 0 auto;
   height: 100svh;
+  justify-content: flex-end;
+  display: flex;
+
+  @media (min-width: $big-tablet-screen) {
+    width: 100%;
+  }
+
+  &__invisible {
+    border: red solid 1px;
+    width: 100%;
+    height: 100svh;
+  }
+
+  &__menu {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    background-color: $secondary-color-faded;
+    border-radius: $radius;
+    backdrop-filter: blur(6px);
+    cursor: pointer;
+
+    &__icon {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
 
   &__nav {
     display: flex;
     justify-content: center;
-    flex-direction: column;
+    align-items: center;
     background-color: $text-color-faded;
     padding: 1rem;
     gap: 1rem;
