@@ -3,7 +3,7 @@ import { ref } from "vue";
 
 const hoveredElements = ref([]);
 
-const isMenuOpen = ref(false);
+const isMenuOpen = ref(true);
 </script>
 <template>
   <aside class="aside">
