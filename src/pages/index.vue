@@ -16,7 +16,6 @@
 <style lang="scss" scoped>
 .index__banner {
   display: flex;
-  background-image: url("@/assets/images/placeholder.svg");
   background-size: cover;
   background-position: center;
   height: 100svh;
