@@ -1,6 +1,5 @@
 <script setup></script>
 <template>
-  <SampleComponent />
   <NavigationComponent />
   <main>
     <slot />

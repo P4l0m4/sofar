@@ -1,6 +1,5 @@
 <script setup></script>
 <template>
-  <SampleComponent />
   <picture class="index__banner">
     <source
       media="(min-width: 1100px)"
