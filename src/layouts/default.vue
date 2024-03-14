@@ -1,8 +1,8 @@
 <script setup>
-import NavigationComponent from "@/components/NavigationComponent.vue";
+import NavigationMenu from "@/components/NavigationMenu.vue";
 </script>
 <template>
-  <NavigationComponent />
+  <NavigationMenu />
   <main>
     <slot />
   </main>
