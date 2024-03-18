@@ -465,7 +465,8 @@ window.addEventListener("scroll", function () {
           right: 8rem;
           transition: 0.4s opacity ease;
 
-          &:hover: &:active {
+          &:hover,
+          &:active {
             display: flex;
             opacity: 1;
           }
