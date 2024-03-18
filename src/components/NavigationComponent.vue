@@ -407,7 +407,7 @@ window.addEventListener("scroll", function () {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: $text-color-faded;
+    background-color: $text-color-faded-strong;
     width: 100%;
     height: fit-content;
     backdrop-filter: blur(6px);
@@ -415,6 +415,7 @@ window.addEventListener("scroll", function () {
     @media (min-width: $big-tablet-screen) {
       height: 100%;
       width: fit-content;
+      background-color: $text-color-faded;
     }
 
     &__ul {
@@ -438,7 +439,7 @@ window.addEventListener("scroll", function () {
         justify-content: center;
         align-items: center;
         border-radius: $radius;
-        backdrop-filter: blur(6px);
+        backdrop-filter: blur(20px);
         position: relative;
         transition:
           0.4s background-color ease,
@@ -612,6 +613,17 @@ window.addEventListener("scroll", function () {
       max-height: 80px;
       height: fit-content;
       transition: max-height 0.4s ease;
+
+      &:after {
+        content: "";
+        display: block;
+        background-image: linear-gradient(transparent, $text-color 80%);
+        width: 100%;
+        height: 100px;
+        position: absolute;
+        bottom: -4.55rem;
+      }
+
       // overflow: scroll;
 
       @media (min-width: $big-tablet-screen) {
@@ -626,6 +638,7 @@ window.addEventListener("scroll", function () {
           color: $text-color-alt;
           font-size: 1rem;
           font-weight: $skinny;
+          text-shadow: $shadow-text;
           display: flex;
           align-items: center;
           padding: 1rem;
