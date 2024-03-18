@@ -141,6 +141,7 @@ window.addEventListener("scroll", function () {
                 alt="menu icon booking"
               />Services</NuxtLink
             >
+
             <div
               id="scrollable-sublinks"
               class="aside__nav__ul__li__sublinks"
@@ -188,7 +189,7 @@ window.addEventListener("scroll", function () {
               ><img
                 class="aside__nav__ul__li__link__icon"
                 src="@/assets/icons/map.svg"
-                alt="menu icon booking"
+                alt="menu icon airports"
               />Airports</NuxtLink
             >
           </li>
@@ -204,7 +205,7 @@ window.addEventListener("scroll", function () {
               ><img
                 class="aside__nav__ul__li__link__icon"
                 src="@/assets/icons/airlines.svg"
-                alt="menu icon booking"
+                alt="menu icon aircrafts"
               />Aircrafts</NuxtLink
             >
             <div class="aside__nav__ul__li__sublinks">
@@ -221,7 +222,7 @@ window.addEventListener("scroll", function () {
                 ><img
                   class="aside__nav__ul__li__sublinks__link__icon"
                   src="@/assets/icons/airplanemode_active.svg"
-                  alt="menu icon booking"
+                  alt="menu icon PC12"
                 />PC12</NuxtLink
               >
               <NuxtLink
@@ -237,7 +238,7 @@ window.addEventListener("scroll", function () {
                 ><img
                   class="aside__nav__ul__li__sublinks__link__icon"
                   src="@/assets/icons/airplanemode_active.svg"
-                  alt="menu icon booking"
+                  alt="menu icon Phenom 100"
                 />Phenom 100</NuxtLink
               >
 
@@ -254,7 +255,7 @@ window.addEventListener("scroll", function () {
                 ><img
                   class="aside__nav__ul__li__sublinks__link__icon"
                   src="@/assets/icons/airplanemode_active.svg"
-                  alt="menu icon booking"
+                  alt="menu icon phenom 300"
                 />Phenom 300</NuxtLink
               >
               <NuxtLink
@@ -270,7 +271,7 @@ window.addEventListener("scroll", function () {
                 ><img
                   class="aside__nav__ul__li__sublinks__link__icon"
                   src="@/assets/icons/health_and_safety.svg"
-                  alt="menu icon booking"
+                  alt="menu icon safety"
                 />Safety</NuxtLink
               >
             </div>
@@ -287,7 +288,7 @@ window.addEventListener("scroll", function () {
               ><img
                 class="aside__nav__ul__li__link__icon"
                 src="@/assets/icons/info.svg"
-                alt="menu icon booking"
+                alt="menu icon about us"
               />About us</NuxtLink
             >
             <div class="aside__nav__ul__li__sublinks">
@@ -304,7 +305,7 @@ window.addEventListener("scroll", function () {
                 ><img
                   class="aside__nav__ul__li__sublinks__link__icon"
                   src="@/assets/icons/book_2.svg"
-                  alt="menu icon booking"
+                  alt="menu icon our story"
                 />Our story</NuxtLink
               >
               <NuxtLink
@@ -320,7 +321,7 @@ window.addEventListener("scroll", function () {
                 ><img
                   class="aside__nav__ul__li__sublinks__link__icon"
                   src="@/assets/icons/article.svg"
-                  alt="menu icon booking"
+                  alt="menu icon blog"
                 />Blog</NuxtLink
               >
 
@@ -337,7 +338,7 @@ window.addEventListener("scroll", function () {
                 ><img
                   class="aside__nav__ul__li__sublinks__link__icon"
                   src="@/assets/icons/alternate_email.svg"
-                  alt="menu icon booking"
+                  alt="menu icon contact"
                 />Contact</NuxtLink
               >
             </div>
@@ -355,13 +356,15 @@ window.addEventListener("scroll", function () {
 .aside {
   z-index: 3;
   position: fixed;
-  inset: 0 0 0 auto;
-  height: 100svh;
-  justify-content: flex-end;
+  width: 100%;
+  inset: auto 0 0 0;
+  height: fit-content;
   display: flex;
 
   @media (min-width: $big-tablet-screen) {
-    width: 100%;
+    inset: 0 0 0 auto;
+    width: fit-content;
+    height: 100svh;
   }
 
   &__nav {
@@ -369,17 +372,32 @@ window.addEventListener("scroll", function () {
     justify-content: center;
     align-items: center;
     background-color: $text-color-faded;
-    padding: 1rem;
-    gap: 1rem;
-    height: 100%;
+    width: 100%;
+    height: fit-content;
     backdrop-filter: blur(6px);
+
+    @media (min-width: $big-tablet-screen) {
+      height: 100%;
+      width: fit-content;
+    }
 
     &__ul {
       display: flex;
-      flex-direction: column;
-      gap: 1rem;
+      gap: 0.5rem;
+      width: 100%;
+      padding: 0.5rem 0 0.5rem 0.5rem;
+      overflow-x: scroll;
+
+      @media (min-width: $big-tablet-screen) {
+        flex-direction: column;
+        padding: 1rem;
+        gap: 1rem;
+        overflow-x: inherit;
+        width: 100%;
+      }
 
       &__li {
+        width: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -394,10 +412,10 @@ window.addEventListener("scroll", function () {
         }
 
         &__link {
-          padding: 1rem;
+          padding: 0.5rem 1rem;
           text-decoration: none;
           color: $text-color-alt;
-          font-size: 1.1rem;
+          font-size: $small-text;
           font-weight: $skinny;
           display: flex;
           align-items: center;
@@ -410,12 +428,24 @@ window.addEventListener("scroll", function () {
 
           @media (min-width: $big-tablet-screen) {
             flex-direction: row;
+            font-size: 1.1rem;
+            padding: 1rem;
 
             &:hover {
               & ~ .aside__nav__ul__li__sublinks {
                 display: flex;
                 opacity: 1;
               }
+            }
+          }
+
+          &__icon {
+            width: 1.2rem;
+            height: 1.2rem;
+
+            @media (min-width: $big-tablet-screen) {
+              width: 1.5rem;
+              height: 1.5rem;
             }
           }
         }
@@ -440,7 +470,6 @@ window.addEventListener("scroll", function () {
           &__link {
             display: flex;
             align-items: center;
-
             padding: 1rem;
             gap: 0.5rem;
             background-color: $text-color-faded;
@@ -452,7 +481,6 @@ window.addEventListener("scroll", function () {
               transform 0.4s ease;
             white-space: nowrap;
             width: 100%;
-
             text-shadow: $shadow-text;
 
             &:hover {
@@ -462,6 +490,16 @@ window.addEventListener("scroll", function () {
             &--siblings {
               background-color: $text-color-faded-strong;
               transform: scale(1.01);
+            }
+
+            &__icon {
+              width: 1.2rem;
+              height: 1.2rem;
+
+              @media (min-width: $big-tablet-screen) {
+                width: 1.5rem;
+                height: 1.5rem;
+              }
             }
           }
 
