@@ -175,7 +175,7 @@ window.addEventListener("scroll", function () {
   let st = window.pageYOffset || document.documentElement.scrollTop;
   if (st > window.innerHeight / 2 && st > lastScrollTop) {
     if (mobileSublinksToDisplay.value !== "" && draggableElement.value) {
-      draggableElement.value.style.maxHeight = "fit-content";
+      // draggableElement.value.style.maxHeight = "fit-content";
       childrenLinksHaveBeenDisplayed = true;
     } else {
       isMenuOpen.value = false;
@@ -186,6 +186,22 @@ window.addEventListener("scroll", function () {
   }
   lastScrollTop = st <= 0 ? 0 : st;
 });
+
+function handleDrag() {
+  if (draggableElement.value) {
+    draggableElement.value.style.height = `${
+      draggableElement.value.scrollTop * 2
+    }px`;
+    draggableElement.value.style.maxHeight = "fit-content";
+    console.log(
+      draggableElement.value.scrollTop,
+      draggableElement.value.style.height
+    );
+    if (draggableElement.value.scrollTop <= 40) {
+      mobileSublinksToDisplay = "";
+    }
+  }
+}
 </script>
 <template>
   <aside class="aside">
@@ -356,6 +372,8 @@ window.addEventListener("scroll", function () {
             class="aside__nav__mobile-sublinks"
             ref="draggableElement"
             v-if="mobileSublinksToDisplay"
+            @mouseenter="handleDrag()"
+            @mousemove="handleDrag()"
           >
             <li
               class="aside__nav__mobile-sublinks__li"
@@ -603,6 +621,7 @@ window.addEventListener("scroll", function () {
     }
 
     &__mobile-sublinks {
+      overflow: scroll;
       z-index: -2;
       position: absolute;
       bottom: 4.55rem;
@@ -611,7 +630,8 @@ window.addEventListener("scroll", function () {
       flex-direction: column;
       background-color: $text-color-faded;
       max-height: 80px;
-      height: fit-content;
+      min-height: 80px;
+      height: 80px;
       transition: max-height 0.4s ease;
 
       &:after {
