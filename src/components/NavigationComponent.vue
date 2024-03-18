@@ -294,7 +294,7 @@ function handleDrag() {
           </li>
           <li
             class="aside__nav__ul__li scale-on-hover"
-            @touchstart.prevent="mobileSublinksToDisplay = 'aircrafts'"
+            @touchstart="mobileSublinksToDisplay = 'aircrafts'"
             @mouseenter="hoveredElements = [2, 4]"
             @mouseleave="hoveredElements = []"
             :class="{
