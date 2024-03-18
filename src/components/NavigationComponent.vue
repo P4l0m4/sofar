@@ -421,9 +421,8 @@ window.addEventListener("scroll", function () {
       display: flex;
       gap: 0.5rem;
       width: 100%;
-      padding: 0.5rem 0 0.5rem 0.5rem;
+      padding: 0.5rem;
       overflow-x: scroll;
-      overflow-y: visible;
 
       @media (min-width: $big-tablet-screen) {
         flex-direction: column;
@@ -585,6 +584,7 @@ window.addEventListener("scroll", function () {
             }
           }
         }
+
         #scrollable-sublinks {
           overflow-y: scroll;
           height: 400px;
