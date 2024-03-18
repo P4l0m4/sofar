@@ -7,6 +7,7 @@ const scrollableElement = ref(null);
 const draggableElement = ref();
 const arrow = ref(null);
 const isMenuOpen = ref(true);
+let childrenLinksHaveBeenDisplayed = false;
 let lastScrollTop = 0;
 const menuElements = [
   {
@@ -171,7 +172,6 @@ function scrollWithArrow() {
 }
 
 window.addEventListener("scroll", function () {
-  let childrenLinksHaveBeenDisplayed = false;
   let st = window.pageYOffset || document.documentElement.scrollTop;
   if (st > window.innerHeight / 2 && st > lastScrollTop) {
     if (mobileSublinksToDisplay.value !== "" && draggableElement.value) {
