@@ -226,7 +226,7 @@ function handleDrag() {
           </li>
           <li
             class="aside__nav__ul__li scale-on-hover"
-            @touchstart.prevent="mobileSublinksToDisplay = 'services'"
+            @touchstart="mobileSublinksToDisplay = 'services'"
             @mouseenter="hoveredElements = [0, 2]"
             @mouseleave="hoveredElements = []"
             :class="{
@@ -331,7 +331,7 @@ function handleDrag() {
           </li>
           <li
             class="aside__nav__ul__li scale-on-hover"
-            @touchstart.prevent="mobileSublinksToDisplay = 'aboutUs'"
+            @touchstart="mobileSublinksToDisplay = 'aboutUs'"
             @mouseenter="hoveredElements = [3]"
             @mouseleave="hoveredElements = []"
             :class="{
@@ -372,8 +372,8 @@ function handleDrag() {
             class="aside__nav__mobile-sublinks"
             ref="draggableElement"
             v-if="mobileSublinksToDisplay"
-            @mouseenter="handleDrag()"
-            @mousemove="handleDrag()"
+            @mouseenter.prevent="handleDrag()"
+            @mousemove.prevent="handleDrag()"
           >
             <li
               class="aside__nav__mobile-sublinks__li"
