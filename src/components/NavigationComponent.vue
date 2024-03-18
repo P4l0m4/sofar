@@ -171,25 +171,21 @@ function scrollWithArrow() {
 }
 
 window.addEventListener("scroll", function () {
+  let childrenLinksHaveBeenDisplayed = false;
   let st = window.pageYOffset || document.documentElement.scrollTop;
   if (st > window.innerHeight / 2 && st > lastScrollTop) {
-    isMenuOpen.value = false;
+    if (mobileSublinksToDisplay.value !== "" && draggableElement.value) {
+      draggableElement.value.style.maxHeight = "fit-content";
+      childrenLinksHaveBeenDisplayed = true;
+    } else {
+      isMenuOpen.value = false;
+    }
   } else if (st > window.innerHeight / 2 && st < lastScrollTop) {
     isMenuOpen.value = true;
+    mobileSublinksToDisplay.value = "";
   }
   lastScrollTop = st <= 0 ? 0 : st;
 });
-
-function handleDragging() {
-  console.log("dragged");
-  draggableElement.value.style.border = "red 1px solid";
-  let newHeight = parseInt(draggableElement.value.style.height, 10) + 1;
-  if (newHeight > 200) {
-    // Let's say we don't want it to grow beyond 200px
-    newHeight = 100; // Reset to original height
-  }
-  draggableElement.value.style.height = `${newHeight}px`;
-}
 </script>
 <template>
   <aside class="aside">
@@ -355,32 +351,35 @@ function handleDragging() {
             </div>
           </li>
         </ul>
-
-        <ul
-          class="aside__nav__mobile-sublinks"
-          ref="mobileSublinks"
-          v-if="mobileSublinksToDisplay"
-          @dragstart="handleDragging()"
-          draggable="true"
-        >
-          <li
-            class="aside__nav__mobile-sublinks__li"
-            v-for="link in linksGroupedByParent[mobileSublinksToDisplay]"
-            :key="link.id"
+        <Transition>
+          <ul
+            class="aside__nav__mobile-sublinks"
+            ref="draggableElement"
+            v-if="mobileSublinksToDisplay"
           >
-            <NuxtLink
-              class="aside__nav__mobile-sublinks__li__link"
-              :to="link.path"
+            <li
+              class="aside__nav__mobile-sublinks__li"
+              v-for="link in linksGroupedByParent[mobileSublinksToDisplay]"
+              :key="link.id"
             >
-              <img
-                class="aside__nav__mobile-sublinks__li__link__icon"
-                :src="link.src"
-                :alt="link.alt"
-              />{{ link.label }}
-            </NuxtLink>
-          </li>
-        </ul>
-        <span class="aside__nav__invisible"></span></nav
+              <NuxtLink
+                class="aside__nav__mobile-sublinks__li__link"
+                :to="link.path"
+              >
+                <img
+                  class="aside__nav__mobile-sublinks__li__link__icon"
+                  :src="link.src"
+                  :alt="link.alt"
+                />{{ link.label }}
+              </NuxtLink>
+            </li>
+          </ul></Transition
+        >
+        <span
+          class="aside__nav__invisible"
+          @click="mobileSublinksToDisplay = ''"
+          v-if="mobileSublinksToDisplay"
+        ></span></nav
     ></Transition>
   </aside>
 </template>
@@ -562,7 +561,6 @@ function handleDragging() {
             cursor: pointer;
             border-radius: 50%;
             box-shadow: $shadow;
-
             animation: moveDown 2s infinite;
 
             &:hover {
@@ -604,16 +602,16 @@ function handleDragging() {
     }
 
     &__mobile-sublinks {
-      z-index: -1;
+      z-index: -2;
       position: absolute;
       bottom: 4.55rem;
-      gap: 0.5rem;
       display: flex;
       width: 100%;
       flex-direction: column;
       background-color: $text-color-faded;
-      max-height: calc(100svh - 4.55rem);
-      height: 80px;
+      max-height: 80px;
+      height: fit-content;
+      transition: max-height 0.4s ease;
       // overflow: scroll;
 
       @media (min-width: $big-tablet-screen) {
@@ -622,6 +620,7 @@ function handleDragging() {
 
       &__li {
         position: relative;
+
         &__link {
           text-decoration: none;
           color: $text-color-alt;
@@ -641,7 +640,8 @@ function handleDragging() {
     }
     &__invisible {
       display: block;
-      border: red solid 1px;
+      z-index: -3;
+      opacity: 0.4;
       width: 100%;
       height: calc(100svh - 80px);
       position: fixed;
