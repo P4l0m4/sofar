@@ -2,8 +2,9 @@
 import { ref } from "vue";
 import { groupBy } from "@/utils/groupBy.js";
 const hoveredElements = ref([]);
-const mobileSublinksToDisplay = ref([]);
+const mobileSublinksToDisplay = ref("");
 const scrollableElement = ref(null);
+const draggableElement = ref();
 const arrow = ref(null);
 const isMenuOpen = ref(true);
 let lastScrollTop = 0;
@@ -178,6 +179,16 @@ window.addEventListener("scroll", function () {
   }
   lastScrollTop = st <= 0 ? 0 : st;
 });
+
+function handleDragging() {
+  console.log("dragged");
+  let newHeight = parseInt(draggableElement.value.style.height, 10) + 1;
+  if (newHeight > 200) {
+    // Let's say we don't want it to grow beyond 200px
+    newHeight = 100; // Reset to original height
+  }
+  draggableElement.value.style.height = `${newHeight}px`;
+}
 </script>
 <template>
   <aside class="aside">
@@ -202,17 +213,18 @@ window.addEventListener("scroll", function () {
           </li>
           <li
             class="aside__nav__ul__li scale-on-hover"
+            @touchstart.prevent="mobileSublinksToDisplay = 'services'"
             @mouseenter="hoveredElements = [0, 2]"
             @mouseleave="hoveredElements = []"
             :class="{
               'aside__nav__ul__li--siblings': hoveredElements.includes(1),
             }"
           >
-            <NuxtLink class="aside__nav__ul__li__link" to="/booking" exact
+            <NuxtLink class="aside__nav__ul__li__link" to="/services" exact
               ><img
                 class="aside__nav__ul__li__link__icon"
                 src="@/assets/icons/concierge.svg"
-                alt="menu icon booking"
+                alt="menu icon services"
               />Services</NuxtLink
             >
 
@@ -259,7 +271,7 @@ window.addEventListener("scroll", function () {
               'aside__nav__ul__li--siblings': hoveredElements.includes(2),
             }"
           >
-            <NuxtLink class="aside__nav__ul__li__link" to="/booking" exact
+            <NuxtLink class="aside__nav__ul__li__link" to="/airports" exact
               ><img
                 class="aside__nav__ul__li__link__icon"
                 src="@/assets/icons/map.svg"
@@ -269,13 +281,14 @@ window.addEventListener("scroll", function () {
           </li>
           <li
             class="aside__nav__ul__li scale-on-hover"
+            @touchstart.prevent="mobileSublinksToDisplay = 'aircrafts'"
             @mouseenter="hoveredElements = [2, 4]"
             @mouseleave="hoveredElements = []"
             :class="{
               'aside__nav__ul__li--siblings': hoveredElements.includes(3),
             }"
           >
-            <NuxtLink class="aside__nav__ul__li__link" to="/booking" exact
+            <NuxtLink class="aside__nav__ul__li__link" to="/aircrafts" exact
               ><img
                 class="aside__nav__ul__li__link__icon"
                 src="@/assets/icons/airlines.svg"
@@ -305,6 +318,7 @@ window.addEventListener("scroll", function () {
           </li>
           <li
             class="aside__nav__ul__li scale-on-hover"
+            @touchstart.prevent="mobileSublinksToDisplay = 'aboutUs'"
             @mouseenter="hoveredElements = [3]"
             @mouseleave="hoveredElements = []"
             :class="{
@@ -343,11 +357,29 @@ window.addEventListener("scroll", function () {
 
         <ul
           class="aside__nav__mobile-sublinks"
-          v-if="mobileSublinksToDisplay.length !== 0"
+          ref="mobileSublinks"
+          v-if="mobileSublinksToDisplay"
+          @dragstart="handleDragging"
         >
-          <li v-for="link in mobileSublinksToDisplay"></li>
-        </ul></nav
-    ></Transition>
+          <li
+            class="aside__nav__mobile-sublinks__li"
+            v-for="link in linksGroupedByParent[mobileSublinksToDisplay]"
+            :key="link.id"
+          >
+            <NuxtLink
+              class="aside__nav__mobile-sublinks__li__link"
+              :to="link.path"
+            >
+              <img
+                class="aside__nav__mobile-sublinks__li__link__icon"
+                :src="link.src"
+                :alt="link.alt"
+              />{{ link.label }}
+            </NuxtLink>
+          </li>
+        </ul>
+      </nav></Transition
+    >
   </aside>
 </template>
 <style lang="scss" scoped>
@@ -370,6 +402,7 @@ window.addEventListener("scroll", function () {
   }
 
   &__nav {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -564,6 +597,42 @@ window.addEventListener("scroll", function () {
         &--siblings {
           background-color: $text-color-faded;
           transform: scale(1.01);
+        }
+      }
+    }
+
+    &__mobile-sublinks {
+      z-index: -1;
+      position: absolute;
+      bottom: 4.5rem;
+      gap: 0.5rem;
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+      background-color: $text-color-faded;
+      max-height: 280px;
+      height: 140px;
+      // overflow: scroll;
+
+      @media (min-width: $big-tablet-screen) {
+        display: none;
+      }
+
+      &__li {
+        &__link {
+          text-decoration: none;
+          color: $text-color-alt;
+          font-size: 1rem;
+          font-weight: $skinny;
+          display: flex;
+          align-items: center;
+          padding: 1rem;
+          gap: 0.5rem;
+
+          &__icon {
+            width: 1.2rem;
+            height: 1.2rem;
+          }
         }
       }
     }
