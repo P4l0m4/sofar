@@ -387,6 +387,7 @@ window.addEventListener("scroll", function () {
       width: 100%;
       padding: 0.5rem 0 0.5rem 0.5rem;
       overflow-x: scroll;
+      overflow-y: visible;
 
       @media (min-width: $big-tablet-screen) {
         flex-direction: column;
