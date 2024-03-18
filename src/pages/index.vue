@@ -10,6 +10,17 @@
       class="index__banner__img"
       src="@/assets/images/index-banner-mobile.webp"
       alt="banner image"
+    /> </picture
+  ><picture class="index__banner">
+    <source
+      media="(min-width: 1100px)"
+      srcset="@/assets/images/index-banner-desktop.webp"
+    />
+
+    <img
+      class="index__banner__img"
+      src="@/assets/images/index-banner-mobile.webp"
+      alt="banner image"
     />
   </picture>
 </template>

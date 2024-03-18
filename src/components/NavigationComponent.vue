@@ -1,374 +1,350 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 
 const hoveredElements = ref([]);
-
+const scrollableElement = ref(null);
+const arrow = ref(null);
 const isMenuOpen = ref(true);
+let lastScrollTop = 0;
+const menuElements = [
+  {
+    label: "Private jet charters",
+    path: "/services/private-jet-charters",
+    hoveredElements: [1, 1.2],
+    src: "_nuxt/assets/icons/award_star.svg",
+    alt: "menu icon private jet charters",
+    id: 1.1,
+  },
+  {
+    label: "Business charters",
+    path: "/services/business-charters",
+    hoveredElements: [1, 1.1, 1.3],
+    src: "_nuxt/assets/icons/business_center.svg",
+    alt: "menu icon business charters",
+    id: 1.2,
+  },
+  {
+    label: "Family jet charters",
+    path: "/services/family-jet-charters",
+    hoveredElements: [1, 1.2, 1.4],
+    src: "_nuxt/assets/icons/group_add.svg",
+    alt: "menu icon family jet charters",
+    id: 1.3,
+  },
+  {
+    label: "Empty legs",
+    path: "/services/empty-legs",
+    hoveredElements: [1, 1.3, 1.5],
+    src: "_nuxt/assets/icons/flight_class.svg",
+    alt: "menu icon empty legs",
+    id: 1.4,
+  },
+  {
+    label: "Pet-friendly charters",
+    path: "/services/pet-friendly-charters",
+    hoveredElements: [1, 1.4, 1.6],
+    src: "_nuxt/assets/icons/pet_supplies.svg",
+    alt: "menu icon pet-friendly charters",
+    id: 1.5,
+  },
+  {
+    label: "Private jet amenities",
+    path: "/services/private-jet-amenities",
+    hoveredElements: [1, 1.5, 1.7],
+    src: "_nuxt/assets/icons/coffee.svg",
+    alt: "menu icon private jet amenities",
+    id: 1.6,
+  },
+  {
+    label: "Off-fleet requests",
+    path: "/services/off-fleet-requests",
+    hoveredElements: [1, 1.6, 1.8],
+    src: "_nuxt/assets/icons/network_node.svg",
+    alt: "menu icon off fleet requests",
+    id: 1.7,
+  },
+  {
+    label: "Prices",
+    path: "/services/prices",
+    hoveredElements: [1, 1.7, 1.9],
+    src: "_nuxt/assets/icons/attach_money.svg",
+    alt: "menu icon prices",
+    id: 1.8,
+  },
+  {
+    label: "Aircraft management",
+    path: "/services/aircraft-management",
+    hoveredElements: [1, 1.8],
+    src: "_nuxt/assets/icons/service_toolbox.svg",
+    alt: "menu icon aircraft management",
+    id: 1.9,
+  },
+];
+
+function scrolling() {
+  let scrollPercent =
+    (event.target.scrollTop /
+      (scrollableElement.value.scrollHeight -
+        scrollableElement.value.clientHeight)) *
+    100;
+
+  arrow.value.style.opacity = `${100 - scrollPercent}%`;
+}
+
+function scrollWithArrow() {
+  scrollableElement.value.scrollBy(0, 100);
+}
+
+window.addEventListener("scroll", function () {
+  let st = window.pageYOffset || document.documentElement.scrollTop;
+  if (st > window.innerHeight / 2 && st > lastScrollTop) {
+    isMenuOpen.value = false;
+  } else if (st > window.innerHeight / 2 && st < lastScrollTop) {
+    isMenuOpen.value = true;
+  }
+  lastScrollTop = st <= 0 ? 0 : st;
+});
 </script>
 <template>
   <aside class="aside">
-    <div
-      class="aside__invisible"
-      v-if="isMenuOpen"
-      @click="isMenuOpen = false"
-      @onmouseenter="isMenuOpen = false"
-    ></div>
-    <button class="aside__menu" v-if="!isMenuOpen" @click="isMenuOpen = true">
-      <img
-        class="aside__menu__icon"
-        src="@/assets/icons/menu.svg"
-        alt="menu icon"
-      />
-    </button>
-    <nav class="aside__nav" v-if="isMenuOpen">
-      <ul class="aside__nav__ul">
-        <li
-          class="aside__nav__ul__li scale-on-hover"
-          @mouseenter="hoveredElements = [1]"
-          @mouseleave="hoveredElements = []"
-          :class="{
-            'aside__nav__ul__li--siblings': hoveredElements.includes(0),
-          }"
-        >
-          <NuxtLink class="aside__nav__ul__li__link" to="/booking" exact
-            ><img
-              class="aside__nav__ul__li__link__icon"
-              src="@/assets/icons/airplane_ticket.svg"
-              alt="menu icon booking"
-            />Booking</NuxtLink
+    <Transition>
+      <nav class="aside__nav" v-if="isMenuOpen">
+        <ul class="aside__nav__ul">
+          <li
+            class="aside__nav__ul__li scale-on-hover"
+            @mouseenter="hoveredElements = [1]"
+            @mouseleave="hoveredElements = []"
+            :class="{
+              'aside__nav__ul__li--siblings': hoveredElements.includes(0),
+            }"
           >
-        </li>
-        <li
-          class="aside__nav__ul__li scale-on-hover"
-          @mouseenter="hoveredElements = [0, 2]"
-          @mouseleave="hoveredElements = []"
-          :class="{
-            'aside__nav__ul__li--siblings': hoveredElements.includes(1),
-          }"
-        >
-          <NuxtLink class="aside__nav__ul__li__link" to="/booking" exact
-            ><img
-              class="aside__nav__ul__li__link__icon"
-              src="@/assets/icons/concierge.svg"
-              alt="menu icon booking"
-            />Services</NuxtLink
+            <NuxtLink class="aside__nav__ul__li__link" to="/booking" exact
+              ><img
+                class="aside__nav__ul__li__link__icon"
+                src="@/assets/icons/airplane_ticket.svg"
+                alt="menu icon booking"
+              />Booking</NuxtLink
+            >
+          </li>
+          <li
+            class="aside__nav__ul__li scale-on-hover"
+            @mouseenter="hoveredElements = [0, 2]"
+            @mouseleave="hoveredElements = []"
+            :class="{
+              'aside__nav__ul__li--siblings': hoveredElements.includes(1),
+            }"
           >
-          <div id="scrollable-sublinks" class="aside__nav__ul__li__sublinks">
-            <NuxtLink
-              class="aside__nav__ul__li__sublinks__link scale-on-hover"
-              to="/services/private-jet-charters"
-              exact
-              @mouseenter="hoveredElements = [1, 1.2]"
-              @mouseleave="hoveredElements = []"
-              :class="{
-                'aside__nav__ul__li__sublinks__link--siblings':
-                  hoveredElements.includes(1.1),
-              }"
+            <NuxtLink class="aside__nav__ul__li__link" to="/booking" exact
               ><img
-                class="aside__nav__ul__li__sublinks__link__icon"
-                src="@/assets/icons/award_star.svg"
+                class="aside__nav__ul__li__link__icon"
+                src="@/assets/icons/concierge.svg"
                 alt="menu icon booking"
-              />Private jet charters</NuxtLink
+              />Services</NuxtLink
             >
-            <NuxtLink
-              class="aside__nav__ul__li__sublinks__link scale-on-hover"
-              to="/services/business-charters"
-              exact
-              @mouseenter="hoveredElements = [1, 1.1, 1.3]"
-              @mouseleave="hoveredElements = []"
-              :class="{
-                'aside__nav__ul__li__sublinks__link--siblings':
-                  hoveredElements.includes(1.2),
-              }"
+            <div
+              id="scrollable-sublinks"
+              class="aside__nav__ul__li__sublinks"
+              v-on:scroll.native="scrolling"
+              ref="scrollableElement"
+            >
+              <NuxtLink
+                class="aside__nav__ul__li__sublinks__link scale-on-hover"
+                to="/services/private-jet-charters"
+                exact
+                v-for="menuElement in menuElements"
+                :key="menuElement.id"
+                @mouseenter="hoveredElements = menuElement.hoveredElements"
+                @mouseleave="hoveredElements = []"
+                :class="{
+                  'aside__nav__ul__li__sublinks__link--siblings':
+                    hoveredElements.includes(menuElement.id),
+                }"
+                ><img
+                  class="aside__nav__ul__li__sublinks__link__icon"
+                  :src="menuElement.src"
+                  :alt="menuElement.alt"
+                />{{ menuElement.label }}</NuxtLink
+              >
+              <span
+                class="aside__nav__ul__li__sublinks__arrow"
+                ref="arrow"
+                @click="scrollWithArrow"
+                ><img
+                  class="aside__nav__ul__li__sublinks__arrow__icon"
+                  src="@/assets/icons/arrow_scroll.svg"
+                  alt="arrow icon scroll"
+              /></span>
+            </div>
+          </li>
+          <li
+            class="aside__nav__ul__li scale-on-hover"
+            @mouseenter="hoveredElements = [1, 3]"
+            @mouseleave="hoveredElements = []"
+            :class="{
+              'aside__nav__ul__li--siblings': hoveredElements.includes(2),
+            }"
+          >
+            <NuxtLink class="aside__nav__ul__li__link" to="/booking" exact
               ><img
-                class="aside__nav__ul__li__sublinks__link__icon"
-                src="@/assets/icons/business_center.svg"
+                class="aside__nav__ul__li__link__icon"
+                src="@/assets/icons/map.svg"
                 alt="menu icon booking"
-              />Business charters</NuxtLink
+              />Airports</NuxtLink
             >
-            <NuxtLink
-              class="aside__nav__ul__li__sublinks__link scale-on-hover"
-              to="/services/family-jet-charters"
-              exact
-              @mouseenter="hoveredElements = [1, 1.2, 1.4]"
-              @mouseleave="hoveredElements = []"
-              :class="{
-                'aside__nav__ul__li__sublinks__link--siblings':
-                  hoveredElements.includes(1.3),
-              }"
+          </li>
+          <li
+            class="aside__nav__ul__li scale-on-hover"
+            @mouseenter="hoveredElements = [2, 4]"
+            @mouseleave="hoveredElements = []"
+            :class="{
+              'aside__nav__ul__li--siblings': hoveredElements.includes(3),
+            }"
+          >
+            <NuxtLink class="aside__nav__ul__li__link" to="/booking" exact
               ><img
-                class="aside__nav__ul__li__sublinks__link__icon"
-                src="@/assets/icons/group_add.svg"
+                class="aside__nav__ul__li__link__icon"
+                src="@/assets/icons/airlines.svg"
                 alt="menu icon booking"
-              />Family jet charters</NuxtLink
+              />Aircrafts</NuxtLink
             >
-            <NuxtLink
-              class="aside__nav__ul__li__sublinks__link scale-on-hover"
-              to="/services/empty-legs"
-              exact
-              @mouseenter="hoveredElements = [1, 1.3, 1.5]"
-              @mouseleave="hoveredElements = []"
-              :class="{
-                'aside__nav__ul__li__sublinks__link--siblings':
-                  hoveredElements.includes(1.4),
-              }"
-              ><img
-                class="aside__nav__ul__li__sublinks__link__icon"
-                src="@/assets/icons/flight_class.svg"
-                alt="menu icon booking"
-              />Empty legs</NuxtLink
-            >
-            <NuxtLink
-              class="aside__nav__ul__li__sublinks__link scale-on-hover"
-              to="/services/pet-friendly-charters"
-              exact
-              @mouseenter="hoveredElements = [1, 1.4, 1.6]"
-              @mouseleave="hoveredElements = []"
-              :class="{
-                'aside__nav__ul__li__sublinks__link--siblings':
-                  hoveredElements.includes(1.5),
-              }"
-              ><img
-                class="aside__nav__ul__li__sublinks__link__icon"
-                src="@/assets/icons/pet_supplies.svg"
-                alt="menu icon booking"
-              />Pet-friendly charters</NuxtLink
-            >
-            <NuxtLink
-              class="aside__nav__ul__li__sublinks__link scale-on-hover"
-              to="/services/private-jet-amenities"
-              exact
-              @mouseenter="hoveredElements = [1, 1.5, 1.7]"
-              @mouseleave="hoveredElements = []"
-              :class="{
-                'aside__nav__ul__li__sublinks__link--siblings':
-                  hoveredElements.includes(1.6),
-              }"
-              ><img
-                class="aside__nav__ul__li__sublinks__link__icon"
-                src="@/assets/icons/coffee.svg"
-                alt="menu icon booking"
-              />Private jet amenities</NuxtLink
-            >
-            <NuxtLink
-              class="aside__nav__ul__li__sublinks__link scale-on-hover"
-              to="/services/off-fleet-requests"
-              exact
-              @mouseenter="hoveredElements = [1, 1.6, 1.8]"
-              @mouseleave="hoveredElements = []"
-              :class="{
-                'aside__nav__ul__li__sublinks__link--siblings':
-                  hoveredElements.includes(1.7),
-              }"
-              ><img
-                class="aside__nav__ul__li__sublinks__link__icon"
-                src="@/assets/icons/network_node.svg"
-                alt="menu icon booking"
-              />Off fleet requests</NuxtLink
-            >
-            <NuxtLink
-              class="aside__nav__ul__li__sublinks__link scale-on-hover"
-              to="/services/prices"
-              exact
-              @mouseenter="hoveredElements = [1, 1.7, 1.9]"
-              @mouseleave="hoveredElements = []"
-              :class="{
-                'aside__nav__ul__li__sublinks__link--siblings':
-                  hoveredElements.includes(1.8),
-              }"
-              ><img
-                class="aside__nav__ul__li__sublinks__link__icon"
-                src="@/assets/icons/attach_money.svg"
-                alt="menu icon booking"
-              />Prices</NuxtLink
-            >
+            <div class="aside__nav__ul__li__sublinks">
+              <NuxtLink
+                class="aside__nav__ul__li__sublinks__link scale-on-hover"
+                to="/aircrafts/pc12"
+                exact
+                @mouseenter="hoveredElements = [3, 3.2]"
+                @mouseleave="hoveredElements = []"
+                :class="{
+                  'aside__nav__ul__li__sublinks__link--siblings':
+                    hoveredElements.includes(3.1),
+                }"
+                ><img
+                  class="aside__nav__ul__li__sublinks__link__icon"
+                  src="@/assets/icons/airplanemode_active.svg"
+                  alt="menu icon booking"
+                />PC12</NuxtLink
+              >
+              <NuxtLink
+                class="aside__nav__ul__li__sublinks__link scale-on-hover"
+                to="/aircrafts/phenom-100"
+                exact
+                @mouseenter="hoveredElements = [3, 3.1, 3.3]"
+                @mouseleave="hoveredElements = []"
+                :class="{
+                  'aside__nav__ul__li__sublinks__link--siblings':
+                    hoveredElements.includes(3.2),
+                }"
+                ><img
+                  class="aside__nav__ul__li__sublinks__link__icon"
+                  src="@/assets/icons/airplanemode_active.svg"
+                  alt="menu icon booking"
+                />Phenom 100</NuxtLink
+              >
 
-            <NuxtLink
-              class="aside__nav__ul__li__sublinks__link scale-on-hover"
-              to="/services/aircraft-management"
-              exact
-              @mouseenter="hoveredElements = [1, 1.8]"
-              @mouseleave="hoveredElements = []"
-              :class="{
-                'aside__nav__ul__li__sublinks__link--siblings':
-                  hoveredElements.includes(1.9),
-              }"
-              ><img
-                class="aside__nav__ul__li__sublinks__link__icon"
-                src="@/assets/icons/service_toolbox.svg"
-                alt="menu icon booking"
-              />Aircraft management</NuxtLink
-            >
-          </div>
-        </li>
-        <li
-          class="aside__nav__ul__li scale-on-hover"
-          @mouseenter="hoveredElements = [1, 3]"
-          @mouseleave="hoveredElements = []"
-          :class="{
-            'aside__nav__ul__li--siblings': hoveredElements.includes(2),
-          }"
-        >
-          <NuxtLink class="aside__nav__ul__li__link" to="/booking" exact
-            ><img
-              class="aside__nav__ul__li__link__icon"
-              src="@/assets/icons/map.svg"
-              alt="menu icon booking"
-            />Airports</NuxtLink
+              <NuxtLink
+                class="aside__nav__ul__li__sublinks__link scale-on-hover"
+                to="/aircrafts/phenom-300"
+                exact
+                @mouseenter="hoveredElements = [3, 3.2, 3.4]"
+                @mouseleave="hoveredElements = []"
+                :class="{
+                  'aside__nav__ul__li__sublinks__link--siblings':
+                    hoveredElements.includes(3.3),
+                }"
+                ><img
+                  class="aside__nav__ul__li__sublinks__link__icon"
+                  src="@/assets/icons/airplanemode_active.svg"
+                  alt="menu icon booking"
+                />Phenom 300</NuxtLink
+              >
+              <NuxtLink
+                class="aside__nav__ul__li__sublinks__link scale-on-hover"
+                to="/aircrafts/safety"
+                exact
+                @mouseenter="hoveredElements = [3, 3.3, 3.5]"
+                @mouseleave="hoveredElements = []"
+                :class="{
+                  'aside__nav__ul__li__sublinks__link--siblings':
+                    hoveredElements.includes(3.4),
+                }"
+                ><img
+                  class="aside__nav__ul__li__sublinks__link__icon"
+                  src="@/assets/icons/health_and_safety.svg"
+                  alt="menu icon booking"
+                />Safety</NuxtLink
+              >
+            </div>
+          </li>
+          <li
+            class="aside__nav__ul__li scale-on-hover"
+            @mouseenter="hoveredElements = [3]"
+            @mouseleave="hoveredElements = []"
+            :class="{
+              'aside__nav__ul__li--siblings': hoveredElements.includes(4),
+            }"
           >
-        </li>
-        <li
-          class="aside__nav__ul__li scale-on-hover"
-          @mouseenter="hoveredElements = [2, 4]"
-          @mouseleave="hoveredElements = []"
-          :class="{
-            'aside__nav__ul__li--siblings': hoveredElements.includes(3),
-          }"
-        >
-          <NuxtLink class="aside__nav__ul__li__link" to="/booking" exact
-            ><img
-              class="aside__nav__ul__li__link__icon"
-              src="@/assets/icons/airlines.svg"
-              alt="menu icon booking"
-            />Aircrafts</NuxtLink
-          >
-          <div class="aside__nav__ul__li__sublinks">
-            <NuxtLink
-              class="aside__nav__ul__li__sublinks__link scale-on-hover"
-              to="/aircrafts/pc12"
-              exact
-              @mouseenter="hoveredElements = [3, 3.2]"
-              @mouseleave="hoveredElements = []"
-              :class="{
-                'aside__nav__ul__li__sublinks__link--siblings':
-                  hoveredElements.includes(3.1),
-              }"
+            <NuxtLink class="aside__nav__ul__li__link" to="/booking" exact
               ><img
-                class="aside__nav__ul__li__sublinks__link__icon"
-                src="@/assets/icons/concierge.svg"
+                class="aside__nav__ul__li__link__icon"
+                src="@/assets/icons/info.svg"
                 alt="menu icon booking"
-              />PC12</NuxtLink
+              />About us</NuxtLink
             >
-            <NuxtLink
-              class="aside__nav__ul__li__sublinks__link scale-on-hover"
-              to="/aircrafts/phenom-100"
-              exact
-              @mouseenter="hoveredElements = [3, 3.1, 3.3]"
-              @mouseleave="hoveredElements = []"
-              :class="{
-                'aside__nav__ul__li__sublinks__link--siblings':
-                  hoveredElements.includes(3.2),
-              }"
-              ><img
-                class="aside__nav__ul__li__sublinks__link__icon"
-                src="@/assets/icons/concierge.svg"
-                alt="menu icon booking"
-              />Phenom 100</NuxtLink
-            >
+            <div class="aside__nav__ul__li__sublinks">
+              <NuxtLink
+                class="aside__nav__ul__li__sublinks__link scale-on-hover"
+                to="/booking"
+                exact
+                @mouseenter="hoveredElements = [4, 4.2]"
+                @mouseleave="hoveredElements = []"
+                :class="{
+                  'aside__nav__ul__li__sublinks__link--siblings':
+                    hoveredElements.includes(4.1),
+                }"
+                ><img
+                  class="aside__nav__ul__li__sublinks__link__icon"
+                  src="@/assets/icons/book_2.svg"
+                  alt="menu icon booking"
+                />Our story</NuxtLink
+              >
+              <NuxtLink
+                class="aside__nav__ul__li__sublinks__link scale-on-hover"
+                to="/booking"
+                exact
+                @mouseenter="hoveredElements = [4, 4.1, 4.3]"
+                @mouseleave="hoveredElements = []"
+                :class="{
+                  'aside__nav__ul__li__sublinks__link--siblings':
+                    hoveredElements.includes(4.2),
+                }"
+                ><img
+                  class="aside__nav__ul__li__sublinks__link__icon"
+                  src="@/assets/icons/article.svg"
+                  alt="menu icon booking"
+                />Blog</NuxtLink
+              >
 
-            <NuxtLink
-              class="aside__nav__ul__li__sublinks__link scale-on-hover"
-              to="/aircrafts/phenom-300"
-              exact
-              @mouseenter="hoveredElements = [3, 3.2, 3.4]"
-              @mouseleave="hoveredElements = []"
-              :class="{
-                'aside__nav__ul__li__sublinks__link--siblings':
-                  hoveredElements.includes(3.3),
-              }"
-              ><img
-                class="aside__nav__ul__li__sublinks__link__icon"
-                src="@/assets/icons/concierge.svg"
-                alt="menu icon booking"
-              />Phenom 300</NuxtLink
-            >
-            <NuxtLink
-              class="aside__nav__ul__li__sublinks__link scale-on-hover"
-              to="/aircrafts/safety"
-              exact
-              @mouseenter="hoveredElements = [3, 3.3, 3.5]"
-              @mouseleave="hoveredElements = []"
-              :class="{
-                'aside__nav__ul__li__sublinks__link--siblings':
-                  hoveredElements.includes(3.4),
-              }"
-              ><img
-                class="aside__nav__ul__li__sublinks__link__icon"
-                src="@/assets/icons/concierge.svg"
-                alt="menu icon booking"
-              />Safety</NuxtLink
-            >
-          </div>
-        </li>
-        <li
-          class="aside__nav__ul__li scale-on-hover"
-          @mouseenter="hoveredElements = [3]"
-          @mouseleave="hoveredElements = []"
-          :class="{
-            'aside__nav__ul__li--siblings': hoveredElements.includes(4),
-          }"
-        >
-          <NuxtLink class="aside__nav__ul__li__link" to="/booking" exact
-            ><img
-              class="aside__nav__ul__li__link__icon"
-              src="@/assets/icons/info.svg"
-              alt="menu icon booking"
-            />About us</NuxtLink
-          >
-          <div class="aside__nav__ul__li__sublinks">
-            <NuxtLink
-              class="aside__nav__ul__li__sublinks__link scale-on-hover"
-              to="/booking"
-              exact
-              @mouseenter="hoveredElements = [4, 4.2]"
-              @mouseleave="hoveredElements = []"
-              :class="{
-                'aside__nav__ul__li__sublinks__link--siblings':
-                  hoveredElements.includes(4.1),
-              }"
-              ><img
-                class="aside__nav__ul__li__sublinks__link__icon"
-                src="@/assets/icons/concierge.svg"
-                alt="menu icon booking"
-              />Our story</NuxtLink
-            >
-            <NuxtLink
-              class="aside__nav__ul__li__sublinks__link scale-on-hover"
-              to="/booking"
-              exact
-              @mouseenter="hoveredElements = [4, 4.1, 4.3]"
-              @mouseleave="hoveredElements = []"
-              :class="{
-                'aside__nav__ul__li__sublinks__link--siblings':
-                  hoveredElements.includes(4.2),
-              }"
-              ><img
-                class="aside__nav__ul__li__sublinks__link__icon"
-                src="@/assets/icons/concierge.svg"
-                alt="menu icon booking"
-              />Blog</NuxtLink
-            >
-
-            <NuxtLink
-              class="aside__nav__ul__li__sublinks__link scale-on-hover"
-              to="/booking"
-              exact
-              @mouseenter="hoveredElements = [4, 4.2]"
-              @mouseleave="hoveredElements = []"
-              :class="{
-                'aside__nav__ul__li__sublinks__link--siblings':
-                  hoveredElements.includes(4.3),
-              }"
-              ><img
-                class="aside__nav__ul__li__sublinks__link__icon"
-                src="@/assets/icons/concierge.svg"
-                alt="menu icon booking"
-              />Contact</NuxtLink
-            >
-          </div>
-        </li>
-      </ul>
-    </nav>
+              <NuxtLink
+                class="aside__nav__ul__li__sublinks__link scale-on-hover"
+                to="/booking"
+                exact
+                @mouseenter="hoveredElements = [4, 4.2]"
+                @mouseleave="hoveredElements = []"
+                :class="{
+                  'aside__nav__ul__li__sublinks__link--siblings':
+                    hoveredElements.includes(4.3),
+                }"
+                ><img
+                  class="aside__nav__ul__li__sublinks__link__icon"
+                  src="@/assets/icons/alternate_email.svg"
+                  alt="menu icon booking"
+                />Contact</NuxtLink
+              >
+            </div>
+          </li>
+        </ul>
+      </nav></Transition
+    >
   </aside>
 </template>
 <style lang="scss" scoped>
@@ -386,32 +362,6 @@ const isMenuOpen = ref(true);
 
   @media (min-width: $big-tablet-screen) {
     width: 100%;
-  }
-
-  &__invisible {
-    border: red solid 1px;
-    width: 100%;
-    height: 100svh;
-  }
-
-  &__menu {
-    position: fixed;
-    top: 1rem;
-    right: 1rem;
-    padding: 1rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1;
-    background-color: $secondary-color-faded;
-    border-radius: $radius;
-    backdrop-filter: blur(6px);
-    cursor: pointer;
-
-    &__icon {
-      width: 2rem;
-      height: 2rem;
-    }
   }
 
   &__nav {
@@ -478,6 +428,7 @@ const isMenuOpen = ref(true);
           gap: 1rem;
           position: absolute;
           padding-right: 2rem;
+          padding-left: 1rem;
           right: 8rem;
           transition: 0.4s opacity ease;
 
@@ -489,7 +440,7 @@ const isMenuOpen = ref(true);
           &__link {
             display: flex;
             align-items: center;
-            justify-content: center;
+
             padding: 1rem;
             gap: 0.5rem;
             background-color: $text-color-faded;
@@ -500,7 +451,8 @@ const isMenuOpen = ref(true);
               background-color 0.4s ease,
               transform 0.4s ease;
             white-space: nowrap;
-            width: fit-content;
+            width: 100%;
+
             text-shadow: $shadow-text;
 
             &:hover {
@@ -511,14 +463,43 @@ const isMenuOpen = ref(true);
               background-color: $text-color-faded-strong;
               transform: scale(1.01);
             }
+          }
 
-            @keyframes scroll {
+          &__arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            width: 40px;
+            height: 40px;
+            background-color: $text-color;
+            position: fixed;
+            top: 210px;
+            right: 250px;
+            cursor: pointer;
+            border-radius: 50%;
+            box-shadow: $shadow;
+
+            animation: moveDown 2s infinite;
+
+            &:hover {
+              animation-play-state: paused;
+            }
+
+            &__icon {
+              width: 1rem;
+              height: 1rem;
+            }
+
+            @keyframes moveDown {
               0% {
-                transform: translateY(0px);
+                transform: translateY(0);
               }
-
+              90% {
+                transform: translateY(10px);
+              }
               100% {
-                transform: translateY(-14px);
+                transform: translateY(0);
               }
             }
           }
@@ -526,12 +507,10 @@ const isMenuOpen = ref(true);
         #scrollable-sublinks {
           overflow-y: scroll;
           height: 400px;
-          padding-top: 1rem;
-          padding-bottom: 1rem;
-
-          & a {
-            animation: scroll alternate 6s infinite;
-          }
+          padding: 0 2rem;
+          border-radius: $radius;
+          justify-content: flex-start;
+          scroll-behavior: smooth;
         }
 
         &--siblings {

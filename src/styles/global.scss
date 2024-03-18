@@ -220,6 +220,10 @@ details > summary::-webkit-details-marker /* Safari */ {
   }
 }
 
+.fading {
+  animation: fading 0.4s ease;
+}
+
 //ANIMATIONS
 @keyframes fading {
   from {
@@ -231,14 +235,7 @@ details > summary::-webkit-details-marker /* Safari */ {
     opacity: 1;
   }
 }
-@keyframes fade {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
+
 @keyframes slide-from-left {
   from {
     transform: translate(-20px);
