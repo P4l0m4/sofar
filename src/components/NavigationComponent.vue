@@ -182,6 +182,7 @@ window.addEventListener("scroll", function () {
 
 function handleDragging() {
   console.log("dragged");
+  draggableElement.value.style.border = "red 1px solid";
   let newHeight = parseInt(draggableElement.value.style.height, 10) + 1;
   if (newHeight > 200) {
     // Let's say we don't want it to grow beyond 200px
@@ -354,12 +355,13 @@ function handleDragging() {
             </div>
           </li>
         </ul>
-        <span class=""></span>
+
         <ul
           class="aside__nav__mobile-sublinks"
           ref="mobileSublinks"
           v-if="mobileSublinksToDisplay"
           @dragstart="handleDragging()"
+          draggable="true"
         >
           <li
             class="aside__nav__mobile-sublinks__li"
@@ -378,8 +380,8 @@ function handleDragging() {
             </NuxtLink>
           </li>
         </ul>
-      </nav></Transition
-    >
+        <span class="aside__nav__invisible"></span></nav
+    ></Transition>
   </aside>
 </template>
 <style lang="scss" scoped>
@@ -604,13 +606,13 @@ function handleDragging() {
     &__mobile-sublinks {
       z-index: -1;
       position: absolute;
-      bottom: 4.5rem;
+      bottom: 4.55rem;
       gap: 0.5rem;
       display: flex;
       width: 100%;
       flex-direction: column;
       background-color: $text-color-faded;
-      max-height: 280px;
+      max-height: calc(100svh - 4.55rem);
       height: 80px;
       // overflow: scroll;
 
@@ -619,6 +621,7 @@ function handleDragging() {
       }
 
       &__li {
+        position: relative;
         &__link {
           text-decoration: none;
           color: $text-color-alt;
@@ -634,6 +637,17 @@ function handleDragging() {
             height: 1.2rem;
           }
         }
+      }
+    }
+    &__invisible {
+      display: block;
+      border: red solid 1px;
+      width: 100%;
+      height: calc(100svh - 80px);
+      position: fixed;
+      bottom: calc(4.55rem + 80px);
+      @media (min-width: $big-tablet-screen) {
+        display: none;
       }
     }
   }
