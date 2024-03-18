@@ -198,7 +198,7 @@ function handleDrag() {
       draggableElement.value.style.height
     );
     if (draggableElement.value.scrollTop <= 40) {
-      mobileSublinksToDisplay = "";
+      mobileSublinksToDisplay.value = "";
     }
   }
 }
@@ -372,9 +372,7 @@ function handleDrag() {
             class="aside__nav__mobile-sublinks"
             ref="draggableElement"
             v-if="mobileSublinksToDisplay"
-            @mouseenter.prevent="handleDrag()"
-            @mousemove.prevent="handleDrag()"
-            draggable="true"
+            @scroll="handleDrag()"
           >
             <li
               class="aside__nav__mobile-sublinks__li"
@@ -482,6 +480,18 @@ function handleDrag() {
           white-space: nowrap;
           text-shadow: $shadow-text;
 
+          &:before {
+            content: "";
+            z-index: -1;
+            display: block;
+            background-image: linear-gradient(transparent 50%, $text-color);
+            width: 100%;
+            height: 100%;
+            border-radius: $radius;
+            position: absolute;
+            bottom: 0;
+          }
+
           @media (min-width: $big-tablet-screen) {
             flex-direction: row;
             font-size: 1.1rem;
@@ -493,6 +503,10 @@ function handleDrag() {
                 display: flex;
                 opacity: 1;
               }
+            }
+
+            &:after {
+              display: none;
             }
           }
 
@@ -633,16 +647,6 @@ function handleDrag() {
       min-height: 80px;
       height: 80px;
       transition: max-height 0.4s ease;
-
-      &:after {
-        content: "";
-        display: block;
-        background-image: linear-gradient(transparent, $text-color 80%);
-        width: 100%;
-        height: 100px;
-        position: absolute;
-        bottom: -4.55rem;
-      }
 
       // overflow: scroll;
 
