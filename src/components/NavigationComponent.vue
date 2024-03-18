@@ -374,6 +374,7 @@ function handleDrag() {
             v-if="mobileSublinksToDisplay"
             @mouseenter.prevent="handleDrag()"
             @mousemove.prevent="handleDrag()"
+            draggable="true"
           >
             <li
               class="aside__nav__mobile-sublinks__li"
