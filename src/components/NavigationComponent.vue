@@ -408,7 +408,8 @@ window.addEventListener("scroll", function () {
         transition:
           0.4s background-color ease,
           0.4s transform ease;
-        &:hover {
+        &:hover,
+        &:active {
           background-color: $text-color;
         }
 
@@ -432,7 +433,8 @@ window.addEventListener("scroll", function () {
             font-size: 1.1rem;
             padding: 1rem;
 
-            &:hover {
+            &:hover,
+            &:active {
               & ~ .aside__nav__ul__li__sublinks {
                 display: flex;
                 opacity: 1;
@@ -463,7 +465,7 @@ window.addEventListener("scroll", function () {
           right: 8rem;
           transition: 0.4s opacity ease;
 
-          &:hover {
+          &:hover: &:active {
             display: flex;
             opacity: 1;
           }
@@ -484,7 +486,8 @@ window.addEventListener("scroll", function () {
             width: 100%;
             text-shadow: $shadow-text;
 
-            &:hover {
+            &:hover,
+            &:active {
               background-color: $text-color;
             }
 
