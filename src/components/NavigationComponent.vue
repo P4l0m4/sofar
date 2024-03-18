@@ -354,12 +354,12 @@ function handleDragging() {
             </div>
           </li>
         </ul>
-
+        <span class=""></span>
         <ul
           class="aside__nav__mobile-sublinks"
           ref="mobileSublinks"
           v-if="mobileSublinksToDisplay"
-          @dragstart="handleDragging"
+          @dragstart="handleDragging()"
         >
           <li
             class="aside__nav__mobile-sublinks__li"
@@ -611,7 +611,7 @@ function handleDragging() {
       flex-direction: column;
       background-color: $text-color-faded;
       max-height: 280px;
-      height: 140px;
+      height: 80px;
       // overflow: scroll;
 
       @media (min-width: $big-tablet-screen) {
