@@ -440,12 +440,11 @@ function handleDrag() {
       display: flex;
       gap: 0.5rem;
       width: 100%;
-      padding: 0.5rem;
       overflow-x: scroll;
+      padding: 1rem;
 
       @media (min-width: $big-tablet-screen) {
         flex-direction: column;
-        padding: 1rem;
         gap: 1rem;
         overflow-x: inherit;
         width: 100%;
@@ -468,7 +467,7 @@ function handleDrag() {
         }
 
         &__link {
-          padding: 0.5rem 1rem;
+          padding: 1rem;
           text-decoration: none;
           color: $text-color-alt;
           font-size: $small-text;
