@@ -637,7 +637,7 @@ function handleDrag() {
       width: 100%;
       flex-direction: column;
       background-color: $text-color-faded;
-      height: 80px;
+      height: 70px;
 
       @media (min-width: $big-tablet-screen) {
         display: none;
@@ -669,9 +669,9 @@ function handleDrag() {
       z-index: -3;
       opacity: 0.4;
       width: 100%;
-      height: calc(100svh - 80px);
+      height: calc(100svh - 70px);
       position: fixed;
-      bottom: calc(6.55rem + 80px);
+      bottom: calc(6.55rem + 70px);
       @media (min-width: $big-tablet-screen) {
         display: none;
       }
