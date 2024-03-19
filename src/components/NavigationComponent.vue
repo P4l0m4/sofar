@@ -441,6 +441,7 @@ function handleDrag() {
         gap: 1rem;
         overflow-x: inherit;
         width: 100%;
+        background-image: none;
       }
 
       &__li {
