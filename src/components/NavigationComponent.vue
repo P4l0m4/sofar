@@ -189,9 +189,10 @@ window.addEventListener("scroll", function () {
 
 function handleDrag() {
   if (draggableElement.value) {
-    draggableElement.value.style.bottom += `${
-      event.touches[0].clientY / 4.4
-    }px`;
+    // draggableElement.value.style.height += `${
+    //   event.touches[0].clientY / 4.4
+    // }px`;
+    draggableElement.value.style.height = "fit-content";
   }
 }
 </script>
@@ -428,6 +429,7 @@ function handleDrag() {
     }
 
     &__ul {
+      background-image: linear-gradient(transparent, $text-color 40%);
       display: flex;
       gap: 0.5rem;
       width: 100%;
@@ -497,7 +499,7 @@ function handleDrag() {
               }
             }
 
-            &:before {
+            &::before {
               display: none;
             }
           }
@@ -629,13 +631,12 @@ function handleDrag() {
     &__mobile-sublinks {
       z-index: -2;
       position: absolute;
-      bottom: -280px;
+      bottom: 6.55rem;
       display: flex;
       width: 100%;
       flex-direction: column;
       background-color: $text-color-faded;
-      height: fit-content;
-      transition: max-height 0.4s ease;
+      height: 80px;
 
       @media (min-width: $big-tablet-screen) {
         display: none;
