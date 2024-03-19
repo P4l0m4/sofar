@@ -189,15 +189,9 @@ window.addEventListener("scroll", function () {
 
 function handleDrag() {
   if (draggableElement.value) {
-    draggableElement.value.style.maxHeight += `${draggableElement.value.scrollTop}px`;
-    draggableElement.value.style.height = "100%";
-
-    if (draggableElement.value.scrollTop > 90) {
-      draggableElement.value.style.maxHeight = "fit-content";
-    }
-    //else if (draggableElement.value.scrollTop <= 40) {
-    //   mobileSublinksToDisplay.value = "";
-    // }
+    draggableElement.value.style.bottom += `${
+      event.touches[0].clientY / 4.4
+    }px`;
   }
 }
 </script>
@@ -370,7 +364,7 @@ function handleDrag() {
             class="aside__nav__mobile-sublinks"
             ref="draggableElement"
             v-if="mobileSublinksToDisplay"
-            @touchstart="handleDrag()"
+            @touchmove="handleDrag()"
           >
             <li
               class="aside__nav__mobile-sublinks__li"
@@ -503,7 +497,7 @@ function handleDrag() {
               }
             }
 
-            &:after {
+            &:before {
               display: none;
             }
           }
@@ -635,15 +629,12 @@ function handleDrag() {
     &__mobile-sublinks {
       z-index: -2;
       position: absolute;
-      bottom: 10rem;
-      // bottom: 4.55rem;
+      bottom: -280px;
       display: flex;
       width: 100%;
       flex-direction: column;
       background-color: $text-color-faded;
-      // max-height: 80px;
-      // min-height: 80px;
-      height: 100%;
+      height: fit-content;
       transition: max-height 0.4s ease;
 
       @media (min-width: $big-tablet-screen) {
@@ -678,7 +669,7 @@ function handleDrag() {
       width: 100%;
       height: calc(100svh - 80px);
       position: fixed;
-      bottom: calc(4.55rem + 80px);
+      bottom: calc(6.55rem + 80px);
       @media (min-width: $big-tablet-screen) {
         display: none;
       }
