@@ -189,17 +189,15 @@ window.addEventListener("scroll", function () {
 
 function handleDrag() {
   if (draggableElement.value) {
-    draggableElement.value.style.height = `${
-      draggableElement.value.scrollTop * 2
-    }px`;
-    draggableElement.value.style.maxHeight = "fit-content";
-    console.log(
-      draggableElement.value.scrollTop,
-      draggableElement.value.style.height
-    );
-    if (draggableElement.value.scrollTop <= 40) {
-      mobileSublinksToDisplay.value = "";
+    draggableElement.value.style.maxHeight += `${draggableElement.value.scrollTop}px`;
+    draggableElement.value.style.height = "100%";
+
+    if (draggableElement.value.scrollTop > 90) {
+      draggableElement.value.style.maxHeight = "fit-content";
     }
+    //else if (draggableElement.value.scrollTop <= 40) {
+    //   mobileSublinksToDisplay.value = "";
+    // }
   }
 }
 </script>
@@ -372,7 +370,7 @@ function handleDrag() {
             class="aside__nav__mobile-sublinks"
             ref="draggableElement"
             v-if="mobileSublinksToDisplay"
-            @scroll="handleDrag()"
+            @touchstart="handleDrag()"
           >
             <li
               class="aside__nav__mobile-sublinks__li"
@@ -400,7 +398,7 @@ function handleDrag() {
     ></Transition>
   </aside>
 </template>
-<style lang="scss" scoped>
+<style lang="scss">
 .router-link-exact-active {
   background-color: $text-color-faded;
 }
@@ -635,20 +633,18 @@ function handleDrag() {
     }
 
     &__mobile-sublinks {
-      overflow: scroll;
       z-index: -2;
       position: absolute;
-      bottom: 4.55rem;
+      bottom: 10rem;
+      // bottom: 4.55rem;
       display: flex;
       width: 100%;
       flex-direction: column;
       background-color: $text-color-faded;
-      max-height: 80px;
-      min-height: 80px;
-      height: 80px;
+      // max-height: 80px;
+      // min-height: 80px;
+      height: 100%;
       transition: max-height 0.4s ease;
-
-      // overflow: scroll;
 
       @media (min-width: $big-tablet-screen) {
         display: none;
