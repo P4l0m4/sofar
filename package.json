@@ -10,17 +10,18 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "ress": "^5.0.2",
+    "nuxt-jsonld": "^2.0.8",
     "nuxt-simple-sitemap": "^2.4.11",
-    "nuxt-jsonld": "^2.0.8"
+    "ress": "^5.0.2"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
+    "@nuxtjs/pwa": "^3.3.5",
     "@nuxtjs/snipcart": "^2.0.2",
     "@storyblok/nuxt": "^5.4.4",
+    "dayjs-nuxt": "^1.1.2",
     "nuxt": "^3.7.3",
     "sass": "^1.58.0",
-    "sass-loader": "^13.2.0",
-    "dayjs-nuxt": "^1.1.2"
+    "sass-loader": "^13.2.0"
   }
 }

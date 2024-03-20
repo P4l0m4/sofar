@@ -3,7 +3,28 @@ export default defineNuxtConfig({
   srcDir: "src/",
   css: ["@/styles/global.scss"],
   modules: ["nuxt-simple-sitemap", "nuxt-jsonld", "dayjs-nuxt"],
-
+  // pwa: {
+  //   manifest: {
+  //     name: "Ma Super Application",
+  //     short_name: "App",
+  //     lang: "fr",
+  //     useWebmanifestExtension: false,
+  //     display: "standalone",
+  //     theme_color: "#123456",
+  //     background_color: "#123456",
+  //     description: "Une description de votre application",
+  //     icons: [
+  //       {
+  //         src: "/icon.png",
+  //         sizes: "512x512",
+  //         type: "image/png",
+  //       },
+  //     ],
+  //   },
+  //   workbox: {
+  //     // Options de Workbox
+  //   },
+  // },
   dayjs: {
     locales: ["fr"],
     defaultLocale: "fr",

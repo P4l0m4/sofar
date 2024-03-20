@@ -1,6 +1,7 @@
 <script setup></script>
 <template>
-  <NavigationComponent />
+  <MobileNavigation />
+  <DesktopNavigation />
   <main>
     <slot />
   </main>
