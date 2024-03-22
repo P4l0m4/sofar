@@ -18,15 +18,12 @@ props.menuItems.forEach((item) => {
   childrenToDisplay.value.push(item.children);
 });
 
-function isElementInViewport(el) {
-  const rect = el.getBoundingClientRect();
+// function isElementInViewport(el) {
+//   const rect = el.getBoundingClientRect();
+//   const isVisibleVertically = rect.bottom > 0 && rect.top - 73 >= 0;
 
-  // Element's bottom position should be greater than 0 to be in the viewport.
-  // The element's top position can be less than 0 up to -130px if its height compensates this shift.
-  const isVisibleVertically = rect.bottom > 0 && rect.top - 73 >= 0;
-
-  return !isVisibleVertically;
-}
+//   return !isVisibleVertically;
+// }
 
 function scrolling(event) {
   let scrollPercent =
@@ -48,18 +45,22 @@ window.addEventListener("scroll", function () {
 
 function storeTouchPosition() {
   initialTouchPosition.value = event.touches[0].clientY;
-  initialBottomPosition.value =
-    draggableElement.value.getBoundingClientRect().bottom;
+  // initialBottomPosition.value =
+  //   draggableElement.value.getBoundingClientRect().bottom;
 }
 function resizeSublinks() {
   document.body.style.overflow = "hidden";
   let delta = event.touches[0].clientY - initialTouchPosition.value;
-  const bottom = draggableElement.value.getBoundingClientRect().bottom;
+  let maxScrollDistance = draggableElement.value.scrollHeight - 130;
+  let top = draggableElement.value.getBoundingClientRect().top;
 
-  console.log(isElementInViewport(draggableElement.value));
-
-  if (draggableElement.value && !isElementInViewport(draggableElement.value)) {
-    draggableElement.value.style.transform = `translateY(${delta * 2}px)`;
+  if (delta > 0) {
+    //element is being dragged down
+    if (draggableElement.value && top <= 392) {
+      draggableElement.value.style.transform = `translateY(${delta}px)`;
+    }
+  } else if (draggableElement.value && delta * -1 <= maxScrollDistance) {
+    draggableElement.value.style.transform = `translateY(${delta}px)`;
   }
 }
 function stopDragging() {
@@ -69,11 +70,16 @@ function stopDragging() {
 </script>
 <template>
   <aside class="aside">
+    <span
+      class="invisible"
+      @click="currentIndex = null"
+      v-if="currentIndex !== null"
+    ></span>
     <Transition>
       <div
         class="aside__mobile-sublinks"
         ref="draggableElement"
-        v-if="childrenToDisplay[currentIndex]"
+        v-if="childrenToDisplay[currentIndex] && isMenuOpen"
         @touchstart="storeTouchPosition()"
         @touchmove="resizeSublinks()"
         @touchend="stopDragging()"
@@ -128,9 +134,17 @@ function stopDragging() {
   inset: auto 0 0 0;
   height: fit-content;
   display: flex;
+  flex-direction: column;
 
   @media (min-width: $big-tablet-screen) {
     display: none;
+  }
+
+  .invisible {
+    height: 100svh;
+    width: 100%;
+    position: fixed;
+    top: 0;
   }
 
   &__nav {
