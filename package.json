@@ -5,6 +5,8 @@
   "scripts": {
     "build": "nuxt build",
     "dev": "cross-env NODE_TLS_REJECT_UNAUTHORIZED=0 nuxt dev --https --ssl-cert localhost.pem --ssl-key localhost-key.pem",
+    "dev:build": "nuxi build playground",
+    "dev:preview:build": "yarn dev:build && node playground/.output/server/index.mjs",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
@@ -16,11 +18,11 @@
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
-    "@nuxtjs/pwa": "^3.3.5",
     "@nuxtjs/snipcart": "^2.0.2",
-    "@storyblok/nuxt": "^5.4.4",
+    "@storyblok/nuxt": "^6.0.6",
+    "@vite-pwa/nuxt": "^0.6.0",
     "dayjs-nuxt": "^1.1.2",
-    "nuxt": "^3.7.3",
+    "nuxt": "^3.11.1",
     "sass": "^1.58.0",
     "sass-loader": "^13.2.0"
   }

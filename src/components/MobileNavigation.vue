@@ -136,7 +136,7 @@ function stopDragging() {
   display: flex;
   flex-direction: column;
 
-  @media (min-width: $big-tablet-screen) {
+  @media (min-width: $laptop-screen) {
     display: none;
   }
 
@@ -161,7 +161,7 @@ function stopDragging() {
       display: flex;
       gap: 0.5rem;
       width: 100%;
-      padding: 0.5rem;
+      max-width: 600px;
       cursor: pointer;
 
       &__li {
@@ -171,7 +171,6 @@ function stopDragging() {
         justify-content: center;
         align-items: center;
         border-radius: $radius;
-        backdrop-filter: blur(20px);
 
         &__link {
           height: fit-content;

@@ -11,14 +11,18 @@ const props = defineProps({
   menuItems: Array,
 });
 
-function scrolling(event) {
+
+function scrolling(index) {
+  const element = scrollableElement.value[`sublinks-${index}`];
   let scrollPercent =
     (event.target.scrollTop /
-      (scrollableElement.value.scrollHeight -
-        scrollableElement.value.clientHeight)) *
+      (element.scrollHeight -
+        element.clientHeight)) *
     100;
 
-  arrow.value.style.opacity = `${100 - scrollPercent}%`;
+  arrow.value[0].style.opacity = `${100 - scrollPercent}%`;
+
+  
 }
 
 function scrollWithArrow(index) {
@@ -76,7 +80,7 @@ function shouldDisplayArrow(index) {
                   shouldDisplayArrow(i),
               }"
               :ref="(el) => (scrollableElement[`sublinks-${i}`] = el)"
-              @scroll.native="scrolling"
+              @scroll.native="scrolling(i)"
             >
               <NuxtLink
                 v-for="(child, j) in item.children"
@@ -125,7 +129,7 @@ function shouldDisplayArrow(index) {
 .aside {
   display: none;
 
-  @media (min-width: $big-tablet-screen) {
+  @media (min-width: $laptop-screen) {
     inset: 0 0 0 auto;
     width: fit-content;
     height: 100svh;
@@ -179,25 +183,10 @@ function shouldDisplayArrow(index) {
           display: flex;
           align-items: center;
           justify-content: center;
-          flex-direction: column;
           gap: 0.5rem;
           border-radius: $radius;
           white-space: nowrap;
           text-shadow: $shadow-text;
-
-          &:before {
-            content: "";
-            z-index: -1;
-            display: block;
-            background-image: linear-gradient(transparent 50%, $text-color);
-            width: 100%;
-            height: 100%;
-            border-radius: $radius;
-            position: absolute;
-            bottom: 0;
-          }
-
-          @media (min-width: $big-tablet-screen) {
             flex-direction: row;
             font-size: 1.1rem;
             padding: 1rem;
@@ -213,7 +202,7 @@ function shouldDisplayArrow(index) {
             &::before {
               display: none;
             }
-          }
+          
 
           &__icon {
             width: 1.5rem;
