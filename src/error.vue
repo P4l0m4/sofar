@@ -5,14 +5,14 @@ defineProps(["error"]);
 <template>
   <div class="error">
     <div class="error__message">
-      <h1>Oooops... erreur {{ error.statusCode }}</h1>
+      <h1 class="titles">Oooops... error {{ error.statusCode }}</h1>
 
-      <h2>Nous n'avons pas trouvé la page que vous cherchez.</h2>
+      <h2 class="subtitles">We didn't find the page you where looking for.</h2>
       <NuxtLink
         to="/"
         class="button-primary"
         aria-label="retour à la page d'accueil"
-        >Retour à la page d'accueil</NuxtLink
+        >Go back to home page</NuxtLink
       >
     </div>
   </div>
