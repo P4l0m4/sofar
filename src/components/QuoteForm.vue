@@ -115,7 +115,6 @@ console.log(form[currentStep.value].button);
       &__label {
         width: fit-content;
         display: flex;
-        flex-direction: column;
         font-size: $small-text;
         font-weight: $skinny;
         background-color: $base-color;
@@ -136,16 +135,17 @@ console.log(form[currentStep.value].button);
         &__number {
           display: flex;
           font-size: 1rem;
-          font-weight: $thick;
-          height: 34px;
-          width: 34px;
-          padding-top: 0.25rem;
+          font-weight: $skinny;
+          height: 30px;
+          width: 30px;
+          padding-top: 0.1rem;
           border-radius: 50%;
           align-items: center;
           justify-content: center;
           background-color: transparent;
           color: $text-color;
           border: 2px solid $text-color;
+          z-index: 1;
           transition: background-color 0.4s ease, color 0.4s ease;
 
           &--active {
@@ -157,7 +157,7 @@ console.log(form[currentStep.value].button);
         &__corner-left,
         &__corner-right {
           background-color: transparent;
-          height: 20px;
+          height: 30px;
           width: 20px;
           box-shadow: 10px -10px 0 0 $base-color;
           border-bottom-right-radius: calc($radius * 2);
@@ -166,14 +166,14 @@ console.log(form[currentStep.value].button);
         }
 
         &__corner-left {
-          bottom: 0;
-          left: -20px;
-          transform: rotate(90deg);
+          bottom: -5px;
+          left: -23px;
+          transform: rotate(70deg);
         }
         &__corner-right {
-          bottom: 0;
+          bottom: -1px;
           right: -20px;
-          transform: rotate(190deg);
+          transform: rotate(170deg);
         }
       }
     }
@@ -189,12 +189,15 @@ console.log(form[currentStep.value].button);
 
     &__field {
       display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
+      //   flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+      width: 100%;
 
       &__label {
         font-size: $small-text;
         font-weight: $skinny;
+        white-space: nowrap;
       }
 
       & input,
@@ -206,6 +209,7 @@ console.log(form[currentStep.value].button);
         color: $text-color;
         background-color: $primary-color;
         box-shadow: $shadow;
+        width: 100%;
 
         &::placeholder {
           color: $text-color-faded;
