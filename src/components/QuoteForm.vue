@@ -46,8 +46,6 @@ const form = [
     ],
   },
 ];
-
-console.log(form[currentStep.value].button);
 </script>
 <template>
   <form class="form">
@@ -101,7 +99,6 @@ console.log(form[currentStep.value].button);
   border-radius: 1rem;
   width: 100%;
   max-width: 450px;
-
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
@@ -181,7 +178,8 @@ console.log(form[currentStep.value].button);
 
   &__fields {
     display: flex;
-    flex-direction: column;
+    // flex-direction: column;
+    flex-wrap: wrap;
     gap: 1rem;
     padding: 1rem;
     border-radius: 0 $radius $radius $radius;
@@ -189,15 +187,20 @@ console.log(form[currentStep.value].button);
 
     &__field {
       display: flex;
-      //   flex-direction: column;
-      gap: 1rem;
-      align-items: center;
+      gap: 0.5rem;
+      flex-direction: column;
       width: 100%;
+
+      &:nth-of-type(1),
+      &:nth-of-type(2) {
+        width: calc(50% - 1rem);
+      }
 
       &__label {
         font-size: $small-text;
         font-weight: $skinny;
         white-space: nowrap;
+        width: fit-content;
       }
 
       & input,
@@ -221,6 +224,10 @@ console.log(form[currentStep.value].button);
       & textarea {
         min-height: 200px;
       }
+    }
+
+    &__button {
+      width: 100%;
     }
   }
 }

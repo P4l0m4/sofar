@@ -38,6 +38,9 @@ justify-content: center;
     padding: 2rem;
     gap: 2rem;
     max-width: 2500px;
+    // flex-direction: row;
+    // align-items: center;
+   
   }
 
   & source {

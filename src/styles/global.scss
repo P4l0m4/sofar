@@ -112,11 +112,11 @@ input[type="number"] {
   font-family: "Custom" !important;
 
   &:hover {
-    transform: scale(1.04);
+    transform: scale(1.02);
   }
 }
 .button-primary {
-  background-color: $text-color;
+  background-color: $secondary-color;
   color: $primary-color;
   transition: 0.4s ease;
   position: relative;
@@ -133,10 +133,10 @@ input[type="number"] {
 
 .button-secondary {
   background-color: transparent;
-  border: $text-color solid 2px;
+  border: $secondary-color solid 2px;
 
   &:hover {
-    transform: scale(1.04);
+    transform: scale(1.02);
   }
 }
 
@@ -156,7 +156,7 @@ input[type="number"] {
   transition: transform 0.4s;
 
   &:hover {
-    transform: scale(1.04) !important;
+    transform: scale(1.02) !important;
   }
 }
 
