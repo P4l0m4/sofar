@@ -67,6 +67,8 @@ console.log(form[currentStep.value].button);
             }"
             >{{ i }}</span
           >{{ step.label }}
+          <div class="form__steps__step__label__corner-left"></div>
+          <div class="form__steps__step__label__corner-right"></div>
         </h3>
       </div>
     </div>
@@ -96,14 +98,13 @@ console.log(form[currentStep.value].button);
 </template>
 <style lang="scss" scoped>
 .form {
-  //   background-color: $base-color;
-  padding: 1rem;
   border-radius: 1rem;
   width: 100%;
   max-width: 450px;
+
   display: flex;
-  box-shadow: $shadow;
   flex-direction: column;
+  overflow-x: hidden;
 
   &__steps {
     display: flex;
@@ -124,8 +125,8 @@ console.log(form[currentStep.value].button);
         padding: 0.5rem;
         align-items: center;
         cursor: pointer;
-        box-shadow: $shadow;
         white-space: nowrap;
+        position: relative;
         transition: opacity 0.4s ease;
 
         &--active {
@@ -134,10 +135,10 @@ console.log(form[currentStep.value].button);
 
         &__number {
           display: flex;
-          font-size: 1.2rem;
+          font-size: 1rem;
           font-weight: $thick;
-          height: 40px;
-          width: 40px;
+          height: 34px;
+          width: 34px;
           padding-top: 0.25rem;
           border-radius: 50%;
           align-items: center;
@@ -151,6 +152,28 @@ console.log(form[currentStep.value].button);
             background-color: $text-color;
             color: $text-color-alt;
           }
+        }
+
+        &__corner-left,
+        &__corner-right {
+          background-color: transparent;
+          height: 20px;
+          width: 20px;
+          box-shadow: 10px -10px 0 0 $base-color;
+          border-bottom-right-radius: calc($radius * 2);
+          border-top-right-radius: calc($radius * 2);
+          position: absolute;
+        }
+
+        &__corner-left {
+          bottom: 0;
+          left: -20px;
+          transform: rotate(90deg);
+        }
+        &__corner-right {
+          bottom: 0;
+          right: -20px;
+          transform: rotate(190deg);
         }
       }
     }
