@@ -110,7 +110,7 @@ function shouldDisplayArrow(index) {
               >
                 <img
                   class="aside__nav__ul__li__sublinks__arrow__icon"
-                  src="@/assets/icons/arrow_scroll.svg"
+                  src="/assets/icons/arrow_scroll.svg"
                   alt="arrow icon scroll"
                 />
               </span>

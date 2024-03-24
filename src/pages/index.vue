@@ -25,7 +25,7 @@
   display: flex;
   background-size: cover;
   background-position: center;
-  height: 100svh;
+  min-height: 100svh;
   max-height: 1200px;
   width: 100%;
   padding: 1rem;
@@ -37,10 +37,7 @@ justify-content: center;
   @media (min-width: $big-tablet-screen) {
     padding: 2rem;
     gap: 2rem;
-    max-width: 2500px;
-    // flex-direction: row;
-    // align-items: center;
-   
+
   }
 
   & source {

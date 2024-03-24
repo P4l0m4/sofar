@@ -95,6 +95,13 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
+   input[type="date"] {
+     
+        -webkit-appearance: none; /* Remove default icon in WebKit browsers */
+        -moz-appearance: none; /* Remove default icon in Firefox */
+        appearance: none !important; /* Generic way to remove default icon */
+    }
+
 .button-primary,
 .button-secondary {
   display: flex;
@@ -218,6 +225,19 @@ details > summary::-webkit-details-marker /* Safari */ {
   @media (min-width: $tablet-screen) {
     font-size: 1.1rem;
   }
+}
+
+.sr-only {
+  border: 0 !important;
+  clip: rect(1px, 1px, 1px, 1px) !important;
+  -webkit-clip-path: inset(50%) !important;
+  clip-path: inset(50%) !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  width: 1px !important;
+  white-space: nowrap !important;
 }
 
 .fading {

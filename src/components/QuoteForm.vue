@@ -6,7 +6,40 @@ const currentStep = ref(0);
 const form = [
   {
     label: "Flight details",
-    children: [],
+    children: [
+      {
+        label: "Departure airport",
+        type: "text",
+        placeholder: "From",
+        icon: "flight-takeoff",
+        required: true,
+        short: true,
+      },
+      {
+        label: "Arrival airport",
+        type: "text",
+        icon: "flight-land",
+        placeholder: "To",
+        required: true,
+        short: true,
+      },
+      {
+        label: "Departure date",
+        type: "date",
+        icon: "calendar",
+        placeholder: "YYYY-MM-DD",
+        required: true,
+        short: true,
+      },
+      {
+        label: "Return date",
+        type: "date",
+        icon: "calendar",
+        placeholder: "YYYY-MM-DD",
+        required: true,
+        short: true,
+      },
+    ],
     button: "Next",
   },
   {
@@ -18,30 +51,35 @@ const form = [
         type: "text",
         placeholder: "John",
         required: true,
+        short: true,
       },
       {
         label: "Last name",
         type: "text",
         placeholder: "Doe",
         required: true,
+        short: true,
       },
       {
         label: "Email",
         type: "email",
         placeholder: "emailadress@domain.com",
         required: true,
+        short: false,
       },
       {
         label: "Phone number",
         type: "tel",
         placeholder: "(000) 000 - 00*",
         required: true,
+        short: false,
       },
       {
         label: "Additional information",
         type: "text",
         placeholder: "Tell us more about your request...",
         required: false,
+        short: false,
       },
     ],
   },
@@ -63,29 +101,80 @@ const form = [
             :class="{
               'form__steps__step__label__number--active': currentStep === i,
             }"
-            >{{ i }}</span
+            >{{ i + 1 }}</span
           >{{ step.label }}
           <div class="form__steps__step__label__corner-left"></div>
           <div class="form__steps__step__label__corner-right"></div>
         </h3>
       </div>
     </div>
+
     <div class="form__fields">
+      <div class="form__fields__custom-field" v-if="currentStep === 0">
+        <span
+          ><img
+            src="/assets/icons/airplanemode_active-dark.svg"
+            alt="icon one way trip"
+          />One way</span
+        >
+        <label class="switch">
+          <input type="checkbox" />
+          <span class="slider round"></span>
+        </label>
+        <span
+          ><img
+            src="/assets/icons/connecting_airports.svg"
+            alt="icon one way trip"
+          />Round trip</span
+        >
+      </div>
+      <div class="form__fields__custom-field" v-if="currentStep === 0">
+        <label for="number" class="sr-only">Number of passengers</label>
+        <span>
+          <img
+            class="form__fields__custom-field__icon"
+            src="/assets/icons/group_add-dark.svg"
+            alt="icon number of passengers"
+          />
+          Passengers</span
+        >
+        <input
+          class="form__fields__custom-field__input"
+          id="number"
+          type="number"
+          inputmode="numeric"
+          max="99"
+          value="1"
+          placeholder="1"
+        />
+      </div>
       <div
         class="form__fields__field"
+        :class="{ 'form__fields__field--short': child.short }"
         v-for="(child, j) in form[currentStep].children"
         :key="j"
       >
-        <label class="form__fields__field__label" :for="child.label">{{
+        <label class="form__fields__field__label sr-only" :for="child.label">{{
           child.label
         }}</label>
+        <img
+          class="form__fields__field__icon"
+          v-if="child.icon"
+          :src="`/assets/icons/${child.icon}.svg`"
+          :alt="`icon ${child.label}`"
+        />
         <input
+          :id="child.label"
           class="form__fields__field__input"
           :type="child.type"
           :placeholder="child.placeholder"
           autocomplete="true"
           :required="child.required"
           :autofocus="{ true: j === 0 }"
+          :aria-label="child.label"
+          :aria-labelledby="child.label"
+          :title="child.label"
+          :aria-placeholder="child.placeholder"
         />
       </div>
       <button
@@ -181,21 +270,129 @@ const form = [
 
   &__fields {
     display: flex;
-    // flex-direction: column;
     flex-wrap: wrap;
     gap: 1rem;
     padding: 1rem;
     border-radius: 0 $radius $radius $radius;
     background-color: $base-color;
 
+    &__custom-field {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      border-radius: $radius;
+      width: fit-content;
+
+      @media (min-width: $big-tablet-screen) {
+        width: calc(50% - 0.5rem);
+        gap: 1rem;
+      }
+
+      &:nth-of-type(2) {
+        & input {
+          width: 40px;
+          padding-left: 0.5rem;
+        }
+      }
+
+      &__icon {
+        width: 1.2rem;
+        height: 1.2rem;
+      }
+
+      & span {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size: $small-text;
+        white-space: nowrap;
+
+        & img {
+          width: 1rem;
+          height: 1rem;
+        }
+      }
+
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+        border-radius: $radius;
+        box-shadow: $shadow;
+      }
+
+      /* Hide default HTML checkbox */
+      .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      /* The slider */
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: $primary-color;
+        -webkit-transition: 0.4s;
+        transition: 0.4s;
+      }
+
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: $secondary-color-faded;
+        -webkit-transition: 0.4s;
+        transition: 0.4s ease;
+      }
+
+      input:checked + .slider {
+        background-color: $secondary-color-faded;
+
+        &:before {
+          background-color: $primary-color;
+        }
+      }
+
+      input:focus + .slider {
+        box-shadow: $shadow;
+      }
+
+      input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+      }
+
+      /* Rounded sliders */
+      .slider.round {
+        border-radius: 34px;
+      }
+
+      .slider.round:before {
+        border-radius: 50%;
+      }
+    }
+
     &__field {
       display: flex;
       gap: 0.5rem;
-      flex-direction: column;
       width: 100%;
+      align-items: center;
+      background-color: $primary-color;
+      border-radius: $radius;
+      padding-left: 0.75rem;
 
-      &:nth-of-type(1),
-      &:nth-of-type(2) {
+      &--short {
         width: calc(50% - 0.5rem);
       }
 
@@ -207,33 +404,32 @@ const form = [
         margin-left: 0.75rem;
       }
 
-      & input,
-      & textarea {
-        font-size: $small-text;
-        padding: 0.65rem 0.75rem;
-        padding-top: 0.75rem;
-        border-radius: $radius;
-        border: none;
-        color: $text-color;
-        background-color: $primary-color;
-        box-shadow: $shadow;
-        width: 100%;
-
-        &::placeholder {
-          color: $text-color-faded;
-          font-size: 1rem;
-          font-weight: $skinny;
-        }
-      }
-
-      & textarea {
-        min-height: 200px;
+      &__icon {
+        width: 1rem;
+        height: 1rem;
       }
     }
 
     &__button {
       width: 100%;
     }
+  }
+}
+
+input {
+  font-size: 1rem;
+  padding: 0.65rem 0;
+  padding-top: 0.75rem;
+  border: none;
+  color: $text-color;
+  background-color: $primary-color;
+  box-shadow: $shadow;
+  width: 100%;
+
+  &::placeholder {
+    color: $text-color-faded;
+    font-size: 1rem;
+    font-weight: $skinny;
   }
 }
 </style>
