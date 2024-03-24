@@ -39,7 +39,7 @@ const form = [
       },
       {
         label: "Additional information",
-        type: "textarea",
+        type: "text",
         placeholder: "Tell us more about your request...",
         required: false,
       },
@@ -88,7 +88,10 @@ const form = [
           :autofocus="{ true: j === 0 }"
         />
       </div>
-      <button class="form__fields__button button-primary">
+      <button
+        class="form__fields__button button-primary"
+        @click="currentStep++"
+      >
         {{ form[currentStep].button }}
       </button>
     </div>
@@ -193,7 +196,7 @@ const form = [
 
       &:nth-of-type(1),
       &:nth-of-type(2) {
-        width: calc(50% - 1rem);
+        width: calc(50% - 0.5rem);
       }
 
       &__label {
@@ -201,12 +204,14 @@ const form = [
         font-weight: $skinny;
         white-space: nowrap;
         width: fit-content;
+        margin-left: 0.75rem;
       }
 
       & input,
       & textarea {
         font-size: $small-text;
-        padding: 0.75rem 1rem;
+        padding: 0.65rem 0.75rem;
+        padding-top: 0.75rem;
         border-radius: $radius;
         border: none;
         color: $text-color;
