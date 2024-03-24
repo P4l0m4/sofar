@@ -95,12 +95,25 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
-   input[type="date"] {
-     
-        -webkit-appearance: none; /* Remove default icon in WebKit browsers */
-        -moz-appearance: none; /* Remove default icon in Firefox */
-        appearance: none !important; /* Generic way to remove default icon */
-    }
+input[type="date"]::-webkit-calendar-picker-indicator {
+  -webkit-appearance: none; /* Remove default icon in WebKit browsers */
+  -moz-appearance: none; /* Remove default icon in Firefox */
+  appearance: none !important; /* Generic way to remove default icon */
+  opacity: 0;
+  width: 34px;
+  height: 34px;
+  position: absolute;
+  margin-left: -2.2rem;
+  cursor: pointer;
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  -webkit-appearance: none;
+  display: none;
+}
 
 .button-primary,
 .button-secondary {

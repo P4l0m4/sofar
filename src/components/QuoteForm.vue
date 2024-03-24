@@ -1,94 +1,68 @@
 <script setup>
 import { ref } from "vue";
+import airports from "@/utils/airports.json";
+import InputField from "@/ui/InputField.vue";
+import dayjs from "dayjs";
+
+const isRoundTrip = ref(false);
+const origin = ref("");
+const destination = ref("");
+const passengers = ref("");
+const firstName = ref("");
+const lastName = ref("");
+const email = ref("");
+const phoneNumber = ref("");
+const info = ref("");
 
 const currentStep = ref(0);
 
-const form = [
+const steps = [
   {
     label: "Flight details",
-    children: [
-      {
-        label: "Departure airport",
-        type: "text",
-        placeholder: "From",
-        icon: "flight-takeoff",
-        required: true,
-        short: true,
-      },
-      {
-        label: "Arrival airport",
-        type: "text",
-        icon: "flight-land",
-        placeholder: "To",
-        required: true,
-        short: true,
-      },
-      {
-        label: "Departure date",
-        type: "date",
-        icon: "calendar",
-        placeholder: "YYYY-MM-DD",
-        required: true,
-        short: true,
-      },
-      {
-        label: "Return date",
-        type: "date",
-        icon: "calendar",
-        placeholder: "YYYY-MM-DD",
-        required: true,
-        short: true,
-      },
-    ],
-    button: "Next",
   },
   {
     label: "Contact information",
-    button: "Validate",
-    children: [
-      {
-        label: "First name",
-        type: "text",
-        placeholder: "John",
-        required: true,
-        short: true,
-      },
-      {
-        label: "Last name",
-        type: "text",
-        placeholder: "Doe",
-        required: true,
-        short: true,
-      },
-      {
-        label: "Email",
-        type: "email",
-        placeholder: "emailadress@domain.com",
-        required: true,
-        short: false,
-      },
-      {
-        label: "Phone number",
-        type: "tel",
-        placeholder: "(000) 000 - 00*",
-        required: true,
-        short: false,
-      },
-      {
-        label: "Additional information",
-        type: "text",
-        placeholder: "Tell us more about your request...",
-        required: false,
-        short: false,
-      },
-    ],
   },
 ];
+
+const originSearchResults = computed(() => {
+  if (!origin.value) {
+    return [];
+  }
+  return airports
+    .filter(
+      (airport) =>
+        airport.name.toLowerCase().includes(origin.value.toLowerCase()) ||
+        airport.municipality
+          .toLowerCase()
+          .includes(origin.value.toLowerCase()) ||
+        airport.iso_country.toLowerCase().includes(origin.value.toLowerCase())
+    )
+    .map((airport) => `${airport.name}, ${airport.municipality}`);
+});
+
+const destinationSearchResults = computed(() => {
+  if (!destination.value) {
+    return [];
+  }
+  return airports
+    .filter(
+      (airport) =>
+        airport.name.toLowerCase().includes(destination.value.toLowerCase()) ||
+        airport.municipality
+          .toLowerCase()
+          .includes(destination.value.toLowerCase()) ||
+        airport.iso_country
+          .toLowerCase()
+          .includes(destination.value.toLowerCase())
+    )
+    .map((airport) => `${airport.name}, ${airport.municipality}`);
+});
 </script>
 <template>
   <form class="form">
     <div class="form__steps">
-      <div class="form__steps__step" v-for="(step, i) in form" :key="i">
+      <div class="form__steps__step" v-for="(step, i) in steps" :key="i">
         <h3
           class="form__steps__step__label"
           :class="{
@@ -101,8 +75,10 @@ const form = [
             :class="{
               'form__steps__step__label__number--active': currentStep === i,
             }"
-            >{{ i + 1 }}</span
-          >{{ step.label }}
+          >
+            {{ i + 1 }}
+          </span>
+          {{ step.label }}
           <div class="form__steps__step__label__corner-left"></div>
           <div class="form__steps__step__label__corner-right"></div>
         </h3>
@@ -110,79 +86,160 @@ const form = [
     </div>
 
     <div class="form__fields">
-      <div class="form__fields__custom-field" v-if="currentStep === 0">
-        <span
-          ><img
-            src="/assets/icons/airplanemode_active-dark.svg"
-            alt="icon one way trip"
-          />One way</span
-        >
-        <label class="switch">
-          <input type="checkbox" />
-          <span class="slider round"></span>
-        </label>
-        <span
-          ><img
-            src="/assets/icons/connecting_airports.svg"
-            alt="icon one way trip"
-          />Round trip</span
-        >
-      </div>
-      <div class="form__fields__custom-field" v-if="currentStep === 0">
-        <label for="number" class="sr-only">Number of passengers</label>
-        <span>
-          <img
-            class="form__fields__custom-field__icon"
-            src="/assets/icons/group_add-dark.svg"
-            alt="icon number of passengers"
+      <template v-if="currentStep === 0">
+        <div class="form__fields__wrapper">
+          <div class="form__fields__custom-field">
+            <span>
+              <img
+                src="/assets/icons/airplanemode_active-dark.svg"
+                alt="icon one way trip"
+              />
+              One way
+            </span>
+            <label class="switch" for="checkbox">
+              <input type="checkbox" id="checkbox" v-model="isRoundTrip" />
+              <span class="slider round"></span>
+            </label>
+            <span>
+              <img
+                src="/assets/icons/connecting_airports.svg"
+                alt="icon one way trip"
+              />
+              Round trip
+            </span>
+          </div>
+          <div class="form__fields__custom-field">
+            <label for="number" class="sr-only">Number of passengers</label>
+            <span>
+              <img
+                class="form__fields__custom-field__icon"
+                src="/assets/icons/group_add-dark.svg"
+                alt="icon number of passengers"
+              />
+              Passengers
+            </span>
+            <InputField
+              class="passengers"
+              v-model="passengers"
+              id="passengers"
+              label="Passengers"
+              type="number"
+              placeholder="1"
+            />
+          </div>
+        </div>
+        <div class="form__fields__wrapper">
+          <InputField
+            v-model="origin"
+            id="origin"
+            label="Departure airport"
+            type="search"
+            placeholder="From"
+            icon="flight_takeoff"
           />
-          Passengers</span
+
+          <InputField
+            v-model="destination"
+            id="destination"
+            label="Arrival airport"
+            type="search"
+            placeholder="To"
+            icon="flight_land"
+          />
+
+          <div class="search-results" v-if="originSearchResults.length > 0">
+            <span
+              class="search-results__result"
+              v-for="(result, i) in originSearchResults"
+              :key="i"
+              @click="origin = result"
+              >{{ result }}</span
+            >
+          </div>
+          <div
+            class="search-results"
+            v-if="destinationSearchResults.length > 0"
+          >
+            <span
+              class="search-results__result"
+              v-for="(result, i) in destinationSearchResults"
+              :key="i"
+              @click="destination = result"
+              >{{ result }}</span
+            >
+          </div>
+        </div>
+        <div class="form__fields__wrapper">
+          <InputField
+            v-model="departureDate"
+            id="departureDate"
+            label="Departure date"
+            type="date"
+            placeholder="YYYY-MM-DD"
+            icon="calendar_today"
+          />
+          <InputField
+            v-model="returnDate"
+            id="returnDate"
+            label="Return date"
+            type="date"
+            placeholder="YYYY-MM-DD"
+            icon="calendar_today"
+          />
+        </div>
+
+        <button
+          class="form__fields__button button-primary"
+          @click="currentStep++"
         >
-        <input
-          class="form__fields__custom-field__input"
-          id="number"
-          type="number"
-          inputmode="numeric"
-          max="99"
-          value="1"
-          placeholder="1"
+          Next
+        </button>
+      </template>
+      <template v-else-if="currentStep === 1">
+        <div class="form__fields__wrapper">
+          <InputField
+            v-model="firstName"
+            id="firstName"
+            label="First name"
+            placeholder="John"
+          />
+          <InputField
+            v-model="lastName"
+            id="lastName"
+            label="Last name"
+            placeholder="Doe"
+          />
+        </div>
+
+        <InputField
+          v-model="email"
+          id="email"
+          label="Email"
+          placeholder="emailadress@domain.com"
+          type="email"
         />
-      </div>
-      <div
-        class="form__fields__field"
-        :class="{ 'form__fields__field--short': child.short }"
-        v-for="(child, j) in form[currentStep].children"
-        :key="j"
-      >
-        <label class="form__fields__field__label sr-only" :for="child.label">{{
-          child.label
-        }}</label>
-        <img
-          class="form__fields__field__icon"
-          v-if="child.icon"
-          :src="`/assets/icons/${child.icon}.svg`"
-          :alt="`icon ${child.label}`"
+        <InputField
+          v-model="phoneNumber"
+          id="phoneNumber"
+          label="Phone"
+          placeholder="(000) 000 - 00*"
+          type="tel"
         />
-        <input
-          :id="child.label"
-          class="form__fields__field__input"
-          :type="child.type"
-          :placeholder="child.placeholder"
-          autocomplete="true"
-          :required="child.required"
-          :autofocus="{ true: j === 0 }"
-          :aria-label="child.label"
-          :aria-labelledby="child.label"
-          :title="child.label"
-          :aria-placeholder="child.placeholder"
+        <InputField
+          v-model="info"
+          id="info"
+          label="Additional information"
+          placeholder="Tell us more about your request..."
+          :required="false"
         />
-      </div>
-      <button
-        class="form__fields__button button-primary"
-        @click="currentStep++"
-      >
-        {{ form[currentStep].button }}
-      </button>
+
+        <button
+          class="form__fields__button button-primary"
+          @click="currentStep++"
+        >
+          Validate
+        </button>
+      </template>
     </div>
   </form>
 </template>
@@ -193,7 +250,7 @@ const form = [
   max-width: 450px;
   display: flex;
   flex-direction: column;
-  overflow-x: hidden;
+  overflow: hidden;
 
   &__steps {
     display: flex;
@@ -270,11 +327,11 @@ const form = [
 
   &__fields {
     display: flex;
-    flex-wrap: wrap;
     gap: 1rem;
     padding: 1rem;
     border-radius: 0 $radius $radius $radius;
     background-color: $base-color;
+    flex-wrap: wrap;
 
     &__custom-field {
       display: flex;
@@ -288,10 +345,13 @@ const form = [
         gap: 1rem;
       }
 
-      &:nth-of-type(2) {
-        & input {
-          width: 40px;
-          padding-left: 0.5rem;
+      .passengers {
+        min-width: 40px;
+        max-width: 40px;
+        padding: 0 0.5rem;
+
+        @media (min-width: $big-tablet-screen) {
+          max-width: 100%;
         }
       }
 
@@ -383,53 +443,38 @@ const form = [
       }
     }
 
-    &__field {
+    &__wrapper {
       display: flex;
-      gap: 0.5rem;
-      width: 100%;
       align-items: center;
-      background-color: $primary-color;
-      border-radius: $radius;
-      padding-left: 0.75rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+      width: 100%;
 
-      &--short {
-        width: calc(50% - 0.5rem);
-      }
+      .search-results {
+        display: flex;
+        flex-direction: column;
+        grid-column: span 2;
+        gap: 1rem;
+        background-color: $primary-color;
+        top: 6.5rem;
+        padding: 1rem;
+        border-radius: $radius;
+        max-height: 350px;
+        width: 100%;
+        overflow-y: scroll;
+        z-index: 1;
+        box-shadow: $shadow;
 
-      &__label {
-        font-size: $small-text;
-        font-weight: $skinny;
-        white-space: nowrap;
-        width: fit-content;
-        margin-left: 0.75rem;
-      }
-
-      &__icon {
-        width: 1rem;
-        height: 1rem;
+        &__result {
+          display: flex;
+          cursor: pointer;
+        }
       }
     }
 
     &__button {
       width: 100%;
     }
-  }
-}
-
-input {
-  font-size: 1rem;
-  padding: 0.65rem 0;
-  padding-top: 0.75rem;
-  border: none;
-  color: $text-color;
-  background-color: $primary-color;
-  box-shadow: $shadow;
-  width: 100%;
-
-  &::placeholder {
-    color: $text-color-faded;
-    font-size: 1rem;
-    font-weight: $skinny;
   }
 }
 </style>
