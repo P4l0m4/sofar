@@ -245,7 +245,7 @@ const destinationSearchResults = computed(() => {
         >
       </template>
       <template v-else-if="currentStep === 1">
-        <div class="form__fields__wrapper">
+        <div class="form__fields__wrapper--row">
           <InputField
             v-model="firstName"
             id="firstName"
@@ -570,6 +570,18 @@ const destinationSearchResults = computed(() => {
           width: 100%;
           height: 1px;
           background-color: $text-color;
+        }
+      }
+
+      &--row {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        width: 100%;
+        max-width: 100%;
+
+        div {
+          min-width: 100px;
         }
       }
     }
