@@ -38,7 +38,8 @@ const originSearchResults = computed(() => {
           .includes(origin.value.toLowerCase()) ||
         airport.iso_country.toLowerCase().includes(origin.value.toLowerCase())
     )
-    .map((airport) => `${airport.name}, ${airport.municipality}`);
+    .map((airport) => `${airport.name}, ${airport.municipality}`)
+    .slice(0, 10);
 });
 
 const destinationSearchResults = computed(() => {
@@ -56,7 +57,8 @@ const destinationSearchResults = computed(() => {
           .toLowerCase()
           .includes(destination.value.toLowerCase())
     )
-    .map((airport) => `${airport.name}, ${airport.municipality}`);
+    .map((airport) => `${airport.name}, ${airport.municipality}`)
+    .slice(0, 10);
 });
 </script>
 <template>
@@ -89,7 +91,12 @@ const destinationSearchResults = computed(() => {
       <template v-if="currentStep === 0">
         <div class="form__fields__wrapper">
           <div class="form__fields__custom-field">
-            <span>
+            <span
+              class="form__fields__custom-field__span"
+              :class="{
+                'form__fields__custom-field__span--transparent': isRoundTrip,
+              }"
+            >
               <img
                 src="/assets/icons/airplanemode_active-dark.svg"
                 alt="icon one way trip"
@@ -100,7 +107,12 @@ const destinationSearchResults = computed(() => {
               <input type="checkbox" id="checkbox" v-model="isRoundTrip" />
               <span class="slider round"></span>
             </label>
-            <span>
+            <span
+              class="form__fields__custom-field__span"
+              :class="{
+                'form__fields__custom-field__span--transparent': !isRoundTrip,
+              }"
+            >
               <img
                 src="/assets/icons/connecting_airports.svg"
                 alt="icon one way trip"
@@ -110,7 +122,7 @@ const destinationSearchResults = computed(() => {
           </div>
           <div class="form__fields__custom-field">
             <label for="number" class="sr-only">Number of passengers</label>
-            <span>
+            <span class="form__fields__custom-field__span">
               <img
                 class="form__fields__custom-field__icon"
                 src="/assets/icons/group_add-dark.svg"
@@ -137,6 +149,15 @@ const destinationSearchResults = computed(() => {
             placeholder="From"
             icon="flight_takeoff"
           />
+          <div class="search-results" v-if="originSearchResults.length > 0">
+            <span
+              class="search-results__result"
+              v-for="(result, i) in originSearchResults"
+              :key="i"
+              @click="origin = result"
+              >{{ result }}</span
+            >
+          </div>
 
           <InputField
             v-model="destination"
@@ -147,15 +168,6 @@ const destinationSearchResults = computed(() => {
             icon="flight_land"
           />
 
-          <div class="search-results" v-if="originSearchResults.length > 0">
-            <span
-              class="search-results__result"
-              v-for="(result, i) in originSearchResults"
-              :key="i"
-              @click="origin = result"
-              >{{ result }}</span
-            >
-          </div>
           <div
             class="search-results"
             v-if="destinationSearchResults.length > 0"
@@ -237,7 +249,7 @@ const destinationSearchResults = computed(() => {
           class="form__fields__button button-primary"
           @click="currentStep++"
         >
-          Validate
+          Request a quote
         </button>
       </template>
     </div>
@@ -345,6 +357,24 @@ const destinationSearchResults = computed(() => {
         gap: 1rem;
       }
 
+      &__span {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size: $small-text;
+        white-space: nowrap;
+
+        &--transparent {
+          opacity: 0.5;
+        }
+
+        & img {
+          width: 1rem;
+          height: 1rem;
+        }
+      }
+
       .passengers {
         min-width: 40px;
         max-width: 40px;
@@ -358,20 +388,6 @@ const destinationSearchResults = computed(() => {
       &__icon {
         width: 1.2rem;
         height: 1.2rem;
-      }
-
-      & span {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        font-size: $small-text;
-        white-space: nowrap;
-
-        & img {
-          width: 1rem;
-          height: 1rem;
-        }
       }
 
       .switch {
@@ -459,9 +475,10 @@ const destinationSearchResults = computed(() => {
         top: 6.5rem;
         padding: 1rem;
         border-radius: $radius;
-        max-height: 350px;
+        max-height: 200px;
         width: 100%;
         overflow-y: scroll;
+        overflow-x: hidden;
         z-index: 1;
         box-shadow: $shadow;
 

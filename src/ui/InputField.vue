@@ -76,8 +76,7 @@ const model = defineModel<string>();
     border: none;
     color: $text-color;
     background-color: $primary-color;
-
-    width: 100%;
+    width: 100% !important;
     text-overflow: ellipsis;
     white-space: nowrap;
 
@@ -89,10 +88,6 @@ const model = defineModel<string>();
 
     &[type="search"] {
       max-width: 100%;
-
-      @media (min-width: $big-tablet-screen) {
-        max-width: 165px;
-      }
     }
   }
 }

@@ -3,22 +3,19 @@
   <picture class="index__banner">
     <source
       media="(min-width: 1100px)"
-      srcset="@/assets/images/index-banner-desktop.webp"
-    />
+      srcset="@/assets/images/index-banner-desktop.webp" />
     <div class="index__banner__headlines">
       <h1 class="index__banner__headlines__title titles">MAKE IT ANYWHERE</h1>
       <h2 class="index__banner__headlines__subtitle subtitles">
         Request a quote
       </h2>
     </div>
-<QuoteForm />
+    <QuoteForm />
     <img
       class="index__banner__img"
       src="@/assets/images/index-banner-mobile.webp"
       alt="banner image"
-    /></picture
-  >
-
+  /></picture>
 </template>
 <style lang="scss" scoped>
 .index__banner {
@@ -30,27 +27,26 @@
   width: 100%;
   padding: 1rem;
   flex-direction: column;
-justify-content: center;
+  justify-content: center;
   gap: 1rem;
   position: relative;
 
   @media (min-width: $big-tablet-screen) {
     padding: 2rem;
     gap: 2rem;
-
   }
 
   & source {
     display: none;
   }
 
-&__headlines{
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  z-index: 1;
-  color: $text-color-alt;
-}
+  &__headlines {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    z-index: 1;
+    color: $text-color-alt;
+  }
 
   &__img {
     position: absolute;

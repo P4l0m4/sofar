@@ -184,24 +184,23 @@ input[type="search"]::-webkit-search-results-decoration {
 /* width */
 ::-webkit-scrollbar {
   width: 8px;
-  display: none;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #e1e1e1;
+  background: $secondary-color-faded;
   border-radius: 20px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: white;
-  border-radius: 2px;
+  background: $secondary-color-faded;
+  border-radius: $radius;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(237, 237, 237);
+  background: $text-color-faded;
 }
 
 //DETAILS
