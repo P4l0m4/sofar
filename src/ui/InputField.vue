@@ -17,11 +17,11 @@ const props = withDefaults(defineProps<Props>(), {
   autofocus: false,
 });
 
-const model = defineModel<string>();
-const input = ref<HTMLInputElement | null>(null);
+const model = defineModel<string | number>();
+const inputRef = ref<HTMLInputElement | null>(null);
 
 function triggerDatepicker() {
-  input.value?.showPicker();
+  inputRef.value?.showPicker();
 }
 
 const dateAsString = computed(() => {
@@ -41,6 +41,7 @@ const dateAsString = computed(() => {
     />
     <input
       v-model="model"
+      ref="inputRef"
       :id="id"
       class="input-field__input"
       :type="type"
@@ -52,14 +53,14 @@ const dateAsString = computed(() => {
       :aria-labelledby="label"
       :title="label"
       :aria-placeholder="placeholder"
-      ref="input"
     />
     <span
-      class="input-field__date"
       v-if="type === 'date'"
+      class="input-field__date"
       @click="triggerDatepicker()"
-      >{{ label }}: {{ dateAsString }}</span
     >
+      {{ label }}: {{ dateAsString }}
+    </span>
   </div>
 </template>
 <style lang="scss" scoped>

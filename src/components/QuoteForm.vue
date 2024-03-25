@@ -14,7 +14,6 @@ const phoneNumber = ref("");
 const info = ref("");
 const departureDate = ref("");
 const returnDate = ref("");
-
 const currentStep = ref(0);
 
 const steps = [
@@ -39,7 +38,6 @@ const originSearchResults = computed(() => {
           .includes(origin.value.toLowerCase()) ||
         airport.iso_country.toLowerCase().includes(origin.value.toLowerCase())
     )
-    .map((airport) => `${airport.name}, ${airport.municipality}`)
     .slice(0, 10);
 });
 
@@ -58,7 +56,6 @@ const destinationSearchResults = computed(() => {
           .toLowerCase()
           .includes(destination.value.toLowerCase())
     )
-    .map((airport) => `${airport.name}, ${airport.municipality}`)
     .slice(0, 10);
 });
 </script>
@@ -137,8 +134,8 @@ const destinationSearchResults = computed(() => {
               Passengers
             </span>
             <InputField
-              class="passengers"
               v-model="passengers"
+              class="passengers"
               id="passengers"
               label="Passengers"
               type="number"
@@ -147,44 +144,56 @@ const destinationSearchResults = computed(() => {
           </div>
         </div>
         <div class="form__fields__wrapper">
-          <InputField
-            v-model="origin"
-            id="origin"
-            label="Departure airport"
-            type="search"
-            placeholder="From"
-            icon="flight_takeoff"
-          />
-          <div class="search-results" v-if="originSearchResults.length > 0">
-            <span
-              class="search-results__result"
-              v-for="(result, i) in originSearchResults"
-              :key="i"
-              @click="origin = result"
-              >{{ result }}</span
-            >
+          <div class="form__fields__wrapper__relative">
+            <InputField
+              v-model="origin"
+              id="origin"
+              label="Departure airport"
+              type="search"
+              placeholder="From"
+              icon="flight_takeoff"
+            />
+            <div class="search-results" v-if="originSearchResults.length > 0">
+              <span
+                v-for="(result, i) in originSearchResults"
+                class="search-results__result"
+                :key="i"
+                @click="origin = result"
+                ><img
+                  class="search-results__result__flag"
+                  :src="`assets/flags/${result.iso_country}.svg`"
+                  alt="country flag"
+                />{{ result.name }}, {{ result.municipality }}</span
+              >
+            </div>
           </div>
+          <div class="form__fields__wrapper__relative">
+            <InputField
+              v-model="destination"
+              id="destination"
+              label="Arrival airport"
+              type="search"
+              placeholder="To"
+              icon="flight_land"
+            />
 
-          <InputField
-            v-model="destination"
-            id="destination"
-            label="Arrival airport"
-            type="search"
-            placeholder="To"
-            icon="flight_land"
-          />
-
-          <div
-            class="search-results"
-            v-if="destinationSearchResults.length > 0"
-          >
-            <span
-              class="search-results__result"
-              v-for="(result, i) in destinationSearchResults"
-              :key="i"
-              @click="destination = result"
-              >{{ result }}</span
+            <div
+              class="search-results"
+              v-if="destinationSearchResults.length > 0"
             >
+              <span
+                v-for="(result, i) in destinationSearchResults"
+                class="search-results__result"
+                :key="i"
+                @click="destination = result"
+                ><img
+                  class="search-results__result__flag"
+                  :src="`assets/flags/${result.iso_country}.svg`"
+                  alt="country flag"
+                />
+                {{ result.name }}, {{ result.municipality }}
+              </span>
+            </div>
           </div>
         </div>
         <div class="form__fields__wrapper">
@@ -202,7 +211,7 @@ const destinationSearchResults = computed(() => {
             label="Return date"
             type="date"
             placeholder="YYYY-MM-DD"
-            icon="calendar_today"
+            icon="calendar_tomorrow"
           />
         </div>
 
@@ -474,25 +483,44 @@ const destinationSearchResults = computed(() => {
       gap: 1rem;
       width: 100%;
 
-      .search-results {
-        display: flex;
-        flex-direction: column;
-        grid-column: span 2;
-        gap: 1rem;
-        background-color: $base-color;
-        top: 6.5rem;
-        padding: 1rem;
-        border-radius: $radius;
-        max-height: 200px;
+      &__relative {
+        position: relative;
         width: 100%;
-        overflow-y: scroll;
-        overflow-x: hidden;
-        z-index: 1;
-        box-shadow: $shadow;
 
-        &__result {
+        .search-results {
           display: flex;
-          cursor: pointer;
+          flex-direction: column;
+          grid-column: span 2;
+          background-color: $primary-color;
+          border-radius: 0 0 $radius $radius;
+          max-height: 200px;
+          width: 100%;
+          overflow-y: scroll;
+          overflow-x: hidden;
+          z-index: 1;
+          box-shadow: $shadow;
+          position: absolute;
+          top: 30px;
+          padding: 1rem 0 0 0;
+
+          &__result {
+            display: flex;
+            cursor: pointer;
+            padding: 1rem;
+            gap: 0.5rem;
+            transition: background-color 0.4s ease;
+
+            @media (min-width: $big-tablet-screen) {
+              &:hover {
+                background-color: $secondary-color-faded;
+              }
+            }
+
+            &__flag {
+              width: 1rem;
+              height: 1rem;
+            }
+          }
         }
       }
     }

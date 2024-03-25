@@ -57,6 +57,7 @@ input,
 textarea {
   caret-color: $text-color;
   background-color: transparent;
+  color: $text-color;
   &:focus {
     border: 2px solid $text-color;
     outline: $text-color;
