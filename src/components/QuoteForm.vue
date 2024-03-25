@@ -82,62 +82,6 @@ const destinationSearchResults = computed(() => {
     <div class="form__fields">
       <template v-if="currentStep === 0">
         <div class="form__fields__wrapper">
-          <div class="form__fields__custom-field">
-            <span
-              class="form__fields__custom-field__span"
-              :class="{
-                'form__fields__custom-field__span--transparent': isRoundTrip,
-              }"
-              @click="isRoundTrip = false"
-            >
-              <img
-                src="/assets/icons/airplanemode_active-dark.svg"
-                alt="icon one way trip"
-              />
-              One way
-            </span>
-            <label class="switch" for="checkbox">
-              <input type="checkbox" id="checkbox" v-model="isRoundTrip" />
-              <span class="slider round"></span>
-            </label>
-            <span
-              class="form__fields__custom-field__span"
-              :class="{
-                'form__fields__custom-field__span--transparent': !isRoundTrip,
-              }"
-              @click="isRoundTrip = true"
-            >
-              <img
-                src="/assets/icons/connecting_airports.svg"
-                alt="icon one way trip"
-              />
-              Round trip
-            </span>
-          </div>
-          <div class="form__fields__custom-field">
-            <label for="number" class="sr-only">Number of passengers</label>
-            <span
-              class="form__fields__custom-field__span"
-              style="cursor: default"
-            >
-              <img
-                class="form__fields__custom-field__icon"
-                src="/assets/icons/group_add-dark.svg"
-                alt="icon number of passengers"
-              />
-              Passengers
-            </span>
-            <InputField
-              v-model="passengers"
-              class="passengers"
-              id="passengers"
-              label="Passengers"
-              type="number"
-              placeholder="1"
-            />
-          </div>
-        </div>
-        <div class="form__fields__wrapper">
           <div class="form__fields__wrapper__relative">
             <InputField
               v-model="origin"
@@ -207,6 +151,62 @@ const destinationSearchResults = computed(() => {
             placeholder="YYYY-MM-DD"
             icon="calendar_tomorrow"
           />
+        </div>
+        <div class="form__fields__wrapper">
+          <div class="form__fields__custom-field">
+            <span
+              class="form__fields__custom-field__span"
+              :class="{
+                'form__fields__custom-field__span--transparent': isRoundTrip,
+              }"
+              @click="isRoundTrip = false"
+            >
+              <img
+                src="/assets/icons/airplanemode_active-dark.svg"
+                alt="icon one way trip"
+              />
+              One way
+            </span>
+            <label class="switch" for="checkbox">
+              <input type="checkbox" id="checkbox" v-model="isRoundTrip" />
+              <span class="slider round"></span>
+            </label>
+            <span
+              class="form__fields__custom-field__span"
+              :class="{
+                'form__fields__custom-field__span--transparent': !isRoundTrip,
+              }"
+              @click="isRoundTrip = true"
+            >
+              <img
+                src="/assets/icons/connecting_airports.svg"
+                alt="icon one way trip"
+              />
+              Round trip
+            </span>
+          </div>
+          <div class="form__fields__custom-field">
+            <label for="number" class="sr-only">Number of passengers</label>
+            <span
+              class="form__fields__custom-field__span"
+              style="cursor: default"
+            >
+              <img
+                class="form__fields__custom-field__icon"
+                src="/assets/icons/group_add-dark.svg"
+                alt="icon number of passengers"
+              />
+              Passengers
+            </span>
+            <InputField
+              v-model="passengers"
+              class="passengers"
+              id="passengers"
+              label="Passengers"
+              type="number"
+              placeholder="1"
+            />
+          </div>
         </div>
 
         <button
