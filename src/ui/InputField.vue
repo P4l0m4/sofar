@@ -23,6 +23,10 @@ const input = ref<HTMLInputElement | null>(null);
 function triggerDatepicker() {
   input.value?.showPicker();
 }
+
+const dateAsString = computed(() => {
+  return dayjs(model.value).format("MMMM DD, YYYY");
+});
 </script>
 <template>
   <div class="input-field">
@@ -54,7 +58,7 @@ function triggerDatepicker() {
       class="input-field__date"
       v-if="type === 'date'"
       @click="triggerDatepicker()"
-      >{{ label }}: {{ dayjs(model).format("MMMM DD, YYYY") }}</span
+      >{{ label }}: {{ dateAsString }}</span
     >
   </div>
 </template>

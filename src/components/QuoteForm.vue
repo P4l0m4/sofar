@@ -12,6 +12,8 @@ const lastName = ref("");
 const email = ref("");
 const phoneNumber = ref("");
 const info = ref("");
+const departureDate = ref("");
+const returnDate = ref("");
 
 const currentStep = ref(0);
 
@@ -191,7 +193,7 @@ const destinationSearchResults = computed(() => {
             id="departureDate"
             label="Departure date"
             type="date"
-            placeholder="MM-DD-YYYY"
+            placeholder="YYYY-MM-DD"
             icon="calendar_today"
           />
           <InputField
@@ -199,7 +201,7 @@ const destinationSearchResults = computed(() => {
             id="returnDate"
             label="Return date"
             type="date"
-            placeholder="MM-DD-YYYY"
+            placeholder="YYYY-MM-DD"
             icon="calendar_today"
           />
         </div>
