@@ -11,18 +11,13 @@ const props = defineProps({
   menuItems: Array,
 });
 
-
 function scrolling(index) {
   const element = scrollableElement.value[`sublinks-${index}`];
   let scrollPercent =
-    (event.target.scrollTop /
-      (element.scrollHeight -
-        element.clientHeight)) *
+    (event.target.scrollTop / (element.scrollHeight - element.clientHeight)) *
     100;
 
   arrow.value[0].style.opacity = `${100 - scrollPercent}%`;
-
-  
 }
 
 function scrollWithArrow(index) {
@@ -166,9 +161,7 @@ function shouldDisplayArrow(index) {
         border-radius: $radius;
         backdrop-filter: blur(20px);
         position: relative;
-        transition:
-          0.4s background-color ease,
-          0.4s transform ease;
+        transition: 0.4s background-color ease, 0.4s transform ease;
         &:hover,
         &:active {
           background-color: $text-color;
@@ -187,22 +180,21 @@ function shouldDisplayArrow(index) {
           border-radius: $radius;
           white-space: nowrap;
           text-shadow: $shadow-text;
-            flex-direction: row;
-            font-size: 1.1rem;
-            padding: 1rem;
+          flex-direction: row;
+          font-size: 1.1rem;
+          padding: 1rem;
 
-            &:hover,
-            &:active {
-              & ~ .aside__nav__ul__li__sublinks {
-                display: flex;
-                opacity: 1;
-              }
+          &:hover,
+          &:active {
+            & ~ .aside__nav__ul__li__sublinks {
+              display: flex;
+              opacity: 1;
             }
+          }
 
-            &::before {
-              display: none;
-            }
-          
+          &::before {
+            display: none;
+          }
 
           &__icon {
             width: 1.5rem;
@@ -240,9 +232,7 @@ function shouldDisplayArrow(index) {
             backdrop-filter: blur(6px);
             border-radius: $radius;
             color: $text-color-alt;
-            transition:
-              background-color 0.4s ease,
-              transform 0.4s ease;
+            transition: background-color 0.4s ease, transform 0.4s ease;
             white-space: nowrap;
             width: 100%;
             text-shadow: $shadow-text;
@@ -309,6 +299,10 @@ function shouldDisplayArrow(index) {
             border-radius: $radius;
             justify-content: flex-start;
             scroll-behavior: smooth;
+
+            &::-webkit-scrollbar {
+              display: none;
+            }
           }
         }
 
