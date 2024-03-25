@@ -96,6 +96,7 @@ const destinationSearchResults = computed(() => {
               :class="{
                 'form__fields__custom-field__span--transparent': isRoundTrip,
               }"
+              @click="isRoundTrip = false"
             >
               <img
                 src="/assets/icons/airplanemode_active-dark.svg"
@@ -112,6 +113,7 @@ const destinationSearchResults = computed(() => {
               :class="{
                 'form__fields__custom-field__span--transparent': !isRoundTrip,
               }"
+              @click="isRoundTrip = true"
             >
               <img
                 src="/assets/icons/connecting_airports.svg"
@@ -122,7 +124,10 @@ const destinationSearchResults = computed(() => {
           </div>
           <div class="form__fields__custom-field">
             <label for="number" class="sr-only">Number of passengers</label>
-            <span class="form__fields__custom-field__span">
+            <span
+              class="form__fields__custom-field__span"
+              style="cursor: default"
+            >
               <img
                 class="form__fields__custom-field__icon"
                 src="/assets/icons/group_add-dark.svg"
@@ -187,15 +192,16 @@ const destinationSearchResults = computed(() => {
             id="departureDate"
             label="Departure date"
             type="date"
-            placeholder="YYYY-MM-DD"
+            placeholder="MM-DD-YYYY"
             icon="calendar_today"
+            :formatted-date="formattedDepartureDate"
           />
           <InputField
             v-model="returnDate"
             id="returnDate"
             label="Return date"
             type="date"
-            placeholder="YYYY-MM-DD"
+            placeholder="MM-DD-YYYY"
             icon="calendar_today"
           />
         </div>
@@ -364,6 +370,8 @@ const destinationSearchResults = computed(() => {
         align-items: center;
         font-size: $small-text;
         white-space: nowrap;
+        transition: opacity 0.4s ease;
+        cursor: pointer;
 
         &--transparent {
           opacity: 0.5;

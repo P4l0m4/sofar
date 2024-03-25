@@ -100,11 +100,15 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   -moz-appearance: none; /* Remove default icon in Firefox */
   appearance: none !important; /* Generic way to remove default icon */
   opacity: 0;
-  width: 34px;
-  height: 34px;
+  width: 300px;
+  height: 30px;
   position: absolute;
-  margin-left: -2.2rem;
+  margin-left: -2rem;
   cursor: pointer;
+
+  @media (min-width: $big-tablet-screen) {
+    width: 400px;
+  }
 }
 
 input[type="search"]::-webkit-search-decoration,

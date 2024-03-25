@@ -13,10 +13,10 @@ export default defineNuxtConfig({
     /* PWA options */
   },
 
-  dayjs: {
-    locales: ["fr"],
-    defaultLocale: "fr",
-  },
+  // dayjs: {
+  //   locales: ["en-us"],
+  //   defaultLocale: "en-us",
+  // },
 
   vite: {
     css: {

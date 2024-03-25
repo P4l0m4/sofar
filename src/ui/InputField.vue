@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ref } from "vue";
+import dayjs from "dayjs";
 interface Props {
   id: string;
   label: string;
@@ -42,6 +44,9 @@ const model = defineModel<string>();
       :title="label"
       :aria-placeholder="placeholder"
     />
+    <span class="input-field__date" v-if="type === 'date'"
+      >{{ label }}: {{ dayjs(model).format("MMMM DD, YYYY") }}</span
+    >
   </div>
 </template>
 <style lang="scss" scoped>
@@ -55,6 +60,7 @@ const model = defineModel<string>();
   border-radius: $radius;
   padding: 0 0.75rem;
   box-shadow: $shadow;
+  overflow: hidden;
 
   &__label {
     font-size: $small-text;
@@ -88,6 +94,24 @@ const model = defineModel<string>();
 
     &[type="search"] {
       max-width: 100%;
+    }
+    &[type="date"] {
+      max-width: 1px;
+    }
+  }
+
+  &__date {
+    width: 100%;
+    margin-left: -0.5rem;
+    font-size: 1rem;
+    padding: 0.65rem 0;
+    font-weight: $skinny;
+    color: $text-color;
+    caret-color: $text-color;
+
+    &:focus {
+      outline: none;
+      border: none;
     }
   }
 }
