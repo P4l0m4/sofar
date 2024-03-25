@@ -14,7 +14,11 @@ const phoneNumber = ref("");
 const info = ref("");
 const departureDate = ref("");
 const returnDate = ref("");
+const roundTripDepartureDate = ref("");
+const roundTripReturnDate = ref("");
 const currentStep = ref(0);
+let isStep1Valid = ref(false);
+let isStep2Valid = ref(false);
 
 const steps = [
   {
@@ -207,14 +211,36 @@ const destinationSearchResults = computed(() => {
               placeholder="1"
             />
           </div>
+          <Transition>
+            <div class="form__fields__wrapper" v-if="isRoundTrip">
+              <span>Second trip</span>
+              <InputField
+                v-model="roundTripDepartureDate"
+                id="departureDate"
+                label="Departure date"
+                type="date"
+                placeholder="YYYY-MM-DD"
+                icon="calendar_today"
+              />
+              <InputField
+                v-model="roundTripReturnDate"
+                id="returnDate"
+                label="Return date"
+                type="date"
+                placeholder="YYYY-MM-DD"
+                icon="calendar_tomorrow"
+              /></div
+          ></Transition>
         </div>
-
-        <button
-          class="form__fields__button button-primary"
-          @click="currentStep++"
+        <Transition>
+          <button
+            class="form__fields__button button-primary"
+            @click="currentStep++"
+            v-if="isStep1Valid"
+          >
+            Next step
+          </button></Transition
         >
-          Next
-        </button>
       </template>
       <template v-else-if="currentStep === 1">
         <div class="form__fields__wrapper">
@@ -521,6 +547,12 @@ const destinationSearchResults = computed(() => {
 
     &__button {
       width: 100%;
+    }
+
+    &__error {
+      color: red;
+      font-size: $small-text;
+      font-weight: $skinny;
     }
   }
 }
