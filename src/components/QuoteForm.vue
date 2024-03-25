@@ -33,10 +33,7 @@ const originSearchResults = computed(() => {
     .filter(
       (airport) =>
         airport.name.toLowerCase().includes(origin.value.toLowerCase()) ||
-        airport.municipality
-          .toLowerCase()
-          .includes(origin.value.toLowerCase()) ||
-        airport.iso_country.toLowerCase().includes(origin.value.toLowerCase())
+        airport.municipality.toLowerCase().includes(origin.value.toLowerCase())
     )
     .slice(0, 10);
 });
@@ -50,9 +47,6 @@ const destinationSearchResults = computed(() => {
       (airport) =>
         airport.name.toLowerCase().includes(destination.value.toLowerCase()) ||
         airport.municipality
-          .toLowerCase()
-          .includes(destination.value.toLowerCase()) ||
-        airport.iso_country
           .toLowerCase()
           .includes(destination.value.toLowerCase())
     )
@@ -158,7 +152,7 @@ const destinationSearchResults = computed(() => {
                 v-for="(result, i) in originSearchResults"
                 class="search-results__result"
                 :key="i"
-                @click="origin = result"
+                @click="origin = `${result.name}, ${result.municipality}`"
                 ><img
                   class="search-results__result__flag"
                   :src="`assets/flags/${result.iso_country}.svg`"
@@ -185,7 +179,7 @@ const destinationSearchResults = computed(() => {
                 v-for="(result, i) in destinationSearchResults"
                 class="search-results__result"
                 :key="i"
-                @click="destination = result"
+                @click="destination = `${result.name}, ${result.municipality}`"
                 ><img
                   class="search-results__result__flag"
                   :src="`assets/flags/${result.iso_country}.svg`"
