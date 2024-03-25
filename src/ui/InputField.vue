@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref } from "vue";
 import dayjs from "dayjs";
 interface Props {
   id: string;
@@ -17,10 +18,10 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const model = defineModel<string>();
+const input = ref<HTMLInputElement | null>(null);
 
 function triggerDatepicker() {
-  const input = document.getElementById(props.id) as HTMLInputElement;
-  input.showPicker();
+  input.value?.showPicker();
 }
 </script>
 <template>
@@ -47,6 +48,7 @@ function triggerDatepicker() {
       :aria-labelledby="label"
       :title="label"
       :aria-placeholder="placeholder"
+      ref="input"
     />
     <span
       class="input-field__date"
