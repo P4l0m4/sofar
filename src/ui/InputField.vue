@@ -25,7 +25,10 @@ function triggerDatepicker() {
 }
 
 const dateAsString = computed(() => {
-  return dayjs(model.value).format("MMMM DD, YYYY");
+  if (model.value === "") return "";
+  else {
+    return dayjs(model.value).format("MMMM DD, YYYY");
+  }
 });
 </script>
 <template>
@@ -59,7 +62,7 @@ const dateAsString = computed(() => {
       class="input-field__date"
       @click="triggerDatepicker()"
     >
-      {{ label }}: {{ dateAsString }}
+      <span>{{ label }}:</span> {{ dateAsString }}
     </span>
   </div>
 </template>
@@ -128,6 +131,13 @@ const dateAsString = computed(() => {
     &:focus {
       outline: none;
       border: none;
+    }
+
+    span {
+      font-size: 1rem;
+      font-weight: $skinny;
+      color: $text-color-faded;
+      white-space: nowrap;
     }
   }
 }
