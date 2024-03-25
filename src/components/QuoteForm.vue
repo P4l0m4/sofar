@@ -2,7 +2,6 @@
 import { ref } from "vue";
 import airports from "@/utils/airports.json";
 import InputField from "@/ui/InputField.vue";
-import dayjs from "dayjs";
 
 const isRoundTrip = ref(false);
 const origin = ref("");
@@ -194,7 +193,6 @@ const destinationSearchResults = computed(() => {
             type="date"
             placeholder="MM-DD-YYYY"
             icon="calendar_today"
-            :formatted-date="formattedDepartureDate"
           />
           <InputField
             v-model="returnDate"
@@ -479,7 +477,7 @@ const destinationSearchResults = computed(() => {
         flex-direction: column;
         grid-column: span 2;
         gap: 1rem;
-        background-color: $primary-color;
+        background-color: $base-color;
         top: 6.5rem;
         padding: 1rem;
         border-radius: $radius;

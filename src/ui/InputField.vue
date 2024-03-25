@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref } from "vue";
 import dayjs from "dayjs";
 interface Props {
   id: string;
@@ -85,6 +84,7 @@ const model = defineModel<string>();
     width: 100% !important;
     text-overflow: ellipsis;
     white-space: nowrap;
+    overflow: hidden;
 
     &::placeholder {
       color: $text-color-faded;
