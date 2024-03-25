@@ -101,7 +101,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   appearance: none !important; /* Generic way to remove default icon */
 
   opacity: 0;
-  width: 300px;
+  width: 30px;
   height: 36px;
   position: absolute;
   margin-left: -2rem;
@@ -109,10 +109,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
   border-radius: $radius;
   color: transparent;
-  background-color: transparent;
 
   @media (min-width: $big-tablet-screen) {
-    width: 400px;
+    width: 30px;
   }
 }
 

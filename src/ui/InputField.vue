@@ -17,6 +17,11 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const model = defineModel<string>();
+
+function triggerDatepicker() {
+  const input = document.getElementById(props.id) as HTMLInputElement;
+  input.showPicker();
+}
 </script>
 <template>
   <div class="input-field">
@@ -43,7 +48,10 @@ const model = defineModel<string>();
       :title="label"
       :aria-placeholder="placeholder"
     />
-    <span class="input-field__date" v-if="type === 'date'"
+    <span
+      class="input-field__date"
+      v-if="type === 'date'"
+      @click="triggerDatepicker()"
       >{{ label }}: {{ dayjs(model).format("MMMM DD, YYYY") }}</span
     >
   </div>
@@ -108,6 +116,7 @@ const model = defineModel<string>();
     font-weight: $skinny;
     color: $text-color;
     caret-color: $text-color;
+    cursor: pointer;
 
     &:focus {
       outline: none;
