@@ -213,7 +213,9 @@ const destinationSearchResults = computed(() => {
           </div>
           <Transition>
             <div class="form__fields__wrapper" v-if="isRoundTrip">
-              <span>Second trip</span>
+              <span class="form__fields__wrapper__second-trip"
+                >Second trip</span
+              >
               <InputField
                 v-model="roundTripDepartureDate"
                 id="departureDate"
@@ -541,6 +543,33 @@ const destinationSearchResults = computed(() => {
               height: 1rem;
             }
           }
+        }
+      }
+
+      &__second-trip {
+        width: 100%;
+        font-size: $small-text;
+        font-weight: $skinny;
+        color: $text-color;
+        margin-top: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        white-space: nowrap;
+
+        &::before {
+          content: "";
+          display: block;
+          width: 100%;
+          height: 1px;
+          background-color: $text-color;
+        }
+        &::after {
+          content: "";
+          display: block;
+          width: 100%;
+          height: 1px;
+          background-color: $text-color;
         }
       }
     }
