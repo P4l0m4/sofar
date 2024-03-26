@@ -57,6 +57,7 @@ const dateAsString = computed(() => {
       :title="label"
       :aria-placeholder="placeholder"
     />
+
     <span
       v-if="type === 'date'"
       class="input-field__date"

@@ -1,24 +1,43 @@
 <script setup>
-import { ref } from "vue";
+import { ref, reactive } from "vue";
 import airports from "@/utils/airports.json";
 import InputField from "@/ui/InputField.vue";
+import dayjs from "dayjs";
+import { useVuelidate } from "@vuelidate/core";
+import emailjs from "@emailjs/browser";
+import {
+  required,
+  minLength,
+  maxLength,
+  email,
+  alphaNum,
+  between,
+  minValue,
+  numeric,
+} from "@vuelidate/validators";
 
 const isRoundTrip = ref(false);
-const origin = ref("");
-const destination = ref("");
-const passengers = ref("");
-const firstName = ref("");
-const lastName = ref("");
-const email = ref("");
-const phoneNumber = ref("");
-const info = ref("");
-const departureDate = ref("");
-const returnDate = ref("");
-const roundTripDepartureDate = ref("");
-const roundTripReturnDate = ref("");
 const currentStep = ref(0);
 let isStep1Valid = ref(false);
 let isStep2Valid = ref(false);
+const isSubmitting = ref(false);
+
+const state = reactive({
+  sent: false,
+  isSubmitting: false,
+  departureDate: "",
+  returnDate: "",
+  roundTripDepartureDate: "",
+  roundTripReturnDate: "",
+  origin: "",
+  destination: "",
+  passengers: "1",
+  firstName: "",
+  lastName: "",
+  emailRef: "",
+  phoneNumber: "",
+  info: "",
+});
 
 const steps = [
   {
@@ -30,35 +49,121 @@ const steps = [
 ];
 
 const originSearchResults = computed(() => {
-  if (!origin.value) {
+  if (!state.origin) {
     return [];
   }
   return airports
     .filter(
       (airport) =>
-        airport.name.toLowerCase().includes(origin.value.toLowerCase()) ||
-        airport.municipality.toLowerCase().includes(origin.value.toLowerCase())
+        airport.name.toLowerCase().includes(state.origin.toLowerCase()) ||
+        airport.municipality.toLowerCase().includes(state.origin.toLowerCase())
     )
     .slice(0, 10);
 });
 
 const destinationSearchResults = computed(() => {
-  if (!destination.value) {
+  if (!state.destination) {
     return [];
   }
   return airports
     .filter(
       (airport) =>
-        airport.name.toLowerCase().includes(destination.value.toLowerCase()) ||
+        airport.name.toLowerCase().includes(state.destination.toLowerCase()) ||
         airport.municipality
           .toLowerCase()
-          .includes(destination.value.toLowerCase())
+          .includes(state.destination.toLowerCase())
     )
     .slice(0, 10);
 });
+
+const rules = {
+  origin: {
+    required,
+    alphaNum,
+  },
+  destination: {
+    required,
+    alphaNum,
+  },
+  passengers: {
+    required,
+    minLength: minLength(1),
+    maxLength: maxLength(99),
+  },
+  departureDate: {
+    required,
+    between: between(dayjs().format("MMM DD, YYYY"), state.returnDate),
+  },
+  returnDate: {
+    required,
+    minValue: minValue(state.departureDate),
+  },
+  roundTripDepartureDate: {
+    required: isRoundTrip,
+    between: between(dayjs().format("MMM DD, YYYY"), state.roundTripReturnDate),
+  },
+  roundTripReturnDate: {
+    required: isRoundTrip,
+    minValue: minValue(state.roundTripDepartureDate),
+  },
+  firstName: {
+    required,
+    maxLength: maxLength(50),
+    alphaNum,
+  },
+  lastName: {
+    required,
+    maxLength: maxLength(50),
+    alphaNum,
+  },
+  phoneNumber: {
+    required,
+    minLength: minLength(10),
+    maxLength: maxLength(15),
+    numeric,
+  },
+  email: {
+    required,
+    email,
+  },
+};
+
+const v$ = useVuelidate(rules, state);
+const form = ref(null);
+
+async function submit() {
+  const valid = await v$.value.$validate();
+
+  if (valid) {
+    await emailjs.sendForm(
+      "service_n1t6qo6",
+      "template_764bqrq",
+      form.value,
+      "8ifw_QPXgYXoWYmVW"
+    );
+
+    state.sent = true;
+    state.isSubmitting = false;
+    state.origin = "";
+    state.destination = "";
+    state.lastName = "";
+    state.firstName = "";
+    state.phoneNumber = "";
+    state.info = "";
+    state.email = "";
+    v$.value.$reset();
+  }
+}
+
+async function checkFirstStep() {
+  const valid = await v$.value.$validate();
+  if (valid) {
+    currentStep++;
+  }
+}
 </script>
 <template>
-  <form class="form">
+  <form class="form" ref="form" @submit.prevent="submit">
     <div class="form__steps">
       <div class="form__steps__step" v-for="(step, i) in steps" :key="i">
         <h3
@@ -88,7 +193,7 @@ const destinationSearchResults = computed(() => {
         <div class="form__fields__wrapper">
           <div class="form__fields__wrapper__relative">
             <InputField
-              v-model="origin"
+              v-model="state.origin"
               id="origin"
               label="Departure airport"
               type="search"
@@ -100,7 +205,7 @@ const destinationSearchResults = computed(() => {
                 v-for="(result, i) in originSearchResults"
                 class="search-results__result"
                 :key="i"
-                @click="origin = `${result.name}, ${result.municipality}`"
+                @click="state.origin = `${result.name}, ${result.municipality}`"
                 ><img
                   class="search-results__result__flag"
                   :src="`assets/flags/${result.iso_country}.svg`"
@@ -108,10 +213,22 @@ const destinationSearchResults = computed(() => {
                 />{{ result.name }}, {{ result.municipality }}</span
               >
             </div>
+            <span
+              v-if="v$.origin.$dirty && v$.origin.required.$invalid"
+              class="error"
+            >
+              This field is required
+            </span>
+            <span
+              v-if="v$.origin.$dirty && v$.origin.alphaNum.$invalid"
+              class="error"
+            >
+              This field must contain only alphanumeric characters
+            </span>
           </div>
           <div class="form__fields__wrapper__relative">
             <InputField
-              v-model="destination"
+              v-model="state.destination"
               id="destination"
               label="Arrival airport"
               type="search"
@@ -127,7 +244,9 @@ const destinationSearchResults = computed(() => {
                 v-for="(result, i) in destinationSearchResults"
                 class="search-results__result"
                 :key="i"
-                @click="destination = `${result.name}, ${result.municipality}`"
+                @click="
+                  state.destination = `${result.name}, ${result.municipality}`
+                "
                 ><img
                   class="search-results__result__flag"
                   :src="`assets/flags/${result.iso_country}.svg`"
@@ -136,25 +255,61 @@ const destinationSearchResults = computed(() => {
                 {{ result.name }}, {{ result.municipality }}
               </span>
             </div>
+            <span
+              v-if="v$.destination.$dirty && v$.destination.required.$invalid"
+              class="error"
+            >
+              This field is required
+            </span>
+            <span
+              v-if="v$.destination.$dirty && v$.destination.alphaNum.$invalid"
+              class="error"
+            >
+              This field must contain only alphanumeric characters
+            </span>
           </div>
         </div>
         <div class="form__fields__wrapper">
           <InputField
-            v-model="departureDate"
+            v-model="state.departureDate"
             id="departureDate"
             label="Departure date"
             type="date"
             placeholder="YYYY-MM-DD"
             icon="calendar_today"
           />
+          <span
+            v-if="v$.departureDate.$dirty && v$.departureDate.required.$invalid"
+            class="error error--date"
+          >
+            This field is required
+          </span>
+          <span
+            v-if="v$.departureDate.$dirty && v$.departureDate.between.$invalid"
+            class="error"
+          >
+            Your departure date must be before your return date and after today
+          </span>
           <InputField
-            v-model="returnDate"
+            v-model="state.returnDate"
             id="returnDate"
             label="Return date"
             type="date"
             placeholder="YYYY-MM-DD"
             icon="calendar_tomorrow"
           />
+          <span
+            v-if="v$.returnDate.$dirty && v$.returnDate.required.$invalid"
+            class="error"
+          >
+            This field is required
+          </span>
+          <span
+            v-if="v$.returnDate.$dirty && v$.returnDate.minValue.$invalid"
+            class="error"
+          >
+            Your return date must be after your departure date
+          </span>
         </div>
         <div class="form__fields__wrapper">
           <div class="form__fields__custom-field">
@@ -203,13 +358,25 @@ const destinationSearchResults = computed(() => {
               Passengers
             </span>
             <InputField
-              v-model="passengers"
+              v-model="state.passengers"
               class="passengers"
               id="passengers"
               label="Passengers"
               type="number"
               placeholder="1"
             />
+            <span
+              v-if="v$.passengers.$dirty && v$.passengers.required.$invalid"
+              class="error"
+            >
+              This field is required
+            </span>
+            <span
+              v-if="v$.passengers.$dirty && v$.passengers.minLength.$invalid"
+              class="error"
+            >
+              Passengers must be between 1 and 99
+            </span>
           </div>
           <Transition>
             <div class="form__fields__wrapper" v-if="isRoundTrip">
@@ -217,28 +384,63 @@ const destinationSearchResults = computed(() => {
                 >Second trip</span
               >
               <InputField
-                v-model="roundTripDepartureDate"
+                v-model="state.roundTripDepartureDate"
                 id="departureDate"
                 label="Departure date"
                 type="date"
                 placeholder="YYYY-MM-DD"
                 icon="calendar_today"
               />
+              <span
+                v-if="
+                  v$.roundTripDepartureDate.$dirty &&
+                  v$.roundTripDepartureDate.required.$invalid
+                "
+                class="error error--date"
+              >
+                This field is required
+              </span>
+              <span
+                v-if="
+                  v$.roundTripDepartureDate.$dirty &&
+                  v$.roundTripDepartureDate.between.$invalid
+                "
+                class="error error--date"
+              >
+                Your departure date must be before your return date
+              </span>
               <InputField
-                v-model="roundTripReturnDate"
+                v-model="state.roundTripReturnDate"
                 id="returnDate"
                 label="Return date"
                 type="date"
                 placeholder="YYYY-MM-DD"
                 icon="calendar_tomorrow"
-              /></div
-          ></Transition>
+              /><span
+                v-if="
+                  v$.roundTripReturnDate.$dirty &&
+                  v$.roundTripReturnDate.required.$invalid
+                "
+                class="error error--date"
+              >
+                This field is required
+              </span>
+              <span
+                v-if="
+                  v$.roundTripReturnDate.$dirty &&
+                  v$.roundTripReturnDate.minValue.$invalid
+                "
+                class="error error--date"
+              >
+                Your return date must be after your departure date
+              </span>
+            </div></Transition
+          >
         </div>
         <Transition>
           <button
             class="form__fields__button button-primary"
-            @click="currentStep++"
-            v-if="isStep1Valid"
+            @click="checkFirstStep()"
           >
             Next step
           </button></Transition
@@ -247,13 +449,13 @@ const destinationSearchResults = computed(() => {
       <template v-else-if="currentStep === 1">
         <div class="form__fields__wrapper--row">
           <InputField
-            v-model="firstName"
+            v-model="state.firstName"
             id="firstName"
             label="First name"
             placeholder="John"
           />
           <InputField
-            v-model="lastName"
+            v-model="state.lastName"
             id="lastName"
             label="Last name"
             placeholder="Doe"
@@ -261,21 +463,21 @@ const destinationSearchResults = computed(() => {
         </div>
 
         <InputField
-          v-model="email"
+          v-model="state.email"
           id="email"
           label="Email"
           placeholder="emailadress@domain.com"
           type="email"
         />
         <InputField
-          v-model="phoneNumber"
+          v-model="state.phoneNumber"
           id="phoneNumber"
           label="Phone"
           placeholder="(000) 000 - 00*"
           type="tel"
         />
         <InputField
-          v-model="info"
+          v-model="state.info"
           id="info"
           label="Additional information"
           placeholder="Tell us more about your request..."
@@ -589,12 +791,20 @@ const destinationSearchResults = computed(() => {
     &__button {
       width: 100%;
     }
+  }
+}
 
-    &__error {
-      color: red;
-      font-size: $small-text;
-      font-weight: $skinny;
-    }
+.error {
+  color: $error-color;
+  font-size: $small-text;
+  font-weight: $skinny;
+  padding: 0.5rem 0 0 0.5rem;
+  display: flex;
+
+  &--date {
+    padding: 0;
+    padding-left: 0.5rem;
+    margin-top: -0.5rem;
   }
 }
 </style>
