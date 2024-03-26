@@ -286,7 +286,7 @@ async function checkFirstStep() {
           </span>
           <span
             v-if="v$.departureDate.$dirty && v$.departureDate.between.$invalid"
-            class="error"
+            class="error error--date"
           >
             Your departure date must be before your return date and after today
           </span>
@@ -300,13 +300,13 @@ async function checkFirstStep() {
           />
           <span
             v-if="v$.returnDate.$dirty && v$.returnDate.required.$invalid"
-            class="error"
+            class="error error--date"
           >
             This field is required
           </span>
           <span
             v-if="v$.returnDate.$dirty && v$.returnDate.minValue.$invalid"
-            class="error"
+            class="error error--date"
           >
             Your return date must be after your departure date
           </span>
