@@ -11,6 +11,7 @@ import {
   maxLength,
   email,
   alphaNum,
+  requiredIf,
   between,
   minValue,
   numeric,
@@ -24,6 +25,7 @@ const currentStep = ref(0);
 let isStep1Valid = ref(false);
 let isStep2Valid = ref(false);
 const isSubmitting = ref(false);
+const todaysDate = dayjs().format("YYYY-MM-DD");
 
 const state = reactive({
   sent: false,
@@ -129,10 +131,10 @@ const rules = {
   },
   departureDate: {
     required,
-    minValue: minValue(dayjs().format("MMM DD, YYYY")),
+    minValue: minValue(todaysDate),
   },
   returnDate: {
-    requiredIf: () => isRoundTrip.value,
+    requiredIfRef: requiredIf(isRoundTrip),
     minValue: minValue(state.departureDate),
   },
   firstName: {
@@ -194,6 +196,7 @@ async function checkFirstStep() {
 }
 </script>
 <template>
+  <!-- {{ state.departureDate > todaysDate }} -->
   <form class="form" ref="form" @submit.prevent="submit">
     <div class="form__steps">
       <div class="form__steps__step" v-for="(step, i) in steps" :key="i">
@@ -346,7 +349,7 @@ async function checkFirstStep() {
                 v-if="v$.departureDate.minValue.$invalid"
                 class="errors__error"
               >
-                Your departure date cannot be today or in the past
+                Your departure date cannot be today nor in the past
               </span>
             </div>
           </div>
@@ -361,14 +364,14 @@ async function checkFirstStep() {
             />
             <div class="errors" v-if="v$.returnDate.$dirty">
               <span
-                v-if="v$.returnDate.requiredIf.$invalid"
-                class="errors__error errors__error--date"
+                v-if="v$.returnDate.requiredIfRef.$invalid"
+                class="errors__error"
               >
                 This field is empty
               </span>
               <span
                 v-if="v$.returnDate.minValue.$invalid"
-                class="errors__error errors__error--date"
+                class="errors__error"
               >
                 Your return date must be after your departure date
               </span>
