@@ -9,6 +9,7 @@ interface Props {
   icon?: string;
   required?: boolean;
   autofocus?: boolean;
+  error?: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -25,10 +26,8 @@ function triggerDatepicker() {
 }
 
 const dateAsString = computed(() => {
-  if (model.value === "") return "";
-  else {
-    return dayjs(model.value).format("MMMM DD, YYYY");
-  }
+  if (!model.value) return "";
+  return dayjs(model.value).format("MMMM DD, YYYY");
 });
 </script>
 <template>
@@ -55,6 +54,7 @@ const dateAsString = computed(() => {
       :aria-labelledby="label"
       :title="label"
       :aria-placeholder="placeholder"
+      @change=""
     />
 
     <span
@@ -65,6 +65,7 @@ const dateAsString = computed(() => {
       <span>{{ label }}:</span> {{ dateAsString }}
     </span>
   </div>
+  <div class="input-error" v-if="error">{{ error }}</div>
 </template>
 <style lang="scss" scoped>
 .input-field {
@@ -142,5 +143,14 @@ const dateAsString = computed(() => {
       white-space: nowrap;
     }
   }
+}
+.input-error {
+  color: $error-color;
+  font-size: $small-text;
+  font-weight: $skinny;
+  display: flex;
+  background-color: rgba(255, 0, 0, 0.2);
+  padding: 0.25rem 0.5rem;
+  border-radius: $radius;
 }
 </style>

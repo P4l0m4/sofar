@@ -12,11 +12,9 @@ import {
   email,
   alphaNum,
   requiredIf,
-  between,
   minValue,
+  maxValue,
   numeric,
-  not,
-  sameAs,
   helpers,
 } from "@vuelidate/validators";
 
@@ -27,19 +25,18 @@ let isStep2Valid = ref(false);
 const isSubmitting = ref(false);
 const todaysDate = dayjs().format("YYYY-MM-DD");
 
-const state = reactive({
-  sent: false,
-  isSubmitting: false,
+const flightState = reactive({
   departureDate: "",
   returnDate: "",
-  roundTripDepartureDate: "",
-  roundTripReturnDate: "",
   origin: "",
   destination: "",
   passengers: "1",
+});
+
+const contactState = reactive({
   firstName: "",
   lastName: "",
-  emailRef: "",
+  email: "",
   phoneNumber: "",
   info: "",
 });
@@ -54,66 +51,58 @@ const steps = [
 ];
 
 const originSearchResults = computed(() => {
-  if (!state.origin) {
+  if (!flightState.origin) {
     return [];
   }
   return airports
     .filter(
       (airport) =>
-        airport.name.toLowerCase().includes(state.origin.toLowerCase()) ||
-        airport.municipality.toLowerCase().includes(state.origin.toLowerCase())
+        airport.name.toLowerCase().includes(flightState.origin.toLowerCase()) ||
+        airport.municipality
+          .toLowerCase()
+          .includes(flightState.origin.toLowerCase())
     )
     .slice(0, 10);
 });
 
 const destinationSearchResults = computed(() => {
-  if (!state.destination) {
+  if (!flightState.destination) {
     return [];
   }
   return airports
     .filter(
       (airport) =>
-        airport.name.toLowerCase().includes(state.destination.toLowerCase()) ||
+        airport.name
+          .toLowerCase()
+          .includes(flightState.destination.toLowerCase()) ||
         airport.municipality
           .toLowerCase()
-          .includes(state.destination.toLowerCase())
+          .includes(flightState.destination.toLowerCase())
     )
     .slice(0, 10);
 });
 
 function checkIfAirportExists(airport) {
-  if (
-    airports.some(
-      (a) =>
-        `${a.name.toLowerCase()}, ${a.municipality.toLowerCase()}` ===
-        airport.toLowerCase()
-    )
-  ) {
-    return true;
-  } else {
-    return false;
-  }
+  return airports.some(
+    (a) =>
+      `${a.name.toLowerCase()}, ${a.municipality.toLowerCase()}` ===
+      airport.toLowerCase()
+  );
 }
 
 // Custom validator that checks if the airport exists
-const airportExistsValidator = helpers.withMessage(
-  "The specified airport does not exist.",
-  (value) => {
-    return checkIfAirportExists(value);
+const airportExistsValidator = (value) => checkIfAirportExists(value);
+const notSameAsDestination = (value) => value !== flightState.destination;
+const notSameAsOrigin = (value) => value !== flightState.origin;
+const greaterThan = (value) => value > todaysDate;
+const lowerThan = (value) => {
+  if (!isRoundTrip.value) {
+    return true;
   }
-);
+  return value >= flightState.departureDate;
+};
 
-const notSameAsDestination = helpers.withMessage(
-  "The departure and arrival airports cannot be the same",
-  (value, vm) => value !== vm.destination
-);
-
-const notSameAsOrigin = helpers.withMessage(
-  "The departure and arrival airports cannot be the same",
-  (value, vm) => value !== vm.origin
-);
-
-const rules = {
+const flightRules = {
   origin: {
     required,
     airportExistsValidator,
@@ -126,17 +115,20 @@ const rules = {
   },
   passengers: {
     required,
-    minLength: minLength(1),
-    maxLength: maxLength(99),
+    minValue: minValue(1),
+    maxValue: maxValue(99),
   },
   departureDate: {
     required,
-    minValue: minValue(todaysDate),
+    greaterThan,
   },
   returnDate: {
-    requiredIfRef: requiredIf(isRoundTrip),
-    minValue: minValue(state.departureDate),
+    required: requiredIf(isRoundTrip),
+    lowerThan,
   },
+};
+
+const contactRules = {
   firstName: {
     required,
     maxLength: maxLength(50),
@@ -159,11 +151,68 @@ const rules = {
   },
 };
 
-const v$ = useVuelidate(rules, state);
+const vFlight$ = useVuelidate(flightRules, flightState);
+const vContact$ = useVuelidate(contactRules, contactState);
 const form = ref(null);
 
-async function submit() {
-  const valid = await v$.value.$validate();
+const originErrors = computed(() => {
+  const errors = [];
+  if (!vFlight$.value.origin.$dirty) return errors;
+  vFlight$.value.origin.required.$invalid &&
+    errors.push("This field must be filled");
+  vFlight$.value.origin.airportExistsValidator.$invalid &&
+    errors.push("Please select an existing airport");
+  vFlight$.value.origin.notSameAsDestination.$invalid &&
+    errors.push("The departure and arrival airports must be different");
+  return errors;
+});
+
+const destinationErrors = computed(() => {
+  const errors = [];
+  if (!vFlight$.value.destination.$dirty) return errors;
+  vFlight$.value.destination.required.$invalid &&
+    errors.push("This field must be filled");
+  vFlight$.value.destination.airportExistsValidator.$invalid &&
+    errors.push("Please select an existing airport");
+  vFlight$.value.destination.notSameAsOrigin.$invalid &&
+    errors.push("The departure and arrival airports must be different");
+  return errors;
+});
+
+const passengersErrors = computed(() => {
+  const errors = [];
+  if (!vFlight$.value.passengers.$dirty) return errors;
+  vFlight$.value.passengers.required.$invalid &&
+    errors.push("This field must be filled");
+  vFlight$.value.passengers.minValue.$invalid &&
+    errors.push("Passengers must be between 1 and 99");
+  vFlight$.value.passengers.maxValue.$invalid &&
+    errors.push("Passengers must be between 1 and 99");
+  return errors;
+});
+
+const departureDateErrors = computed(() => {
+  const errors = [];
+  if (!vFlight$.value.departureDate.$dirty) return errors;
+  vFlight$.value.departureDate.required.$invalid &&
+    errors.push("This field must be filled");
+  vFlight$.value.departureDate.greaterThan.$invalid &&
+    errors.push("Your departure must at least tomorrow");
+  return errors;
+});
+
+const returnDateErrors = computed(() => {
+  const errors = [];
+  if (!vFlight$.value.returnDate.$dirty) return errors;
+  vFlight$.value.returnDate.required.$invalid &&
+    errors.push("This field must be filled");
+  vFlight$.value.returnDate.lowerThan.$invalid &&
+    errors.push("Your return must the same day of after your departure");
+  return errors;
+});
+
+async function submitForm() {
+  const valid = await vContact$.value.$validate();
 
   if (valid) {
     await emailjs.sendForm(
@@ -173,30 +222,22 @@ async function submit() {
       "8ifw_QPXgYXoWYmVW"
     );
 
-    state.sent = true;
-    state.isSubmitting = false;
-    state.origin = "";
-    state.destination = "";
-    state.lastName = "";
-    state.firstName = "";
-    state.phoneNumber = "";
-    state.info = "";
-    state.email = "";
-    v$.value.$reset();
+    vFlight$.value.$reset();
   }
 }
 
-async function checkFirstStep() {
-  const valid = await v$.value.$validate();
-  if (valid && currentStep === 0) {
-    currentStep = 1;
-  } else if (valid && currentStep === 1) {
-    currentStep = 0;
+async function validFlightState() {
+  const valid = await vFlight$.value.$validate();
+  if (valid) {
+    currentStep.value = 1;
   }
+}
+
+function goToStep(index) {
+  currentStep.value = index;
 }
 </script>
 <template>
-  <!-- {{ state.departureDate > todaysDate }} -->
   <form class="form" ref="form" @submit.prevent="submit">
     <div class="form__steps">
       <div class="form__steps__step" v-for="(step, i) in steps" :key="i">
@@ -205,7 +246,7 @@ async function checkFirstStep() {
           :class="{
             'form__steps__step__label--active': currentStep === i,
           }"
-          @click="checkFirstStep()"
+          @click="goToStep(i)"
         >
           <span
             class="form__steps__step__label__number"
@@ -227,19 +268,22 @@ async function checkFirstStep() {
         <div class="form__fields__wrapper">
           <div class="form__fields__wrapper__relative">
             <InputField
-              v-model="state.origin"
+              v-model="flightState.origin"
               id="origin"
               label="Departure airport"
               type="search"
               placeholder="From"
               icon="flight_takeoff"
+              :error="originErrors[0]"
             />
             <div class="search-results" v-if="originSearchResults.length > 0">
               <span
                 v-for="(result, i) in originSearchResults"
                 class="search-results__result"
                 :key="i"
-                @click="state.origin = `${result.name}, ${result.municipality}`"
+                @click="
+                  flightState.origin = `${result.name}, ${result.municipality}`
+                "
                 ><img
                   class="search-results__result__flag"
                   :src="`assets/flags/${result.iso_country}.svg`"
@@ -247,38 +291,16 @@ async function checkFirstStep() {
                 />{{ result.name }}, {{ result.municipality }}</span
               >
             </div>
-            <div class="errors" v-if="v$.origin.$dirty">
-              <span v-if="v$.origin.required.$invalid" class="errors__error">
-                This field is empty
-              </span>
-              <span
-                v-if="
-                  v$.origin.airportExistsValidator.$invalid &&
-                  !v$.origin.required.$invalid
-                "
-                class="errors__error"
-              >
-                This airport does not exist
-              </span>
-              <span
-                v-if="
-                  v$.origin.notSameAsDestination.$invalid &&
-                  !v$.origin.required.$invalid
-                "
-                class="errors__error"
-              >
-                The departure and arrival airports cannot be the same
-              </span>
-            </div>
           </div>
           <div class="form__fields__wrapper__relative">
             <InputField
-              v-model="state.destination"
+              v-model="flightState.destination"
               id="destination"
               label="Arrival airport"
               type="search"
               placeholder="To"
               icon="flight_land"
+              :error="destinationErrors[0]"
             />
 
             <div
@@ -290,7 +312,7 @@ async function checkFirstStep() {
                 class="search-results__result"
                 :key="i"
                 @click="
-                  state.destination = `${result.name}, ${result.municipality}`
+                  flightState.destination = `${result.name}, ${result.municipality}`
                 "
                 ><img
                   class="search-results__result__flag"
@@ -300,82 +322,30 @@ async function checkFirstStep() {
                 {{ result.name }}, {{ result.municipality }}
               </span>
             </div>
-            <div class="errors" v-if="v$.destination.$dirty">
-              <span
-                v-if="v$.destination.required.$invalid"
-                class="errors__error"
-              >
-                This field is empty
-              </span>
-              <span
-                v-if="
-                  v$.destination.airportExistsValidator.$invalid &&
-                  !v$.destination.required.$invalid
-                "
-                class="errors__error"
-              >
-                This airport does not exist
-              </span>
-              <span
-                v-if="
-                  v$.destination.notSameAsOrigin.$invalid &&
-                  !v$.destination.required.$invalid
-                "
-                class="errors__error"
-              >
-                The departure and arrival airports cannot be the same
-              </span>
-            </div>
           </div>
         </div>
         <div class="form__fields__wrapper">
           <div class="form__fields__wrapper__not-relative">
             <InputField
-              v-model="state.departureDate"
+              v-model="flightState.departureDate"
               id="departureDate"
               label="Departure date"
               type="date"
               placeholder="YYYY-MM-DD"
               icon="calendar_today"
+              :error="departureDateErrors[0]"
             />
-            <div class="errors" v-if="v$.departureDate.$dirty">
-              <span
-                v-if="v$.departureDate.required.$invalid"
-                class="errors__error"
-              >
-                This field is empty
-              </span>
-              <span
-                v-if="v$.departureDate.minValue.$invalid"
-                class="errors__error"
-              >
-                Your departure date cannot be today nor in the past
-              </span>
-            </div>
           </div>
           <div class="form__fields__wrapper__not-relative" v-if="isRoundTrip">
             <InputField
-              v-model="state.returnDate"
+              v-model="flightState.returnDate"
               id="returnDate"
               label="Return date"
               type="date"
               placeholder="YYYY-MM-DD"
               icon="calendar_tomorrow"
+              :error="returnDateErrors[0]"
             />
-            <div class="errors" v-if="v$.returnDate.$dirty">
-              <span
-                v-if="v$.returnDate.requiredIfRef.$invalid"
-                class="errors__error"
-              >
-                This field is empty
-              </span>
-              <span
-                v-if="v$.returnDate.minValue.$invalid"
-                class="errors__error"
-              >
-                Your return date must be after your departure date
-              </span>
-            </div>
           </div>
         </div>
         <div class="form__fields__wrapper">
@@ -425,48 +395,35 @@ async function checkFirstStep() {
               Passengers
             </span>
             <InputField
-              v-model="state.passengers"
+              v-model="flightState.passengers"
               class="passengers"
               id="passengers"
               label="Passengers"
               type="number"
               placeholder="1"
+              :error="passengersErrors[0]"
             />
-            <div class="errors" v-if="v$.passengers.$dirty">
-              <span
-                v-if="v$.passengers.required.$invalid"
-                class="errors__error"
-              >
-                This field is empty
-              </span>
-              <span
-                v-if="v$.passengers.minLength.$invalid"
-                class="errors__error"
-              >
-                Passengers must be between 1 and 99
-              </span>
-            </div>
           </div>
         </div>
         <Transition>
           <button
             class="form__fields__button button-primary"
-            @click="checkFirstStep()"
+            @click="validFlightState()"
           >
             Next step
-          </button></Transition
-        >
+          </button>
+        </Transition>
       </template>
       <template v-else-if="currentStep === 1">
         <div class="form__fields__wrapper--row">
           <InputField
-            v-model="state.firstName"
+            v-model="contactState.firstName"
             id="firstName"
             label="First name"
             placeholder="John"
           />
           <InputField
-            v-model="state.lastName"
+            v-model="contactState.lastName"
             id="lastName"
             label="Last name"
             placeholder="Doe"
@@ -474,21 +431,21 @@ async function checkFirstStep() {
         </div>
 
         <InputField
-          v-model="state.email"
+          v-model="contactState.email"
           id="email"
           label="Email"
           placeholder="emailadress@domain.com"
           type="email"
         />
         <InputField
-          v-model="state.phoneNumber"
+          v-model="contactState.phoneNumber"
           id="phoneNumber"
           label="Phone"
           placeholder="(000) 000 - 00*"
           type="tel"
         />
         <InputField
-          v-model="state.info"
+          v-model="contactState.info"
           id="info"
           label="Additional information"
           placeholder="Tell us more about your request..."
@@ -497,7 +454,7 @@ async function checkFirstStep() {
 
         <button
           class="form__fields__button button-primary"
-          @click="currentStep++"
+          @click="submitForm()"
         >
           Request a quote
         </button>
