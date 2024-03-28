@@ -50,7 +50,6 @@ const dateAsString = computed(() => {
       :type="type"
       :placeholder="placeholder"
       autocomplete="true"
-      :required="required"
       :autofocus="autofocus"
       :aria-label="label"
       :aria-labelledby="label"
@@ -116,12 +115,14 @@ const dateAsString = computed(() => {
     }
     &[type="date"] {
       max-width: 1px;
+      position: absolute;
+      top: 200px;
+      opacity: 0;
     }
   }
 
   &__date {
     width: 100%;
-    margin-left: -0.5rem;
     font-size: 1rem;
     padding: 0.65rem 0;
     font-weight: $skinny;

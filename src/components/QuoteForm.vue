@@ -14,6 +14,9 @@ import {
   between,
   minValue,
   numeric,
+  not,
+  sameAs,
+  helpers,
 } from "@vuelidate/validators";
 
 const isRoundTrip = ref(false);
@@ -76,14 +79,36 @@ const destinationSearchResults = computed(() => {
     .slice(0, 10);
 });
 
+function checkIfAirportExists(airport) {
+  if (
+    airports.some(
+      (a) =>
+        `${a.name.toLowerCase()}, ${a.municipality.toLowerCase()}` ===
+        airport.toLowerCase()
+    )
+  ) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+// Custom validator that checks if the airport exists
+const airportExistsValidator = helpers.withMessage(
+  "The specified airport does not exist.",
+  (value) => {
+    return checkIfAirportExists(value);
+  }
+);
+
 const rules = {
   origin: {
     required,
-    alphaNum,
+    airportExistsValidator,
   },
   destination: {
     required,
-    alphaNum,
+    airportExistsValidator,
   },
   passengers: {
     required,
@@ -213,18 +238,22 @@ async function checkFirstStep() {
                 />{{ result.name }}, {{ result.municipality }}</span
               >
             </div>
-            <span
-              v-if="v$.origin.$dirty && v$.origin.required.$invalid"
-              class="error"
-            >
-              This field is required
-            </span>
-            <span
-              v-if="v$.origin.$dirty && v$.origin.alphaNum.$invalid"
-              class="error"
-            >
-              This field must contain only alphanumeric characters
-            </span>
+            <div class="errors" v-if="v$.origin.$dirty">
+              <span
+                v-if="v$.origin.$dirty && v$.origin.required.$invalid"
+                class="errors__error"
+              >
+                This field is empty
+              </span>
+              <span
+                v-if="
+                  v$.origin.$dirty && v$.origin.airportExistsValidator.$invalid
+                "
+                class="errors__error"
+              >
+                This airport does not exist
+              </span>
+            </div>
           </div>
           <div class="form__fields__wrapper__relative">
             <InputField
@@ -255,61 +284,79 @@ async function checkFirstStep() {
                 {{ result.name }}, {{ result.municipality }}
               </span>
             </div>
-            <span
-              v-if="v$.destination.$dirty && v$.destination.required.$invalid"
-              class="error"
-            >
-              This field is required
-            </span>
-            <span
-              v-if="v$.destination.$dirty && v$.destination.alphaNum.$invalid"
-              class="error"
-            >
-              This field must contain only alphanumeric characters
-            </span>
+            <div class="errors" v-if="v$.destination.$dirty">
+              <span
+                v-if="v$.destination.$dirty && v$.destination.required.$invalid"
+                class="errors__error"
+              >
+                This field is empty
+              </span>
+              <span
+                v-if="
+                  v$.destination.$dirty &&
+                  v$.destination.airportExistsValidator.$invalid
+                "
+                class="errors__error"
+              >
+                This airport does not exist
+              </span>
+            </div>
           </div>
         </div>
         <div class="form__fields__wrapper">
-          <InputField
-            v-model="state.departureDate"
-            id="departureDate"
-            label="Departure date"
-            type="date"
-            placeholder="YYYY-MM-DD"
-            icon="calendar_today"
-          />
-          <span
-            v-if="v$.departureDate.$dirty && v$.departureDate.required.$invalid"
-            class="error error--date"
-          >
-            This field is required
-          </span>
-          <span
-            v-if="v$.departureDate.$dirty && v$.departureDate.between.$invalid"
-            class="error error--date"
-          >
-            Your departure date must be before your return date and after today
-          </span>
-          <InputField
-            v-model="state.returnDate"
-            id="returnDate"
-            label="Return date"
-            type="date"
-            placeholder="YYYY-MM-DD"
-            icon="calendar_tomorrow"
-          />
-          <span
-            v-if="v$.returnDate.$dirty && v$.returnDate.required.$invalid"
-            class="error error--date"
-          >
-            This field is required
-          </span>
-          <span
-            v-if="v$.returnDate.$dirty && v$.returnDate.minValue.$invalid"
-            class="error error--date"
-          >
-            Your return date must be after your departure date
-          </span>
+          <div class="form__fields__wrapper__not-relative">
+            <InputField
+              v-model="state.departureDate"
+              id="departureDate"
+              label="Departure date"
+              type="date"
+              placeholder="YYYY-MM-DD"
+              icon="calendar_today"
+            />
+            <div class="errors" v-if="v$.departureDate.$dirty">
+              <span
+                v-if="
+                  v$.departureDate.$dirty && v$.departureDate.required.$invalid
+                "
+                class="errors__error"
+              >
+                This field is empty
+              </span>
+              <span
+                v-if="
+                  v$.departureDate.$dirty && v$.departureDate.between.$invalid
+                "
+                class="errors__error"
+              >
+                Your departure date must be before your return date and after
+                today
+              </span>
+            </div>
+          </div>
+          <div class="form__fields__wrapper__not-relative" v-if="isRoundTrip">
+            <InputField
+              v-model="state.returnDate"
+              id="returnDate"
+              label="Return date"
+              type="date"
+              placeholder="YYYY-MM-DD"
+              icon="calendar_tomorrow"
+            />
+            <div class="errors" v-if="v$.returnDate.$dirty">
+              <span
+                v-if="v$.returnDate.$dirty && v$.returnDate.required.$invalid"
+                class="errors__error errors__error--date"
+              >
+                This field is empty
+              </span>
+              <span
+                v-if="v$.returnDate.$dirty && v$.returnDate.minValue.$invalid"
+                class="errors__error errors__error--date"
+              >
+                Your return date must be after your departure date
+              </span>
+            </div>
+          </div>
         </div>
         <div class="form__fields__wrapper">
           <div class="form__fields__custom-field">
@@ -369,7 +416,7 @@ async function checkFirstStep() {
               v-if="v$.passengers.$dirty && v$.passengers.required.$invalid"
               class="error"
             >
-              This field is required
+              This field is empty
             </span>
             <span
               v-if="v$.passengers.$dirty && v$.passengers.minLength.$invalid"
@@ -378,64 +425,6 @@ async function checkFirstStep() {
               Passengers must be between 1 and 99
             </span>
           </div>
-          <Transition>
-            <div class="form__fields__wrapper" v-if="isRoundTrip">
-              <span class="form__fields__wrapper__second-trip"
-                >Second trip</span
-              >
-              <InputField
-                v-model="state.roundTripDepartureDate"
-                id="departureDate"
-                label="Departure date"
-                type="date"
-                placeholder="YYYY-MM-DD"
-                icon="calendar_today"
-              />
-              <span
-                v-if="
-                  v$.roundTripDepartureDate.$dirty &&
-                  v$.roundTripDepartureDate.required.$invalid
-                "
-                class="error error--date"
-              >
-                This field is required
-              </span>
-              <span
-                v-if="
-                  v$.roundTripDepartureDate.$dirty &&
-                  v$.roundTripDepartureDate.between.$invalid
-                "
-                class="error error--date"
-              >
-                Your departure date must be before your return date
-              </span>
-              <InputField
-                v-model="state.roundTripReturnDate"
-                id="returnDate"
-                label="Return date"
-                type="date"
-                placeholder="YYYY-MM-DD"
-                icon="calendar_tomorrow"
-              /><span
-                v-if="
-                  v$.roundTripReturnDate.$dirty &&
-                  v$.roundTripReturnDate.required.$invalid
-                "
-                class="error error--date"
-              >
-                This field is required
-              </span>
-              <span
-                v-if="
-                  v$.roundTripReturnDate.$dirty &&
-                  v$.roundTripReturnDate.minValue.$invalid
-                "
-                class="error error--date"
-              >
-                Your return date must be after your departure date
-              </span>
-            </div></Transition
-          >
         </div>
         <Transition>
           <button
@@ -710,6 +699,9 @@ async function checkFirstStep() {
       &__relative {
         position: relative;
         width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
 
         .search-results {
           display: flex;
@@ -746,6 +738,12 @@ async function checkFirstStep() {
             }
           }
         }
+      }
+      &__not-relative {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
       }
 
       &__second-trip {
@@ -794,17 +792,26 @@ async function checkFirstStep() {
   }
 }
 
-.error {
-  color: $error-color;
-  font-size: $small-text;
-  font-weight: $skinny;
-  padding: 0.5rem 0 0 0.5rem;
+.errors {
   display: flex;
+  gap: 0.5rem;
+  width: 100%;
+  overflow-x: scroll;
+  scrollbar-width: 0px;
 
-  &--date {
-    padding: 0;
-    padding-left: 0.5rem;
-    margin-top: -0.5rem;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  &__error {
+    color: $error-color;
+    font-size: $small-text;
+    font-weight: $skinny;
+    padding: 0.5rem 0 0 0.5rem;
+    display: flex;
+    background-color: rgba(255, 0, 0, 0.2);
+    padding: 4px 8px;
+    border-radius: $radius;
   }
 }
 </style>
