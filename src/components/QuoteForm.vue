@@ -101,14 +101,26 @@ const airportExistsValidator = helpers.withMessage(
   }
 );
 
+const notSameAsDestination = helpers.withMessage(
+  "The departure and arrival airports cannot be the same",
+  (value, vm) => value !== vm.destination
+);
+
+const notSameAsOrigin = helpers.withMessage(
+  "The departure and arrival airports cannot be the same",
+  (value, vm) => value !== vm.origin
+);
+
 const rules = {
   origin: {
     required,
     airportExistsValidator,
+    notSameAsDestination,
   },
   destination: {
     required,
     airportExistsValidator,
+    notSameAsOrigin,
   },
   passengers: {
     required,
@@ -117,19 +129,11 @@ const rules = {
   },
   departureDate: {
     required,
-    between: between(dayjs().format("MMM DD, YYYY"), state.returnDate),
+    minValue: minValue(dayjs().format("MMM DD, YYYY")),
   },
   returnDate: {
-    required,
+    requiredIf: () => isRoundTrip.value,
     minValue: minValue(state.departureDate),
-  },
-  roundTripDepartureDate: {
-    required: isRoundTrip,
-    between: between(dayjs().format("MMM DD, YYYY"), state.roundTripReturnDate),
-  },
-  roundTripReturnDate: {
-    required: isRoundTrip,
-    minValue: minValue(state.roundTripDepartureDate),
   },
   firstName: {
     required,
@@ -182,8 +186,10 @@ async function submit() {
 
 async function checkFirstStep() {
   const valid = await v$.value.$validate();
-  if (valid) {
-    currentStep++;
+  if (valid && currentStep === 0) {
+    currentStep = 1;
+  } else if (valid && currentStep === 1) {
+    currentStep = 0;
   }
 }
 </script>
@@ -196,7 +202,7 @@ async function checkFirstStep() {
           :class="{
             'form__steps__step__label--active': currentStep === i,
           }"
-          @click="currentStep = i"
+          @click="checkFirstStep()"
         >
           <span
             class="form__steps__step__label__number"
@@ -239,19 +245,26 @@ async function checkFirstStep() {
               >
             </div>
             <div class="errors" v-if="v$.origin.$dirty">
-              <span
-                v-if="v$.origin.$dirty && v$.origin.required.$invalid"
-                class="errors__error"
-              >
+              <span v-if="v$.origin.required.$invalid" class="errors__error">
                 This field is empty
               </span>
               <span
                 v-if="
-                  v$.origin.$dirty && v$.origin.airportExistsValidator.$invalid
+                  v$.origin.airportExistsValidator.$invalid &&
+                  !v$.origin.required.$invalid
                 "
                 class="errors__error"
               >
                 This airport does not exist
+              </span>
+              <span
+                v-if="
+                  v$.origin.notSameAsDestination.$invalid &&
+                  !v$.origin.required.$invalid
+                "
+                class="errors__error"
+              >
+                The departure and arrival airports cannot be the same
               </span>
             </div>
           </div>
@@ -286,19 +299,28 @@ async function checkFirstStep() {
             </div>
             <div class="errors" v-if="v$.destination.$dirty">
               <span
-                v-if="v$.destination.$dirty && v$.destination.required.$invalid"
+                v-if="v$.destination.required.$invalid"
                 class="errors__error"
               >
                 This field is empty
               </span>
               <span
                 v-if="
-                  v$.destination.$dirty &&
-                  v$.destination.airportExistsValidator.$invalid
+                  v$.destination.airportExistsValidator.$invalid &&
+                  !v$.destination.required.$invalid
                 "
                 class="errors__error"
               >
                 This airport does not exist
+              </span>
+              <span
+                v-if="
+                  v$.destination.notSameAsOrigin.$invalid &&
+                  !v$.destination.required.$invalid
+                "
+                class="errors__error"
+              >
+                The departure and arrival airports cannot be the same
               </span>
             </div>
           </div>
@@ -315,21 +337,16 @@ async function checkFirstStep() {
             />
             <div class="errors" v-if="v$.departureDate.$dirty">
               <span
-                v-if="
-                  v$.departureDate.$dirty && v$.departureDate.required.$invalid
-                "
+                v-if="v$.departureDate.required.$invalid"
                 class="errors__error"
               >
                 This field is empty
               </span>
               <span
-                v-if="
-                  v$.departureDate.$dirty && v$.departureDate.between.$invalid
-                "
+                v-if="v$.departureDate.minValue.$invalid"
                 class="errors__error"
               >
-                Your departure date must be before your return date and after
-                today
+                Your departure date cannot be today or in the past
               </span>
             </div>
           </div>
@@ -344,13 +361,13 @@ async function checkFirstStep() {
             />
             <div class="errors" v-if="v$.returnDate.$dirty">
               <span
-                v-if="v$.returnDate.$dirty && v$.returnDate.required.$invalid"
+                v-if="v$.returnDate.requiredIf.$invalid"
                 class="errors__error errors__error--date"
               >
                 This field is empty
               </span>
               <span
-                v-if="v$.returnDate.$dirty && v$.returnDate.minValue.$invalid"
+                v-if="v$.returnDate.minValue.$invalid"
                 class="errors__error errors__error--date"
               >
                 Your return date must be after your departure date
@@ -412,18 +429,20 @@ async function checkFirstStep() {
               type="number"
               placeholder="1"
             />
-            <span
-              v-if="v$.passengers.$dirty && v$.passengers.required.$invalid"
-              class="error"
-            >
-              This field is empty
-            </span>
-            <span
-              v-if="v$.passengers.$dirty && v$.passengers.minLength.$invalid"
-              class="error"
-            >
-              Passengers must be between 1 and 99
-            </span>
+            <div class="errors" v-if="v$.passengers.$dirty">
+              <span
+                v-if="v$.passengers.required.$invalid"
+                class="errors__error"
+              >
+                This field is empty
+              </span>
+              <span
+                v-if="v$.passengers.minLength.$invalid"
+                class="errors__error"
+              >
+                Passengers must be between 1 and 99
+              </span>
+            </div>
           </div>
         </div>
         <Transition>
