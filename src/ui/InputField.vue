@@ -10,6 +10,7 @@ interface Props {
   required?: boolean;
   autofocus?: boolean;
   error?: string;
+  name: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -61,6 +62,7 @@ function changePassengers(amount: number) {
       :aria-labelledby="label"
       :title="label"
       :aria-placeholder="placeholder"
+      :name="name"
     />
 
     <span

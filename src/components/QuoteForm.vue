@@ -212,18 +212,28 @@ const returnDateErrors = computed(() => {
 });
 
 async function submitForm() {
-  const valid = await vContact$.value.$validate();
+  isSubmitting.value = true;
+  await emailjs.sendForm(
+    "service_n1t6qo6",
+    "template_764bqrq",
+    form.value,
+    "8ifw_QPXgYXoWYmVW"
+  );
 
-  if (valid) {
-    await emailjs.sendForm(
-      "service_n1t6qo6",
-      "template_764bqrq",
-      form.value,
-      "8ifw_QPXgYXoWYmVW"
-    );
-
-    vFlight$.value.$reset();
-  }
+  vFlight$.value.$reset();
+  vContact$.value.$reset();
+  flightState.departureDate = "";
+  flightState.returnDate = "";
+  flightState.origin = "";
+  flightState.destination = "";
+  flightState.passengers = "1";
+  contactState.firstName = "";
+  contactState.lastName = "";
+  contactState.email = "";
+  contactState.phoneNumber = "";
+  contactState.info = "";
+  currentStep.value = 0;
+  isSubmitting.value = false;
 }
 
 async function validFlightState() {
@@ -232,9 +242,24 @@ async function validFlightState() {
     currentStep.value = 1;
   }
 }
+async function validContactState() {
+  console.log("validContactState");
+  const valid = await vContact$.value.$validate();
+  if (valid) {
+    submitForm();
+  }
+}
 
-function goToStep(index) {
-  currentStep.value = index;
+async function changeSteps() {
+  const valid = await vFlight$.value.$validate();
+
+  if (currentStep.value === 0 && valid) {
+    currentStep.value = 1;
+  } else if (currentStep.value === 1 && !valid) {
+    currentStep.value = 0;
+  } else {
+    currentStep.value = 0;
+  }
 }
 </script>
 <template>
@@ -246,7 +271,7 @@ function goToStep(index) {
           :class="{
             'form__steps__step__label--active': currentStep === i,
           }"
-          @click="goToStep(i)"
+          @click="changeSteps()"
         >
           <span
             class="form__steps__step__label__number"
@@ -275,6 +300,7 @@ function goToStep(index) {
               placeholder="From"
               icon="flight_takeoff"
               :error="originErrors[0]"
+              name="origin"
             />
             <div class="search-results" v-if="originSearchResults.length > 0">
               <span
@@ -301,6 +327,7 @@ function goToStep(index) {
               placeholder="To"
               icon="flight_land"
               :error="destinationErrors[0]"
+              name="destination"
             />
 
             <div
@@ -334,6 +361,7 @@ function goToStep(index) {
               placeholder="YYYY-MM-DD"
               icon="calendar_today"
               :error="departureDateErrors[0]"
+              name="departureDate"
             />
           </div>
         </div>
@@ -392,6 +420,7 @@ function goToStep(index) {
               label="Passengers"
               type="number"
               placeholder="1"
+              name="passengers"
             />
           </div>
         </div>
@@ -407,6 +436,7 @@ function goToStep(index) {
             placeholder="YYYY-MM-DD"
             icon="calendar_tomorrow"
             :error="returnDateErrors[0]"
+            name="returnDate"
           />
         </div>
         <Transition>
@@ -425,12 +455,14 @@ function goToStep(index) {
             id="firstName"
             label="First name"
             placeholder="John"
+            name="firstName"
           />
           <InputField
             v-model="contactState.lastName"
             id="lastName"
             label="Last name"
             placeholder="Doe"
+            name="lastName"
           />
         </div>
 
@@ -440,6 +472,7 @@ function goToStep(index) {
           label="Email"
           placeholder="emailadress@domain.com"
           type="email"
+          name="email"
         />
         <InputField
           v-model="contactState.phoneNumber"
@@ -454,16 +487,18 @@ function goToStep(index) {
           label="Additional information"
           placeholder="Tell us more about your request..."
           :required="false"
+          name="info"
         />
 
         <button
           class="form__fields__button button-primary"
-          @click="submitForm()"
+          @click="validContactState()"
         >
           Request a quote
         </button>
       </template>
     </div>
+    <div v-if="isSubmitting" class="form__thanks">Form is submitting</div>
   </form>
 </template>
 <style lang="scss" scoped>
@@ -776,6 +811,19 @@ function goToStep(index) {
     &__button {
       width: 100%;
     }
+  }
+
+  &__thanks {
+    color: $text-color;
+    font-size: 1rem;
+    font-weight: $skinny;
+    padding: 0.5rem 0 0 0.5rem;
+    display: flex;
+    background-color: rgba(0, 255, 0, 0.2);
+    padding: 4px 8px;
+    border-radius: $radius;
+    margin-top: -1rem;
+    width: fit-content;
   }
 }
 
