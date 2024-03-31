@@ -29,9 +29,16 @@ const dateAsString = computed(() => {
   if (!model.value) return "";
   return dayjs(model.value).format("MMMM DD, YYYY");
 });
+
+function changePassengers(amount: number) {
+  model.value = Number(model.value) + amount;
+}
 </script>
 <template>
-  <div class="input-field">
+  <div
+    class="input-field"
+    :class="{ 'input-field--passengers': type === 'number' }"
+  >
     <label class="input-field__label sr-only" :for="id">
       {{ label }}
     </label>
@@ -54,7 +61,6 @@ const dateAsString = computed(() => {
       :aria-labelledby="label"
       :title="label"
       :aria-placeholder="placeholder"
-      @change=""
     />
 
     <span
@@ -64,6 +70,26 @@ const dateAsString = computed(() => {
     >
       <span>{{ label }}:</span> {{ dateAsString }}
     </span>
+    <div class="passengers-arrows" v-if="type === 'number'">
+      <button
+        class="passengers-arrows__button"
+        :class="{
+          'passengers-arrows__button--disabled': model >= 99 || model === null,
+        }"
+        @click="changePassengers(1)"
+      >
+        +
+      </button>
+      <button
+        class="passengers-arrows__button"
+        :class="{
+          'passengers-arrows__button--disabled': model <= 1 || model === null,
+        }"
+        @click="changePassengers(-1)"
+      >
+        -
+      </button>
+    </div>
   </div>
   <div class="input-error" v-if="error">{{ error }}</div>
 </template>
@@ -72,13 +98,20 @@ const dateAsString = computed(() => {
   display: flex;
   gap: 0.5rem;
   width: 100%;
-  min-width: 300px;
   align-items: center;
   background-color: $primary-color;
   border-radius: $radius;
   padding: 0 0.75rem;
   box-shadow: $shadow;
   overflow: hidden;
+
+  &--passengers {
+    background-color: $base-color;
+    padding: 0;
+    gap: 0rem;
+    border-radius: 0;
+    overflow: visible;
+  }
 
   &__label {
     font-size: $small-text;
@@ -120,6 +153,11 @@ const dateAsString = computed(() => {
       top: 200px;
       opacity: 0;
     }
+    &[type="number"] {
+      min-width: 40px;
+      max-width: 50px;
+      text-align: center;
+    }
   }
 
   &__date {
@@ -152,5 +190,31 @@ const dateAsString = computed(() => {
   background-color: rgba(255, 0, 0, 0.2);
   padding: 0.25rem 0.5rem;
   border-radius: $radius;
+  width: fit-content;
+}
+
+.passengers-arrows {
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+
+  &__button {
+    width: 1rem;
+    height: 1rem;
+    cursor: pointer;
+    border: $secondary-color 2px solid;
+    background-color: $primary-color;
+    color: $secondary-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+
+    &--disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  }
 }
 </style>

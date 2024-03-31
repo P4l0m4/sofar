@@ -336,24 +336,14 @@ function goToStep(index) {
               :error="departureDateErrors[0]"
             />
           </div>
-          <div class="form__fields__wrapper__not-relative" v-if="isRoundTrip">
-            <InputField
-              v-model="flightState.returnDate"
-              id="returnDate"
-              label="Return date"
-              type="date"
-              placeholder="YYYY-MM-DD"
-              icon="calendar_tomorrow"
-              :error="returnDateErrors[0]"
-            />
-          </div>
         </div>
-        <div class="form__fields__wrapper">
-          <div class="form__fields__custom-field">
+        <div class="form__fields__wrapper--row">
+          <div class="form__fields__wrapper--row__custom-field">
             <span
-              class="form__fields__custom-field__span"
+              class="form__fields__wrapper--row__custom-field__span"
               :class="{
-                'form__fields__custom-field__span--transparent': isRoundTrip,
+                'form__fields__wrapper--row__custom-field__span--transparent':
+                  isRoundTrip,
               }"
               @click="isRoundTrip = false"
             >
@@ -368,9 +358,10 @@ function goToStep(index) {
               <span class="slider round"></span>
             </label>
             <span
-              class="form__fields__custom-field__span"
+              class="form__fields__wrapper--row__custom-field__span"
               :class="{
-                'form__fields__custom-field__span--transparent': !isRoundTrip,
+                'form__fields__wrapper--row__custom-field__span--transparent':
+                  !isRoundTrip,
               }"
               @click="isRoundTrip = true"
             >
@@ -381,14 +372,14 @@ function goToStep(index) {
               Round trip
             </span>
           </div>
-          <div class="form__fields__custom-field">
+          <div class="form__fields__wrapper--row__custom-field passengers">
             <label for="number" class="sr-only">Number of passengers</label>
             <span
-              class="form__fields__custom-field__span"
+              class="form__fields__wrapper--row__custom-field__span"
               style="cursor: default"
             >
               <img
-                class="form__fields__custom-field__icon"
+                class="form__fields__wrapper--row__custom-field__icon"
                 src="/assets/icons/group_add-dark.svg"
                 alt="icon number of passengers"
               />
@@ -401,9 +392,22 @@ function goToStep(index) {
               label="Passengers"
               type="number"
               placeholder="1"
-              :error="passengersErrors[0]"
             />
           </div>
+        </div>
+        <div class="error" v-if="passengersErrors[0]">
+          {{ passengersErrors[0] }}
+        </div>
+        <div class="form__fields__wrapper__not-relative" v-if="isRoundTrip">
+          <InputField
+            v-model="flightState.returnDate"
+            id="returnDate"
+            label="Return date"
+            type="date"
+            placeholder="YYYY-MM-DD"
+            icon="calendar_tomorrow"
+            :error="returnDateErrors[0]"
+          />
         </div>
         <Transition>
           <button
@@ -552,128 +556,13 @@ function goToStep(index) {
     background-color: $base-color;
     flex-wrap: wrap;
 
-    &__custom-field {
-      display: flex;
-      gap: 0.5rem;
-      align-items: center;
-      border-radius: $radius;
-      width: fit-content;
-
-      @media (min-width: $big-tablet-screen) {
-        width: calc(50% - 0.5rem);
-        gap: 1rem;
-      }
-
-      &__span {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        font-size: $small-text;
-        white-space: nowrap;
-        transition: opacity 0.4s ease;
-        cursor: pointer;
-
-        &--transparent {
-          opacity: 0.5;
-        }
-
-        & img {
-          width: 1rem;
-          height: 1rem;
-        }
-      }
-
-      .passengers {
-        min-width: 40px;
-        max-width: 40px;
-        padding: 0 0.5rem;
-
-        @media (min-width: $big-tablet-screen) {
-          max-width: 100%;
-        }
-      }
-
-      &__icon {
-        width: 1.2rem;
-        height: 1.2rem;
-      }
-
-      .switch {
-        position: relative;
-        display: inline-block;
-        width: 60px;
-        height: 34px;
-        border-radius: $radius;
-        box-shadow: $shadow;
-      }
-
-      /* Hide default HTML checkbox */
-      .switch input {
-        opacity: 0;
-        width: 0;
-        height: 0;
-      }
-
-      /* The slider */
-      .slider {
-        position: absolute;
-        cursor: pointer;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: $primary-color;
-        -webkit-transition: 0.4s;
-        transition: 0.4s;
-      }
-
-      .slider:before {
-        position: absolute;
-        content: "";
-        height: 26px;
-        width: 26px;
-        left: 4px;
-        bottom: 4px;
-        background-color: $secondary-color-faded;
-        -webkit-transition: 0.4s;
-        transition: 0.4s ease;
-      }
-
-      input:checked + .slider {
-        background-color: $secondary-color-faded;
-
-        &:before {
-          background-color: $primary-color;
-        }
-      }
-
-      input:focus + .slider {
-        box-shadow: $shadow;
-      }
-
-      input:checked + .slider:before {
-        -webkit-transform: translateX(26px);
-        -ms-transform: translateX(26px);
-        transform: translateX(26px);
-      }
-
-      /* Rounded sliders */
-      .slider.round {
-        border-radius: 34px;
-      }
-
-      .slider.round:before {
-        border-radius: 50%;
-      }
-    }
-
     &__wrapper {
       display: flex;
       align-items: center;
       flex-wrap: wrap;
       gap: 1rem;
       width: 100%;
+      justify-content: space-between;
 
       &__relative {
         position: relative;
@@ -757,10 +646,129 @@ function goToStep(index) {
         flex-direction: row;
         gap: 1rem;
         width: 100%;
-        max-width: 100%;
+        justify-content: space-between;
 
         div {
-          min-width: 100px;
+          width: fit-content;
+          min-width: 40px;
+        }
+
+        &__custom-field {
+          display: flex;
+          gap: 1rem;
+          align-items: center;
+          border-radius: $radius;
+          width: fit-content;
+
+          @media (min-width: $big-tablet-screen) {
+            width: calc(50% - 0.5rem);
+          }
+
+          &:nth-child(2) {
+            & span {
+              border: none;
+            }
+          }
+
+          &__span {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: $small-text;
+            white-space: nowrap;
+            transition: opacity 0.4s ease;
+            cursor: pointer;
+            border-bottom: $text-color 2px solid;
+            padding-bottom: 2px;
+
+            &--transparent {
+              opacity: 0.5;
+              border-color: transparent;
+            }
+
+            & img {
+              width: 1rem;
+              height: 1rem;
+            }
+          }
+
+          &__icon {
+            width: 1.2rem;
+            height: 1.2rem;
+          }
+
+          .switch {
+            position: relative;
+            width: 60px;
+            height: 34px;
+            border-radius: $radius;
+            box-shadow: $shadow;
+            display: none;
+
+            @media (min-width: $big-tablet-screen) {
+              display: inline-block;
+            }
+          }
+
+          /* Hide default HTML checkbox */
+          .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+          }
+
+          /* The slider */
+          .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: $primary-color;
+            -webkit-transition: 0.4s;
+            transition: 0.4s;
+          }
+
+          .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: $secondary-color-faded;
+            -webkit-transition: 0.4s;
+            transition: 0.4s ease;
+          }
+
+          input:checked + .slider {
+            background-color: $secondary-color-faded;
+
+            &:before {
+              background-color: $primary-color;
+            }
+          }
+
+          input:focus + .slider {
+            box-shadow: $shadow;
+          }
+
+          input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+          }
+
+          /* Rounded sliders */
+          .slider.round {
+            border-radius: 34px;
+          }
+
+          .slider.round:before {
+            border-radius: 50%;
+          }
         }
       }
     }
@@ -771,26 +779,16 @@ function goToStep(index) {
   }
 }
 
-.errors {
+.error {
+  color: $error-color;
+  font-size: $small-text;
+  font-weight: $skinny;
+  padding: 0.5rem 0 0 0.5rem;
   display: flex;
-  gap: 0.5rem;
-  width: 100%;
-  overflow-x: scroll;
-  scrollbar-width: 0px;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
-  &__error {
-    color: $error-color;
-    font-size: $small-text;
-    font-weight: $skinny;
-    padding: 0.5rem 0 0 0.5rem;
-    display: flex;
-    background-color: rgba(255, 0, 0, 0.2);
-    padding: 4px 8px;
-    border-radius: $radius;
-  }
+  background-color: rgba(255, 0, 0, 0.2);
+  padding: 4px 8px;
+  border-radius: $radius;
+  margin-top: -1rem;
+  width: fit-content;
 }
 </style>
