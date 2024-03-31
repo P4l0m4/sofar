@@ -16,6 +16,7 @@ import {
   maxValue,
   numeric,
   helpers,
+  not,
 } from "@vuelidate/validators";
 
 const isRoundTrip = ref(false);
@@ -133,11 +134,13 @@ const contactRules = {
     required,
     maxLength: maxLength(50),
     alphaNum,
+    not: not(numeric),
   },
   lastName: {
     required,
     maxLength: maxLength(50),
     alphaNum,
+    not: not(numeric),
   },
   phoneNumber: {
     required,
@@ -211,6 +214,44 @@ const returnDateErrors = computed(() => {
   return errors;
 });
 
+const firstNameAndLastNameErrors = computed(() => {
+  const errors = [];
+  if (!vContact$.value.firstName.$dirty) return errors;
+  vContact$.value.firstName.required.$invalid &&
+    errors.push("Please indicate your first name");
+  vContact$.value.firstName.not.$invalid &&
+    errors.push("Your first name cannot contain numbers");
+  vContact$.value.lastName.required.$invalid &&
+    errors.push("Please indicate your last name");
+  vContact$.value.firstName.not.$invalid &&
+    errors.push("Your last name cannot contain numbers");
+  return errors;
+});
+
+const phoneNumberErrors = computed(() => {
+  const errors = [];
+  if (!vContact$.value.phoneNumber.$dirty) return errors;
+  vContact$.value.phoneNumber.required.$invalid &&
+    errors.push("This field must be filled");
+  vContact$.value.phoneNumber.minLength.$invalid &&
+    errors.push("This field must contain at least 10 characters");
+  vContact$.value.phoneNumber.maxLength.$invalid &&
+    errors.push("This field must contain at most 15 characters");
+  vContact$.value.phoneNumber.numeric.$invalid &&
+    errors.push("Only numbers, no spaces or special characters allowed");
+  return errors;
+});
+
+const emailErrors = computed(() => {
+  const errors = [];
+  if (!vContact$.value.email.$dirty) return errors;
+  vContact$.value.email.required.$invalid &&
+    errors.push("This field must be filled");
+  vContact$.value.email.email.$invalid &&
+    errors.push("Please enter a valid email address");
+  return errors;
+});
+
 async function submitForm() {
   isSubmitting.value = true;
   await emailjs.sendForm(
@@ -243,8 +284,8 @@ async function validFlightState() {
   }
 }
 async function validContactState() {
-  console.log("validContactState");
   const valid = await vContact$.value.$validate();
+
   if (valid) {
     submitForm();
   }
@@ -465,6 +506,9 @@ async function changeSteps() {
             name="lastName"
           />
         </div>
+        <div class="error" v-if="firstNameAndLastNameErrors[0]">
+          {{ firstNameAndLastNameErrors[0] }}
+        </div>
 
         <InputField
           v-model="contactState.email"
@@ -473,6 +517,7 @@ async function changeSteps() {
           placeholder="emailadress@domain.com"
           type="email"
           name="email"
+          :error="emailErrors[0]"
         />
         <InputField
           v-model="contactState.phoneNumber"
@@ -480,6 +525,8 @@ async function changeSteps() {
           label="Phone"
           placeholder="(000) 000 - 00*"
           type="tel"
+          name="phoneNumber"
+          :error="phoneNumberErrors[0]"
         />
         <InputField
           v-model="contactState.info"
@@ -838,5 +885,9 @@ async function changeSteps() {
   border-radius: $radius;
   margin-top: -1rem;
   width: fit-content;
+
+  &:nth-of-type(2) {
+    margin-top: 0rem;
+  }
 }
 </style>
