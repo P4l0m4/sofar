@@ -21,8 +21,6 @@ import {
 
 const isRoundTrip = ref(false);
 const currentStep = ref(0);
-let isStep1Valid = ref(false);
-let isStep2Valid = ref(false);
 const isSubmitting = ref(false);
 const todaysDate = dayjs().format("YYYY-MM-DD");
 

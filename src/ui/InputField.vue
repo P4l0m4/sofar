@@ -70,7 +70,7 @@ function changePassengers(amount: number) {
       class="input-field__date"
       @click="triggerDatepicker()"
     >
-      <span>{{ label }}:</span> {{ dateAsString }}
+      <span v-if="!dateAsString">{{ label }}:</span> {{ dateAsString }}
     </span>
     <div class="passengers-arrows" v-if="type === 'number'">
       <button
