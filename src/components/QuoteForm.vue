@@ -593,15 +593,14 @@ async function changeSteps() {
 
         &__number {
           display: flex;
-          font-size: 1rem;
+          font-size: $small-text;
           font-weight: $skinny;
-          height: 30px;
-          width: 30px;
+          height: 24px;
+          width: 24px;
           padding-top: 0.1rem;
           border-radius: 50%;
           align-items: center;
           justify-content: center;
-          background-color: transparent;
           color: $text-color;
           border: 2px solid $text-color;
           z-index: 1;

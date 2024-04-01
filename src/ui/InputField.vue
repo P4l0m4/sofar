@@ -207,9 +207,9 @@ function changePassengers(amount: number) {
     width: 1rem;
     height: 1rem;
     cursor: pointer;
-    border: $secondary-color 2px solid;
+    border: $text-color 2px solid;
     background-color: $primary-color;
-    color: $secondary-color;
+    color: $text-color;
     display: flex;
     justify-content: center;
     align-items: center;
