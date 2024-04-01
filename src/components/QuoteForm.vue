@@ -53,13 +53,17 @@ const originSearchResults = computed(() => {
   if (!flightState.origin) {
     return [];
   }
+
   return airports
     .filter(
       (airport) =>
         airport.name.toLowerCase().includes(flightState.origin.toLowerCase()) ||
         airport.municipality
           .toLowerCase()
-          .includes(flightState.origin.toLowerCase())
+          .includes(flightState.origin.toLowerCase()) ||
+        `${airport.name.toLowerCase()}, ${airport.municipality
+          .toLowerCase()
+          .slice(0, -1)}`.includes(flightState.origin.toLowerCase())
     )
     .slice(0, 10);
 });
@@ -76,7 +80,10 @@ const destinationSearchResults = computed(() => {
           .includes(flightState.destination.toLowerCase()) ||
         airport.municipality
           .toLowerCase()
-          .includes(flightState.destination.toLowerCase())
+          .includes(flightState.destination.toLowerCase()) ||
+        `${airport.name.toLowerCase()}, ${airport.municipality
+          .toLowerCase()
+          .slice(0, -1)}`.includes(flightState.destination.toLowerCase())
     )
     .slice(0, 10);
 });
@@ -340,7 +347,9 @@ async function changeSteps() {
               icon="flight_takeoff"
               :error="originErrors[0]"
               name="origin"
+              :autocomplete="false"
             />
+
             <div class="search-results" v-if="originSearchResults.length > 0">
               <span
                 v-for="(result, i) in originSearchResults"
@@ -367,6 +376,7 @@ async function changeSteps() {
               icon="flight_land"
               :error="destinationErrors[0]"
               name="destination"
+              :autocomplete="false"
             />
 
             <div
@@ -521,7 +531,7 @@ async function changeSteps() {
           v-model="contactState.phoneNumber"
           id="phoneNumber"
           label="Phone"
-          placeholder="(000) 000 - 00*"
+          placeholder="000 000 00*"
           type="tel"
           name="phoneNumber"
           :error="phoneNumberErrors[0]"

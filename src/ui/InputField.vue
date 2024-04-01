@@ -11,12 +11,14 @@ interface Props {
   autofocus?: boolean;
   error?: string;
   name: string;
+  autocomplete?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   type: "text",
   required: true,
   autofocus: false,
+  autocomplete: true,
 });
 
 const model = defineModel<string | number>();
@@ -56,13 +58,14 @@ function changePassengers(amount: number) {
       class="input-field__input"
       :type="type"
       :placeholder="placeholder"
-      autocomplete="true"
+      :autocomplete="autocomplete"
       :autofocus="autofocus"
       :aria-label="label"
       :aria-labelledby="label"
       :title="label"
       :aria-placeholder="placeholder"
       :name="name"
+      :value="model"
     />
 
     <span
