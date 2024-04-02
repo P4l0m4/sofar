@@ -107,6 +107,12 @@ const lowerThan = (value) => {
   }
   return value >= flightState.departureDate;
 };
+const phoneRegex =
+  /^(\+\d{1,3}\s?)?(\(\d{1,3}\)\s?)?(\d{1,4}[\s-]?){2,4}\d{1,4}$/;
+const isPhoneNumber = (value) => phoneRegex.test(value);
+
+const namesRegex = /^[A-Z][a-z]+(?:[\s-][A-Z][a-z]+)?$/;
+const isName = (value) => namesRegex.test(value);
 
 const flightRules = {
   origin: {
@@ -137,21 +143,17 @@ const flightRules = {
 const contactRules = {
   firstName: {
     required,
-    maxLength: maxLength(50),
-    alphaNum,
-    not: not(numeric),
+    maxLength: maxLength(30),
+    isName,
   },
   lastName: {
     required,
-    maxLength: maxLength(50),
-    alphaNum,
-    not: not(numeric),
+    maxLength: maxLength(30),
+    isName,
   },
   phoneNumber: {
     required,
-    minLength: minLength(10),
-    maxLength: maxLength(15),
-    numeric,
+    isPhoneNumber,
   },
   email: {
     required,
@@ -166,8 +168,7 @@ const form = ref(null);
 const originErrors = computed(() => {
   const errors = [];
   if (!vFlight$.value.origin.$dirty) return errors;
-  vFlight$.value.origin.required.$invalid &&
-    errors.push("This field must be filled");
+  vFlight$.value.origin.required.$invalid && errors.push("This field is empty");
   vFlight$.value.origin.airportExistsValidator.$invalid &&
     errors.push("Please select an existing airport");
   vFlight$.value.origin.notSameAsDestination.$invalid &&
@@ -179,7 +180,7 @@ const destinationErrors = computed(() => {
   const errors = [];
   if (!vFlight$.value.destination.$dirty) return errors;
   vFlight$.value.destination.required.$invalid &&
-    errors.push("This field must be filled");
+    errors.push("This field is empty");
   vFlight$.value.destination.airportExistsValidator.$invalid &&
     errors.push("Please select an existing airport");
   vFlight$.value.destination.notSameAsOrigin.$invalid &&
@@ -191,7 +192,7 @@ const passengersErrors = computed(() => {
   const errors = [];
   if (!vFlight$.value.passengers.$dirty) return errors;
   vFlight$.value.passengers.required.$invalid &&
-    errors.push("This field must be filled");
+    errors.push("This field is empty");
   vFlight$.value.passengers.minValue.$invalid &&
     errors.push("Passengers must be between 1 and 99");
   vFlight$.value.passengers.maxValue.$invalid &&
@@ -203,7 +204,7 @@ const departureDateErrors = computed(() => {
   const errors = [];
   if (!vFlight$.value.departureDate.$dirty) return errors;
   vFlight$.value.departureDate.required.$invalid &&
-    errors.push("This field must be filled");
+    errors.push("This field is empty");
   vFlight$.value.departureDate.greaterThan.$invalid &&
     errors.push("Your departure must at least tomorrow");
   return errors;
@@ -213,7 +214,7 @@ const returnDateErrors = computed(() => {
   const errors = [];
   if (!vFlight$.value.returnDate.$dirty) return errors;
   vFlight$.value.returnDate.required.$invalid &&
-    errors.push("This field must be filled");
+    errors.push("This field is empty");
   vFlight$.value.returnDate.lowerThan.$invalid &&
     errors.push("Your return must the same day of after your departure");
   return errors;
@@ -224,12 +225,16 @@ const firstNameAndLastNameErrors = computed(() => {
   if (!vContact$.value.firstName.$dirty) return errors;
   vContact$.value.firstName.required.$invalid &&
     errors.push("Please indicate your first name");
-  vContact$.value.firstName.not.$invalid &&
-    errors.push("Your first name cannot contain numbers");
+  vContact$.value.firstName.isName.$invalid &&
+    errors.push("Please enter a valid first name");
+  vContact$.value.firstName.maxLength.$invalid &&
+    errors.push("Your first name is too long (max 30 characters)");
   vContact$.value.lastName.required.$invalid &&
     errors.push("Please indicate your last name");
-  vContact$.value.firstName.not.$invalid &&
-    errors.push("Your last name cannot contain numbers");
+  vContact$.value.lastName.isName.$invalid &&
+    errors.push("Please enter a valid last name");
+  vContact$.value.lastName.maxLength.$invalid &&
+    errors.push("Your last name is too long (max 30 characters)");
   return errors;
 });
 
@@ -237,21 +242,17 @@ const phoneNumberErrors = computed(() => {
   const errors = [];
   if (!vContact$.value.phoneNumber.$dirty) return errors;
   vContact$.value.phoneNumber.required.$invalid &&
-    errors.push("This field must be filled");
-  vContact$.value.phoneNumber.minLength.$invalid &&
-    errors.push("This field must contain at least 10 characters");
-  vContact$.value.phoneNumber.maxLength.$invalid &&
-    errors.push("This field must contain at most 15 characters");
-  vContact$.value.phoneNumber.numeric.$invalid &&
-    errors.push("Only numbers, no spaces or special characters allowed");
+    errors.push("This field is empty");
+  vContact$.value.phoneNumber.isPhoneNumber.$invalid &&
+    errors.push("This field must contain a valid phone number");
+
   return errors;
 });
 
 const emailErrors = computed(() => {
   const errors = [];
   if (!vContact$.value.email.$dirty) return errors;
-  vContact$.value.email.required.$invalid &&
-    errors.push("This field must be filled");
+  vContact$.value.email.required.$invalid && errors.push("This field is empty");
   vContact$.value.email.email.$invalid &&
     errors.push("Please enter a valid email address");
   return errors;
@@ -503,7 +504,7 @@ async function changeSteps() {
             v-model="contactState.firstName"
             id="firstName"
             label="First name"
-            placeholder="John"
+            placeholder="John, Mary Jane"
             name="firstName"
           />
           <InputField
@@ -527,15 +528,17 @@ async function changeSteps() {
           name="email"
           :error="emailErrors[0]"
         />
+
         <InputField
           v-model="contactState.phoneNumber"
           id="phoneNumber"
           label="Phone"
-          placeholder="000 000 00*"
+          placeholder="+1 (000) 000-000, +33 6 00 00 00 00"
           type="tel"
           name="phoneNumber"
           :error="phoneNumberErrors[0]"
         />
+
         <InputField
           v-model="contactState.info"
           id="info"
