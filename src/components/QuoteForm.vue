@@ -515,29 +515,35 @@ async function changeSteps() {
             name="lastName"
           />
         </div>
-        <div class="error" v-if="firstNameAndLastNameErrors[0]">
+        <div
+          class="error"
+          style="margin-top: -0.5rem"
+          v-if="firstNameAndLastNameErrors[0]"
+        >
           {{ firstNameAndLastNameErrors[0] }}
         </div>
-
-        <InputField
-          v-model="contactState.email"
-          id="email"
-          label="Email"
-          placeholder="emailadress@domain.com"
-          type="email"
-          name="email"
-          :error="emailErrors[0]"
-        />
-
-        <InputField
-          v-model="contactState.phoneNumber"
-          id="phoneNumber"
-          label="Phone"
-          placeholder="+1 (000) 000-000, +33 6 00 00 00 00"
-          type="tel"
-          name="phoneNumber"
-          :error="phoneNumberErrors[0]"
-        />
+        <div class="form__fields__wrapper__not-relative">
+          <InputField
+            v-model="contactState.email"
+            id="email"
+            label="Email"
+            placeholder="emailadress@domain.com"
+            type="email"
+            name="email"
+            :error="emailErrors[0]"
+          />
+        </div>
+        <div class="form__fields__wrapper__not-relative">
+          <InputField
+            v-model="contactState.phoneNumber"
+            id="phoneNumber"
+            label="Phone"
+            placeholder="+1 (000) 000-000, +33 6 00 00 00 00"
+            type="tel"
+            name="phoneNumber"
+            :error="phoneNumberErrors[0]"
+          />
+        </div>
 
         <InputField
           v-model="contactState.info"
