@@ -119,7 +119,7 @@ const isPM = computed(() => {
     input[type="range"] {
       transform: rotate(90deg);
       width: 80px;
-      height: 26px;
+      height: 46px;
       -webkit-appearance: none;
       background-color: $base-color;
       box-shadow: inset $shadow;
@@ -129,7 +129,7 @@ const isPM = computed(() => {
       &::-webkit-slider-thumb {
         width: 26px;
         -webkit-appearance: none;
-        height: 20px;
+        height: 40px;
         border-radius: $radius;
         cursor: grab;
         background: $text-color;
