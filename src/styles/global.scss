@@ -231,13 +231,21 @@ details > summary::-webkit-details-marker /* Safari */ {
 }
 
 .titles {
-  font-size: $titles;
+  font-size: calc($titles - 0.2rem);
   font-weight: $thick;
+
+  @media (min-width: $tablet-screen) {
+    font-size: $titles;
+  }
 }
 
 .subtitles {
-  font-size: $subtitles;
+  font-size: calc($subtitles - 0.2rem);
+
   font-weight: $skinny-thick;
+  @media (min-width: $tablet-screen) {
+    font-size: $subtitles;
+  }
 }
 
 .base-text {

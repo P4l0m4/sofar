@@ -60,11 +60,44 @@ const formattedReturnDate = computed(() => {
   return dayjs(flightState.returnDate).format("MMMM DD, YYYY");
 });
 
+const formattedDepartureTime = computed(() => {
+  return `${Math.floor(flightState.departureTime)
+    .toString()
+    .padStart(2, "0")}:${Math.round(
+    (flightState.departureTime - Math.floor(flightState.departureTime)) * 60
+  )
+    .toString()
+    .padStart(2, "0")}`;
+});
+const formattedReturnTime = computed(() => {
+  return `${Math.floor(flightState.returnTime)
+    .toString()
+    .padStart(2, "0")}:${Math.round(
+    (flightState.returnTime - Math.floor(flightState.returnTime)) * 60
+  )
+    .toString()
+    .padStart(2, "0")}`;
+});
+
 const templateParams = computed(() => ({
   origin: flightState.origin,
   destination: flightState.destination,
   departureDate: dayjs(flightState.departureDate).format("MMMM DD, YYYY"),
+  departureTime: `${Math.floor(flightState.departureTime)
+    .toString()
+    .padStart(2, "0")}:${Math.round(
+    (flightState.departureTime - Math.floor(flightState.departureTime)) * 60
+  )
+    .toString()
+    .padStart(2, "0")}`,
   returnDate: formattedReturnDate.value,
+  returnTime: `${Math.floor(flightState.returnTime)
+    .toString()
+    .padStart(2, "0")}:${Math.round(
+    (flightState.returnTime - Math.floor(flightState.returnTime)) * 60
+  )
+    .toString()
+    .padStart(2, "0")}`,
   passengers: flightState.passengers,
   firstName: contactState.firstName,
   lastName: contactState.lastName,
@@ -257,7 +290,7 @@ const departureDateErrors = computed(() => {
   vFlight$.value.departureDate.required.$invalid &&
     errors.push("This field is empty");
   vFlight$.value.departureDate.greaterThan.$invalid &&
-    errors.push("Your departure must at least tomorrow");
+    errors.push("Your departure date must be at tomorrow or later");
   return errors;
 });
 
@@ -447,10 +480,17 @@ async function changeSteps() {
             type="date"
             placeholder="YYYY-MM-DD"
             icon="calendar_today"
-            :error="departureDateErrors[0]"
             name="departureDate"
           />
+
           <HourSelection v-model="flightState.departureTime" />
+        </div>
+        <div
+          class="error"
+          style="margin-top: -0.5rem"
+          v-if="departureDateErrors[0]"
+        >
+          {{ departureDateErrors[0] }}
         </div>
         <div class="form__fields__wrapper--row">
           <div class="form__fields__wrapper--row__custom-field">
@@ -514,7 +554,7 @@ async function changeSteps() {
         <div class="error" v-if="passengersErrors[0]">
           {{ passengersErrors[0] }}
         </div>
-        <div class="form__fields__wrapper__not-relative" v-if="isRoundTrip">
+        <div class="form__fields__wrapper--row" v-if="isRoundTrip">
           <InputField
             v-model="flightState.returnDate"
             id="returnDate"
@@ -522,9 +562,16 @@ async function changeSteps() {
             type="date"
             placeholder="YYYY-MM-DD"
             icon="calendar_tomorrow"
-            :error="returnDateErrors[0]"
             name="returnDate"
           />
+          <HourSelection v-model="flightState.returnTime" />
+        </div>
+        <div
+          class="error"
+          style="margin-top: -0.5rem"
+          v-if="returnDateErrors[0]"
+        >
+          {{ returnDateErrors[0] }}
         </div>
         <Transition>
           <button
