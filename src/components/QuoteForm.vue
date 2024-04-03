@@ -1,10 +1,12 @@
 <script setup>
 import { ref, reactive } from "vue";
 import airports from "@/utils/airports.json";
+import phoneCodes from "@/utils/phoneCodes.json";
 import InputField from "@/ui/InputField.vue";
 import dayjs from "dayjs";
 import { useVuelidate } from "@vuelidate/core";
 import emailjs from "@emailjs/browser";
+
 import {
   required,
   minLength,
@@ -19,6 +21,17 @@ import {
   not,
 } from "@vuelidate/validators";
 
+const selectedPhoneCode = ref({
+  country: "United States",
+  code: "+1",
+  abbreviation: "US",
+});
+const phoneCodesListIsOpen = ref(false);
+const phoneCodesList = computed(() => {
+  return phoneCodes.filter(
+    (code) => code.abbreviation !== selectedPhoneCode.value.abbreviation
+  );
+});
 const isRoundTrip = ref(false);
 const currentStep = ref(0);
 const isSubmitting = ref(false);
@@ -40,6 +53,18 @@ const contactState = reactive({
   info: "",
 });
 
+let templateParams = ref({
+  origin: flightState.origin,
+  destination: flightState.destination,
+  departureDate: flightState.departureDate,
+  returnDate: flightState.returnDate,
+  passengers: flightState.passengers,
+  firstName: contactState.firstName,
+  lastName: contactState.lastName,
+  email: contactState.email,
+  phoneNumber: `${selectedPhoneCode.code} ${contactState.phoneNumber}`,
+  info: contactState.info,
+});
 const steps = [
   {
     label: "Flight details",
@@ -108,11 +133,8 @@ const lowerThan = (value) => {
   return value >= flightState.departureDate;
 };
 const phoneRegex =
-  /^(\+\d{1,3}\s?)?(\(\d{1,3}\)\s?)?(\d{1,4}[\s-]?){2,4}\d{1,4}$/;
+  /^(\(\d{3}\)\s?\d{3}[-.\s]?\d{4}|\d{3}[-.\s]??\d{4}|\d{3}[-.\s]??\d{3}[-.\s]??\d{4}|\d{2}(\s\d{2}){4}|\d{4}[-.\s]??\d{6})$/;
 const isPhoneNumber = (value) => phoneRegex.test(value);
-
-const namesRegex = /^[A-Z][a-z]+(?:[\s-][A-Z][a-z]+)?$/;
-const isName = (value) => namesRegex.test(value);
 
 const flightRules = {
   origin: {
@@ -144,12 +166,12 @@ const contactRules = {
   firstName: {
     required,
     maxLength: maxLength(30),
-    isName,
+    minLength: minLength(2),
   },
   lastName: {
     required,
     maxLength: maxLength(30),
-    isName,
+    minLength: minLength(2),
   },
   phoneNumber: {
     required,
@@ -225,14 +247,14 @@ const firstNameAndLastNameErrors = computed(() => {
   if (!vContact$.value.firstName.$dirty) return errors;
   vContact$.value.firstName.required.$invalid &&
     errors.push("Please indicate your first name");
-  vContact$.value.firstName.isName.$invalid &&
-    errors.push("Please enter a valid first name");
+  vContact$.value.firstName.minLength.$invalid &&
+    errors.push("Your first name is too short (min 2 characters)");
   vContact$.value.firstName.maxLength.$invalid &&
     errors.push("Your first name is too long (max 30 characters)");
   vContact$.value.lastName.required.$invalid &&
     errors.push("Please indicate your last name");
-  vContact$.value.lastName.isName.$invalid &&
-    errors.push("Please enter a valid last name");
+  vContact$.value.lastName.minLength.$invalid &&
+    errors.push("Your last name is too short (min 2 characters)");
   vContact$.value.lastName.maxLength.$invalid &&
     errors.push("Your last name is too long (max 30 characters)");
   return errors;
@@ -242,7 +264,7 @@ const phoneNumberErrors = computed(() => {
   const errors = [];
   if (!vContact$.value.phoneNumber.$dirty) return errors;
   vContact$.value.phoneNumber.required.$invalid &&
-    errors.push("This field is empty");
+    errors.push("Please indicate your phone number");
   vContact$.value.phoneNumber.isPhoneNumber.$invalid &&
     errors.push("This field must contain a valid phone number");
 
@@ -260,10 +282,10 @@ const emailErrors = computed(() => {
 
 async function submitForm() {
   isSubmitting.value = true;
-  await emailjs.sendForm(
+  await emailjs.send(
     "service_n1t6qo6",
     "template_764bqrq",
-    form.value,
+    templateParams.value,
     "8ifw_QPXgYXoWYmVW"
   );
 
@@ -533,16 +555,60 @@ async function changeSteps() {
             :error="emailErrors[0]"
           />
         </div>
-        <div class="form__fields__wrapper__not-relative">
+        <div class="form__fields__wrapper--row">
+          <div class="phone-codes">
+            <span
+              class="phone-codes__selected"
+              :class="{ 'phone-codes__selected--active': phoneCodesListIsOpen }"
+              @click="phoneCodesListIsOpen = !phoneCodesListIsOpen"
+              ><img
+                class="phone-codes__selected__flag"
+                :src="`assets/flags/${selectedPhoneCode.abbreviation}.svg`"
+                alt="country flag" />
+              {{ selectedPhoneCode.code
+              }}<img
+                class="phone-codes__selected__arrow"
+                :class="{
+                  'phone-codes__selected__arrow--up': phoneCodesListIsOpen,
+                }"
+                :src="`assets/icons/arrow_scroll_dark.svg`"
+                alt="arrow icon"
+            /></span>
+            <Transition>
+              <div class="phone-codes__list" v-if="phoneCodesListIsOpen">
+                <span
+                  class="phone-codes__list__element"
+                  v-for="(element, i) in phoneCodesList"
+                  :key="i"
+                  @click="
+                    (selectedPhoneCode = element),
+                      (phoneCodesListIsOpen = false)
+                  "
+                  ><img
+                    class="phone-codes__list__element__flag"
+                    :src="`assets/flags/${element.abbreviation}.svg`"
+                    alt="country flag"
+                  />{{ element.country }}</span
+                >
+              </div></Transition
+            >
+          </div>
+
           <InputField
             v-model="contactState.phoneNumber"
             id="phoneNumber"
             label="Phone"
-            placeholder="+1 (000) 000-000, +33 6 00 00 00 00"
+            placeholder="(000) 000-000, 00 00 00 00 00"
             type="tel"
             name="phoneNumber"
-            :error="phoneNumberErrors[0]"
           />
+        </div>
+        <div
+          class="error"
+          style="margin-top: -0.5rem"
+          v-if="phoneNumberErrors[0]"
+        >
+          {{ phoneNumberErrors[0] }}
         </div>
 
         <InputField
@@ -712,32 +778,32 @@ async function changeSteps() {
         gap: 0.5rem;
       }
 
-      &__second-trip {
-        width: 100%;
-        font-size: $small-text;
-        font-weight: $skinny;
-        color: $text-color;
-        margin-top: 0.5rem;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        white-space: nowrap;
+      // &__second-trip {
+      //   width: 100%;
+      //   font-size: $small-text;
+      //   font-weight: $skinny;
+      //   color: $text-color;
+      //   margin-top: 0.5rem;
+      //   display: flex;
+      //   align-items: center;
+      //   gap: 0.5rem;
+      //   white-space: nowrap;
 
-        &::before {
-          content: "";
-          display: block;
-          width: 100%;
-          height: 1px;
-          background-color: $text-color;
-        }
-        &::after {
-          content: "";
-          display: block;
-          width: 100%;
-          height: 1px;
-          background-color: $text-color;
-        }
-      }
+      //   &::before {
+      //     content: "";
+      //     display: block;
+      //     width: 100%;
+      //     height: 1px;
+      //     background-color: $text-color;
+      //   }
+      //   &::after {
+      //     content: "";
+      //     display: block;
+      //     width: 100%;
+      //     height: 1px;
+      //     background-color: $text-color;
+      //   }
+      // }
 
       &--row {
         display: flex;
@@ -745,6 +811,7 @@ async function changeSteps() {
         gap: 1rem;
         width: 100%;
         justify-content: space-between;
+        align-items: center;
 
         div {
           width: fit-content;
@@ -807,14 +874,20 @@ async function changeSteps() {
             @media (min-width: $big-tablet-screen) {
               display: inline-block;
             }
+
+            input {
+              opacity: 0;
+              width: 0;
+              height: 0;
+            }
           }
 
           /* Hide default HTML checkbox */
-          .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-          }
+          // .switch input {
+          //   opacity: 0;
+          //   width: 0;
+          //   height: 0;
+          // }
 
           /* The slider */
           .slider {
@@ -827,18 +900,18 @@ async function changeSteps() {
             background-color: $primary-color;
             -webkit-transition: 0.4s;
             transition: 0.4s;
-          }
 
-          .slider:before {
-            position: absolute;
-            content: "";
-            height: 26px;
-            width: 26px;
-            left: 4px;
-            bottom: 4px;
-            background-color: $secondary-color-faded;
-            -webkit-transition: 0.4s;
-            transition: 0.4s ease;
+            &:before {
+              position: absolute;
+              content: "";
+              height: 26px;
+              width: 26px;
+              left: 4px;
+              bottom: 4px;
+              background-color: $secondary-color-faded;
+              -webkit-transition: 0.4s;
+              transition: 0.4s ease;
+            }
           }
 
           input:checked + .slider {
@@ -866,6 +939,80 @@ async function changeSteps() {
 
           .slider.round:before {
             border-radius: 50%;
+          }
+        }
+
+        .phone-codes {
+          display: flex;
+          flex-direction: column;
+          position: relative;
+          width: 180px;
+
+          &__selected {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            background-color: $primary-color;
+            padding: 0.5rem 0.75rem;
+            height: 40px;
+            border-radius: $radius;
+            font-size: 1rem;
+            font-weight: $skinny;
+            cursor: pointer;
+            width: 100%;
+
+            &--active {
+              border-bottom-left-radius: 0;
+              border-bottom-right-radius: 0;
+            }
+
+            &__flag {
+              width: 1rem;
+              height: 1rem;
+            }
+
+            &__arrow {
+              width: 0.75rem;
+              height: 0.75rem;
+              margin-left: auto;
+              transition: transform 0.4s;
+              opacity: 0.6;
+
+              &--up {
+                transform: rotate(180deg);
+              }
+            }
+          }
+          &__list {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 1.75rem;
+            left: 0;
+            padding: 0.5rem 0.75rem;
+            width: 118px;
+            background-color: $primary-color;
+            border-radius: 0 0 $radius $radius;
+            box-shadow: $shadow;
+            z-index: 1;
+            gap: 0.5rem;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            max-height: 70px;
+
+            &__element {
+              display: flex;
+              gap: 0.5rem;
+              cursor: pointer;
+              align-items: center;
+              font-size: $small-text;
+              font-weight: $skinny;
+
+              &__flag {
+                width: 1rem;
+                height: 1rem;
+              }
+            }
           }
         }
       }
