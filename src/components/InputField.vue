@@ -83,7 +83,11 @@ function changePassengers(amount: number) {
         }"
         @click="changePassengers(1)"
       >
-        +
+        <img
+          class="passengers-arrows__button__icon"
+          src="/assets/icons/add_dark.svg"
+          alt="minus icon"
+        />
       </button>
       <button
         class="passengers-arrows__button"
@@ -92,7 +96,11 @@ function changePassengers(amount: number) {
         }"
         @click="changePassengers(-1)"
       >
-        -
+        <img
+          class="passengers-arrows__button__icon"
+          src="/assets/icons/remove.svg"
+          alt="minus icon"
+        />
       </button>
     </div>
   </div>
@@ -219,6 +227,11 @@ function changePassengers(amount: number) {
       cursor: not-allowed;
       opacity: 0.5;
       pointer-events: none;
+    }
+
+    &__icon {
+      width: 0.5rem;
+      height: 0.5rem;
     }
   }
 }
