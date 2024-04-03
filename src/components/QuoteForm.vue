@@ -2,7 +2,6 @@
 import { ref, reactive } from "vue";
 import airports from "@/utils/airports.json";
 import phoneCodes from "@/utils/phoneCodes.json";
-import InputField from "@/ui/InputField.vue";
 import dayjs from "dayjs";
 import { useVuelidate } from "@vuelidate/core";
 import emailjs from "@emailjs/browser";
@@ -38,7 +37,9 @@ const todaysDate = dayjs().format("YYYY-MM-DD");
 
 const flightState = reactive({
   departureDate: "",
+  departureTime: 9.0,
   returnDate: "",
+  returnTime: 20.0,
   origin: "",
   destination: "",
   passengers: "1",
@@ -438,19 +439,18 @@ async function changeSteps() {
             </div>
           </div>
         </div>
-        <div class="form__fields__wrapper">
-          <div class="form__fields__wrapper__not-relative">
-            <InputField
-              v-model="flightState.departureDate"
-              id="departureDate"
-              label="Departure date"
-              type="date"
-              placeholder="YYYY-MM-DD"
-              icon="calendar_today"
-              :error="departureDateErrors[0]"
-              name="departureDate"
-            />
-          </div>
+        <div class="form__fields__wrapper--row">
+          <InputField
+            v-model="flightState.departureDate"
+            id="departureDate"
+            label="Departure date"
+            type="date"
+            placeholder="YYYY-MM-DD"
+            icon="calendar_today"
+            :error="departureDateErrors[0]"
+            name="departureDate"
+          />
+          <HourSelection v-model="flightState.departureTime" />
         </div>
         <div class="form__fields__wrapper--row">
           <div class="form__fields__wrapper--row__custom-field">
@@ -844,10 +844,10 @@ async function changeSteps() {
         justify-content: space-between;
         align-items: center;
 
-        div {
-          width: fit-content;
-          min-width: 40px;
-        }
+        // div {
+        //   width: fit-content;
+        //   min-width: 40px;
+        // }
 
         &__custom-field {
           display: flex;
