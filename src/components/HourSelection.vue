@@ -65,11 +65,6 @@ const isPM = computed(() => {
   background-color: $primary-color;
   border-radius: $radius;
 
-  &--active {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-
   &__selected {
     display: flex;
     gap: 0.5rem;
@@ -110,10 +105,11 @@ const isPM = computed(() => {
     max-width: 116px;
     min-width: 116px;
     position: absolute;
-    top: 1.7rem;
+    top: -100%;
+    left: -7.8rem;
     z-index: 1;
     padding: 0.5rem 0;
-    border-radius: 0 0 $radius $radius;
+    border-radius: $radius;
     box-shadow: $shadow;
 
     input[type="range"] {
