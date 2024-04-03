@@ -12,13 +12,10 @@ import {
   minLength,
   maxLength,
   email,
-  alphaNum,
   requiredIf,
   minValue,
   maxValue,
-  numeric,
   helpers,
-  not,
 } from "@vuelidate/validators";
 
 const selectedPhoneCode = ref({
@@ -35,6 +32,8 @@ const phoneCodesList = computed(() => {
 const isRoundTrip = ref(false);
 const currentStep = ref(0);
 const isSubmitting = ref(false);
+const wasSent = ref(false);
+
 const todaysDate = dayjs().format("YYYY-MM-DD");
 
 const flightState = reactive({
@@ -53,18 +52,26 @@ const contactState = reactive({
   info: "",
 });
 
-let templateParams = ref({
+const formattedReturnDate = computed(() => {
+  if (!flightState.returnDate) {
+    return "";
+  }
+  return dayjs(flightState.returnDate).format("MMMM DD, YYYY");
+});
+
+const templateParams = computed(() => ({
   origin: flightState.origin,
   destination: flightState.destination,
-  departureDate: flightState.departureDate,
-  returnDate: flightState.returnDate,
+  departureDate: dayjs(flightState.departureDate).format("MMMM DD, YYYY"),
+  returnDate: formattedReturnDate.value,
   passengers: flightState.passengers,
   firstName: contactState.firstName,
   lastName: contactState.lastName,
   email: contactState.email,
-  phoneNumber: `${selectedPhoneCode.code} ${contactState.phoneNumber}`,
+  phoneNumber: contactState.phoneNumber,
+  countryCode: selectedPhoneCode.value.code,
   info: contactState.info,
-});
+}));
 const steps = [
   {
     label: "Flight details",
@@ -73,6 +80,27 @@ const steps = [
     label: "Contact information",
   },
 ];
+
+function confirmSubmission() {
+  isSubmitting.value = false;
+  wasSent.value = true;
+  vFlight$.value.$reset();
+  vContact$.value.$reset();
+  flightState.departureDate = "";
+  flightState.returnDate = "";
+  flightState.origin = "";
+  flightState.destination = "";
+  flightState.passengers = "1";
+  contactState.firstName = "";
+  contactState.lastName = "";
+  contactState.email = "";
+  contactState.phoneNumber = "";
+  contactState.info = "";
+  setTimeout(() => {
+    currentStep.value = 0;
+    wasSent.value = false;
+  }, 1000);
+}
 
 const originSearchResults = computed(() => {
   if (!flightState.origin) {
@@ -133,7 +161,7 @@ const lowerThan = (value) => {
   return value >= flightState.departureDate;
 };
 const phoneRegex =
-  /^(\(\d{3}\)\s?\d{3}[-.\s]?\d{4}|\d{3}[-.\s]??\d{4}|\d{3}[-.\s]??\d{3}[-.\s]??\d{4}|\d{2}(\s\d{2}){4}|\d{4}[-.\s]??\d{6})$/;
+  /^(\d{10}|(\d{2}[-.\s]){4}\d{2}|\(\d{3}\)\s\d{3}-\d{4}|\d{3}[-.\s]\d{3}[-.\s]\d{4}|\d{3}\s\d{3}\s\d{3}\s\d)$/;
 const isPhoneNumber = (value) => phoneRegex.test(value);
 
 const flightRules = {
@@ -289,20 +317,7 @@ async function submitForm() {
     "8ifw_QPXgYXoWYmVW"
   );
 
-  vFlight$.value.$reset();
-  vContact$.value.$reset();
-  flightState.departureDate = "";
-  flightState.returnDate = "";
-  flightState.origin = "";
-  flightState.destination = "";
-  flightState.passengers = "1";
-  contactState.firstName = "";
-  contactState.lastName = "";
-  contactState.email = "";
-  contactState.phoneNumber = "";
-  contactState.info = "";
-  currentStep.value = 0;
-  isSubmitting.value = false;
+  confirmSubmission();
 }
 
 async function validFlightState() {
@@ -623,12 +638,28 @@ async function changeSteps() {
         <button
           class="form__fields__button button-primary"
           @click="validContactState()"
+          v-if="!wasSent"
         >
-          Request a quote
+          <span>Request a quote</span
+          ><Transition
+            ><img
+              class="spinning"
+              src="/assets/icons/loader.svg"
+              v-if="isSubmitting"
+              alt="loading icon"
+          /></Transition>
+        </button>
+        <button
+          class="form__fields__button form__fields__button--sent button-primary"
+          v-if="wasSent"
+        >
+          <span>Thank you !</span
+          ><Transition
+            ><img src="/assets/icons/check_small_light.svg" alt="check icon"
+          /></Transition>
         </button>
       </template>
     </div>
-    <div v-if="isSubmitting" class="form__thanks">Form is submitting</div>
   </form>
 </template>
 <style lang="scss" scoped>
@@ -1020,6 +1051,29 @@ async function changeSteps() {
 
     &__button {
       width: 100%;
+      gap: 1rem;
+
+      &--sent {
+        background-color: green;
+      }
+
+      & img {
+        width: 1.2rem;
+        height: 1.2rem;
+
+        .spinning {
+          animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
+        }
+      }
     }
   }
 
