@@ -99,7 +99,7 @@ function confirmSubmission() {
   setTimeout(() => {
     currentStep.value = 0;
     wasSent.value = false;
-  }, 1000);
+  }, 1400);
 }
 
 const originSearchResults = computed(() => {
@@ -1060,19 +1060,6 @@ async function changeSteps() {
       & img {
         width: 1.2rem;
         height: 1.2rem;
-
-        .spinning {
-          animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-          from {
-            transform: rotate(0deg);
-          }
-          to {
-            transform: rotate(360deg);
-          }
-        }
       }
     }
   }
@@ -1105,6 +1092,19 @@ async function changeSteps() {
 
   &:nth-of-type(2) {
     margin-top: 0rem;
+  }
+}
+
+.spinning {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }
 </style>
