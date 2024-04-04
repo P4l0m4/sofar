@@ -33,7 +33,7 @@ const currentStep = ref(0);
 const isSubmitting = ref(false);
 const wasSent = ref(false);
 
-const todaysDate = dayjs().format("YYYY-MM-DD");
+const todaysDate = dayjs().format("YYYY-MM-DDTHH:mm");
 
 const flightState = reactive({
   departureDate: "",
@@ -259,7 +259,7 @@ const departureDateErrors = computed(() => {
   vFlight$.value.departureDate.required.$invalid &&
     errors.push("This field is empty");
   vFlight$.value.departureDate.greaterThan.$invalid &&
-    errors.push("Your departure date must be at tomorrow or later");
+    errors.push("Your departure date must be tomorrow or later");
   return errors;
 });
 
@@ -269,7 +269,9 @@ const returnDateErrors = computed(() => {
   vFlight$.value.returnDate.required.$invalid &&
     errors.push("This field is empty");
   vFlight$.value.returnDate.lowerThan.$invalid &&
-    errors.push("Your return must the same day of after your departure");
+    errors.push(
+      "Your return date must be the same day of after your departure"
+    );
   return errors;
 });
 
