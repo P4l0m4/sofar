@@ -165,7 +165,7 @@ function changePassengers(amount: number) {
       min-width: 300px;
       position: absolute;
       // top: 0px;
-      opacity: 0.5;
+      opacity: 0;
     }
     &[type="number"] {
       min-width: 40px;
