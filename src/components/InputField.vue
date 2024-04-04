@@ -160,10 +160,11 @@ function changePassengers(amount: number) {
       max-width: 100%;
     }
     &[type="datetime-local"] {
-      max-width: 200px;
+      width: 100%;
+      max-width: 400px;
       position: absolute;
-      top: 200px;
-      opacity: 0.5;
+      // top: 0px;
+      opacity: 0;
     }
     &[type="number"] {
       min-width: 40px;
