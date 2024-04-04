@@ -165,6 +165,8 @@ const lowerThan = (value) => {
   }
   return value >= flightState.departureDate;
 };
+// const phoneRegex =
+//   /^(\d{10}|(\d{2}[-.\s]){4}\d{2}|\(\d{3}\)\s\d{3}-\d{4}|\d{3}[-.\s]\d{3}[-.\s]\d{4}|\d{3}\s\d{3}\s\d{3}\s\d)$/;
 const phoneRegex =
   /^(\d{10}|(\d{2}[-.\s]){4}\d{2}|\(\d{3}\)\s\d{3}-\d{4}|\d{3}[-.\s]\d{3}[-.\s]\d{4}|\d{3}\s\d{3}\s\d{3}\s\d)$/;
 const isPhoneNumber = (value) => phoneRegex.test(value);
@@ -281,13 +283,13 @@ const firstNameAndLastNameErrors = computed(() => {
   const errors = [];
   if (!vContact$.value.firstName.$dirty) return errors;
   vContact$.value.firstName.required.$invalid &&
-    errors.push("Please indicate your first name");
+    errors.push("Please enter your first name");
   vContact$.value.firstName.minLength.$invalid &&
     errors.push("Your first name is too short (min 2 characters)");
   vContact$.value.firstName.maxLength.$invalid &&
     errors.push("Your first name is too long (max 30 characters)");
   vContact$.value.lastName.required.$invalid &&
-    errors.push("Please indicate your last name");
+    errors.push("Please enter your last name");
   vContact$.value.lastName.minLength.$invalid &&
     errors.push("Your last name is too short (min 2 characters)");
   vContact$.value.lastName.maxLength.$invalid &&
@@ -299,7 +301,7 @@ const phoneNumberErrors = computed(() => {
   const errors = [];
   if (!vContact$.value.phoneNumber.$dirty) return errors;
   vContact$.value.phoneNumber.required.$invalid &&
-    errors.push("Please indicate your phone number");
+    errors.push("Please enter your phone number");
   vContact$.value.phoneNumber.isPhoneNumber.$invalid &&
     errors.push("This field must contain a valid phone number");
 
@@ -309,7 +311,8 @@ const phoneNumberErrors = computed(() => {
 const emailErrors = computed(() => {
   const errors = [];
   if (!vContact$.value.email.$dirty) return errors;
-  vContact$.value.email.required.$invalid && errors.push("This field is empty");
+  vContact$.value.email.required.$invalid &&
+    errors.push("Please enter an email address");
   vContact$.value.email.email.$invalid &&
     errors.push("Please enter a valid email address");
   return errors;
