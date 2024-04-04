@@ -12,7 +12,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  background-color: $text-color;
+  background-color: $text-color-faded-strong;
   border-radius: $radius;
   padding: 0.5rem 1rem;
   gap: 0.5rem;
