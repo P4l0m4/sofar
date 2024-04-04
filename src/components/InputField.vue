@@ -51,6 +51,20 @@ function changePassengers(amount: number) {
       :src="`/assets/icons/${icon}.svg`"
       :alt="`icon ${label}`"
     />
+    <button
+      class="passengers-arrows__button"
+      :class="{
+        'passengers-arrows__button--disabled': model <= 1 || model === null,
+      }"
+      @click="changePassengers(-1)"
+      v-if="type === 'number'"
+    >
+      <img
+        class="passengers-arrows__button__icon"
+        src="/assets/icons/remove.svg"
+        alt="minus icon"
+      />
+    </button>
     <input
       v-model="model"
       ref="inputRef"
@@ -75,34 +89,21 @@ function changePassengers(amount: number) {
     >
       <span v-if="!dateAsString">{{ label }}:</span> {{ dateAsString }}
     </span>
-    <div class="passengers-arrows" v-if="type === 'number'">
-      <button
-        class="passengers-arrows__button"
-        :class="{
-          'passengers-arrows__button--disabled': model >= 99 || model === null,
-        }"
-        @click="changePassengers(1)"
-      >
-        <img
-          class="passengers-arrows__button__icon"
-          src="/assets/icons/add_dark.svg"
-          alt="minus icon"
-        />
-      </button>
-      <button
-        class="passengers-arrows__button"
-        :class="{
-          'passengers-arrows__button--disabled': model <= 1 || model === null,
-        }"
-        @click="changePassengers(-1)"
-      >
-        <img
-          class="passengers-arrows__button__icon"
-          src="/assets/icons/remove.svg"
-          alt="minus icon"
-        />
-      </button>
-    </div>
+
+    <button
+      class="passengers-arrows__button"
+      :class="{
+        'passengers-arrows__button--disabled': model >= 99 || model === null,
+      }"
+      @click="changePassengers(1)"
+      v-if="type === 'number'"
+    >
+      <img
+        class="passengers-arrows__button__icon"
+        src="/assets/icons/add_dark.svg"
+        alt="minus icon"
+      />
+    </button>
   </div>
   <div class="input-error" v-if="error">{{ error }}</div>
 </template>
@@ -119,11 +120,8 @@ function changePassengers(amount: number) {
   overflow: hidden;
 
   &--passengers {
-    background-color: $base-color;
     padding: 0;
     gap: 0rem;
-    border-radius: 0;
-    overflow: visible;
   }
 
   &__label {
@@ -212,8 +210,8 @@ function changePassengers(amount: number) {
   flex-direction: column;
 
   &__button {
-    width: 1rem;
-    height: 1rem;
+    width: 1.5rem;
+    height: 100%;
     cursor: pointer;
     border: $text-color 2px solid;
     background-color: $primary-color;
@@ -222,6 +220,11 @@ function changePassengers(amount: number) {
     justify-content: center;
     align-items: center;
     padding: 0.5rem;
+    border-radius: $radius 0 0 $radius;
+
+    &:nth-of-type(2) {
+      border-radius: 0 $radius $radius 0;
+    }
 
     &--disabled {
       cursor: not-allowed;

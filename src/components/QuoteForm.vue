@@ -1,6 +1,6 @@
 <script setup>
-import { ref, reactive } from "vue";
-import airports from "@/utils/airports.json";
+import { ref, reactive, onMounted } from "vue";
+// import airports from "@/utils/airports.json";
 import phoneCodes from "@/utils/phoneCodes.json";
 import dayjs from "dayjs";
 import { useVuelidate } from "@vuelidate/core";
@@ -16,6 +16,8 @@ import {
   maxValue,
   helpers,
 } from "@vuelidate/validators";
+
+const airports = ref([]);
 
 const selectedPhoneCode = ref({
   country: "United States",
@@ -110,7 +112,7 @@ const originSearchResults = computed(() => {
     return [];
   }
 
-  return airports
+  return airports.value
     .filter(
       (airport) =>
         airport.name.toLowerCase().includes(flightState.origin.toLowerCase()) ||
@@ -128,7 +130,7 @@ const destinationSearchResults = computed(() => {
   if (!flightState.destination) {
     return [];
   }
-  return airports
+  return airports.value
     .filter(
       (airport) =>
         airport.name
@@ -145,7 +147,7 @@ const destinationSearchResults = computed(() => {
 });
 
 function checkIfAirportExists(airport) {
-  return airports.some(
+  return airports.value.some(
     (a) =>
       `${a.name.toLowerCase()}, ${a.municipality.toLowerCase()}` ===
       airport.toLowerCase()
@@ -350,6 +352,12 @@ async function changeSteps() {
     currentStep.value = 0;
   }
 }
+
+onMounted(() => {
+  import("@/utils/airports.json").then((json) => {
+    airports.value = json.default;
+  });
+});
 </script>
 <template>
   <form class="form" ref="form" @submit.prevent="submit">
@@ -498,14 +506,11 @@ async function changeSteps() {
               Round trip
             </span>
           </div>
-          <div class="form__fields__wrapper--row__custom-field passengers">
+          <div class="passengers-field">
             <label for="number" class="sr-only">Number of passengers</label>
-            <span
-              class="form__fields__wrapper--row__custom-field__span"
-              style="cursor: default"
-            >
+            <span class="passengers-field__span" style="cursor: default">
               <img
-                class="form__fields__wrapper--row__custom-field__icon"
+                class="passengers-field__icon"
                 src="/assets/icons/group_add-dark.svg"
                 alt="icon number of passengers"
               />
@@ -827,33 +832,6 @@ async function changeSteps() {
         gap: 0.5rem;
       }
 
-      // &__second-trip {
-      //   width: 100%;
-      //   font-size: $small-text;
-      //   font-weight: $skinny;
-      //   color: $text-color;
-      //   margin-top: 0.5rem;
-      //   display: flex;
-      //   align-items: center;
-      //   gap: 0.5rem;
-      //   white-space: nowrap;
-
-      //   &::before {
-      //     content: "";
-      //     display: block;
-      //     width: 100%;
-      //     height: 1px;
-      //     background-color: $text-color;
-      //   }
-      //   &::after {
-      //     content: "";
-      //     display: block;
-      //     width: 100%;
-      //     height: 1px;
-      //     background-color: $text-color;
-      //   }
-      // }
-
       &--row {
         display: flex;
         flex-direction: row;
@@ -861,11 +839,6 @@ async function changeSteps() {
         width: 100%;
         justify-content: space-between;
         align-items: center;
-
-        // div {
-        //   width: fit-content;
-        //   min-width: 40px;
-        // }
 
         &__custom-field {
           display: flex;
@@ -988,6 +961,25 @@ async function changeSteps() {
 
           .slider.round:before {
             border-radius: 50%;
+          }
+        }
+
+        .passengers-field {
+          display: flex;
+          gap: 0.5rem;
+
+          &__span {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: $small-text;
+            font-weight: $skinny;
+          }
+
+          &__icon {
+            width: 1.2rem;
+            height: 1.2rem;
           }
         }
 
