@@ -383,6 +383,7 @@ onMounted(() => {
           <div class="form__steps__step__label__corner-right"></div>
         </h3>
       </div>
+      <EmergencyBubble />
     </div>
 
     <div class="form__fields">
