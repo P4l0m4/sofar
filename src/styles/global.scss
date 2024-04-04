@@ -102,7 +102,7 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
   -webkit-appearance: none; /* Remove default icon in WebKit browsers */
   -moz-appearance: none; /* Remove default icon in Firefox */
   appearance: none !important; /* Generic way to remove default icon */
-  opacity: 0;
+  opacity: 0.5;
   width: 30px;
   height: 36px;
   position: absolute;
@@ -113,7 +113,8 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
   color: transparent;
 
   @media (min-width: $big-tablet-screen) {
-    width: 30px;
+    width: 450px;
+    border: red solid 1px;
   }
 }
 
