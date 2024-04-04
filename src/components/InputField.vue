@@ -122,6 +122,7 @@ function changePassengers(amount: number) {
   &--passengers {
     padding: 0;
     gap: 0rem;
+    box-shadow: none;
   }
 
   &__label {
@@ -168,6 +169,8 @@ function changePassengers(amount: number) {
       min-width: 40px;
       max-width: 50px;
       text-align: center;
+      background-color: $base-color !important;
+      border-radius: 0 !important;
     }
   }
 
@@ -213,8 +216,9 @@ function changePassengers(amount: number) {
     width: 1.5rem;
     height: 100%;
     cursor: pointer;
-    border: $text-color 2px solid;
+    // border: $text-color 2px solid;
     background-color: $primary-color;
+    box-shadow: $shadow;
     color: $text-color;
     display: flex;
     justify-content: center;
