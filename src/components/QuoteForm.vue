@@ -1030,8 +1030,9 @@ onMounted(() => {
             position: absolute;
             top: 1.75rem;
             left: 0;
-            padding: 0.5rem 0.75rem;
+            padding: 0.25rem;
             width: 118px;
+            max-width: 118px;
             background-color: $primary-color;
             border-radius: 0 0 $radius $radius;
             box-shadow: $shadow;
@@ -1039,15 +1040,23 @@ onMounted(() => {
             gap: 0.5rem;
             overflow-y: scroll;
             overflow-x: hidden;
-            max-height: 70px;
+            max-height: 110px;
 
             &__element {
               display: flex;
               gap: 0.5rem;
+              padding: 0.5rem;
               cursor: pointer;
               align-items: center;
               font-size: $small-text;
               font-weight: $skinny;
+              border-radius: $radius;
+              transition: background-color 0.3s linear;
+
+              &:hover {
+                background-color: $text-color-faded;
+                border-radius: $radius;
+              }
 
               &__flag {
                 width: 1rem;

@@ -138,10 +138,10 @@ function shouldDisplayArrow(index) {
     display: flex;
     justify-content: center;
     align-items: center;
-    backdrop-filter: blur(6px);
+    backdrop-filter: blur($blur);
     height: 100%;
     width: fit-content;
-    background-color: $text-color-faded;
+    background-color: $text-color-faded-strong;
 
     &__ul {
       display: flex;
@@ -159,7 +159,7 @@ function shouldDisplayArrow(index) {
         justify-content: center;
         align-items: center;
         border-radius: $radius;
-        backdrop-filter: blur(20px);
+        backdrop-filter: blur($blur);
         position: relative;
         transition: 0.4s background-color ease, 0.4s transform ease;
         &:hover,
@@ -228,8 +228,8 @@ function shouldDisplayArrow(index) {
             align-items: center;
             padding: 1rem;
             gap: 0.5rem;
-            background-color: $text-color-faded;
-            backdrop-filter: blur(6px);
+            background-color: $text-color-faded-strong;
+            backdrop-filter: blur($blur);
             border-radius: $radius;
             color: $text-color-alt;
             transition: background-color 0.4s ease, transform 0.4s ease;
