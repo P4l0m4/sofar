@@ -30,7 +30,7 @@ function triggerDatepicker() {
 
 const dateAsString = computed(() => {
   if (!model.value) return "";
-  return dayjs(model.value).format("MMMM DD, YYYY");
+  return dayjs(model.value).format("MMMM DD, YYYY [at] h:mm A");
 });
 
 function changePassengers(amount: number) {
@@ -69,7 +69,7 @@ function changePassengers(amount: number) {
     />
 
     <span
-      v-if="type === 'date'"
+      v-if="type === 'datetime-local'"
       class="input-field__date"
       @click="triggerDatepicker()"
     >
@@ -160,7 +160,7 @@ function changePassengers(amount: number) {
     &[type="search"] {
       max-width: 100%;
     }
-    &[type="date"] {
+    &[type="datetime-local"] {
       max-width: 1px;
       position: absolute;
       top: 200px;

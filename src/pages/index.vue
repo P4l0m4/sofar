@@ -3,7 +3,7 @@
   <picture class="index__banner">
     <source
       media="(min-width: 1100px)"
-      srcset="@/assets/images/index-banner-desktop.webp" />
+      srcset="@/assets/images/landscape.webp" />
     <div class="index__banner__headlines">
       <h1 class="index__banner__headlines__title titles">MAKE IT ANYWHERE</h1>
       <h2 class="index__banner__headlines__subtitle subtitles">
@@ -13,7 +13,7 @@
     <QuoteForm />
     <img
       class="index__banner__img"
-      src="@/assets/images/index-banner-mobile.webp"
+      src="@/assets/images/landscape-mobile.webp"
       alt="banner image"
   /></picture>
 </template>
@@ -34,6 +34,16 @@
   @media (min-width: $big-tablet-screen) {
     padding: 2rem;
     gap: 2rem;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(80deg, $text-color, transparent 60%);
+    z-index: -1;
   }
 
   & source {

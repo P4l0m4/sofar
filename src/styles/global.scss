@@ -97,11 +97,11 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
-input[type="date"]::-webkit-calendar-picker-indicator {
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
   -webkit-appearance: none; /* Remove default icon in WebKit browsers */
   -moz-appearance: none; /* Remove default icon in Firefox */
   appearance: none !important; /* Generic way to remove default icon */
-
   opacity: 0;
   width: 30px;
   height: 36px;

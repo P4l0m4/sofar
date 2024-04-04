@@ -57,47 +57,16 @@ const formattedReturnDate = computed(() => {
   if (!flightState.returnDate) {
     return "";
   }
-  return dayjs(flightState.returnDate).format("MMMM DD, YYYY");
-});
-
-const formattedDepartureTime = computed(() => {
-  return `${Math.floor(flightState.departureTime)
-    .toString()
-    .padStart(2, "0")}:${Math.round(
-    (flightState.departureTime - Math.floor(flightState.departureTime)) * 60
-  )
-    .toString()
-    .padStart(2, "0")}`;
-});
-const formattedReturnTime = computed(() => {
-  return `${Math.floor(flightState.returnTime)
-    .toString()
-    .padStart(2, "0")}:${Math.round(
-    (flightState.returnTime - Math.floor(flightState.returnTime)) * 60
-  )
-    .toString()
-    .padStart(2, "0")}`;
+  return dayjs(flightState.returnDate).format("MMMM DD, YYYY [at] h:mm A");
 });
 
 const templateParams = computed(() => ({
   origin: flightState.origin,
   destination: flightState.destination,
-  departureDate: dayjs(flightState.departureDate).format("MMMM DD, YYYY"),
-  departureTime: `${Math.floor(flightState.departureTime)
-    .toString()
-    .padStart(2, "0")}:${Math.round(
-    (flightState.departureTime - Math.floor(flightState.departureTime)) * 60
-  )
-    .toString()
-    .padStart(2, "0")}`,
+  departureDate: dayjs(flightState.departureDate).format(
+    "MMMM DD, YYYY [at] h:mm A"
+  ),
   returnDate: formattedReturnDate.value,
-  returnTime: `${Math.floor(flightState.returnTime)
-    .toString()
-    .padStart(2, "0")}:${Math.round(
-    (flightState.returnTime - Math.floor(flightState.returnTime)) * 60
-  )
-    .toString()
-    .padStart(2, "0")}`,
   passengers: flightState.passengers,
   firstName: contactState.firstName,
   lastName: contactState.lastName,
@@ -477,13 +446,13 @@ async function changeSteps() {
             v-model="flightState.departureDate"
             id="departureDate"
             label="Departure date"
-            type="date"
+            type="datetime-local"
             placeholder="YYYY-MM-DD"
             icon="calendar_today"
             name="departureDate"
           />
 
-          <HourSelection v-model="flightState.departureTime" />
+          <!-- <HourSelection v-model="flightState.departureTime" /> -->
         </div>
         <div
           class="error"
@@ -559,12 +528,12 @@ async function changeSteps() {
             v-model="flightState.returnDate"
             id="returnDate"
             label="Return date"
-            type="date"
+            type="datetime-local"
             placeholder="YYYY-MM-DD"
             icon="calendar_tomorrow"
             name="returnDate"
           />
-          <HourSelection v-model="flightState.returnTime" />
+          <!-- <HourSelection v-model="flightState.returnTime" /> -->
         </div>
         <div
           class="error"
