@@ -168,11 +168,11 @@ function changePassengers(amount: number) {
       opacity: 0;
     }
     &[type="number"] {
-      min-width: 40px;
+      min-width: 50px;
       max-width: 50px;
       text-align: center;
-      background-color: $base-color !important;
-      border-radius: 0 !important;
+      // background-color: $base-color !important;
+      // border-radius: 0 !important;
     }
   }
 
@@ -227,9 +227,11 @@ function changePassengers(amount: number) {
     align-items: center;
     padding: 0.5rem;
     border-radius: $radius 0 0 $radius;
+    border-right: 1px solid $base-color;
 
     &:nth-of-type(2) {
       border-radius: 0 $radius $radius 0;
+      border-left: 1px solid $base-color;
     }
 
     &--disabled {
@@ -239,8 +241,8 @@ function changePassengers(amount: number) {
     }
 
     &__icon {
-      width: 0.5rem;
-      height: 0.5rem;
+      width: 0.75rem;
+      height: 0.75rem;
     }
   }
 }
