@@ -1,9 +1,6 @@
 <template>
   <a class="emergency-bubble" href="tel:+19144686800">
-    <img
-      class="emergency-bubble__icon"
-      src="/assets/icons/emergency_home.svg"
-    />
+    <img class="emergency-bubble__icon" src="/assets/icons/call_quality.svg" />
     <span class="emergency-bubble__number">+1 (914) 468-6800</span>
   </a>
 </template>
