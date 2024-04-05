@@ -477,10 +477,10 @@ onMounted(() => {
         </div>
         <div class="form__fields__wrapper--row">
           <div class="form__fields__wrapper--row__custom-field">
-            <span
-              class="form__fields__wrapper--row__custom-field__span"
+            <button
+              class="form__fields__wrapper--row__custom-field__button"
               :class="{
-                'form__fields__wrapper--row__custom-field__span--transparent':
+                'form__fields__wrapper--row__custom-field__button--transparent':
                   isRoundTrip,
               }"
               @click="isRoundTrip = false"
@@ -490,15 +490,15 @@ onMounted(() => {
                 alt="icon one way trip"
               />
               One way
-            </span>
+            </button>
             <label class="switch" for="checkbox">
               <input type="checkbox" id="checkbox" v-model="isRoundTrip" />
               <span class="slider round"></span>
             </label>
-            <span
-              class="form__fields__wrapper--row__custom-field__span"
+            <button
+              class="form__fields__wrapper--row__custom-field__button"
               :class="{
-                'form__fields__wrapper--row__custom-field__span--transparent':
+                'form__fields__wrapper--row__custom-field__button--transparent':
                   !isRoundTrip,
               }"
               @click="isRoundTrip = true"
@@ -508,7 +508,7 @@ onMounted(() => {
                 alt="icon one way trip"
               />
               Round trip
-            </span>
+            </button>
           </div>
           <div class="passengers-field">
             <label for="number" class="sr-only">Number of passengers</label>
@@ -855,23 +855,22 @@ onMounted(() => {
             width: calc(50% - 0.5rem);
           }
 
-          &:nth-child(2) {
-            & span {
-              border: none;
-            }
-          }
-
-          &__span {
+          &__button {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             font-size: $small-text;
+            font-weight: $skinny;
+            color: $text-color;
             white-space: nowrap;
             transition: opacity 0.4s ease;
             cursor: pointer;
             border-bottom: $text-color 2px solid;
             padding-bottom: 2px;
+            padding-top: 1rem;
+            margin-top: -1rem;
+            border-radius: 0 !important;
 
             &--transparent {
               opacity: 0.5;
