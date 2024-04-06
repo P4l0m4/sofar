@@ -13,8 +13,8 @@
     </p>
 
     <div class="our-birds__buttons">
-      <NuxtLink class="button-primary" to="/about-us/our-story"
-        >Learn more about Sofar</NuxtLink
+      <NuxtLink class="button-primary" to="/aircraft"
+        >Learn more about our birds</NuxtLink
       >
       <QuotePopUpButton color="#fffdfa" />
     </div>
