@@ -21,6 +21,7 @@
   /></picture>
   <HomeWelcomeToSofar />
   <OurBases />
+  <HomeOurBirds />
 </template>
 <style lang="scss" scoped>
 .index__banner {

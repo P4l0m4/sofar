@@ -8,7 +8,7 @@ mapboxgl.accessToken = config.public.MAP_BOX_API_KEY;
 onMounted(() => {
   const map = new mapboxgl.Map({
     container: mapRef.value,
-    style: "mapbox://styles/flysofar/cluohiwuc00x501pe1javcdf6",
+    style: "mapbox://styles/flysofar/cluo5ywcv003z01qz3ek81gzn",
     center: [-80.55174117682346, 35.15790888688196],
     zoom: 3.8,
     scrollZoom: false,
@@ -18,16 +18,14 @@ onMounted(() => {
   });
 
   // Marker for New York with a custom color
-  new mapboxgl.Marker({ color: "#fffdfa", anchor: "center" })
+  new mapboxgl.Marker({ color: "#06067c", anchor: "center" })
     .setLngLat([-74.006, 40.7128])
     .addTo(map);
 
   // Marker for Miami with a different custom color
-  new mapboxgl.Marker({ color: "#fffdfa", anchor: "center" })
+  new mapboxgl.Marker({ color: "#06067c", anchor: "center" })
     .setLngLat([-80.1918, 25.7617])
     .addTo(map);
-
-  map.setPitch(0);
 });
 </script>
 <template>

@@ -34,6 +34,8 @@
   gap: 1rem;
   padding: 2rem 1rem;
   width: 100%;
+  height: 90svh;
+  justify-content: center;
   background-color: $base-color;
   margin-top: -2rem;
   background-image: url("@/assets/images/mini-logo-light.svg");
