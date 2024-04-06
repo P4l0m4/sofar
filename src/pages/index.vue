@@ -5,17 +5,21 @@
       media="(min-width: 1100px)"
       srcset="@/assets/images/landscape.webp" />
     <div class="index__banner__headlines">
+      <NuxtLink to="/">
+        <img
+          class="index__banner__headlines__logo"
+          src="@/assets/images/logo-light.svg"
+      /></NuxtLink>
       <h1 class="index__banner__headlines__title titles">MAKE IT ANYWHERE</h1>
-      <h2 class="index__banner__headlines__subtitle subtitles">
-        Request a quote
-      </h2>
     </div>
     <QuoteForm />
+
     <img
       class="index__banner__img"
       src="@/assets/images/landscape-mobile.webp"
       alt="banner image"
   /></picture>
+  <HomeWelcomeToSofar />
 </template>
 <style lang="scss" scoped>
 .index__banner {
@@ -52,10 +56,34 @@
 
   &__headlines {
     display: flex;
-    flex-direction: column;
+    align-items: center;
     gap: 1rem;
     z-index: 1;
     color: $text-color-alt;
+
+    @media (min-width: $big-tablet-screen) {
+      gap: 2rem;
+      align-items: end;
+    }
+
+    &__logo {
+      width: 70px;
+
+      @media (min-width: $big-tablet-screen) {
+        width: 200px;
+      }
+    }
+
+    &__title {
+      // white-space: nowrap;
+      display: flex;
+      height: fit-content;
+      line-height: 2.5rem;
+
+      @media (min-width: $big-tablet-screen) {
+        line-height: 1.5rem;
+      }
+    }
   }
 
   &__img {

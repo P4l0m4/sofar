@@ -14,8 +14,9 @@ import {
   requiredIf,
   minValue,
   maxValue,
-  helpers,
 } from "@vuelidate/validators";
+
+const emits = defineEmits(["formSubmitted"]);
 
 const airports = ref([]);
 
@@ -104,6 +105,7 @@ function confirmSubmission() {
   setTimeout(() => {
     currentStep.value = 0;
     wasSent.value = false;
+    emits("formSubmitted");
   }, 1400);
 }
 

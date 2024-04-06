@@ -28,6 +28,7 @@
 html {
   scroll-behavior: smooth;
   line-height: $line-height;
+  overflow-x: hidden;
 }
 
 body {
@@ -241,19 +242,22 @@ details > summary::-webkit-details-marker /* Safari */ {
 
 .subtitles {
   font-size: calc($subtitles - 0.2rem);
-
+  line-height: 1.25;
   font-weight: $skinny-thick;
   @media (min-width: $tablet-screen) {
     font-size: $subtitles;
+    line-height: 1.5;
   }
 }
 
-.base-text {
+.paragraphs {
   font-size: 1rem;
   font-weight: $skinny;
+  line-height: 1.25;
 
   @media (min-width: $tablet-screen) {
     font-size: 1.1rem;
+    line-height: 1.5;
   }
 }
 
