@@ -34,7 +34,7 @@
   gap: 1rem;
   padding: 2rem 1rem;
   width: 100%;
-  height: 100svh;
+  min-height: 100svh;
   justify-content: center;
   background-color: $base-color;
   margin-top: -2rem;
