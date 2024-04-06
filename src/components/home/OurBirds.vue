@@ -33,7 +33,7 @@
   gap: 1rem;
   padding: 2rem 1rem;
   width: 100%;
-  height: 90svh;
+  height: 100svh;
   margin-top: -2rem;
   position: relative;
 

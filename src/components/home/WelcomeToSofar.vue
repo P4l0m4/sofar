@@ -34,11 +34,11 @@
   gap: 1rem;
   padding: 2rem 1rem;
   width: 100%;
-  height: 90svh;
+  height: 100svh;
   justify-content: center;
   background-color: $base-color;
   margin-top: -2rem;
-  background-image: url("@/assets/images/mini-logo-light.svg");
+  background-image: url("@/assets/images/mini-logo.svg");
   background-size: 200px;
   background-repeat: no-repeat;
   background-position: right 1rem top 1rem;
