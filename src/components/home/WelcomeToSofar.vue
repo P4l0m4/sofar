@@ -1,6 +1,6 @@
 <template>
   <div class="welcome-to-sofar">
-    <h1 class="welcome-to-sofar__title titles">Welcome to Sofar</h1>
+    <h2 class="welcome-to-sofar__title titles">Welcome to Sofar</h2>
     <p class="welcome-to-sofar__text subtitles">
       Sofar is a specialized private jet charter offering tailor-made travel
       experiences from Westchester or Miami.
@@ -23,7 +23,7 @@
       <NuxtLink class="button-primary" to="/about-us/our-story"
         >Learn more about Sofar</NuxtLink
       >
-      <QuotePopUpButton color="#fffdfa" />
+      <QuotePopUpButton />
     </div>
   </div>
 </template>
@@ -34,7 +34,7 @@
   gap: 1rem;
   padding: 2rem 1rem;
   width: 100%;
-  background-color: $secondary-color;
+  background-color: $base-color;
   margin-top: -2rem;
   background-image: url("@/assets/images/mini-logo-light.svg");
   background-size: 200px;
@@ -49,11 +49,11 @@
   }
 
   &__title {
-    color: $text-color-alt;
+    color: $text-color;
   }
 
   &__text {
-    color: $text-color-alt;
+    color: $text-color;
 
     @media (min-width: $laptop-screen) {
       max-width: calc(100% - 160px);
@@ -77,8 +77,8 @@
     }
 
     .button-primary {
-      background-color: $primary-color;
-      color: $secondary-color;
+      background-color: $secondary-color;
+      color: $text-color-alt;
 
       @media (min-width: $big-tablet-screen) {
         width: fit-content;

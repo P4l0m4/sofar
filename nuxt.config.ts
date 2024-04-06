@@ -38,4 +38,9 @@ export default defineNuxtConfig({
       htmlAttrs: { lang: "en" },
     },
   },
+  runtimeConfig: {
+    public: {
+      MAP_BOX_API_KEY: process.env.MAP_BOX_API_KEY,
+    },
+  },
 });

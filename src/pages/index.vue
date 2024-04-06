@@ -20,6 +20,7 @@
       alt="banner image"
   /></picture>
   <HomeWelcomeToSofar />
+  <OurBases />
 </template>
 <style lang="scss" scoped>
 .index__banner {
