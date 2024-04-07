@@ -1,4 +1,22 @@
-<script setup></script>
+<script setup>
+const carouselElements = [
+  {
+    link: "/aircraft/phenom-100",
+    image: "100",
+    label: "Phenom 100",
+  },
+  {
+    link: "/aicraft/phenom-300",
+    image: "300",
+    label: "Phenom 300",
+  },
+  {
+    link: "/aircraft/pc-12",
+    image: "12",
+    label: "Pilatus PC 12",
+  },
+];
+</script>
 <template>
   <picture class="index__banner">
     <source
@@ -22,6 +40,7 @@
   <HomeWelcomeToSofar />
   <OurBases />
   <HomeOurBirds />
+  <CarouselComponent :carouselElements="carouselElements" />
 </template>
 <style lang="scss" scoped>
 .index__banner {

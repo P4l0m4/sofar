@@ -40,12 +40,7 @@ onMounted(() => {
 <style lang="scss" scoped>
 .our-bases {
   position: relative;
-  margin-top: -2rem;
   height: 100svh;
-
-  @media (min-width: $big-tablet-screen) {
-    margin-top: -4rem;
-  }
 
   &__headlines {
     display: flex;

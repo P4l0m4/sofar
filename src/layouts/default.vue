@@ -147,11 +147,6 @@ const menuItems = [
 main {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-
-  @media (min-width: $big-tablet-screen) {
-    gap: 4rem;
-  }
 }
 .v-enter-active,
 .v-leave-active {

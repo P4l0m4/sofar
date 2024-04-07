@@ -37,7 +37,6 @@
   min-height: 100svh;
   justify-content: center;
   background-color: $base-color;
-  margin-top: -2rem;
   background-image: url("@/assets/images/mini-logo.svg");
   background-size: 200px;
   background-repeat: no-repeat;
@@ -46,7 +45,6 @@
   @media (min-width: $big-tablet-screen) {
     padding: 4rem 2rem;
     gap: 2rem;
-    margin-top: -4rem;
     background-position: right 2rem top 2rem;
   }
 

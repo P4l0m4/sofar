@@ -34,7 +34,6 @@
   padding: 2rem 1rem;
   width: 100%;
   height: 100svh;
-  margin-top: -2rem;
   position: relative;
 
   &::after {
@@ -50,7 +49,6 @@
   @media (min-width: $big-tablet-screen) {
     padding: 4rem 2rem;
     gap: 2rem;
-    margin-top: -4rem;
     background-position: right 2rem top 2rem;
   }
 
