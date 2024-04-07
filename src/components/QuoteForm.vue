@@ -38,6 +38,8 @@ const wasSent = ref(false);
 
 const todaysDate = dayjs().format("YYYY-MM-DDTHH:mm");
 
+const phoneCodeQuery = ref("");
+
 const flightState = reactive({
   departureDate: "",
   departureTime: 9.0,
@@ -146,6 +148,20 @@ const destinationSearchResults = computed(() => {
           .slice(0, -1)}`.includes(flightState.destination.toLowerCase())
     )
     .slice(0, 10);
+});
+
+const phoneCodesSearchResults = computed(() => {
+  if (!phoneCodeQuery.value) {
+    return phoneCodesList.value.slice(0, 10);
+  }
+  return phoneCodesList.value.filter(
+    (code) =>
+      code.country.toLowerCase().includes(phoneCodeQuery.value.toLowerCase()) ||
+      code.abbreviation
+        .toLowerCase()
+        .includes(phoneCodeQuery.value.toLowerCase()) ||
+      code.code.includes(phoneCodeQuery.value)
+  );
 });
 
 function checkIfAirportExists(airport) {
@@ -608,9 +624,18 @@ onMounted(() => {
               ><img
                 class="phone-codes__selected__flag"
                 :src="`assets/flags/${selectedPhoneCode.abbreviation}.svg`"
-                alt="country flag" />
-              {{ selectedPhoneCode.code
-              }}<img
+                alt="country flag"
+                v-if="!phoneCodesListIsOpen" />
+              <span v-if="!phoneCodesListIsOpen">{{
+                selectedPhoneCode.code
+              }}</span>
+              <input
+                class="phone-codes__selected__search-input"
+                type="search"
+                placeholder="Country"
+                v-model="phoneCodeQuery"
+                v-if="phoneCodesListIsOpen"
+                @click.stop /><img
                 class="phone-codes__selected__arrow"
                 :class="{
                   'phone-codes__selected__arrow--up': phoneCodesListIsOpen,
@@ -618,11 +643,12 @@ onMounted(() => {
                 :src="`assets/icons/arrow_scroll_dark.svg`"
                 alt="arrow icon"
             /></span>
+
             <Transition>
               <div class="phone-codes__list" v-if="phoneCodesListIsOpen">
                 <span
                   class="phone-codes__list__element"
-                  v-for="(element, i) in phoneCodesList"
+                  v-for="(element, i) in phoneCodesSearchResults"
                   :key="i"
                   @click="
                     (selectedPhoneCode = element),
@@ -992,7 +1018,9 @@ onMounted(() => {
           display: flex;
           flex-direction: column;
           position: relative;
-          width: 180px;
+          width: 140px;
+          min-width: 140px;
+          max-width: 140px;
 
           &__selected {
             display: flex;
@@ -1005,7 +1033,9 @@ onMounted(() => {
             font-size: 1rem;
             font-weight: $skinny;
             cursor: pointer;
-            width: 100%;
+            width: 140px;
+            min-width: 140px;
+            max-width: 140px;
 
             &--active {
               border-bottom-left-radius: 0;
@@ -1028,6 +1058,21 @@ onMounted(() => {
                 transform: rotate(180deg);
               }
             }
+
+            &__search-input {
+              width: 100%;
+              outline: none;
+              border: none;
+              font-family: "Custom";
+
+              &:focus {
+                outline: none;
+              }
+              &::placeholder {
+                font-family: "Custom";
+                color: $text-color-faded;
+              }
+            }
           }
           &__list {
             display: flex;
@@ -1036,8 +1081,9 @@ onMounted(() => {
             top: 1.75rem;
             left: 0;
             padding: 0.25rem;
-            width: 118px;
-            max-width: 118px;
+            width: 140px;
+            min-width: 140px;
+            max-width: 140px;
             background-color: $primary-color;
             border-radius: 0 0 $radius $radius;
             box-shadow: $shadow;
