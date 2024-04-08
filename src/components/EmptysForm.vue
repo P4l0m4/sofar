@@ -111,38 +111,48 @@ async function validEmptyState() {
   <section class="emptys-form">
     <h2 class="titles">Join Sofar Emptys</h2>
     <form class="emptys-form__fields">
-      <InputField
-        v-model="emptyState.firstName"
-        id="firstName"
-        label="First name"
-        placeholder="John, Jane"
-        name="firstName"
-        :errors="firstNameErrors[0]"
-      />
-      <div class="error" style="margin-top: -0.5rem" v-if="firstNameErrors[0]">
-        {{ firstNameErrors[0] }}
+      <div class="emptys-form__fields__field">
+        <InputField
+          v-model="emptyState.firstName"
+          id="firstName"
+          label="First name"
+          placeholder="John, Jane"
+          name="firstName"
+          :errors="firstNameErrors[0]"
+        />
+        <div
+          class="error"
+          style="margin-top: -0.5rem"
+          v-if="firstNameErrors[0]"
+        >
+          {{ firstNameErrors[0] }}
+        </div>
       </div>
-      <InputField
-        v-model="emptyState.lastName"
-        id="lastName"
-        label="Last name"
-        placeholder="Doe"
-        name="lastName"
-        :errors="lastNameErrors[0]"
-      />
-      <div class="error" style="margin-top: -0.5rem" v-if="lastNameErrors[0]">
-        {{ lastNameErrors[0] }}
+      <div class="emptys-form__fields__field">
+        <InputField
+          v-model="emptyState.lastName"
+          id="lastName"
+          label="Last name"
+          placeholder="Doe"
+          name="lastName"
+          :errors="lastNameErrors[0]"
+        />
+        <div class="error" style="margin-top: -0.5rem" v-if="lastNameErrors[0]">
+          {{ lastNameErrors[0] }}
+        </div>
       </div>
-      <InputField
-        v-model="emptyState.email"
-        id="email"
-        label="Email"
-        placeholder="youremail@gmail.com"
-        name="email"
-        :errors="emailErrors[0]"
-      />
-      <div class="error" style="margin-top: -0.5rem" v-if="emailErrors[0]">
-        {{ emailErrors[0] }}
+      <div class="emptys-form__fields__field">
+        <InputField
+          v-model="emptyState.email"
+          id="email"
+          label="Email"
+          placeholder="youremail@gmail.com"
+          name="email"
+          :errors="emailErrors[0]"
+        />
+        <div class="error" style="margin-top: -0.5rem" v-if="emailErrors[0]">
+          {{ emailErrors[0] }}
+        </div>
       </div>
       <button
         class="emptys-form__fields__button button-primary"
@@ -198,9 +208,17 @@ async function validEmptyState() {
       width: fit-content;
     }
 
+    &__field {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
     &__button {
       width: 100%;
       gap: 1rem;
+      height: fit-content;
 
       &--sent {
         background-color: green;
@@ -222,6 +240,7 @@ async function validEmptyState() {
       border-radius: $radius;
       margin-top: -1rem;
       width: fit-content;
+      height: fit-content;
     }
   }
 }
@@ -236,9 +255,5 @@ async function validEmptyState() {
   line-height: 1rem;
   border-radius: $radius;
   width: fit-content;
-
-  &:nth-of-type(2) {
-    margin-top: 0rem;
-  }
 }
 </style>
