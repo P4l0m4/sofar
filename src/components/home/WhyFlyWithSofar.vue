@@ -32,7 +32,7 @@ const qualities = [
   <section class="why-fly-with-sofar">
     <div class="why-fly-with-sofar__main-part">
       <h2 class="why-fly-with-sofar__main-part__title titles">
-        Why fly with Sofar ?
+        Why fly with Sofar
       </h2>
 
       <div class="why-fly-with-sofar__main-part__qualities">
@@ -81,8 +81,8 @@ const qualities = [
   flex-direction: column;
   justify-content: space-between;
   padding: 1rem;
-  height: 100svh;
-  max-height: 800px;
+  min-height: 100svh;
+  // max-height: 800px;
   background-image: url("@/assets/images/seats.webp");
   background-size: cover;
   background-position: center;
@@ -111,6 +111,7 @@ const qualities = [
     max-width: 760px;
     height: fit-content;
     z-index: 1;
+    padding: 1rem 0;
 
     @media (min-width: $big-tablet-screen) {
       gap: 2rem;
