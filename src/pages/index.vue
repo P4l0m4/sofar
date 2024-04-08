@@ -112,7 +112,7 @@ const carouselElements = [
       line-height: 2.5rem;
 
       @media (min-width: $big-tablet-screen) {
-        line-height: 1.5rem;
+        line-height: 2.1rem;
       }
     }
   }
