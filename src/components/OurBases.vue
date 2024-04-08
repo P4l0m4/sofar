@@ -41,6 +41,7 @@ onMounted(() => {
 .our-bases {
   position: relative;
   height: 100svh;
+  max-height: 800px;
 
   &__headlines {
     display: flex;

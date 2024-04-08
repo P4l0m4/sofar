@@ -41,6 +41,7 @@ const carouselElements = [
   <OurBases />
   <HomeOurBirds />
   <CarouselComponent :carouselElements="carouselElements" />
+  <HomeWhyFlyWithSofar />
 </template>
 <style lang="scss" scoped>
 .index__banner {
@@ -48,7 +49,7 @@ const carouselElements = [
   background-size: cover;
   background-position: center;
   min-height: 100svh;
-  max-height: 1200px;
+  max-height: 800px;
   width: 100%;
   padding: 1rem;
   flex-direction: column;
