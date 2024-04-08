@@ -153,10 +153,12 @@ const qualities = [
 
           &__title {
             width: fit-content;
+            text-shadow: $shadow-text;
           }
 
           &__paragraph {
             text-wrap: balance;
+            text-shadow: $shadow-text;
           }
         }
       }

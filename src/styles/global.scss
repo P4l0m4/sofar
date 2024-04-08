@@ -238,7 +238,7 @@ details > summary::-webkit-details-marker /* Safari */ {
 }
 
 .titles {
-  font-size: calc($titles - 0.2rem);
+  font-size: calc($titles - 0.25rem);
   font-weight: $thick;
 
   @media (min-width: $tablet-screen) {

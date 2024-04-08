@@ -1,8 +1,7 @@
-<script setup>
+<script setup lang="ts">
 const props = defineProps({
   menuItems: Array,
 });
-console.log(props);
 </script>
 <template>
   <footer class="footer">

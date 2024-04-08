@@ -33,7 +33,7 @@ const emptyRules = {
 
 const vEmpty$ = useVuelidate(emptyRules, emptyState);
 
-const firstNameAndLastNameErrors = computed(() => {
+const firstNameErrors = computed(() => {
   const errors = [];
   if (!vEmpty$.value.firstName.$dirty) return errors;
   vEmpty$.value.firstName.required.$invalid &&
@@ -42,6 +42,13 @@ const firstNameAndLastNameErrors = computed(() => {
     errors.push("Your first name is too short (min 2 characters)");
   vEmpty$.value.firstName.maxLength.$invalid &&
     errors.push("Your first name is too long (max 30 characters)");
+
+  return errors;
+});
+const lastNameErrors = computed(() => {
+  const errors = [];
+  if (!vEmpty$.value.lastName.$dirty) return errors;
+
   vEmpty$.value.lastName.required.$invalid &&
     errors.push("Please enter your last name");
   vEmpty$.value.lastName.minLength.$invalid &&
@@ -61,13 +68,19 @@ const emailErrors = computed(() => {
   return errors;
 });
 
+const templateParams = computed(() => ({
+  firstName: emptyState.firstName,
+  lastName: emptyState.lastName,
+  email: emptyState.email,
+}));
+
 function confirmSubmission() {
   isSubmitting.value = false;
   wasSent.value = true;
   vEmpty$.value.$reset();
-  contactState.firstName = "";
-  contactState.lastName = "";
-  contactState.email = "";
+  emptyState.firstName = "";
+  emptyState.lastName = "";
+  emptyState.email = "";
   setTimeout(() => {
     wasSent.value = false;
   }, 1400);
@@ -86,6 +99,7 @@ async function submitForm() {
 }
 
 async function validEmptyState() {
+  event.preventDefault();
   const valid = await vEmpty$.value.$validate();
 
   if (valid) {
@@ -95,7 +109,7 @@ async function validEmptyState() {
 </script>
 <template>
   <section class="emptys-form">
-    <h2 class="titles">Join Sofar emptys</h2>
+    <h2 class="titles">Join Sofar Emptys</h2>
     <form class="emptys-form__fields">
       <InputField
         v-model="emptyState.firstName"
@@ -103,16 +117,22 @@ async function validEmptyState() {
         label="First name"
         placeholder="John, Jane"
         name="firstName"
-        :errors="firstNameAndLastNameErrors[0]"
+        :errors="firstNameErrors[0]"
       />
+      <div class="error" style="margin-top: -0.5rem" v-if="firstNameErrors[0]">
+        {{ firstNameErrors[0] }}
+      </div>
       <InputField
         v-model="emptyState.lastName"
         id="lastName"
         label="Last name"
         placeholder="Doe"
         name="lastName"
-        :errors="firstNameAndLastNameErrors[0]"
+        :errors="lastNameErrors[0]"
       />
+      <div class="error" style="margin-top: -0.5rem" v-if="lastNameErrors[0]">
+        {{ lastNameErrors[0] }}
+      </div>
       <InputField
         v-model="emptyState.email"
         id="email"
@@ -121,6 +141,9 @@ async function validEmptyState() {
         name="email"
         :errors="emailErrors[0]"
       />
+      <div class="error" style="margin-top: -0.5rem" v-if="emailErrors[0]">
+        {{ emailErrors[0] }}
+      </div>
       <button
         class="emptys-form__fields__button button-primary"
         @click="validEmptyState()"
@@ -136,7 +159,7 @@ async function validEmptyState() {
         /></Transition>
       </button>
       <button
-        class="emptys-form__fields__button emptys-form__button--sent button-primary"
+        class="emptys-form__fields__button emptys-form__fields__button--sent button-primary"
         v-if="wasSent"
       >
         <span>Thank you !</span
@@ -200,6 +223,22 @@ async function validEmptyState() {
       margin-top: -1rem;
       width: fit-content;
     }
+  }
+}
+.error {
+  color: $error-color;
+  font-size: $small-text;
+  font-weight: $skinny;
+  display: flex;
+  border: $error-color 1px solid;
+  background-color: rgba(255, 0, 0, 0.2);
+  padding: 0.25rem 0.5rem;
+  line-height: 1rem;
+  border-radius: $radius;
+  width: fit-content;
+
+  &:nth-of-type(2) {
+    margin-top: 0rem;
   }
 }
 </style>

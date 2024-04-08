@@ -311,7 +311,8 @@ const returnDateErrors = computed(() => {
 
 const firstNameAndLastNameErrors = computed(() => {
   const errors = [];
-  if (!vContact$.value.firstName.$dirty) return errors;
+  if (!vContact$.value.firstName.$dirty && !vContact$.value.lastName.$dirty)
+    return errors;
   vContact$.value.firstName.required.$invalid &&
     errors.push("Please enter your first name");
   vContact$.value.firstName.minLength.$invalid &&
@@ -438,7 +439,7 @@ onMounted(() => {
 
             <div
               class="search-results"
-              v-if="isOriginResultsOpen"
+              v-if="isOriginResultsOpen && originSearchResults.length > 0"
               v-click-outside="handleCloseOriginSearchResults"
             >
               <span
@@ -470,7 +471,9 @@ onMounted(() => {
 
             <div
               class="search-results"
-              v-if="isDestinationResultsOpen"
+              v-if="
+                isDestinationResultsOpen && destinationSearchResults.length > 0
+              "
               v-click-outside="handleCloseDestinationSearchResults"
             >
               <span
@@ -1178,12 +1181,12 @@ onMounted(() => {
   color: $error-color;
   font-size: $small-text;
   font-weight: $skinny;
-  padding: 0.5rem 0 0 0.5rem;
   display: flex;
+  border: $error-color 1px solid;
   background-color: rgba(255, 0, 0, 0.2);
-  padding: 4px 8px;
+  padding: 0.25rem 0.5rem;
+  line-height: 1rem;
   border-radius: $radius;
-  margin-top: -1rem;
   width: fit-content;
 
   &:nth-of-type(2) {
