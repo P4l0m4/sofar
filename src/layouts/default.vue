@@ -142,6 +142,7 @@ const menuItems = [
   <main>
     <slot />
   </main>
+  <FooterComponent :menuItems="menuItems" />
 </template>
 <style lang="scss">
 main {
