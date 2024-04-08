@@ -167,6 +167,13 @@ async function validEmptyState() {
   &__fields {
     display: flex;
     gap: 1rem;
+    flex-direction: column;
+    width: 100%;
+
+    @media (min-width: $big-tablet-screen) {
+      flex-direction: row;
+      width: fit-content;
+    }
 
     &__button {
       width: 100%;

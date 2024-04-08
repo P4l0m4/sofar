@@ -30,11 +30,10 @@ console.log(props);
   justify-content: center;
   padding: 2rem 1rem;
   background-color: $text-color;
-  gap: 1rem;
+  gap: 2rem;
   flex-direction: column;
 
   @media (min-width: $big-tablet-screen) {
-    gap: 2rem;
     flex-direction: row;
     padding: 4rem 2rem;
   }
@@ -54,13 +53,13 @@ console.log(props);
     gap: 1rem;
 
     &__title {
-      font-weight: bold;
       color: $base-color;
     }
 
     &__elements {
       color: $base-color;
       font-size: $small-text;
+      font-weight: $skinny;
     }
   }
 }
