@@ -5,6 +5,7 @@ import phoneCodes from "@/utils/phoneCodes.json";
 import dayjs from "dayjs";
 import { useVuelidate } from "@vuelidate/core";
 import emailjs from "@emailjs/browser";
+import { debounce } from "@/libs/debounce";
 
 import {
   required,
@@ -111,44 +112,55 @@ function confirmSubmission() {
   }, 1400);
 }
 
-const originSearchResults = computed(() => {
-  if (!flightState.origin) {
-    return [];
-  }
+//SEARCH AIRPORTS
+const isOriginResultsOpen = ref(false);
+const isDestinationResultsOpen = ref(false);
+const originSearchResults = ref([]);
+const destinationSearchResults = ref([]);
+const handleOriginSearch = debounce(() => {
+  originSearchResults.value = searchAirports(flightState.origin);
+  isOriginResultsOpen.value = true;
+}, 300);
+const handleDestinationSearch = debounce(() => {
+  destinationSearchResults.value = searchAirports(flightState.destination);
+  isDestinationResultsOpen.value = true;
+}, 300);
 
+function searchAirports(searchQuery) {
   return airports.value
     .filter(
       (airport) =>
-        airport.name.toLowerCase().includes(flightState.origin.toLowerCase()) ||
+        airport.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         airport.municipality
           .toLowerCase()
-          .includes(flightState.origin.toLowerCase()) ||
+          .includes(searchQuery.toLowerCase()) ||
         `${airport.name.toLowerCase()}, ${airport.municipality
           .toLowerCase()
-          .slice(0, -1)}`.includes(flightState.origin.toLowerCase())
+          .slice(0, -1)}`.includes(searchQuery.toLowerCase())
     )
     .slice(0, 10);
-});
+}
 
-const destinationSearchResults = computed(() => {
-  if (!flightState.destination) {
-    return [];
+function handleCloseOriginSearchResults() {
+  if (isOriginResultsOpen.value) {
+    isOriginResultsOpen.value = false;
   }
-  return airports.value
-    .filter(
-      (airport) =>
-        airport.name
-          .toLowerCase()
-          .includes(flightState.destination.toLowerCase()) ||
-        airport.municipality
-          .toLowerCase()
-          .includes(flightState.destination.toLowerCase()) ||
-        `${airport.name.toLowerCase()}, ${airport.municipality
-          .toLowerCase()
-          .slice(0, -1)}`.includes(flightState.destination.toLowerCase())
-    )
-    .slice(0, 10);
-});
+}
+function handleCloseDestinationSearchResults() {
+  if (isDestinationResultsOpen.value) {
+    isDestinationResultsOpen.value = false;
+  }
+}
+
+function handleSelectOriginResult(result) {
+  flightState.origin = `${result.name}, ${result.municipality}`;
+  isOriginResultsOpen.value = false;
+}
+
+function handleSelectDestinationResult(result) {
+  flightState.destination = `${result.name}, ${result.municipality}`;
+  isDestinationResultsOpen.value = false;
+}
 
 const phoneCodesSearchResults = computed(() => {
   if (!phoneCodeQuery.value) {
@@ -421,16 +433,19 @@ onMounted(() => {
               :error="originErrors[0]"
               name="origin"
               :autocomplete="false"
+              @update:modelValue="handleOriginSearch"
             />
 
-            <div class="search-results" v-if="originSearchResults.length > 0">
+            <div
+              class="search-results"
+              v-if="isOriginResultsOpen"
+              v-click-outside="handleCloseOriginSearchResults"
+            >
               <span
                 v-for="(result, i) in originSearchResults"
                 class="search-results__result"
                 :key="i"
-                @click="
-                  flightState.origin = `${result.name}, ${result.municipality}`
-                "
+                @click="handleSelectOriginResult(result)"
                 ><img
                   class="search-results__result__flag"
                   :src="`assets/flags/${result.iso_country}.svg`"
@@ -450,19 +465,19 @@ onMounted(() => {
               :error="destinationErrors[0]"
               name="destination"
               :autocomplete="false"
+              @update:modelValue="handleDestinationSearch"
             />
 
             <div
               class="search-results"
-              v-if="destinationSearchResults.length > 0"
+              v-if="isDestinationResultsOpen"
+              v-click-outside="handleCloseDestinationSearchResults"
             >
               <span
                 v-for="(result, i) in destinationSearchResults"
                 class="search-results__result"
                 :key="i"
-                @click="
-                  flightState.destination = `${result.name}, ${result.municipality}`
-                "
+                @click="handleSelectDestinationResult(result)"
                 ><img
                   class="search-results__result__flag"
                   :src="`assets/flags/${result.iso_country}.svg`"
@@ -619,7 +634,10 @@ onMounted(() => {
           <div class="phone-codes">
             <span
               class="phone-codes__selected"
-              :class="{ 'phone-codes__selected--active': phoneCodesListIsOpen }"
+              :class="{
+                'phone-codes__selected--active':
+                  phoneCodesListIsOpen && phoneCodesSearchResults.length > 0,
+              }"
               @click="phoneCodesListIsOpen = !phoneCodesListIsOpen"
               ><img
                 class="phone-codes__selected__flag"
@@ -632,6 +650,7 @@ onMounted(() => {
               <input
                 class="phone-codes__selected__search-input"
                 type="search"
+                autofocus
                 placeholder="Country"
                 v-model="phoneCodeQuery"
                 v-if="phoneCodesListIsOpen"
@@ -646,6 +665,13 @@ onMounted(() => {
 
             <Transition>
               <div class="phone-codes__list" v-if="phoneCodesListIsOpen">
+                <span
+                  class="phone-codes__list__element disabled"
+                  v-if="
+                    phoneCodesListIsOpen && phoneCodesSearchResults.length === 0
+                  "
+                  >No country found</span
+                >
                 <span
                   class="phone-codes__list__element"
                   v-for="(element, i) in phoneCodesSearchResults"
@@ -1178,3 +1204,4 @@ onMounted(() => {
   }
 }
 </style>
+~/libs/debounce

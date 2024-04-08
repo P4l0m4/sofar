@@ -163,6 +163,11 @@ input[type="search"]::-webkit-search-results-decoration {
   }
 }
 
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
 .button-secondary {
   background-color: transparent;
   border: $secondary-color solid 2px;
