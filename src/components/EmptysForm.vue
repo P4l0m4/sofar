@@ -90,7 +90,7 @@ async function submitForm() {
   isSubmitting.value = true;
   await emailjs.send(
     "service_n1t6qo6",
-    "template_764bqrq",
+    "template_8jkth7m",
     templateParams.value,
     "8ifw_QPXgYXoWYmVW"
   );
