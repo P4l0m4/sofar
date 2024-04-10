@@ -90,7 +90,7 @@ const scroll = (direction: "left" | "right") => {
       <button
         class="carousel__button"
         ref="rightArrowRef"
-        v-if="showArrows"
+        v-if="showArrows && props.carouselElements.length > 4"
         @click="scroll('right')"
         @mouseenter="showArrows = true"
         @mouseleave="showArrows = false"
@@ -105,12 +105,16 @@ const scroll = (direction: "left" | "right") => {
 <style lang="scss" scoped>
 .carousel {
   display: flex;
-  justify-content: center;
+  // justify-content: center;
   align-items: center;
   padding: 2rem 0 0 1rem;
   overflow-x: hidden;
   width: 100%;
   position: relative;
+
+  @media (min-width: $big-tablet-screen) {
+    padding: 2rem 0 2rem 1rem;
+  }
 
   &__button {
     position: absolute;

@@ -39,6 +39,7 @@ const carouselElements = [
   /></picture>
   <HomeWelcomeToSofar />
   <OurBases />
+
   <HomeOurBirds />
   <CarouselComponent :carouselElements="carouselElements" />
   <HomeWhyFlyWithSofar />
