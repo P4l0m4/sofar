@@ -57,7 +57,7 @@ const scroll = (direction: "left" | "right") => {
       <button
         class="carousel__button"
         ref="leftArrowRef"
-        v-if="showArrows"
+        v-if="showArrows && props.carouselElements.length > 4"
         @click="scroll('left')"
         @mouseenter="showArrows = true"
         @mouseleave="showArrows = false"
@@ -107,25 +107,26 @@ const scroll = (direction: "left" | "right") => {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2rem 0 2rem 1rem;
+  padding: 2rem 0 0 1rem;
   overflow-x: hidden;
   width: 100%;
   position: relative;
 
   &__button {
     position: absolute;
-    top: 4rem;
+    top: 0;
     bottom: 0;
     left: 2rem;
+    margin: auto;
     width: 80px;
-    height: 280px;
-    background-image: linear-gradient(90deg, $base-color, transparent);
+    height: 80px;
+    background-color: $base-color;
     z-index: 1;
     border: none;
     display: none;
     justify-content: center;
     align-items: center;
-    border-radius: 0;
+    border-radius: 100%;
     cursor: pointer;
 
     & img {
@@ -148,6 +149,7 @@ const scroll = (direction: "left" | "right") => {
 
   @media (min-width: $big-tablet-screen) {
     padding: 4rem 2rem;
+    padding-right: 0;
   }
 
   &__container {

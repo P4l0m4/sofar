@@ -42,6 +42,8 @@ const carouselElements = [
   <HomeOurBirds />
   <CarouselComponent :carouselElements="carouselElements" />
   <HomeWhyFlyWithSofar />
+
+  <ClientReviews />
   <EmptysForm />
 </template>
 <style lang="scss" scoped>
