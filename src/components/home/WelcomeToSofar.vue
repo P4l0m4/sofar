@@ -20,8 +20,8 @@
       dimension of private jet travel and turning travel dreams into reality.
     </p>
     <div class="welcome-to-sofar__buttons">
-      <NuxtLink class="button-primary" to="/about-us/our-story"
-        >Learn more about Sofar</NuxtLink
+      <NuxtLink class="button-primary" to="/services"
+        >Learn more about our services</NuxtLink
       >
       <QuotePopUpButton />
     </div>

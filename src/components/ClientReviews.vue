@@ -122,11 +122,14 @@ const scroll = (direction: "left" | "right") => {
       flex-direction: column;
       gap: 0.5rem;
       max-width: 400px;
+      min-width: 240px;
       text-wrap: wrap;
+      height: 100%;
 
       &__stars {
         display: flex;
         gap: 0.5rem;
+        margin-top: auto;
 
         & img {
           width: 1rem;
