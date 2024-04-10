@@ -99,12 +99,12 @@ const scroll = (direction: "left" | "right") => {
 .satisfied-clients {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
   padding: 2rem 1rem;
   position: relative;
 
   @media (min-width: $big-tablet-screen) {
-    gap: 4rem;
+    gap: 2rem;
     padding: 4rem 2rem;
   }
 
