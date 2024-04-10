@@ -1,13 +1,9 @@
 <script setup>
 import { ref } from "vue";
-const scrollableElement = ref({});
+
 const isMenuOpen = ref(true);
 let lastScrollTop = 0;
 const currentIndex = ref(null);
-const currentIndexSublinks = ref(null);
-const initialTouchPosition = ref();
-const initialBottomPosition = ref();
-const draggableElement = ref(null);
 const childrenToDisplay = ref([]);
 
 const props = defineProps({
@@ -17,13 +13,6 @@ const props = defineProps({
 props.menuItems.forEach((item) => {
   childrenToDisplay.value.push(item.children);
 });
-
-// function isElementInViewport(el) {
-//   const rect = el.getBoundingClientRect();
-//   const isVisibleVertically = rect.bottom > 0 && rect.top - 73 >= 0;
-
-//   return !isVisibleVertically;
-// }
 
 function scrolling(event) {
   let scrollPercent =
@@ -42,31 +31,6 @@ window.addEventListener("scroll", function () {
   }
   lastScrollTop = st <= 0 ? 0 : st;
 });
-
-function storeTouchPosition() {
-  initialTouchPosition.value = event.touches[0].clientY;
-  // initialBottomPosition.value =
-  //   draggableElement.value.getBoundingClientRect().bottom;
-}
-function resizeSublinks() {
-  document.body.style.overflow = "hidden";
-  let delta = event.touches[0].clientY - initialTouchPosition.value;
-  let maxScrollDistance = draggableElement.value.scrollHeight - 130;
-  let top = draggableElement.value.getBoundingClientRect().top;
-
-  if (delta > 0) {
-    //element is being dragged down
-    if (draggableElement.value && top <= 392) {
-      draggableElement.value.style.transform = `translateY(${delta}px)`;
-    }
-  } else if (draggableElement.value && delta * -1 <= maxScrollDistance) {
-    draggableElement.value.style.transform = `translateY(${delta}px)`;
-  }
-}
-function stopDragging() {
-  document.body.style.overflow = "auto";
-  initialTouchPosition.value = null;
-}
 </script>
 <template>
   <aside class="aside">
@@ -80,9 +44,6 @@ function stopDragging() {
         class="aside__mobile-sublinks"
         ref="draggableElement"
         v-if="childrenToDisplay[currentIndex] && isMenuOpen"
-        @touchstart="storeTouchPosition()"
-        @touchmove="resizeSublinks()"
-        @touchend="stopDragging()"
       >
         <NuxtLink
           class="aside__mobile-sublinks__link"
@@ -106,9 +67,8 @@ function stopDragging() {
             v-for="(item, i) in menuItems"
             :key="i"
             class="aside__nav__ul__li"
-            @mouseenter="currentIndex = i"
           >
-            <NuxtLink class="aside__nav__ul__li__link" :to="item.path" exact>
+            <NuxtLink class="aside__nav__ul__li__link" :to="item.link" exact>
               <img
                 class="aside__nav__ul__li__link__icon"
                 :src="`assets/icons/${item.icon}.svg`"
@@ -116,6 +76,14 @@ function stopDragging() {
               />
               {{ item.label }}
             </NuxtLink>
+            <span
+              class="invisible-opener"
+              @mouseenter="currentIndex = i"
+              v-if="item.children?.length > 0"
+              :class="{
+                'invisible-opener--no-display': currentIndex === i,
+              }"
+            ></span>
           </li>
         </ul>
       </nav>
@@ -155,7 +123,6 @@ function stopDragging() {
     width: 100%;
     height: fit-content;
     backdrop-filter: blur(6px);
-    position: relative;
 
     &__ul {
       display: flex;
@@ -187,11 +154,26 @@ function stopDragging() {
           border-radius: $radius;
           white-space: nowrap;
           text-shadow: $shadow-text;
+          position: relative;
 
           &__icon {
             width: 1.2rem;
             height: 1.2rem;
           }
+        }
+
+        .invisible-opener {
+          margin-left: -65px;
+          width: 65px;
+          height: 57px;
+          // background-color: rgba(255, 0, 0, 0.8);
+          border-radius: $radius;
+          z-index: 1;
+
+          // &--no-display {
+          //   background-color: green;
+          //   pointer-events: none;
+          // }
         }
       }
     }
@@ -200,12 +182,13 @@ function stopDragging() {
   &__mobile-sublinks {
     position: absolute;
     left: 0;
-    top: -130px;
+    bottom: 57px;
     display: flex;
     width: 100vw;
     flex-direction: column;
-    background-color: $text-color-faded;
+    background-color: $text-color-faded-strong;
     height: fit-content;
+    backdrop-filter: blur($blur);
 
     &__link {
       text-decoration: none;
