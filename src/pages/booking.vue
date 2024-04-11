@@ -9,8 +9,8 @@ onMounted(() => {
   const map = new mapboxgl.Map({
     container: mapRef.value,
     style: "mapbox://styles/flysofar/cluvditjb006w01r5enddch7y",
-    center: [-80.55174117682346, 35.15790888688196],
-    zoom: 3.8,
+    center: [60.55174117682346, 35.15790888688196],
+    zoom: 1,
     scrollZoom: false,
     doubleClickZoom: false,
     touchZoomRotate: false,
@@ -29,38 +29,52 @@ onMounted(() => {
 });
 </script>
 <template>
-  <section class="our-bases">
-    <div ref="mapRef" class="map-container"></div>
-    <div class="our-bases__headlines">
-      <h2 class="titles">Our Bases</h2>
-      <h3 class="subtitles">Strategically positioned for the east coast.</h3>
+  <section class="booking">
+    <h1 class="titles">Book your next adventure with us</h1>
+    <h2 class="subtitles">
+      Choose your destination, select your dates and let us take care of the
+      rest
+    </h2>
+    <div class="booking__map" ref="mapRef">
+      <QuoteForm class="booking__map__form" />
     </div>
   </section>
 </template>
 <style lang="scss" scoped>
-.our-bases {
-  position: relative;
-  height: 100svh;
-  max-height: 800px;
+.booking {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2rem 0;
 
-  &__headlines {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    color: $text-color;
-    position: absolute;
-    z-index: 1;
-    padding: 2rem 1rem;
+  @media (min-width: $big-tablet-screen) {
+    gap: 2rem;
+    padding: 4rem 0;
+  }
+
+  & h1,
+  h2 {
+    padding: 0 1rem;
 
     @media (min-width: $big-tablet-screen) {
-      padding: 4rem 2rem;
+      padding: 0 2rem;
     }
   }
-}
-.map-container {
-  position: absolute;
-  inset: 0;
-  height: 100%;
-  width: 100%;
+
+  &__map {
+    position: relative;
+    height: 100svh;
+    width: 100%;
+    user-select: none;
+    outline: none;
+    border: none;
+    &__form {
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      height: fit-content;
+      z-index: 1;
+    }
+  }
 }
 </style>

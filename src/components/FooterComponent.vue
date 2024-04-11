@@ -128,6 +128,7 @@ const props = defineProps({
     &__link {
       width: 1.5rem;
       height: 1.5rem;
+      z-index: 1;
     }
   }
 }

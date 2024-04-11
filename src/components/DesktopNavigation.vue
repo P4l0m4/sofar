@@ -59,7 +59,7 @@ function shouldDisplayArrow(index) {
               'aside__nav__ul__li--siblings':
                 i === currentIndex - 1 || i === currentIndex + 1,
             }"
-            @mouseenter="currentIndex = i"
+            @mouseover="currentIndex = i"
           >
             <NuxtLink class="aside__nav__ul__li__link" :to="item.path" exact>
               <img
