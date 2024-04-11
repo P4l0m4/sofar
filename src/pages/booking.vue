@@ -53,6 +53,10 @@ onMounted(() => {
     padding: 4rem 2rem;
   }
 
+  & h2 {
+    margin-top: -1rem;
+  }
+
   & h1,
   & h2 {
     z-index: 1;
@@ -71,6 +75,7 @@ onMounted(() => {
     height: fit-content;
     z-index: 1;
     box-shadow: $shadow;
+    margin-top: 1rem;
   }
 }
 </style>

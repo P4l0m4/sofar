@@ -148,6 +148,7 @@ const menuItems = [
 main {
   display: flex;
   flex-direction: column;
+  min-height: 100svh;
 }
 .v-enter-active,
 .v-leave-active {

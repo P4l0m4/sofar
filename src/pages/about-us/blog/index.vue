@@ -55,6 +55,10 @@ const story = await useAsyncStoryblok("blog", { version: "published" });
     padding: 4rem 2rem;
   }
 
+  & h2 {
+    margin-top: -1rem;
+  }
+
   &__articles {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(343px, 1fr));
