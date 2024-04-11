@@ -275,6 +275,18 @@ details > summary::-webkit-details-marker /* Safari */ {
   white-space: nowrap !important;
 }
 
+.tags {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: $text-color;
+  justify-content: center;
+  background-color: $secondary-color-faded;
+  border-radius: $radius;
+  padding: 0.25rem 0.75rem;
+  width: fit-content;
+}
+
 .fading {
   animation: fading 0.4s ease;
 }

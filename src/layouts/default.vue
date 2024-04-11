@@ -78,31 +78,31 @@ const menuItems = [
   },
   {
     label: "Aircraft",
-    link: "/booking",
+    link: "/aircraft",
     icon: "airlines",
-    alt: "menu icon booking",
+    alt: "menu icon aircraft",
     children: [
       {
         label: "PC12",
-        link: "/services/pc12",
+        link: "/aircraft/pc12",
         icon: "airplanemode_active",
         alt: "menu icon pc12",
       },
       {
         label: "Phenom 100",
-        link: "/services/phenom-100",
+        link: "/aircraft/phenom-100",
         icon: "airplanemode_active",
         alt: "menu icon phenom 100",
       },
       {
         label: "Phenom 300",
-        link: "/services/phenom-300",
+        link: "/aircraft/phenom-300",
         icon: "airplanemode_active",
         alt: "menu icon phenom 300",
       },
       {
         label: "Safety",
-        link: "/services/safety",
+        link: "/aircraft/safety",
         icon: "health_and_safety",
         alt: "menu icon safety",
       },
@@ -110,25 +110,25 @@ const menuItems = [
   },
   {
     label: "About us",
-    link: "/booking",
+    link: "/about-us",
     icon: "info",
-    alt: "menu icon booking",
+    alt: "menu icon about-us",
     children: [
       {
         label: "Our story",
-        link: "/services/our-story",
+        link: "/about-us/our-story",
         icon: "book_2",
         alt: "menu icon our story",
       },
       {
         label: "Blog",
-        link: "/services/blog",
+        link: "/about-us/blog",
         icon: "article",
         alt: "menu icon blog",
       },
       {
         label: "Contact",
-        link: "/services/contact",
+        link: "/about-us/contact",
         icon: "alternate_email",
         alt: "menu icon contact",
       },
