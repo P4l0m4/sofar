@@ -47,6 +47,9 @@ function shouldDisplayArrow(index) {
   <aside class="aside">
     <Transition>
       <nav class="aside__nav" v-if="isMenuOpen">
+        <NuxtLink to="/" class="aside__nav__logo"
+          ><img src="@/assets/images/logo-light.svg"
+        /></NuxtLink>
         <ul class="aside__nav__ul" @mouseleave="currentIndex === null">
           <li
             v-for="(item, i) in menuItems"
@@ -136,12 +139,24 @@ function shouldDisplayArrow(index) {
   &__nav {
     position: relative;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     backdrop-filter: blur($blur);
     height: 100%;
     width: fit-content;
     background-color: $text-color-faded-strong;
+
+    &__logo {
+      width: 120px;
+      margin-bottom: 2rem;
+      background-color: transparent !important;
+
+      & img {
+        width: 100%;
+        height: 100%;
+      }
+    }
 
     &__ul {
       display: flex;

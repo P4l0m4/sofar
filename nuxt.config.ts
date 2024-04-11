@@ -7,6 +7,14 @@ export default defineNuxtConfig({
     "nuxt-jsonld",
     "dayjs-nuxt",
     "@vite-pwa/nuxt",
+    [
+      "@storyblok/nuxt",
+      {
+        accessToken: process.env.STORYBLOK_KEY,
+        cacheProvider: "memory",
+        apiOptions: { region: "us" },
+      },
+    ],
   ],
 
   pwa: {
