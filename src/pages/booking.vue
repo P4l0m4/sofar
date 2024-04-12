@@ -1,14 +1,14 @@
 <script setup>
 import { onMounted, ref } from "vue";
 import mapboxgl from "mapbox-gl";
+
 const config = useRuntimeConfig();
+mapboxgl.accessToken = config.public.MAP_BOX_API_KEY;
 const mapRef = ref();
 const originAirport = ref(null);
 const destinationAirport = ref(null);
 const map = ref(null);
 const midpoint = ref([-60.55174117682346, 40.15790888688196]);
-
-mapboxgl.accessToken = config.public.MAP_BOX_API_KEY;
 
 const originLat = computed(() =>
   originAirport.value ? Number(originAirport.value.latitude_deg) : 0
@@ -23,6 +23,18 @@ const destinationLon = computed(() =>
   destinationAirport.value ? Number(destinationAirport.value.longitude_deg) : 0
 );
 
+const pathGeoJSON = ref({
+  type: "Feature",
+  properties: {},
+  geometry: {
+    type: "LineString",
+    coordinates: [
+      [originLon.value, originLat.value],
+      [destinationLon.value, destinationLat.value],
+    ],
+  },
+});
+
 function calculateMidpoint(lat1, lon1, lat2, lon2) {
   const midpointLat = (lat1 + lat2) / 2;
   const midpointLon = (lon1 + lon2) / 2;
@@ -31,8 +43,8 @@ function calculateMidpoint(lat1, lon1, lat2, lon2) {
   if (map.value) {
     map.value.flyTo({
       center: midpoint.value,
-      essential: true, // this animation is considered essential with respect to prefers-reduced-motion
-      zoom: 2, // Optional: adjust zoom level as needed
+      essential: true,
+      zoom: 1.5,
     });
   }
 }
@@ -60,7 +72,6 @@ function getEmittedDestinationAirport(airport) {
 
 function createMap() {
   if (!mapRef.value) {
-    console.error("Map container element is not yet available.");
     return;
   }
   map.value = new mapboxgl.Map({
@@ -68,21 +79,56 @@ function createMap() {
     style: "mapbox://styles/flysofar/cluvditjb006w01r5enddch7y",
     center: midpoint.value,
     zoom: 1,
-    scrollZoom: false,
-    doubleClickZoom: false,
-    touchZoomRotate: false,
     projection: "mercator",
   });
 }
 
 function placeMarker() {
-  new mapboxgl.Marker({ color: "06067c", anchor: "center" })
+  new mapboxgl.Marker({ color: "#06067c", anchor: "center" })
     .setLngLat([originLon.value, originLat.value])
     .addTo(map.value);
 
-  new mapboxgl.Marker({ color: "06067c", anchor: "center" })
-    .setLngLat([destinationLon.value, destinationLat.value])
-    .addTo(map.value);
+  if (destinationLat.value !== 0 && destinationLon.value !== 0) {
+    new mapboxgl.Marker({ color: "#06067c", anchor: "center" })
+      .setLngLat([destinationLon.value, destinationLat.value])
+      .addTo(map.value);
+  }
+  if (
+    originLat.value !== 0 &&
+    originLon.value !== 0 &&
+    destinationLat.value !== 0 &&
+    destinationLon.value !== 0
+  ) {
+    pathGeoJSON.value = {
+      type: "Feature",
+      properties: {},
+      geometry: {
+        type: "LineString",
+        coordinates: [
+          [originLon.value, originLat.value],
+          [destinationLon.value, destinationLat.value],
+        ],
+      },
+    };
+    map.value.addSource("route", {
+      type: "geojson",
+      data: pathGeoJSON.value,
+    });
+
+    map.value.addLayer({
+      id: "routeLine",
+      type: "line",
+      source: "route",
+      layout: {
+        "line-join": "round",
+        "line-cap": "round",
+      },
+      paint: {
+        "line-color": "#06067c",
+        "line-width": 2,
+      },
+    });
+  }
 }
 
 onMounted(() => {
