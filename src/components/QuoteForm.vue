@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive, onMounted } from "vue";
+import { ref, reactive, onMounted, watch } from "vue";
 // import airports from "@/utils/airports.json";
 import phoneCodes from "@/utils/phoneCodes.json";
 import dayjs from "dayjs";
@@ -17,7 +17,11 @@ import {
   maxValue,
 } from "@vuelidate/validators";
 
-const emits = defineEmits(["formSubmitted"]);
+const emits = defineEmits([
+  "formSubmitted",
+  "originAirport",
+  "destinationAirport",
+]);
 
 const airports = ref([]);
 
@@ -155,11 +159,18 @@ function handleCloseDestinationSearchResults() {
 function handleSelectOriginResult(result) {
   flightState.origin = `${result.name}, ${result.municipality}`;
   isOriginResultsOpen.value = false;
+  if (!vFlight$.value.origin.$dirty) {
+    emits("originAirport", result);
+  }
 }
 
 function handleSelectDestinationResult(result) {
   flightState.destination = `${result.name}, ${result.municipality}`;
   isDestinationResultsOpen.value = false;
+
+  if (!vFlight$.value.destination.$dirty) {
+    emits("destinationAirport", result);
+  }
 }
 
 const phoneCodesSearchResults = computed(() => {

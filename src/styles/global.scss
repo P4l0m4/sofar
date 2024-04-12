@@ -241,7 +241,7 @@ details > summary::-webkit-details-marker /* Safari */ {
 }
 
 .titles {
-  font-size: calc($titles - 0.25rem);
+  font-size: calc($titles - 0.5rem);
   font-weight: $thick;
 
   @media (min-width: $tablet-screen) {
@@ -250,7 +250,7 @@ details > summary::-webkit-details-marker /* Safari */ {
 }
 
 .subtitles {
-  font-size: calc($subtitles - 0.2rem);
+  font-size: calc($subtitles - 0.25rem);
   line-height: 1.25;
   font-weight: $skinny-thick;
   @media (min-width: $tablet-screen) {
