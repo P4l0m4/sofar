@@ -1,6 +1,12 @@
 <script setup>
 import { onMounted, ref } from "vue";
 import mapboxgl from "mapbox-gl";
+import {
+  interpolateGreatCircle,
+  haversineDistance,
+  convertKmToMiles,
+  calculateFlightDuration,
+} from "~/utils/mapGL.js";
 
 const config = useRuntimeConfig();
 mapboxgl.accessToken = config.public.MAP_BOX_API_KEY;
@@ -80,16 +86,47 @@ function createMap() {
     center: midpoint.value,
     zoom: 1,
     projection: "mercator",
+    scrollZoom: false,
   });
 }
+const originMarker = ref(null);
+const destinationMarker = ref(null);
+const popupRef = ref(null);
 
+function removeMarkersAndPopUp() {
+  if (originMarker.value) {
+    originMarker.value.remove();
+  }
+  if (destinationMarker.value) {
+    destinationMarker.value.remove();
+  }
+  if (map.value.getLayer("routeLine")) {
+    map.value.removeLayer("routeLine");
+  }
+  if (map.value.getSource("route")) {
+    map.value.removeSource("route");
+  }
+  if (popupRef.value) {
+    popupRef.value.remove();
+    popupRef.value = null;
+  }
+}
+
+let dashArraySeq = [0, 2];
 function placeMarker() {
-  new mapboxgl.Marker({ color: "#06067c", anchor: "center" })
+  removeMarkersAndPopUp();
+  originMarker.value = new mapboxgl.Marker({
+    color: "#06067c",
+    anchor: "center",
+  })
     .setLngLat([originLon.value, originLat.value])
     .addTo(map.value);
 
   if (destinationLat.value !== 0 && destinationLon.value !== 0) {
-    new mapboxgl.Marker({ color: "#06067c", anchor: "center" })
+    destinationMarker.value = new mapboxgl.Marker({
+      color: "#06067c",
+      anchor: "center",
+    })
       .setLngLat([destinationLon.value, destinationLat.value])
       .addTo(map.value);
   }
@@ -99,6 +136,11 @@ function placeMarker() {
     destinationLat.value !== 0 &&
     destinationLon.value !== 0
   ) {
+    const distanceKm = haversineDistance(
+      [originLon.value, originLat.value],
+      [destinationLon.value, destinationLat.value]
+    );
+
     pathGeoJSON.value = {
       type: "Feature",
       properties: {},
@@ -126,8 +168,20 @@ function placeMarker() {
       paint: {
         "line-color": "#06067c",
         "line-width": 2,
+        "line-dasharray": dashArraySeq,
       },
     });
+
+    popupRef.value = new mapboxgl.Popup({ closeOnClick: false })
+      .setLngLat(midpoint.value) // Set to midpoint or any relevant point
+      .setHTML(
+        `<p>${convertKmToMiles(distanceKm).toFixed(2)} miles</p>
+        <p>${distanceKm.toFixed(2)} km</p>
+      <span>Aprox. ${calculateFlightDuration(distanceKm).toFixed(
+        2
+      )} hours</span>`
+      )
+      .addTo(map.value);
   }
 }
 
