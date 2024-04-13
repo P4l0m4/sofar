@@ -33,7 +33,7 @@ const props = defineProps({
         class="footer__socials__link"
         href="https://www.pinterest.fr/Sofaraviation/"
         aria-label="pinterest"
-        ><img src="/assets/icons/pinterest.svg" alt="social media icon"
+        ><img src="/assets/icons/pinterest1.svg" alt="social media icon"
       /></a>
       <a
         class="footer__socials__link"
