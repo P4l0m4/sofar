@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from "vue";
+
 const scrollableElement = ref({});
 const arrow = ref(null);
 const isMenuOpen = ref(true);
@@ -61,7 +62,7 @@ function shouldDisplayArrow(index) {
             }"
             @mouseover="currentIndex = i"
           >
-            <NuxtLink class="aside__nav__ul__li__link" :to="item.path" exact>
+            <NuxtLink class="aside__nav__ul__li__link" :to="item.link" exact>
               <img
                 class="aside__nav__ul__li__link__icon"
                 :src="`assets/icons/${item.icon}.svg`"
