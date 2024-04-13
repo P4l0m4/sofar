@@ -93,7 +93,9 @@ const story = await useAsyncStoryblok("blog", { version: "published" });
         display: flex;
         flex-direction: column;
         gap: 1rem;
+
         &__tag {
+          margin-bottom: 1rem;
         }
 
         &__title {
