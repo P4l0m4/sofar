@@ -11,14 +11,14 @@ interface Props {
   autofocus?: boolean;
   error?: string;
   name: string;
-  autocomplete?: boolean;
+  autocomplete?: "on" | "off";
 }
 
 const props = withDefaults(defineProps<Props>(), {
   type: "text",
   required: true,
   autofocus: false,
-  autocomplete: true,
+  autocomplete: "on",
 });
 
 const model = defineModel<string | number>();

@@ -5,7 +5,8 @@ import phoneCodes from "@/utils/phoneCodes.json";
 import dayjs from "dayjs";
 import { useVuelidate } from "@vuelidate/core";
 import emailjs from "@emailjs/browser";
-import { debounce } from "@/libs/debounce";
+import { debounce } from "@/utils/debounce";
+import { normalizeString } from "@/utils/normalize";
 
 import {
   required,
@@ -134,13 +135,13 @@ function searchAirports(searchQuery) {
   return airports.value
     .filter(
       (airport) =>
-        airport.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        airport.municipality
-          .toLowerCase()
-          .includes(searchQuery.toLowerCase()) ||
-        `${airport.name.toLowerCase()}, ${airport.municipality
-          .toLowerCase()
-          .slice(0, -1)}`.includes(searchQuery.toLowerCase())
+        normalizeString(airport.name).includes(normalizeString(searchQuery)) ||
+        normalizeString(airport.municipality).includes(
+          normalizeString(searchQuery)
+        ) ||
+        `${normalizeString(airport.name)}, ${normalizeString(
+          airport.municipality
+        ).slice(0, -1)}`.includes(normalizeString(searchQuery))
     )
     .slice(0, 10);
 }
@@ -179,19 +180,21 @@ const phoneCodesSearchResults = computed(() => {
   }
   return phoneCodesList.value.filter(
     (code) =>
-      code.country.toLowerCase().includes(phoneCodeQuery.value.toLowerCase()) ||
-      code.abbreviation
-        .toLowerCase()
-        .includes(phoneCodeQuery.value.toLowerCase()) ||
-      code.code.includes(phoneCodeQuery.value)
+      normalizeString(code.country).includes(
+        normalizeString(phoneCodeQuery.value)
+      ) ||
+      normalizeString(code.abbreviation).includes(
+        normalizeString(phoneCodeQuery.value)
+      ) ||
+      normalizeString(code.code).includes(normalizeString(phoneCodeQuery.value))
   );
 });
 
 function checkIfAirportExists(airport) {
   return airports.value.some(
     (a) =>
-      `${a.name.toLowerCase()}, ${a.municipality.toLowerCase()}` ===
-      airport.toLowerCase()
+      `${normalizeString(a.name)}, ${normalizeString(a.municipality)}` ===
+      normalizeString(airport)
   );
 }
 
@@ -444,7 +447,7 @@ onMounted(() => {
               icon="flight_takeoff"
               :error="originErrors[0]"
               name="origin"
-              :autocomplete="false"
+              autocomplete="off"
               @update:modelValue="handleOriginSearch"
             />
 
@@ -476,7 +479,7 @@ onMounted(() => {
               icon="flight_land"
               :error="destinationErrors[0]"
               name="destination"
-              :autocomplete="false"
+              autocomplete="off"
               @update:modelValue="handleDestinationSearch"
             />
 
@@ -1218,4 +1221,3 @@ onMounted(() => {
   }
 }
 </style>
-~/libs/debounce
