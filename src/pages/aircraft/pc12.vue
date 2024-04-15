@@ -50,6 +50,7 @@
 
     <img class="plane__img" src="@/assets/images/pc12.webp" alt="banner image"
   /></picture>
+  <EmptysForm />
 </template>
 <style lang="scss" scoped>
 .plane {
