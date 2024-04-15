@@ -8,9 +8,8 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 4rem 2rem;
+  padding: 2rem 1rem;
   scroll-margin-top: 5rem;
-
   animation: fading 0.4s;
   gap: 2rem;
 
