@@ -51,8 +51,43 @@
     <img class="plane__img" src="@/assets/images/pc12.webp" alt="banner image"
   /></picture>
   <EmptysForm />
+  <section class="gallery">
+    <div class="gallery__img">
+      <img src="@/assets/images/pc-12/pc-12-1.webp" />
+    </div>
+    <div class="gallery__img">
+      <img src="@/assets/images/pc-12/pc-12-2.webp" />
+    </div>
+    <div class="gallery__img">
+      <img src="@/assets/images/pc-12/pc-12-3.webp" />
+    </div>
+    <div class="gallery__img">
+      <img src="@/assets/images/pc-12/pc-12-4.webp" />
+    </div>
+    <div class="gallery__img">
+      <img src="@/assets/images/pc-12/pc-12-1.webp" />
+    </div>
+    <div class="gallery__img">
+      <img src="@/assets/images/pc-12/pc-12-5.webp" />
+    </div>
+    <div class="gallery__img">
+      <img src="@/assets/images/pc-12/pc-12-1.webp" />
+    </div>
+    <div class="gallery__img">
+      <img src="@/assets/images/pc-12/pc-12-6.webp" />
+    </div>
+    <div class="gallery__img">
+      <img src="@/assets/images/pc-12/pc-12-1.webp" />
+    </div>
+    <div class="gallery__img">
+      <img src="@/assets/images/pc-12/pc-12-7.webp" />
+    </div>
+    <div class="gallery__img">
+      <img src="@/assets/images/pc-12/pc-12-8.webp" />
+    </div>
+  </section>
 </template>
-<style lang="scss" scoped>
+<style lang="scss">
 .plane {
   display: flex;
   flex-direction: column;
@@ -63,6 +98,7 @@
   height: 100svh;
   max-height: 800px;
   position: relative;
+  background-image: $text-color;
 
   &::after {
     content: "";
@@ -142,6 +178,21 @@
       align-items: center;
       color: $text-color;
       background-color: $primary-color-faded;
+    }
+  }
+}
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(343px, 1fr));
+  gap: 1rem;
+
+  &__img {
+    width: 100%;
+
+    & img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
   }
 }
