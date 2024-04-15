@@ -46,6 +46,7 @@ const carouselElements = [
 
   <ClientReviews />
   <EmptysForm />
+  <AnyQuestion />
 </template>
 <style lang="scss" scoped>
 .index__banner {

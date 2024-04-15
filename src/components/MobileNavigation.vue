@@ -69,11 +69,12 @@ window.addEventListener("scroll", function () {
             class="aside__nav__ul__li"
           >
             <NuxtLink class="aside__nav__ul__li__link" :to="item.link" exact>
-              <img
+              <!-- <img
                 class="aside__nav__ul__li__link__icon"
                 :src="`assets/icons/${item.icon}.svg`"
                 :alt="item.alt"
-              />
+              /> -->
+              <IconComponent :icon="item.icon" color="#fffdfa" size="1rem" />
               {{ item.label }}
             </NuxtLink>
             <span
