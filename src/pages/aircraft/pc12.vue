@@ -25,12 +25,28 @@
       </div>
     </div>
 
-    <!-- <div class="plane__buttons">
-      <NuxtLink class="button-primary" to="/aircraft"
-        >Learn more about our birds</NuxtLink
+    <div class="plane__tags">
+      <span class="plane__tags__tag tags"
+        ><IconComponent color="#04045c" icon="pet_supplies" />Pet friendly</span
       >
-      <QuotePopUpButton color="#fffdfa" />
-    </div> -->
+      <span class="plane__tags__tag tags"
+        ><IconComponent color="#04045c" icon="group_add" />Flexible layout</span
+      >
+      <span class="plane__tags__tag tags"
+        ><IconComponent color="#04045c" icon="pet_supplies" />Cargo space</span
+      >
+      <span class="plane__tags__tag tags"
+        ><IconComponent color="#04045c" icon="pet_supplies" />Internet on
+        board</span
+      >
+      <span class="plane__tags__tag tags"
+        ><IconComponent color="#04045c" icon="pet_supplies" />Bagage
+        compartment</span
+      >
+      <span class="plane__tags__tag tags"
+        ><IconComponent color="#04045c" icon="pet_supplies" />USB 110V
+      </span>
+    </div>
 
     <img class="plane__img" src="@/assets/images/pc12.webp" alt="banner image"
   /></picture>
@@ -112,25 +128,19 @@
     }
   }
 
-  &__buttons {
+  &__tags {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     gap: 1rem;
-    width: 100%;
-    margin-top: 1rem;
+    max-width: 500px;
+    margin-top: auto;
 
-    @media (min-width: $big-tablet-screen) {
-      flex-direction: row;
-      margin-top: 2rem;
-    }
-
-    .button-primary {
-      background-color: $primary-color;
+    &__tag {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
       color: $text-color;
-
-      @media (min-width: $big-tablet-screen) {
-        width: fit-content;
-      }
+      background-color: $primary-color-faded;
     }
   }
 }
