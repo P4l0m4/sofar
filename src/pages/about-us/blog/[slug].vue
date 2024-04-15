@@ -10,18 +10,17 @@ const article = story.value.content.articles.find(
 </script>
 <template>
   <article class="article">
-    <Container>
-      <div
-        class="article__banner"
-        :style="{ backgroundImage: `url(${article.banner.filename})` }"
-      >
-        <h1 class="titles">{{ article.title }}</h1>
-        <h2 class="subtitles">{{ article.TLDR }}</h2>
-        <span class="article__banner__date">{{
-          dayjs(article.date).format("MMMM DD, YYYY")
-        }}</span>
-      </div>
-    </Container>
+    <div
+      class="article__banner"
+      :style="{ backgroundImage: `url(${article.banner.filename})` }"
+    >
+      <h1 class="titles">{{ article.title }}</h1>
+      <h2 class="subtitles">{{ article.TLDR }}</h2>
+      <span class="article__banner__date">{{
+        dayjs(article.date).format("MMMM DD, YYYY")
+      }}</span>
+    </div>
+
     <Container>
       <div class="article__txt" v-for="paragraph in article.paragraphs">
         <h3 class="subtitles">{{ paragraph.subtitle }}</h3>
@@ -35,7 +34,7 @@ const article = story.value.content.articles.find(
   &__banner {
     background-size: cover;
     background-position: center;
-    height: 300px;
+    height: 100svh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -48,12 +47,28 @@ const article = story.value.content.articles.find(
     text-shadow: $shadow-text;
 
     @media (min-width: $big-tablet-screen) {
-      height: 500px;
+      height: 100svh;
       padding: 4rem 2rem;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background-image: linear-gradient(80deg, $text-color, transparent 60%);
+    }
+
+    .titles,
+    .subtitles,
+    &__date {
+      z-index: 1;
     }
 
     &__date {
       font-size: 1rem;
+      margin-top: 2rem;
     }
   }
   &__txt {

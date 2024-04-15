@@ -8,15 +8,15 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 0 0 2rem 0;
+  padding: 4rem 2rem;
   scroll-margin-top: 5rem;
-  margin: auto;
+
   animation: fading 0.4s;
   gap: 2rem;
 
   @media (min-width: $big-tablet-screen) {
     width: calc(100vw - 18rem);
-    padding: 0 2rem 4rem 2rem;
+    padding: 4rem 2rem;
     gap: 4rem;
   }
   @media (min-width: $super-big-screen) {
