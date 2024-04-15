@@ -5,7 +5,9 @@ interface Props {
   size?: string;
 }
 
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+  size: "1rem",
+});
 </script>
 
 <template>
