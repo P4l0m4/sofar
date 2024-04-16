@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
 const leftArrowRef = ref<HTMLButtonElement | null>(null);
 const rightArrowRef = ref<HTMLButtonElement | null>(null);
 const showArrows = ref(false);
@@ -107,7 +107,7 @@ const scroll = (direction: "left" | "right") => {
   display: flex;
   // justify-content: center;
   align-items: center;
-  padding: 2rem 0 0 1rem;
+  padding: 2rem 0 2rem 1rem;
   overflow-x: hidden;
   width: 100%;
   position: relative;

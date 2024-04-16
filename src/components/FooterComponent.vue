@@ -1,7 +1,22 @@
 <script setup lang="ts">
-const props = defineProps({
-  menuItems: Array,
-});
+import type AnyQuestion from "./AnyQuestion.vue";
+
+type MenuItem = {
+  label: string;
+  link: string;
+  children: Child[];
+};
+
+type Child = {
+  label: string;
+  link: string;
+};
+
+interface Props {
+  menuItems: MenuItem[];
+}
+
+defineProps<Props>();
 </script>
 <template>
   <footer class="footer">
@@ -15,53 +30,60 @@ const props = defineProps({
         class="footer__socials__link"
         href="https://www.facebook.com/profile.php?id=100092022864510"
         aria-label="facebook"
-        ><img src="/assets/icons/facebook.svg" alt="social media icon"
-      /></a>
+      >
+        <img src="/assets/icons/facebook.svg" alt="social media icon" />
+      </a>
       <a
         class="footer__socials__link"
         href="https://www.instagram.com/fly.sofar"
         aria-label="instagram"
-        ><img src="/assets/icons/instagram.svg" alt="social media icon"
-      /></a>
+      >
+        <img src="/assets/icons/instagram.svg" alt="social media icon" />
+      </a>
       <a
         class="footer__socials__link"
         href="https://www.linkedin.com/company/melmanaviation/?viewAsMember=true"
         aria-label="linkedin"
-        ><img src="/assets/icons/linkedin.svg" alt="social media icon"
-      /></a>
+      >
+        <img src="/assets/icons/linkedin.svg" alt="social media icon" />
+      </a>
       <a
         class="footer__socials__link"
         href="https://www.pinterest.fr/Sofaraviation/"
         aria-label="pinterest"
-        ><img src="/assets/icons/pinterest1.svg" alt="social media icon"
-      /></a>
+      >
+        <img src="/assets/icons/pinterest1.svg" alt="social media icon" />
+      </a>
       <a
         class="footer__socials__link"
         href="https://www.tiktok.com/@fly.sofar?is_from_webapp=1&sender_device=pc"
         aria-label="tiktok"
-        ><img src="/assets/icons/tiktok.svg" alt="social media icon"
-      /></a>
+      >
+        <img src="/assets/icons/tiktok.svg" alt="social media icon" />
+      </a>
     </div>
     <div class="footer__links" v-for="item in menuItems">
-      <NuxtLink class="footer__links__title subtitles" :to="item.link">{{
-        item.label
-      }}</NuxtLink>
+      <NuxtLink class="footer__links__title subtitles" :to="item.link">
+        {{ item.label }}
+      </NuxtLink>
       <NuxtLink
+        v-for="child in item.children"
         class="footer__links__elements"
-        :to="link.link"
-        v-for="link in item.children"
-        >{{ link.label }}</NuxtLink
+        :to="child.link"
       >
+        {{ child.label }}
+      </NuxtLink>
     </div>
 
     <div class="footer__info">
       <span class="subtitles">Get in touch</span>
-      <a class="button-tertiary" href="tel:+19144686800"> +1 914-468-6800</a
-      ><span>KHPN | KTEB | KOPF</span>
+      <a class="button-tertiary" href="tel:+19144686800">+1 914-468-6800</a>
+      <span>KHPN | KTEB | KOPF</span>
       <span>HQ@flysofar.com</span>
       <span>10 New King St West Harrison, NY 10604</span>
     </div>
   </footer>
+  <AnyQuestion />
 </template>
 <style lang="scss" scoped>
 .footer {
