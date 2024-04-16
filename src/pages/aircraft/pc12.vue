@@ -98,7 +98,16 @@
   height: 100svh;
   max-height: 800px;
   position: relative;
-  background-image: $text-color;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $text-color;
+    z-index: -1;
+  }
 
   &::after {
     content: "";

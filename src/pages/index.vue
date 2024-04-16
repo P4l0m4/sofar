@@ -11,7 +11,7 @@ const carouselElements = [
     label: "Phenom 300",
   },
   {
-    link: "/aircraft/pc-12",
+    link: "/aircraft/pc12",
     image: "12",
     label: "Pilatus PC 12",
   },

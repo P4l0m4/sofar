@@ -49,9 +49,9 @@ function shouldDisplayArrow(index) {
   <aside class="aside">
     <Transition>
       <nav class="aside__nav" v-if="isMenuOpen">
-        <NuxtLink to="/" class="aside__nav__logo"
-          ><img src="@/assets/images/logo-light.svg"
-        /></NuxtLink>
+        <NuxtLink to="/" class="aside__nav__logo">
+          <img src="@/assets/images/logo-light.svg" />
+        </NuxtLink>
         <ul class="aside__nav__ul" @mouseleave="currentIndex === null">
           <li
             v-for="(item, i) in menuItems"
@@ -64,11 +64,6 @@ function shouldDisplayArrow(index) {
             @mouseover="currentIndex = i"
           >
             <NuxtLink class="aside__nav__ul__li__link" :to="item.link" exact>
-              <!-- <img
-                class="aside__nav__ul__li__link__icon"
-                :src="`assets/icons/${item.icon}.svg`"
-                :alt="item.alt"
-              /> -->
               <IconComponent :icon="item.icon" color="#fffdfa" size="1rem" />
               {{ item.label }}
             </NuxtLink>
@@ -96,11 +91,7 @@ function shouldDisplayArrow(index) {
                 }"
                 @mouseenter="currentIndexSublinks = j"
               >
-                <img
-                  class="aside__nav__ul__li__sublinks__link__icon"
-                  :src="`assets/icons/${child.icon}.svg`"
-                  :alt="child.alt"
-                />
+                <IconComponent :icon="child.icon" color="#fffdfa" size="1rem" />
                 {{ child.label }}
               </NuxtLink>
               <span
@@ -109,10 +100,10 @@ function shouldDisplayArrow(index) {
                 ref="arrow"
                 @click="scrollWithArrow(i)"
               >
-                <img
-                  class="aside__nav__ul__li__sublinks__arrow__icon"
-                  src="/assets/icons/arrow_scroll.svg"
-                  alt="arrow icon scroll"
+                <IconComponent
+                  icon="arrow_scroll"
+                  color="#fffdfa"
+                  size="0.5rem"
                 />
               </span>
             </div>
@@ -201,6 +192,7 @@ function shouldDisplayArrow(index) {
           flex-direction: row;
           font-size: 1.1rem;
           padding: 1rem;
+          width: 100%;
 
           &:hover,
           &:active {
