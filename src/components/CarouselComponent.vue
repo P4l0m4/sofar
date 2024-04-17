@@ -10,6 +10,7 @@ interface Props {
     link: string;
     image: string;
     label: string;
+    countryCode?: string;
   }[];
 }
 
@@ -17,17 +18,17 @@ const props = withDefaults(defineProps<Props>(), {
   carouselElements: [
     {
       link: "/",
-      image: "100",
+      image: "/assets/images/100.webp",
       label: "Phenom 100",
     },
     {
       link: "/",
-      image: "100",
+      image: "/assets/images/100.webp",
       label: "Phenom 100",
     },
     {
       link: "/",
-      image: "100",
+      image: "/assets/images/100.webp",
       label: "Phenom 100",
     },
   ],
@@ -77,13 +78,17 @@ const scroll = (direction: "left" | "right") => {
       <NuxtLink
         :to="slide.link"
         class="carousel__container__slide"
-        :style="{ backgroundImage: `url(/assets/images/${slide.image}.webp)` }"
+        :style="{ backgroundImage: `url(${slide.image})` }"
         v-for="slide in props.carouselElements"
       >
         <span class="carousel__container__slide__label">{{ slide.label }}</span>
         <span class="carousel__container__slide__arrow"
           ><img src="/assets/icons/arrow_upward_alt.svg" alt="icon arrow"
         /></span>
+
+        <span class="carousel__container__slide__country-code">{{
+          slide.countryCode
+        }}</span>
       </NuxtLink>
     </div>
     <Transition>
@@ -169,6 +174,7 @@ const scroll = (direction: "left" | "right") => {
     &__slide {
       display: flex;
       justify-content: space-between;
+      flex-wrap: wrap;
       gap: 1rem;
       width: 300px;
       min-width: 300px;
@@ -233,6 +239,16 @@ const scroll = (direction: "left" | "right") => {
           height: 1rem;
           transform: rotate(45deg);
         }
+      }
+
+      &__country-code {
+        font-size: 10rem;
+        color: $primary-color-faded;
+        font-weight: $skinny-thick;
+        text-align: center;
+        z-index: 1;
+        width: 100%;
+        margin-top: auto;
       }
     }
   }
