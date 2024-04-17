@@ -273,7 +273,7 @@ function shouldDisplayArrow(index) {
             background-color: $text-color;
             position: fixed;
             top: 210px;
-            right: 250px;
+            right: 270px;
             cursor: pointer;
             border-radius: 50%;
             box-shadow: $shadow;
