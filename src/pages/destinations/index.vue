@@ -24,26 +24,37 @@ const tagsSelectedRef = ref([]);
 // }
 
 const matchingDestinations = computed(() => {
-  return story.value.content.destinationsList;
+  if (queryRef.value.length === 0) {
+    return story.value.content.destinationsList;
+  } else
+    return story.value.content.destinationsList.filter(
+      (destination) =>
+        normalizeString(destination.city).includes(
+          normalizeString(queryRef.value)
+        ) ||
+        normalizeString(destination.state).includes(
+          normalizeString(queryRef.value)
+        ) ||
+        normalizeString(destination.country).includes(
+          normalizeString(queryRef.value)
+        ) ||
+        destination.geographicalCategories.some((category) =>
+          normalizeString(category).includes(normalizeString(queryRef.value))
+        )
+    );
 });
 
 const carouselElements = computed(() => {
-  let arrayOfDestinations;
-
-  arrayOfDestinations = story.value.content.destinationsList.map(
-    (destination) => {
-      return {
-        link: `/destinations/${stringToSlug(
-          `${destination.city}-${destination.state}`
-        )}`,
-        image: destination.previewImage.filename,
-        label: `${destination.city}, ${destination.state}`,
-        countryCode: destination.country,
-      };
-    }
-  );
-
-  return arrayOfDestinations;
+  return matchingDestinations.value.map((destination) => {
+    return {
+      link: `/destinations/${stringToSlug(
+        `${destination.city}-${destination.state}`
+      )}`,
+      image: destination.previewImage.filename,
+      label: `${destination.city}, ${destination.state}`,
+      countryCode: destination.country,
+    };
+  });
 });
 </script>
 <template>
@@ -67,7 +78,9 @@ const carouselElements = computed(() => {
       </div> -->
     </div>
     <div class="destinations__top">
-      <CarouselComponent :carouselElements="carouselElements" />
+      <Transition>
+        <CarouselComponent :carouselElements="carouselElements"
+      /></Transition>
     </div>
   </section>
 </template>

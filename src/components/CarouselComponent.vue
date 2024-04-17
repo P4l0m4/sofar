@@ -77,7 +77,7 @@ const scroll = (direction: "left" | "right") => {
     >
       <NuxtLink
         :to="slide.link"
-        class="carousel__container__slide"
+        class="carousel__container__slide fading"
         :style="{ backgroundImage: `url(${slide.image})` }"
         v-for="slide in props.carouselElements"
       >
