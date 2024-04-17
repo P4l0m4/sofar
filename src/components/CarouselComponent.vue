@@ -242,13 +242,17 @@ const scroll = (direction: "left" | "right") => {
       }
 
       &__country-code {
-        font-size: 10rem;
+        font-size: 8rem;
         color: $primary-color-faded;
         font-weight: $skinny-thick;
         text-align: center;
         z-index: 1;
         width: 100%;
         margin-top: auto;
+
+        @media (min-width: $big-tablet-screen) {
+          font-size: 10rem;
+        }
       }
     }
   }
