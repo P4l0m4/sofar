@@ -64,37 +64,37 @@
   <EmptysForm />
   <section class="gallery">
     <div class="gallery__img">
-      <img src="@/assets/images/pc-12/pc-12-1.webp" />
+      <img src="@/assets/images/pc-12/pc-12-1.webp" alt="pilatus pc 12" />
     </div>
     <div class="gallery__img">
-      <img src="@/assets/images/pc-12/pc-12-2.webp" />
+      <img src="@/assets/images/pc-12/pc-12-2.webp" alt="pilatus pc 12" />
     </div>
     <div class="gallery__img">
-      <img src="@/assets/images/pc-12/pc-12-3.webp" />
+      <img src="@/assets/images/pc-12/pc-12-3.webp" alt="pilatus pc 12" />
     </div>
     <div class="gallery__img">
-      <img src="@/assets/images/pc-12/pc-12-4.webp" />
+      <img src="@/assets/images/pc-12/pc-12-4.webp" alt="pilatus pc 12" />
     </div>
     <div class="gallery__img">
-      <img src="@/assets/images/pc-12/pc-12-1.webp" />
+      <img src="@/assets/images/pc-12/pc-12-1.webp" alt="pilatus pc 12" />
     </div>
     <div class="gallery__img">
-      <img src="@/assets/images/pc-12/pc-12-5.webp" />
+      <img src="@/assets/images/pc-12/pc-12-5.webp" alt="pilatus pc 12" />
     </div>
     <div class="gallery__img">
-      <img src="@/assets/images/pc-12/pc-12-1.webp" />
+      <img src="@/assets/images/pc-12/pc-12-1.webp" alt="pilatus pc 12" />
     </div>
     <div class="gallery__img">
-      <img src="@/assets/images/pc-12/pc-12-6.webp" />
+      <img src="@/assets/images/pc-12/pc-12-6.webp" alt="pilatus pc 12" />
     </div>
     <div class="gallery__img">
-      <img src="@/assets/images/pc-12/pc-12-1.webp" />
+      <img src="@/assets/images/pc-12/pc-12-1.webp" alt="pilatus pc 12" />
     </div>
     <div class="gallery__img">
-      <img src="@/assets/images/pc-12/pc-12-7.webp" />
+      <img src="@/assets/images/pc-12/pc-12-7.webp" alt="pilatus pc 12" />
     </div>
     <div class="gallery__img">
-      <img src="@/assets/images/pc-12/pc-12-8.webp" />
+      <img src="@/assets/images/pc-12/pc-12-8.webp" alt="pilatus pc 12" />
     </div>
   </section>
 </template>

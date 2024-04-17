@@ -1,6 +1,6 @@
 <template>
   <picture class="plane">
-    <source media="(min-width: 1100px)" srcset="@/assets/images/pc12.webp" />
+    <source media="(min-width: 1100px)" srcset="@/assets/images/birds.webp" />
 
     <h2 class="plane__title titles">Phenom 100</h2>
     <div class="plane__stats">
@@ -64,55 +64,106 @@
   <EmptysForm />
   <section class="gallery">
     <div class="gallery__img">
-      <img src="@/assets/images/phenom-100/phenom-100-1.webp" />
+      <img
+        src="@/assets/images/phenom-100/phenom-100-1.webp"
+        alt="phenom-100"
+      />
     </div>
     <div class="gallery__img">
-      <img src="@/assets/images/phenom-100/phenom-100-2.webp" />
+      <img
+        src="@/assets/images/phenom-100/phenom-100-2.webp"
+        alt="phenom-100"
+      />
     </div>
     <div class="gallery__img">
-      <img src="@/assets/images/phenom-100/phenom-100-3.webp" />
+      <img
+        src="@/assets/images/phenom-100/phenom-100-3.webp"
+        alt="phenom-100"
+      />
     </div>
     <div class="gallery__img">
-      <img src="@/assets/images/phenom-100/phenom-100-4.webp" />
+      <img
+        src="@/assets/images/phenom-100/phenom-100-4.webp"
+        alt="phenom-100"
+      />
     </div>
     <div class="gallery__img">
-      <img src="@/assets/images/phenom-100/phenom-100-1.webp" />
+      <img
+        src="@/assets/images/phenom-100/phenom-100-1.webp"
+        alt="phenom-100"
+      />
     </div>
     <div class="gallery__img">
-      <img src="@/assets/images/phenom-100/phenom-100-5.webp" />
+      <img
+        src="@/assets/images/phenom-100/phenom-100-5.webp"
+        alt="phenom-100"
+      />
     </div>
     <div class="gallery__img">
-      <img src="@/assets/images/phenom-100/phenom-100-1.webp" />
+      <img
+        src="@/assets/images/phenom-100/phenom-100-1.webp"
+        alt="phenom-100"
+      />
     </div>
     <div class="gallery__img">
-      <img src="@/assets/images/phenom-100/phenom-100-6.webp" />
+      <img
+        src="@/assets/images/phenom-100/phenom-100-6.webp"
+        alt="phenom-100"
+      />
     </div>
     <div class="gallery__img">
-      <img src="@/assets/images/phenom-100/phenom-100-1.webp" />
+      <img
+        src="@/assets/images/phenom-100/phenom-100-1.webp"
+        alt="phenom-100"
+      />
     </div>
     <div class="gallery__img">
-      <img src="@/assets/images/phenom-100/phenom-100-7.webp" />
+      <img
+        src="@/assets/images/phenom-100/phenom-100-7.webp"
+        alt="phenom-100"
+      />
     </div>
     <div class="gallery__img">
-      <img src="@/assets/images/phenom-100/phenom-100-8.webp" />
+      <img
+        src="@/assets/images/phenom-100/phenom-100-8.webp"
+        alt="phenom-100"
+      />
     </div>
     <div class="gallery__img">
-      <img src="@/assets/images/phenom-100/phenom-100-9.webp" />
+      <img
+        src="@/assets/images/phenom-100/phenom-100-9.webp"
+        alt="phenom-100"
+      />
     </div>
     <div class="gallery__img">
-      <img src="@/assets/images/phenom-100/phenom-100-10.webp" />
+      <img
+        src="@/assets/images/phenom-100/phenom-100-10.webp"
+        alt="phenom-100"
+      />
     </div>
     <div class="gallery__img">
-      <img src="@/assets/images/phenom-100/phenom-100-11.webp" />
+      <img
+        src="@/assets/images/phenom-100/phenom-100-11.webp"
+        alt="phenom-100"
+      />
     </div>
     <div class="gallery__img">
-      <img src="@/assets/images/phenom-100/phenom-100-12.webp" />
+      <img
+        src="@/assets/images/phenom-100/phenom-100-12.webp"
+        alt="phenom-100"
+      />
     </div>
     <div class="gallery__img">
-      <img src="@/assets/images/phenom-100/phenom-100-13.webp" />
+      <img
+        src="@/assets/images/phenom-100/phenom-100-13.webp"
+        alt="phenom-100"
+      />
     </div>
     <div class="gallery__img">
-      <img src="@/assets/images/phenom-100/phenom-100-14.webp" />
+      <img
+        src="@/assets/images/phenom-100/phenom-100-14.webp"
+        alt="phenom-100"
+      />
     </div>
   </section>
 </template>
