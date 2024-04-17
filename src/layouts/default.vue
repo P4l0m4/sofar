@@ -71,10 +71,10 @@ const menuItems = [
     ],
   },
   {
-    label: "Airports",
-    link: "/airports",
+    label: "Destinations",
+    link: "/destinations",
     icon: "map",
-    alt: "menu icon airports",
+    alt: "menu icon destinations",
   },
   {
     label: "Aircraft",

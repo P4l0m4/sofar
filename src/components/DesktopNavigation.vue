@@ -221,7 +221,7 @@ function shouldDisplayArrow(index) {
           padding-left: 1rem;
           display: none;
           width: fit-content;
-          inset: auto 8rem auto auto;
+          inset: auto 9.5rem auto auto;
           bottom: inherit;
           opacity: 0;
           background-color: transparent;
