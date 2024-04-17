@@ -28,16 +28,22 @@ const matchingDestinations = computed(() => {
 });
 
 const carouselElements = computed(() => {
-  return [
-    {
-      link: stringToSlug(
-        `${matchingDestinations.value[0].city}-${matchingDestinations.value[0].state}`
-      ),
-      image: matchingDestinations.value[0].previewImage.filename,
-      label: `${matchingDestinations.value[0].city}, ${matchingDestinations.value[0].state}`,
-      countryCode: matchingDestinations.value[0].country,
-    },
-  ];
+  let arrayOfDestinations;
+
+  arrayOfDestinations = story.value.content.destinationsList.map(
+    (destination) => {
+      return {
+        link: `/destinations/${stringToSlug(
+          `${destination.city}-${destination.state}`
+        )}`,
+        image: destination.previewImage.filename,
+        label: `${destination.city}, ${destination.state}`,
+        countryCode: destination.country,
+      };
+    }
+  );
+
+  return arrayOfDestinations;
 });
 </script>
 <template>
