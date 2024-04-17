@@ -64,6 +64,10 @@ textarea {
     border: 2px solid $text-color;
     outline: $text-color;
   }
+
+  &::placeholder {
+    color: $text-color-faded;
+  }
 }
 /* Change the white to any color */
 input:-webkit-autofill,
@@ -77,6 +81,9 @@ input[type="search"] {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  border: none;
+  border-radius: 0 !important;
+  color: $text-color;
 
   &:-webkit-autofill,
   &:-webkit-autofill:hover,

@@ -184,7 +184,7 @@ function shouldDisplayArrow(index) {
           font-weight: $skinny;
           display: flex;
           align-items: center;
-          justify-content: center;
+          // justify-content: center;
           gap: 0.5rem;
           border-radius: $radius;
           white-space: nowrap;
