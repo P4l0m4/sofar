@@ -5,16 +5,25 @@
     <h2 class="plane__title titles">PILATUS PC 12</h2>
     <div class="plane__stats">
       <div class="plane__stats__stat">
-        <p class="plane__stats__stat paragraphs">Cruise speed</p>
-        <p class="plane__stats__stat subtitles">290 knots</p>
+        <p class="plane__stats__stat__name paragraphs">Cruise speed</p>
+        <p class="plane__stats__stat__figure subtitles">
+          290
+          <span class="plane__stats__stat__figure__small-text">Knots /</span>
+          333,726
+          <span class="plane__stats__stat__figure__small-text">Mph</span>
+        </p>
       </div>
       <div class="plane__stats__stat">
-        <p class="plane__stats__stat paragraphs">Range</p>
-        <p class="plane__stats__stat subtitles">1,803 Nm</p>
+        <p class="plane__stats__stat__name paragraphs">Range</p>
+        <p class="plane__stats__stat__figure subtitles">
+          1,803 <span class="plane__stats__stat__figure__small-text">Nm</span>
+        </p>
       </div>
       <div class="plane__stats__stat">
-        <p class="plane__stats__stat paragraphs">Payload</p>
-        <p class="plane__stats__stat subtitles">1000 kg</p>
+        <p class="plane__stats__stat__name paragraphs">Payload</p>
+        <p class="plane__stats__stat__figure subtitles">
+          2204 <span class="plane__stats__stat__figure__small-text">Lbs</span>
+        </p>
       </div>
       <div class="plane__stats__stat">
         <p class="plane__stats__stat__name paragraphs">Seating</p>
@@ -33,18 +42,20 @@
         ><IconComponent color="#04045c" icon="group_add" />Flexible layout</span
       >
       <span class="plane__tags__tag tags"
-        ><IconComponent color="#04045c" icon="pet_supplies" />Cargo space</span
+        ><IconComponent
+          color="#04045c"
+          icon="airline_seat_recline_extra"
+        />Cargo space</span
       >
       <span class="plane__tags__tag tags"
-        ><IconComponent color="#04045c" icon="pet_supplies" />Internet on
-        board</span
+        ><IconComponent color="#04045c" icon="wifi" />Internet on board</span
       >
       <span class="plane__tags__tag tags"
-        ><IconComponent color="#04045c" icon="pet_supplies" />Bagage
+        ><IconComponent color="#04045c" icon="business_center" />Bagage
         compartment</span
       >
       <span class="plane__tags__tag tags"
-        ><IconComponent color="#04045c" icon="pet_supplies" />USB 110V
+        ><IconComponent color="#04045c" icon="cable" />USB 110V
       </span>
     </div>
 
@@ -158,6 +169,7 @@
       display: flex;
       align-items: center;
       gap: 1rem;
+      white-space: nowrap;
 
       @media (min-width: $laptop-screen) {
         max-width: calc(100% - 160px);
@@ -167,6 +179,7 @@
       }
       &__figure {
         text-shadow: $shadow-text;
+
         &__small-text {
           font-size: 1rem;
         }
