@@ -19,7 +19,9 @@
     "mapbox-gl": "^3.2.0",
     "nuxt-jsonld": "^2.0.8",
     "nuxt-simple-sitemap": "^2.4.11",
-    "ress": "^5.0.2"
+    "ress": "^5.0.2",
+    "pinia": "^2.0.30",
+    "@pinia/nuxt": "^0.4.6"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",

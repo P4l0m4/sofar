@@ -8,9 +8,9 @@ const menuItems = [
   },
   {
     label: "Services",
-    link: "/booking",
+    link: "/services",
     icon: "concierge",
-    alt: "menu icon booking",
+    alt: "menu icon services",
     children: [
       {
         label: "Private jet charters",

@@ -3,6 +3,7 @@ export default defineNuxtConfig({
   srcDir: "src/",
   css: ["@/styles/global.scss"],
   modules: [
+    "@pinia/nuxt",
     "nuxt-simple-sitemap",
     "nuxt-jsonld",
     "dayjs-nuxt",
