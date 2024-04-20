@@ -35,11 +35,21 @@
     </div>
 
     <div class="plane__tags">
+      <!-- <span class="plane__tags__tag tags"
+        ><IconComponent color="#04045c" icon="pet_supplies" />Pet friendly</span
+      > -->
+      <span class="plane__tags__tag tags"
+        ><IconComponent color="#04045c" icon="pet_supplies" />6 passengers</span
+      >
+      <span class="plane__tags__tag tags"
+        ><IconComponent color="#04045c" icon="pet_supplies" />Turboprop</span
+      >
       <span class="plane__tags__tag tags"
         ><IconComponent color="#04045c" icon="pet_supplies" />Pet friendly</span
       >
+
       <span class="plane__tags__tag tags"
-        ><IconComponent color="#04045c" icon="group_add" />Flexible layout</span
+        ><IconComponent color="#04045c" icon="group_add" />Cargo door</span
       >
       <span class="plane__tags__tag tags"
         ><IconComponent
@@ -47,7 +57,7 @@
           icon="airline_seat_recline_extra"
         />Cargo space</span
       >
-      <span class="plane__tags__tag tags"
+      <!-- <span class="plane__tags__tag tags"
         ><IconComponent color="#04045c" icon="wifi" />Internet on board</span
       >
       <span class="plane__tags__tag tags"
@@ -56,7 +66,7 @@
       >
       <span class="plane__tags__tag tags"
         ><IconComponent color="#04045c" icon="cable" />USB 110V
-      </span>
+      </span> -->
     </div>
 
     <img class="plane__img" src="@/assets/images/pc12.webp" alt="banner image"
