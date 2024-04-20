@@ -29,7 +29,7 @@
 .our-birds {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+
   gap: 1rem;
   padding: 2rem 1rem;
   width: 100%;

@@ -43,7 +43,7 @@ onMounted(() => {
     <div ref="mapRef" class="map-container"></div>
     <div class="our-bases__headlines">
       <h2 class="titles">Our Bases</h2>
-      <h3 class="subtitles">Strategically positioned for the east coast.</h3>
+      <h3 class="subtitles">Strategically positioned in the United States.</h3>
     </div>
   </section>
 </template>
