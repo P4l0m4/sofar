@@ -5,7 +5,7 @@ defineProps(["error"]);
 <template>
   <div class="error">
     <div class="error__message">
-      <h1 class="titles">Oooops... error {{ error.statusCode }}</h1>
+      <h1 class="titles">Ooops... error {{ error.statusCode }}</h1>
 
       <h2 class="subtitles">We didn't find the page you where looking for.</h2>
       <NuxtLink
