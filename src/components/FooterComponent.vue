@@ -131,6 +131,7 @@ defineProps<Props>();
         padding-top: 0.5rem;
         border-radius: 40px;
         width: fit-content;
+        transform: translateY(-25%);
       }
 
       &__title {
