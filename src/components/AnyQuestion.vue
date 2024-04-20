@@ -8,7 +8,7 @@
 </template>
 <style lang="scss" scoped>
 .any-question {
-  padding: 2rem 1rem;
+  // padding: 2rem 1rem;
   gap: 1rem;
   display: flex;
   justify-content: center;
