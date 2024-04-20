@@ -9,22 +9,32 @@ onMounted(() => {
   const map = new mapboxgl.Map({
     container: mapRef.value,
     style: "mapbox://styles/flysofar/cluvditjb006w01r5enddch7y",
-    center: [-80.55174117682346, 35.15790888688196],
-    zoom: 3.8,
+    center: [-90.55174117682346, 35.15790888688196],
+    zoom: 3.5,
     scrollZoom: false,
     doubleClickZoom: false,
     touchZoomRotate: false,
     projection: "mercator",
   });
 
-  // Marker for New York with a custom color
+  if (window.innerWidth < 768) {
+    map.setCenter([-96.55174117682346, 35.15790888688196]);
+    map.setZoom(2.2);
+  }
+
+  // Marker for New York
   new mapboxgl.Marker({ color: "#06067c", anchor: "center" })
     .setLngLat([-74.006, 40.7128])
     .addTo(map);
 
-  // Marker for Miami with a different custom color
+  // Marker for Miami
   new mapboxgl.Marker({ color: "#06067c", anchor: "center" })
     .setLngLat([-80.1918, 25.7617])
+    .addTo(map);
+
+  // Marker for Los Angeles
+  new mapboxgl.Marker({ color: "#06067c", anchor: "center" })
+    .setLngLat([-118.243683, 34.052235])
     .addTo(map);
 });
 </script>

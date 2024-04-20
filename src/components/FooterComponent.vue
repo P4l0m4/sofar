@@ -127,8 +127,10 @@ defineProps<Props>();
       &:nth-child(1) {
         height: fit-content;
         border: 2px solid $primary-color;
-        padding: 0.25rem 1rem;
-        border-radius: $radius;
+        padding: 0.3rem 1rem;
+        padding-top: 0.5rem;
+        border-radius: 40px;
+        width: fit-content;
       }
 
       &__title {
