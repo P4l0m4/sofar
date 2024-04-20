@@ -1,21 +1,19 @@
 <script setup lang="ts">
 import { ref } from "vue";
-const leftArrowRef = ref<HTMLButtonElement | null>(null);
-const rightArrowRef = ref<HTMLButtonElement | null>(null);
-const showArrows = ref(false);
-const scrollableContainerRef = ref<HTMLDivElement | null>(null);
+
+type CarouselElement = {
+  link: string;
+  image: string;
+  label: string;
+  countryCode?: string;
+};
 
 interface Props {
-  carouselElements: {
-    link: string;
-    image: string;
-    label: string;
-    countryCode?: string;
-  }[];
+  carouselElements: CarouselElement[];
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  carouselElements: [
+  carouselElements: () => [
     {
       link: "/",
       image: "/assets/images/100.webp",
@@ -33,6 +31,10 @@ const props = withDefaults(defineProps<Props>(), {
     },
   ],
 });
+const leftArrowRef = ref<HTMLButtonElement | null>(null);
+const rightArrowRef = ref<HTMLButtonElement | null>(null);
+const showArrows = ref(false);
+const scrollableContainerRef = ref<HTMLDivElement | null>(null);
 
 const scroll = (direction: "left" | "right") => {
   if (scrollableContainerRef.value) {

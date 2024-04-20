@@ -25,10 +25,12 @@
       >
       <QuotePopUpButton />
     </div>
+    <img class="welcome-to-sofar__img" src="@/assets/images/clouds.png" />
   </div>
 </template>
 <style lang="scss" scoped>
 .welcome-to-sofar {
+  z-index: 1;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -37,23 +39,26 @@
   min-height: 100svh;
   justify-content: center;
   background-color: $base-color;
-  background-image: url("@/assets/images/mini-logo.svg");
-  background-size: 200px;
-  background-repeat: no-repeat;
-  background-position: right 1rem top 1rem;
+
+  position: relative;
 
   @media (min-width: $big-tablet-screen) {
     padding: 4rem 2rem;
     gap: 2rem;
+    background-image: url("@/assets/images/mini-logo-light.svg");
+    background-size: 200px;
+    background-repeat: no-repeat;
     background-position: right 2rem top 2rem;
   }
 
   &__title {
     color: $text-color;
+    z-index: 1;
   }
 
   &__text {
     color: $text-color;
+    z-index: 1;
 
     @media (min-width: $laptop-screen) {
       max-width: calc(100% - 160px);
@@ -83,6 +88,21 @@
       @media (min-width: $big-tablet-screen) {
         width: fit-content;
       }
+    }
+  }
+
+  &__img {
+    position: absolute;
+    bottom: -12rem;
+    left: 0;
+    width: 100%;
+    height: 440px;
+    pointer-events: none;
+    display: none;
+    z-index: 1;
+
+    @media (min-width: $big-tablet-screen) {
+      display: block;
     }
   }
 }
