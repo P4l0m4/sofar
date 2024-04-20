@@ -35,9 +35,6 @@
     </div>
 
     <div class="plane__tags">
-      <!-- <span class="plane__tags__tag tags"
-        ><IconComponent color="#04045c" icon="pet_supplies" />Pet friendly</span
-      > -->
       <span class="plane__tags__tag tags"
         ><IconComponent color="#04045c" icon="pet_supplies" />6 passengers</span
       >
