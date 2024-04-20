@@ -124,6 +124,13 @@ defineProps<Props>();
       flex-direction: column;
       gap: 1rem;
 
+      &:nth-child(1) {
+        height: fit-content;
+        border: 2px solid $primary-color;
+        padding: 0.25rem 1rem;
+        border-radius: $radius;
+      }
+
       &__title {
         color: $base-color;
       }

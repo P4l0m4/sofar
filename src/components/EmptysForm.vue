@@ -109,7 +109,7 @@ async function validEmptyState() {
 </script>
 <template>
   <section class="emptys-form">
-    <h2 class="titles">Join Sofar Emptys</h2>
+    <h2 class="titles">Join Sofar Newsletter</h2>
     <form class="emptys-form__fields">
       <div class="emptys-form__fields__field">
         <InputField
