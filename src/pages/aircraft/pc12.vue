@@ -54,16 +54,14 @@
           icon="airline_seat_recline_extra"
         />Cargo space</span
       >
-      <!-- <span class="plane__tags__tag tags"
-        ><IconComponent color="#04045c" icon="wifi" />Internet on board</span
-      >
       <span class="plane__tags__tag tags"
         ><IconComponent color="#04045c" icon="business_center" />Bagage
         compartment</span
       >
       <span class="plane__tags__tag tags"
         ><IconComponent color="#04045c" icon="cable" />USB 110V
-      </span> -->
+      </span>
+      -->
     </div>
 
     <img class="plane__img" src="@/assets/images/pc12.webp" alt="banner image"
