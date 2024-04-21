@@ -728,7 +728,7 @@ onMounted(() => {
           v-model="contactState.info"
           id="info"
           label="Additional information"
-          placeholder="Tell us more about your request..."
+          placeholder="I am flexible on the schedule, I have a pet, etc."
           :required="false"
           name="info"
         />

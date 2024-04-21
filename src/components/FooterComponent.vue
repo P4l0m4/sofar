@@ -92,6 +92,11 @@ defineProps<Props>();
       </div>
       <AnyQuestion />
     </div>
+    <img
+      class="footer__clouds"
+      src="@/assets/images/clouds.png"
+      alt="clouds image"
+    />
   </footer>
 </template>
 <style lang="scss" scoped>
@@ -103,6 +108,8 @@ defineProps<Props>();
   background-color: $text-color;
   gap: 2rem;
   flex-direction: column;
+  position: relative;
+  overflow: hidden;
 
   @media (min-width: $big-tablet-screen) {
     padding: 4rem 2rem;
@@ -177,6 +184,19 @@ defineProps<Props>();
           z-index: 1;
         }
       }
+    }
+  }
+
+  &__clouds {
+    position: absolute;
+    inset: auto 0 -14rem 0;
+    width: 100%;
+    pointer-events: none;
+    opacity: 0.8;
+    display: none;
+
+    @media (min-width: $big-tablet-screen) {
+      display: block;
     }
   }
 }
