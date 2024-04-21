@@ -24,10 +24,8 @@ const carouselElements = [
       srcset="@/assets/images/landscape.webp"
     />
     <div class="index__banner__headlines">
-      <NuxtLink to="/">
-        <img
-          class="index__banner__headlines__logo"
-          src="@/assets/images/logo-light.svg"
+      <NuxtLink class="index__banner__headlines__logo" to="/">
+        <img src="@/assets/images/logo-light.svg"
       /></NuxtLink>
 
       <h1 class="index__banner__headlines__title titles">
@@ -48,7 +46,7 @@ const carouselElements = [
   <OurBases />
 
   <HomeOurBirds />
-  <h2 class="titles">SoFar Fleet</h2>
+  <h2 class="fleet titles">SoFar Fleet</h2>
   <CarouselComponent :carouselElements="carouselElements" />
   <HomeWhyFlyWithSofar />
 
@@ -102,29 +100,36 @@ const carouselElements = [
     gap: 1rem;
     z-index: 1;
     color: $text-color-alt;
-    height: 100%;
 
     @media (min-width: $big-tablet-screen) {
       gap: 2rem;
     }
 
     &__logo {
-      width: 70px;
+      width: fit-content;
+      height: fit-content;
 
-      @media (min-width: $big-tablet-screen) {
-        width: 200px;
+      & img {
+        width: 120px;
+        height: 60px;
+
+        @media (min-width: $big-tablet-screen) {
+          width: 200px;
+          height: 90px;
+        }
       }
     }
 
     &__title {
       // white-space: nowrap;
       display: flex;
-      height: fit-content;
       line-height: 2.5rem;
       color: $text-color-alt;
+      height: fit-content;
+      width: fit-content;
 
       @media (min-width: $big-tablet-screen) {
-        line-height: 2.1rem;
+        line-height: 2rem;
       }
     }
   }
@@ -152,7 +157,7 @@ const carouselElements = [
   }
 }
 
-.titles {
+.fleet {
   padding: 2rem 1rem;
   padding-bottom: 0;
   @media (min-width: $big-tablet-screen) {
