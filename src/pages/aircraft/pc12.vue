@@ -178,6 +178,7 @@
       alt="plane info image"
     />
   </section>
+
   <EmptysForm />
   <section class="plane-gallery">
     <div class="plane-gallery__img">
@@ -359,6 +360,25 @@
     @media (min-width: $big-tablet-screen) {
       width: 50%;
       padding: 2rem 0;
+    }
+
+    &__img {
+      width: 100%;
+      object-fit: cover;
+      height: 200px;
+
+      @media (min-width: $big-tablet-screen) {
+        height: 100%;
+      }
+    }
+  }
+  &__video {
+    width: 100%;
+    height: 100svh;
+    background-color: $text-color;
+
+    @media (min-width: $big-tablet-screen) {
+      width: 50%;
     }
   }
 
