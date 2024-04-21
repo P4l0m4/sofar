@@ -21,26 +21,32 @@ const carouselElements = [
   <picture class="index__banner">
     <source
       media="(min-width: 1100px)"
-      srcset="@/assets/images/landscape.webp" />
+      srcset="@/assets/images/landscape.webp"
+    />
     <div class="index__banner__headlines">
-      <NuxtLink to="/">
-        <img
-          class="index__banner__headlines__logo"
-          src="@/assets/images/logo-light.svg"
+      <NuxtLink class="index__banner__headlines__logo" to="/">
+        <img src="@/assets/images/logo-light.svg"
       /></NuxtLink>
-      <h1 class="index__banner__headlines__title titles">MAKE IT ANYWHERE</h1>
+
+      <h1 class="index__banner__headlines__title titles">
+        Private Jet Charter
+      </h1>
     </div>
+
     <QuoteForm />
 
     <img
       class="index__banner__img"
       src="@/assets/images/landscape-mobile.webp"
       alt="banner image"
-  /></picture>
+    />
+    <h2 class="index__banner__subtitle subtitles">Make It Anywhere</h2></picture
+  >
   <HomeWelcomeToSofar />
   <OurBases />
 
   <HomeOurBirds />
+  <h2 class="fleet titles">SoFar Fleet</h2>
   <CarouselComponent :carouselElements="carouselElements" />
   <HomeWhyFlyWithSofar />
 
@@ -90,36 +96,56 @@ const carouselElements = [
 
   &__headlines {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     gap: 1rem;
     z-index: 1;
     color: $text-color-alt;
 
     @media (min-width: $big-tablet-screen) {
       gap: 2rem;
-      align-items: end;
     }
 
     &__logo {
-      width: 70px;
+      width: fit-content;
+      height: fit-content;
 
-      @media (min-width: $big-tablet-screen) {
-        width: 200px;
+      & img {
+        width: 120px;
+        height: 60px;
+
+        @media (min-width: $big-tablet-screen) {
+          width: 200px;
+          height: 90px;
+        }
       }
     }
 
     &__title {
       // white-space: nowrap;
       display: flex;
-      height: fit-content;
       line-height: 2.5rem;
+      color: $text-color-alt;
+      height: fit-content;
+      width: fit-content;
 
       @media (min-width: $big-tablet-screen) {
-        line-height: 2.1rem;
+        line-height: 2rem;
       }
     }
   }
-
+  &__subtitle {
+    color: $text-color-alt;
+    line-height: 1.6rem;
+    position: absolute;
+    inset: 2rem;
+    bottom: inherit;
+    margin: auto;
+    width: fit-content;
+    height: fit-content;
+    opacity: 0.8;
+    font-family: "Custom";
+    font-weight: 100;
+  }
   &__img {
     position: absolute;
     top: 0;
@@ -128,6 +154,15 @@ const carouselElements = [
     height: 100%;
     object-fit: cover;
     z-index: -1;
+  }
+}
+
+.fleet {
+  padding: 2rem 1rem;
+  padding-bottom: 0;
+  @media (min-width: $big-tablet-screen) {
+    padding: 4rem 2rem;
+    padding-bottom: 0;
   }
 }
 </style>
