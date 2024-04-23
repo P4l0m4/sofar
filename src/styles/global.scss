@@ -301,6 +301,31 @@ details > summary::-webkit-details-marker /* Safari */ {
   border-radius: $radius;
   padding: 0.25rem 0.75rem;
   width: fit-content;
+  border: 1px solid transparent;
+}
+
+.images-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(343px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+  @media (min-width: $big-tablet-screen) {
+    padding: 2rem;
+  }
+
+  &__img {
+    width: 100%;
+    height: 400px;
+    @media (min-width: $big-tablet-screen) {
+      height: 500px;
+    }
+
+    & img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
 }
 
 .fading {

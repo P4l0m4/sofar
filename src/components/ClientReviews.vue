@@ -101,6 +101,7 @@ const scroll = (direction: "left" | "right") => {
   flex-direction: column;
   gap: 1rem;
   padding: 2rem 1rem;
+  padding-right: 0;
   position: relative;
 
   @media (min-width: $big-tablet-screen) {

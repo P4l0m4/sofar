@@ -189,6 +189,7 @@ const scroll = (direction: "left" | "right") => {
       position: relative;
       overflow: hidden;
       transition: filter 0.3s linear;
+
       filter: grayscale(30%);
 
       &:hover {
