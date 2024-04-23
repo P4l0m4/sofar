@@ -1,8 +1,11 @@
+import OurBases from '~/components/OurBases.vue';
 <template>
   <picture class="plane">
-    <source media="(min-width: 1100px)" srcset="@/assets/images/birds.webp" />
+    <source
+      media="(min-width: 1100px)"
+      srcset="@/assets/images/phenom-300/phenom-300-banner.webp" />
 
-    <h2 class="plane__title titles">Phenom 100</h2>
+    <h2 class="plane__title titles">Phenom 300</h2>
     <div class="plane__stats">
       <div class="plane__stats__stat">
         <p class="plane__stats__stat__name paragraphs">Cruise speed</p>
@@ -59,97 +62,66 @@
       </span>
     </div>
 
-    <img class="plane__img" src="@/assets/images/birds.webp" alt="banner image"
+    <img
+      class="plane__img"
+      src="@/assets/images/phenom-300/phenom-300-banner.webp"
+      alt="banner image"
   /></picture>
   <section class="plane-info-horizontal">
     <div class="plane-info-horizontal__txt">
-      <h2 class="titles">
-        Experience Exceptional Travel with Sofar's Phenom 100
-      </h2>
-      <h3 class="subtitles">
-        Introducing the Phenom 100 - your ultimate ticket to travel in
-        unrivalled style.
-      </h3>
-      <p class="paragraphs">
-        Designed for business trips and family getaways, this small aircraft
-        harmoniously combines the need for speed with uncompromising comfort,
-        all at an incredibly attractive price. Despite its compact size, the
-        Phenom 100 ensures that you don't have to sacrifice luxury for
-        efficiency. Enjoy the comfort of its spacious, well appointed seats for
-        a sumptuous experience, whether you're on a business mission or escaping
-        with the family. High-speed travel becomes an uncompromising reality, as
-        the Phenom 100 sets a new benchmark for small jets, offering efficiency
-        and luxury in an elegant package.
-      </p>
-      <p class="paragraphs">
-        What really sets the Phenom 100 apart is its reliability. Count on this
-        exceptional aircraft for a journey that's not only smooth, but also
-        safe, so you can reach your destination with pinpoint accuracy. Elevate
-        your travel experience with the Phenom 100 - an unrivalled blend of
-        speed, comfort and affordability that defines the pinnacle of private
-        aviation.
-      </p>
+      <h2 class="titles">The Most Trusted Light Jet in The World</h2>
+      <h3 class="subtitles">Efficiency, Performance, Comfort.</h3>
     </div>
     <img
       class="plane-info-horizontal__img"
-      src="@/assets/images/phenom-100/phenom-100-plane-specs.webp"
+      src="@/assets/images/phenom-300/phenom-300-plane-specs.webp"
       alt="plane info image"
     />
   </section>
   <section class="plane-info-vertical">
     <div class="plane-info-vertical__txt">
-      <h3 class="subtitles">Exceptional comfort and spaciousness</h3>
+      <h3 class="subtitles">The cabin</h3>
       <p class="paragraphs">
-        The Phenom 100 also claims to have the tallest and widest cross section,
-        cabin dimensions in its class, offering more head and leg room than its
-        competitors. The Phenom 100 also possesses the largest entrance door,
-        and is unique due to the fact that most entry-level and small jets do
-        not have an air-stair option!
+        The Phenom 300 cabin is the epitome of luxury and practicality. Designed
+        meticulously, it offers a remarkable travel experience. The cabin's
+        spaciousness, ergonomic seats, and premium finishes create an inviting
+        atmosphere.
       </p>
       <p class="paragraphs">
-        The Phenom 100 windows are also the largest among entry-level and light
-        jets, measuring 1.2 square feet, and are strategically positioned to
-        provide the most natural light possible for occupants. The Phenom 100
-        contains a forward wardrobe for storing coats, jackets, and up to 4
-        laptops with 6 cubic feet of storage capacity.
+        Large windows fill the cabin with natural light. This jet features an
+        enclosed bathroom and the widest cabin in its category, offering both
+        privacy and roominess. With a generous luggage capacity of 76ft³, it
+        comfortably accommodates up to 8 passengers.
       </p>
       <p class="paragraphs">
-        The Phenom 100 has a large cabin cross-section and offers more head and
-        legroom than many competitors. Depending on the configuration, there is
-        room for 4 to 6 passengers in the cabin without feeling cramped. The
-        large windows give the cabin a light and bright feel-good ambience.
+        Maintaining a low cabin pressure altitude, even at cruising altitudes of
+        45,000ft, enhances passenger comfort. It's equipped with 110V outlets
+        (4), satellite phone/text capability, and Gogo WIFI for uninterrupted
+        connectivity. The Phenom 300 combines luxury, comfort, and practicality
+        for a superior travel experience.
       </p>
-      <img
-        class="plane-info-vertical__txt__img"
-        src="@/assets/images/phenom-100/phenom-100-cabin-inside.webp"
-        alt="private jet cabin image"
-      />
     </div>
     <img
       class="plane-info-vertical__img"
-      src="@/assets/images/phenom-100/phenom-100-cabin.webp"
+      src="@/assets/images/phenom-300/phenom-300-cabin.webp"
       alt="plane info image"
     />
   </section>
   <section class="plane-info-vertical">
     <div class="plane-info-vertical__txt">
       <h3 class="subtitles">Aircraft Specifics and Cabin Capability</h3>
-      <p class="paragraphs">Enclosed Bathroom</p>
-      <p class="paragraphs">Widest Cabin in Light Jet Category</p>
-      <p class="paragraphs">Cabin Pressure Altitude as Low as 8,000ft</p>
-      <p class="paragraphs">At Cruise Altitude of 41,000ft</p>
-      <p class="paragraphs">110V Outlets (2)</p>
-      <p class="paragraphs">Satellite Phone/Text Capability/Airtext</p>
+
       <img
         class="plane-info-vertical__txt__img"
-        src="@/assets/images/phenom-100/phenom-100-luggage-capacity.svg"
+        src="@/assets/images/phenom-300/phenom-300-cabin-inside.svg"
         alt="private jet cabin image"
       />
     </div>
-    <video class="plane-info-vertical__video" autoplay muted loop>
-      <source src="@/assets/images/phenom-100/video.mp4" type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
+    <img
+      class="plane-info-vertical__img"
+      src="@/assets/images/phenom-300/phenom-300-cabin-2.webp"
+      alt="private jet cabin image"
+    />
   </section>
 
   <section class="plane-gallery">
