@@ -17,6 +17,7 @@ const menuItemsStore = useMenuItemsStore();
       >
     </div>
   </section>
+  <ServicesWhyChooseUs />
 </template>
 <style lang="scss" scoped>
 .services {
@@ -41,9 +42,8 @@ const menuItemsStore = useMenuItemsStore();
 
     &__link {
       padding: 1rem 2rem;
-      border: $text-color 2px solid;
       height: 140px;
-
+      background-color: $primary-color;
       border-radius: $radius;
       display: flex;
       justify-content: center;
@@ -51,6 +51,10 @@ const menuItemsStore = useMenuItemsStore();
       flex-direction: column;
       gap: 1rem;
       white-space: nowrap;
+
+      &:hover {
+        box-shadow: $shadow;
+      }
     }
   }
 }
