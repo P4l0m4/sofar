@@ -204,6 +204,7 @@ onMounted(() => {
       @destination-airport="getEmittedDestinationAirport"
     />
   </section>
+  <BlogArticlesCarousel />
 </template>
 <style lang="scss" scoped>
 .booking {
@@ -212,10 +213,12 @@ onMounted(() => {
   gap: 1rem;
   padding: 2rem 1rem;
   position: relative;
+  margin-bottom: 6rem;
 
   @media (min-width: $big-tablet-screen) {
     gap: 2rem;
     padding: 4rem 2rem;
+    margin-bottom: 4rem;
   }
 
   & h2 {

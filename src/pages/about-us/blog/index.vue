@@ -1,18 +1,57 @@
-<script setup>
+<script setup lang="ts">
 import { stringToSlug } from "~/utils/slugify";
-const dayjs = useDayjs();
-
+import { ref } from "vue";
 const story = await useAsyncStoryblok("blog", { version: "published" });
+const dayjs = useDayjs();
+const categorySelected = ref("all");
+
+const allCategories = computed(() => {
+  let categories = new Set();
+  story.value.content.articles.forEach((article) => {
+    categories.add(article.tag);
+  });
+  return Array.from(categories);
+});
+
+const articlesMatchingCategory = computed(() => {
+  if (categorySelected.value === "all") {
+    return story.value.content.articles;
+  }
+  return story.value.content.articles.filter(
+    (article) => article.tag === categorySelected.value
+  );
+});
 </script>
 <template>
   <section class="blog">
     <h1 class="titles">Our Blog</h1>
     <h2 class="subtitles">Learn about our latest news, travels and trends</h2>
+
+    <div class="blog__tags">
+      <span
+        class="blog__tags__tag tags scale-on-hover"
+        :class="{
+          'blog__tags__tag--selected': categorySelected === 'all',
+        }"
+        @click="categorySelected = 'all'"
+        >All</span
+      >
+      <span
+        class="blog__tags__tag tags scale-on-hover"
+        :class="{
+          'blog__tags__tag--selected': categorySelected === category,
+        }"
+        v-for="(category, i) in allCategories"
+        :key="i"
+        @click="categorySelected = category"
+        >{{ category }}</span
+      >
+    </div>
     <div class="blog__articles">
       <NuxtLink
         :to="`/about-us/blog/${stringToSlug(article.title)}`"
         class="blog__articles__article shadow-on-hover"
-        v-for="article in story.content.articles"
+        v-for="article in articlesMatchingCategory"
       >
         <img
           class="blog__articles__article__img"
@@ -57,6 +96,27 @@ const story = await useAsyncStoryblok("blog", { version: "published" });
 
   & h2 {
     margin-top: -1rem;
+  }
+
+  &__tags {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+    overflow-x: scroll;
+    margin-bottom: 1rem;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    &__tag {
+      cursor: pointer;
+      transition: border 0.3s;
+
+      &--selected {
+        border: 1px solid $text-color;
+      }
+    }
   }
 
   &__articles {

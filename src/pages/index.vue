@@ -51,6 +51,7 @@ const carouselElements = [
   <HomeWhyFlyWithSofar />
 
   <ClientReviews />
+  <BlogArticlesCarousel />
   <EmptysForm />
 </template>
 <style lang="scss" scoped>

@@ -28,6 +28,28 @@ const article = story.value.content.articles.find(
       </div>
     </Container>
   </article>
+
+  <iframe
+    class="article-video"
+    :src="article.video"
+    v-if="article.video"
+    title="YouTube video player"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerpolicy="strict-origin-when-cross-origin"
+    allowfullscreen
+  ></iframe>
+
+  <div class="images-gallery" v-if="article.gallery">
+    <div
+      class="images-gallery__img"
+      v-for="image in article.gallery"
+      :key="image.id"
+    >
+      <img :src="image.filename" :alt="image.alt" />
+    </div>
+  </div>
+  <BlogArticlesCarousel :articleTitle="article.title" />
 </template>
 <style lang="scss" scoped>
 .article {
@@ -75,11 +97,6 @@ const article = story.value.content.articles.find(
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    padding: 0 1rem 0 1rem;
-
-    @media (min-width: $big-tablet-screen) {
-      padding: 0;
-    }
 
     &:deep(ul) {
       list-style: square;
@@ -91,6 +108,16 @@ const article = story.value.content.articles.find(
       text-decoration-color: $secondary-color-faded;
       text-decoration-thickness: 10px;
     }
+  }
+}
+
+.article-video {
+  width: 100%;
+  height: 400px;
+  border: none;
+
+  @media (min-width: $big-tablet-screen) {
+    height: 100svh;
   }
 }
 </style>
