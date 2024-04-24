@@ -13,7 +13,7 @@
         schedule.
       </h2>
     </div>
-    <QuoteForm />
+    <QuoteForm parent="private-jet" />
     <img
       class="services-banner__img"
       src="@/assets/images/private-jet-charters-mobile.webp"

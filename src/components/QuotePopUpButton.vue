@@ -25,7 +25,11 @@ function closePopUp() {
     Request a quote
   </button>
   <div class="pop-up-form" v-if="showQuoteForm" @click="showQuoteForm = false">
-    <QuoteForm @click.stop @form-submitted="closePopUp()" />
+    <QuoteForm
+      parent="quote-popup"
+      @click.stop
+      @form-submitted="closePopUp()"
+    />
   </div>
 </template>
 <style lang="scss" scoped>

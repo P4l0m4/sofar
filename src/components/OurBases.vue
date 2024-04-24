@@ -59,7 +59,6 @@ onMounted(() => {
     gap: 1rem;
     color: $text-color;
     position: absolute;
-    z-index: 1;
     padding: 2rem 1rem;
 
     @media (min-width: $big-tablet-screen) {

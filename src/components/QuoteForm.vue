@@ -18,6 +18,10 @@ import {
   maxValue,
 } from "@vuelidate/validators";
 
+defineProps({
+  parent: String,
+});
+
 const emits = defineEmits([
   "formSubmitted",
   "originAirport",
@@ -541,8 +545,12 @@ onMounted(() => {
               />
               One way
             </button>
-            <label class="switch" for="checkbox">
-              <input type="checkbox" id="checkbox" v-model="isRoundTrip" />
+            <label class="switch" :for="`${parent}-round-trip-toggle`">
+              <input
+                type="checkbox"
+                :id="`${parent}-round-trip-toggle`"
+                v-model="isRoundTrip"
+              />
               <span class="slider round"></span>
             </label>
             <button

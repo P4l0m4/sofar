@@ -199,6 +199,7 @@ onMounted(() => {
     </h2>
 
     <QuoteForm
+      parent="booking"
       class="booking__form"
       @origin-airport="getEmittedOriginAirport"
       @destination-airport="getEmittedDestinationAirport"

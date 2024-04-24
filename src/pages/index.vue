@@ -33,7 +33,7 @@ const carouselElements = [
       </h1>
     </div>
 
-    <QuoteForm />
+    <QuoteForm parent="home" />
 
     <img
       class="index__banner__img"
