@@ -47,6 +47,9 @@ const isSubmitting = ref(false);
 const wasSent = ref(false);
 
 const todaysDate = dayjs().format("YYYY-MM-DDTHH:mm");
+const todaysDatePlusTwoHours = dayjs()
+  .add(2, "hour")
+  .format("YYYY-MM-DDTHH:mm");
 
 const phoneCodeQuery = ref("");
 
@@ -206,7 +209,7 @@ function checkIfAirportExists(airport) {
 const airportExistsValidator = (value) => checkIfAirportExists(value);
 const notSameAsDestination = (value) => value !== flightState.destination;
 const notSameAsOrigin = (value) => value !== flightState.origin;
-const greaterThan = (value) => value > todaysDate;
+const greaterThan = (value) => value > todaysDatePlusTwoHours;
 const lowerThan = (value) => {
   if (!isRoundTrip.value) {
     return true;
@@ -311,7 +314,7 @@ const departureDateErrors = computed(() => {
   vFlight$.value.departureDate.required.$invalid &&
     errors.push("This field is empty");
   vFlight$.value.departureDate.greaterThan.$invalid &&
-    errors.push("Your departure date must be tomorrow or later");
+    errors.push("Your departure time must be at least 2 hours from now");
   return errors;
 });
 
