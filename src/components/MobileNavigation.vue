@@ -1,5 +1,7 @@
 <script setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
+import { useRoute } from "vue-router";
+const route = useRoute();
 
 const isMenuOpen = ref(true);
 let lastScrollTop = 0;
@@ -31,6 +33,14 @@ window.addEventListener("scroll", function () {
   }
   lastScrollTop = st <= 0 ? 0 : st;
 });
+
+watch(
+  route,
+  () => {
+    currentIndex.value = null;
+  },
+  { deep: true }
+);
 </script>
 <template>
   <aside class="aside">
