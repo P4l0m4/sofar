@@ -66,13 +66,11 @@ const scroll = (direction: "left" | "right") => {
         @mouseleave="showArrows = false"
       >
         <NuxtLink
-          :to="stringToSlug(slide.title)"
+          :to="`/about-us/blog/${stringToSlug(slide.title)}`"
           class="carousel__container__slide fading"
           v-for="slide in articlesToDisplay"
-          ><div
-            class="carousel__container__slide__img"
-            :style="{ backgroundImage: `url(${slide.previewImage.filename})` }"
-          >
+          :style="{ backgroundImage: `url(${slide.previewImage.filename})` }"
+          ><div class="carousel__container__slide__img">
             <span class="carousel__container__slide__img__tag">{{
               slide.tag
             }}</span>
@@ -178,15 +176,33 @@ const scroll = (direction: "left" | "right") => {
       display: flex;
       flex-direction: column;
       gap: 1rem;
+      border-radius: $radius;
+      overflow: hidden;
       height: 260px;
+      min-width: 300px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      justify-content: space-between;
+      padding: 1rem;
       @media (min-width: $big-tablet-screen) {
         width: 360px;
         min-width: 360px;
         height: 340px;
+        transition: filter 0.3s linear;
+        filter: grayscale(30%);
 
-        &:hover > &__img {
+        &:hover {
           filter: grayscale(0%);
         }
+      }
+      &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        background-image: linear-gradient(45deg, $text-color, transparent 60%);
       }
 
       &__img {
@@ -196,29 +212,11 @@ const scroll = (direction: "left" | "right") => {
         gap: 1rem;
         width: 100%;
         min-width: 300px;
-        height: 260px;
-        background-size: cover;
-        background-position: center;
+        height: fit-content;
         text-align: center;
-        padding: 1rem;
-        border-radius: $radius;
-        position: relative;
         overflow: hidden;
-        transition: filter 0.3s linear;
-        filter: grayscale(30%);
+        height: 100%;
 
-        &::after {
-          content: "";
-          position: absolute;
-          inset: 0;
-          width: 100%;
-          height: 100%;
-          background-image: linear-gradient(
-            45deg,
-            $text-color,
-            transparent 60%
-          );
-        }
         &__tag {
           font-size: 1rem;
           font-weight: $skinny-thick;
@@ -251,6 +249,19 @@ const scroll = (direction: "left" | "right") => {
             transform: rotate(45deg);
           }
         }
+      }
+
+      .subtitles {
+        color: $text-color-alt;
+        z-index: 1;
+        text-shadow: $shadow-text;
+      }
+      &__date {
+        z-index: 1;
+        color: $primary-color-faded;
+        width: 100%;
+        text-align: right;
+        text-shadow: $shadow-text;
       }
     }
   }
