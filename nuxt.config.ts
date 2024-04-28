@@ -7,7 +7,6 @@ export default defineNuxtConfig({
     "nuxt-simple-sitemap",
     "nuxt-jsonld",
     "dayjs-nuxt",
-    "@vite-pwa/nuxt",
     [
       "@storyblok/nuxt",
       {
@@ -17,10 +16,6 @@ export default defineNuxtConfig({
       },
     ],
   ],
-
-  pwa: {
-    /* PWA options */
-  },
 
   // dayjs: {
   //   locales: ["en-us"],

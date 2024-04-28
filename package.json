@@ -14,19 +14,18 @@
   },
   "dependencies": {
     "@emailjs/browser": "^4.3.3",
+    "@pinia/nuxt": "^0.4.6",
     "@vuelidate/core": "^2.0.3",
     "@vuelidate/validators": "^2.0.4",
     "mapbox-gl": "^3.2.0",
     "nuxt-jsonld": "^2.0.8",
     "nuxt-simple-sitemap": "^2.4.11",
-    "ress": "^5.0.2",
     "pinia": "^2.0.30",
-    "@pinia/nuxt": "^0.4.6"
+    "ress": "^5.0.2"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
     "@storyblok/nuxt": "^6.0.6",
-    "@vite-pwa/nuxt": "^0.6.0",
     "dayjs-nuxt": "^1.1.2",
     "nuxt": "^3.11.1",
     "sass": "^1.58.0",
