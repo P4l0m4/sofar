@@ -5,53 +5,65 @@ import { normalizeString } from "@/utils/normalize";
 const story = await useAsyncStoryblok("destinations", { version: "published" });
 
 const queryRef = ref("");
-
-// const tags = computed(() => {
-//   //for all destinations inside story.value.content.destinationsList, get all services tags inside story.value.content.destinationsList.services and return a unique array of tags
-//   return story.value.content.destinationsList
-//     .map((destination) => destination.services)
-//     .flat()
-//     .filter((tag, i, tags) => tags.indexOf(tag) === i);
-// });
 const tagsSelectedRef = ref([]);
 
-// function addOrRemoveTag(tag: string) {
-//   if (tagsSelectedRef.value.includes(tag)) {
-//     tagsSelectedRef.value = tagsSelectedRef.value.filter((t) => t !== tag);
-//   } else {
-//     tagsSelectedRef.value.push(tag);
-//   }
-// }
+//type for destination
+interface Destination {
+  city: string;
+  stateName: string;
+  country: string;
+  geographicalCategories: string[];
+  previewImage: {
+    filename: string;
+  };
+}
+//type for state
+interface State {
+  name: string;
+  destinationsList: Destination[];
+  country: string;
+}
+
+const destinations = computed(() => {
+  return story.value.content.statesList.flatMap((state: State) => {
+    return state.destinationsList.map((destination) => {
+      return {
+        ...destination,
+        stateName: state.name,
+        country: state.country,
+      };
+    });
+  });
+});
 
 const matchingDestinations = computed(() => {
   if (queryRef.value.length === 0) {
-    return story.value.content.destinationsList;
-  } else
-    return story.value.content.destinationsList.filter(
-      (destination) =>
+    return destinations.value;
+  } else {
+    return destinations.value.filter((destination: Destination) => {
+      return (
         normalizeString(destination.city).includes(
           normalizeString(queryRef.value)
         ) ||
-        normalizeString(destination.state).includes(
+        normalizeString(destination.stateName).includes(
           normalizeString(queryRef.value)
         ) ||
         normalizeString(destination.country).includes(
           normalizeString(queryRef.value)
-        ) ||
-        destination.geographicalCategories.some((category) =>
-          normalizeString(category).includes(normalizeString(queryRef.value))
         )
-    );
+      );
+    });
+  }
 });
 
 const carouselElements = computed(() => {
-  return matchingDestinations.value.map((destination) => {
+  return matchingDestinations.value.map((destination: Destination) => {
     return {
       link: `/destinations/${stringToSlug(
-        `${destination.city}-${destination.state}`
-      )}`,
+        `${destination.country}-${destination.stateName}`
+      )}/${stringToSlug(`${destination.city}`)}`,
       image: destination.previewImage.filename,
-      label: `${destination.city}, ${destination.state}`,
+      label: `${destination.city}, ${destination.stateName}`,
       countryCode: destination.country,
     };
   });
@@ -61,6 +73,7 @@ const carouselElements = computed(() => {
   <section class="destinations">
     <div class="destinations__header">
       <h1 class="titles">Browse destinations</h1>
+
       <DestinationsSearchBar v-model="queryRef" />
       <!-- <div class="destinations__header__filtering">
         <button

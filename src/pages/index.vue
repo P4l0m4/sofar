@@ -1,4 +1,6 @@
 <script setup>
+const message = "%c 🌵TEKILAWEBFACTORY.COM🌵";
+console.log(message, `color: #1EB2BC; font-weight: bold; font-size: 16px;`);
 const carouselElements = [
   {
     link: "/aircraft/phenom-100",

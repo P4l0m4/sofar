@@ -3,10 +3,12 @@ import { ref } from "vue";
 
 const showQuoteForm = ref(false);
 interface Props {
-  color: string;
+  color?: string;
+  label?: string;
 }
 const props = withDefaults(defineProps<Props>(), {
   color: "#06067c",
+  label: "Request a quote",
 });
 
 function closePopUp() {
@@ -17,12 +19,13 @@ function closePopUp() {
   <button
     class="button-secondary"
     @click="showQuoteForm = !showQuoteForm"
+    @click.prevent
     :style="{
       color: props.color,
       borderColor: props.color,
     }"
   >
-    Request a quote
+    {{ props.label }}
   </button>
   <div class="pop-up-form" v-if="showQuoteForm" @click="showQuoteForm = false">
     <QuoteForm
