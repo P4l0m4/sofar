@@ -168,6 +168,7 @@ const carouselElements = computed(() => {
       &__tag {
         cursor: pointer;
         transition: border 0.3s;
+        white-space: nowrap;
 
         &--selected {
           border: 1px solid $text-color;
