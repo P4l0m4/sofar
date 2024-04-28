@@ -4,9 +4,6 @@ import { stringToSlug } from "~/utils/slugify";
 import { normalizeString } from "@/utils/normalize";
 const story = await useAsyncStoryblok("destinations", { version: "published" });
 
-const queryRef = ref("");
-const tagsSelectedRef = ref([]);
-
 //type for destination
 interface Destination {
   city: string;
@@ -36,6 +33,8 @@ const destinations = computed(() => {
   });
 });
 
+const queryRef = ref("");
+
 const matchingDestinations = computed(() => {
   if (queryRef.value.length === 0) {
     return destinations.value;
@@ -56,17 +55,52 @@ const matchingDestinations = computed(() => {
   }
 });
 
-const carouselElements = computed(() => {
-  return matchingDestinations.value.map((destination: Destination) => {
-    return {
-      link: `/destinations/${stringToSlug(
-        `${destination.country}-${destination.stateName}`
-      )}/${stringToSlug(`${destination.city}`)}`,
-      image: destination.previewImage.filename,
-      label: `${destination.city}, ${destination.stateName}`,
-      countryCode: destination.country,
-    };
+const tagsSelectedRef = ref("");
+
+const tags = computed(() => {
+  return destinations.value.flatMap((destination: Destination) => {
+    return destination.geographicalCategories;
   });
+});
+
+const addOrRemoveTag = (tag: string) => {
+  if (tagsSelectedRef.value === tag) {
+    tagsSelectedRef.value = "";
+  } else {
+    tagsSelectedRef.value = tag;
+  }
+};
+
+const carouselElements = computed(() => {
+  if (tagsSelectedRef.value === "") {
+    return matchingDestinations.value.map((destination: Destination) => {
+      return {
+        link: `/destinations/${stringToSlug(
+          `${destination.country}-${destination.stateName}`
+        )}/${stringToSlug(`${destination.city}`)}`,
+        image: destination.previewImage.filename,
+        label: `${destination.city}, ${destination.stateName}`,
+        countryCode: destination.country,
+      };
+    });
+  } else {
+    return matchingDestinations.value
+      .filter((destination: Destination) => {
+        return destination.geographicalCategories.includes(
+          tagsSelectedRef.value
+        );
+      })
+      .map((destination: Destination) => {
+        return {
+          link: `/destinations/${stringToSlug(
+            `${destination.country}-${destination.stateName}`
+          )}/${stringToSlug(`${destination.city}`)}`,
+          image: destination.previewImage.filename,
+          label: `${destination.city}, ${destination.stateName}`,
+          countryCode: destination.country,
+        };
+      });
+  }
 });
 </script>
 <template>
@@ -75,12 +109,12 @@ const carouselElements = computed(() => {
       <h1 class="titles">Browse destinations</h1>
 
       <DestinationsSearchBar v-model="queryRef" />
-      <!-- <div class="destinations__header__filtering">
+      <div class="destinations__header__filtering">
         <button
           class="destinations__header__filtering__tag tags"
           :class="{
             'destinations__header__filtering__tag--selected':
-              tagsSelectedRef.includes(tag),
+              tagsSelectedRef === tag,
           }"
           v-for="(tag, i) in tags"
           :key="i"
@@ -88,7 +122,7 @@ const carouselElements = computed(() => {
         >
           {{ tag }}
         </button>
-      </div> -->
+      </div>
     </div>
     <div class="destinations__top">
       <Transition>
