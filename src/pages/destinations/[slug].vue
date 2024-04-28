@@ -44,8 +44,9 @@ const state = story.value.content.statesList.find(
       :alt="state.mobileBanner.alt"
     />
   </picture>
-  <Container v-for="destination in state.destinationsList">
+  <Container>
     <NuxtLink
+      v-for="destination in state.destinationsList"
       class="destination"
       :to="`${stringToSlug(state.country)}-${stringToSlug(
         state.name
