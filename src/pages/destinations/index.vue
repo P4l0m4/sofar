@@ -58,9 +58,13 @@ const matchingDestinations = computed(() => {
 const tagsSelectedRef = ref("");
 
 const tags = computed(() => {
-  return destinations.value.flatMap((destination: Destination) => {
+  let allTags = destinations.value.flatMap((destination: Destination) => {
     return destination.geographicalCategories;
   });
+
+  let uniqueTags = new Set(allTags);
+
+  return Array.from(uniqueTags);
 });
 
 const addOrRemoveTag = (tag: string) => {
