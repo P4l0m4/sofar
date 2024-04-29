@@ -794,6 +794,7 @@ onMounted(() => {
         background-color: $base-color;
         opacity: 0.8;
         border-radius: $radius $radius 0 0;
+        color: $text-color;
         gap: 0.5rem;
         padding: 0.5rem;
         align-items: center;
