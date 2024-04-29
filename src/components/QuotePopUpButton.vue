@@ -4,11 +4,13 @@ import { ref } from "vue";
 const showQuoteForm = ref(false);
 interface Props {
   color?: string;
+  background?: string;
   label?: string;
   primary?: boolean;
 }
 const props = withDefaults(defineProps<Props>(), {
   color: "#06067c",
+  background: "#fffdfa",
   label: "Request a quote",
   primary: false,
 });
@@ -24,9 +26,9 @@ function closePopUp() {
     @click="showQuoteForm = !showQuoteForm"
     @click.prevent
     :style="{
-      backgroundColor: props.color,
+      backgroundColor: props.background,
       borderColor: props.color,
-      color: '#04045c',
+      color: props.color,
     }"
   >
     {{ props.label }}

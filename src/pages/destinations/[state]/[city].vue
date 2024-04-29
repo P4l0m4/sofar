@@ -69,6 +69,7 @@ const city = state.destinationsList.find(
       </div>
     </NuxtLink>
   </section>
+  <DestinationsHowToBook :city="city.city" />
 </template>
 <style scoped lang="scss">
 .city-banner {
