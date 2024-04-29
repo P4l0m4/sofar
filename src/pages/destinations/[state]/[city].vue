@@ -48,7 +48,29 @@ const city = state.destinationsList.find(
       :alt="city.descriptionImage.alt"
     />
   </section>
-
+  <Container>
+    <h2 class="titles">Discover iconic attractions</h2>
+    <div
+      v-for="attraction in city.attractions"
+      class="destination"
+      :key="attraction.name"
+    >
+      <img
+        class="destination__img"
+        :src="attraction.image.filename"
+        :alt="attraction.image.alt"
+      />
+      <div class="destination__headlines">
+        <h1 class="subtitles">
+          {{ attraction.name }}
+        </h1>
+        <p class="paragraphs">
+          {{ attraction.details }}
+        </p>
+        <QuotePopUpButton :label="`Fly to ${city.city}`" />
+      </div>
+    </div>
+  </Container>
   <section class="points-of-interest" v-if="city.pointsOfInterest.length > 0">
     <NuxtLink
       v-for="element in city.pointsOfInterest"
@@ -58,7 +80,7 @@ const city = state.destinationsList.find(
       :style="{ backgroundImage: `url(${element.picture.filename})` }"
     >
       <div class="points-of-interest__point-of-interest__headlines">
-        <h3 class="titles">
+        <h3 class="subtitles">
           {{ element.name }}
         </h3>
         <p class="paragraphs">
@@ -207,6 +229,33 @@ const city = state.destinationsList.find(
   }
 }
 
+.destination {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+  width: 100%;
+
+  @media (min-width: $big-tablet-screen) {
+    gap: 2rem;
+    flex-direction: row;
+  }
+
+  &__img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    max-width: 500px;
+  }
+
+  &__headlines {
+    padding: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+  }
+}
+
 .points-of-interest {
   display: flex;
   gap: 1rem;
@@ -222,7 +271,7 @@ const city = state.destinationsList.find(
   @media (min-width: $big-tablet-screen) {
     gap: 2rem;
     padding: 4rem 2rem;
-    height: 100svh;
+    height: 70svh;
   }
 
   &__point-of-interest {
@@ -262,14 +311,15 @@ const city = state.destinationsList.find(
       gap: 1rem;
       justify-content: space-between;
       color: $text-color-alt;
-      height: 60%;
-      max-height: 60%;
-      min-height: 60%;
+      height: 50%;
+      max-height: 50%;
+      min-height: 50%;
 
       @media (min-width: $big-tablet-screen) {
-        height: 40%;
-        max-height: 40%;
-        min-height: 40%;
+        height: 60%;
+        max-height: 60%;
+        min-height: 60%;
+        padding: 2rem;
       }
 
       & .titles {
