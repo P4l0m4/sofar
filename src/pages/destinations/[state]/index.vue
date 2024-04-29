@@ -2,7 +2,8 @@
 import { stringToSlug } from "~/utils/slugify";
 const story = await useAsyncStoryblok("destinations", { version: "published" });
 const route = useRoute();
-const stateSlug = route.params.slug;
+const stateSlug = route.params.state;
+
 //type for destination
 interface Destination {
   city: string;
@@ -173,6 +174,7 @@ const state = story.value.content.statesList.find(
     width: 100%;
     height: 300px;
     object-fit: cover;
+    max-width: 500px;
   }
 
   &__headlines {

@@ -5,10 +5,12 @@ const showQuoteForm = ref(false);
 interface Props {
   color?: string;
   label?: string;
+  primary?: boolean;
 }
 const props = withDefaults(defineProps<Props>(), {
   color: "#06067c",
   label: "Request a quote",
+  primary: false,
 });
 
 function closePopUp() {
@@ -17,6 +19,20 @@ function closePopUp() {
 </script>
 <template>
   <button
+    v-if="props.primary"
+    class="button-primary"
+    @click="showQuoteForm = !showQuoteForm"
+    @click.prevent
+    :style="{
+      backgroundColor: props.color,
+      borderColor: props.color,
+      color: '#04045c',
+    }"
+  >
+    {{ props.label }}
+  </button>
+  <button
+    v-if="!props.primary"
     class="button-secondary"
     @click="showQuoteForm = !showQuoteForm"
     @click.prevent
@@ -57,6 +73,12 @@ function closePopUp() {
 .button-secondary {
   border-color: $primary-color;
   color: $text-color-alt;
+  @media (min-width: $big-tablet-screen) {
+    width: fit-content;
+  }
+}
+
+.button-primary {
   @media (min-width: $big-tablet-screen) {
     width: fit-content;
   }
