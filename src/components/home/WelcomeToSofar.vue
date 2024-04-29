@@ -25,7 +25,7 @@
       >
       <QuotePopUpButton />
     </div>
-    <img class="welcome-to-sofar__img" src="@/assets/images/clouds.png" />
+    <!-- <img class="welcome-to-sofar__img" src="@/assets/images/clouds.png" /> -->
   </div>
 </template>
 <style lang="scss" scoped>
@@ -91,19 +91,19 @@
     }
   }
 
-  &__img {
-    position: absolute;
-    bottom: -12rem;
-    left: 0;
-    width: 100%;
-    height: 440px;
-    pointer-events: none;
-    display: none;
-    z-index: 1;
+  // &__img {
+  //   position: absolute;
+  //   bottom: -12rem;
+  //   left: 0;
+  //   width: 100%;
+  //   height: 440px;
+  //   pointer-events: none;
+  //   display: none;
+  //   z-index: 1;
 
-    @media (min-width: $big-tablet-screen) {
-      display: block;
-    }
-  }
+  //   @media (min-width: $big-tablet-screen) {
+  //     display: block;
+  //   }
+  // }
 }
 </style>

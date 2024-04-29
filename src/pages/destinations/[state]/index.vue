@@ -34,9 +34,9 @@ const state = story.value.content.statesList.find(
       <h1 class="state-banner__headlines__title titles">
         Fly to {{ state.name }}
       </h1>
-      <h1 class="state-banner__headlines__subtitle subtitles">
+      <h2 class="state-banner__headlines__subtitle subtitles">
         Choose your destination
-      </h1>
+      </h2>
     </div>
 
     <img
