@@ -37,7 +37,8 @@ const city = state.destinationsList.find(
       <p class="paragraphs">{{ city.description }}</p>
       <QuotePopUpButton
         :label="`Fly to ${city.city}`"
-        color="#fffdfa"
+        color="#06067c"
+        background="#fffdfa"
         :primary="true"
       />
     </div>
