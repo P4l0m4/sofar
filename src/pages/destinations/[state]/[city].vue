@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { stringToSlug } from "~/utils/slugify";
+import { onMounted, ref } from "vue";
 const story = await useAsyncStoryblok("destinations", { version: "published" });
 const route = useRoute();
 const citySlug = route.params.city;
@@ -12,6 +13,42 @@ const state = story.value.content.statesList.find(
 const city = state.destinationsList.find(
   (d) => stringToSlug(d.city) === citySlug
 );
+
+import mapboxgl from "mapbox-gl";
+const config = useRuntimeConfig();
+const mapRef = ref();
+mapboxgl.accessToken = config.public.MAP_BOX_API_KEY;
+
+onMounted(() => {
+  const map = new mapboxgl.Map({
+    container: mapRef.value,
+    style: "mapbox://styles/flysofar/cluvditjb006w01r5enddch7y",
+    center: [-90.55174117682346, 35.15790888688196],
+    zoom: 3.5,
+    scrollZoom: false,
+    doubleClickZoom: false,
+    touchZoomRotate: false,
+    projection: "mercator",
+  });
+
+  if (window.innerWidth < 768) {
+    map.setCenter([-96.55174117682346, 35.15790888688196]);
+    map.setZoom(2.2);
+  }
+
+  city.airports.forEach((airport) => {
+    if (map) {
+      new mapboxgl.Marker({ color: "#06067c", anchor: "center" })
+        .setLngLat([airport.longitude, airport.latitude])
+        .addTo(map);
+      map.flyTo({
+        center: [airport.longitude, airport.latitude],
+        essential: true,
+        zoom: 10.5,
+      });
+    }
+  });
+});
 </script>
 <template>
   <picture class="city-banner">
@@ -20,9 +57,9 @@ const city = state.destinationsList.find(
       <h1 class="city-banner__headlines__title titles">
         Fly to {{ city.city }}
       </h1>
-      <h1 class="city-banner__headlines__subtitle subtitles">
+      <h2 class="city-banner__headlines__subtitle subtitles">
         Choose your destination
-      </h1>
+      </h2>
     </div>
 
     <img
@@ -48,6 +85,7 @@ const city = state.destinationsList.find(
       :alt="city.descriptionImage.alt"
     />
   </section>
+
   <Container>
     <h2 class="titles">Discover iconic attractions</h2>
     <div
@@ -71,6 +109,14 @@ const city = state.destinationsList.find(
       </div>
     </div>
   </Container>
+
+  <section class="city-airports">
+    <div ref="mapRef" class="map-container"></div>
+    <div class="city-airports__headlines">
+      <h2 class="titles">Airports in {{ city.city }}</h2>
+      <h3 class="subtitles">Find all airports in this area</h3>
+    </div>
+  </section>
   <section class="points-of-interest" v-if="city.pointsOfInterest.length > 0">
     <NuxtLink
       v-for="element in city.pointsOfInterest"
@@ -337,5 +383,30 @@ const city = state.destinationsList.find(
       }
     }
   }
+}
+
+.city-airports {
+  position: relative;
+  height: 100svh;
+  max-height: 800px;
+
+  &__headlines {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    color: $text-color;
+    position: absolute;
+    padding: 2rem 1rem;
+
+    @media (min-width: $big-tablet-screen) {
+      padding: 4rem 2rem;
+    }
+  }
+}
+.map-container {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
 }
 </style>

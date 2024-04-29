@@ -14,12 +14,7 @@ interface Destination {
     filename: string;
   };
 }
-//type for state
-interface State {
-  name: string;
-  destinationsList: Destination[];
-  country: string;
-}
+
 const state = story.value.content.statesList.find(
   (s) => `${stringToSlug(s.country)}-${stringToSlug(s.name)}` === stateSlug
 );
