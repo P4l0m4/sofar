@@ -180,5 +180,13 @@ const carouselElements = computed(() => {
       }
     }
   }
+
+  &__top {
+    margin-left: -1rem;
+
+    @media (min-width: $big-tablet-screen) {
+      margin-left: -2rem;
+    }
+  }
 }
 </style>
