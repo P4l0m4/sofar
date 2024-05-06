@@ -116,6 +116,24 @@ const statesList = computed(() => {
     };
   });
 });
+
+//function to add to the carousel only the cities that match a given state
+const filterByState = (state: string) => {
+  return matchingDestinations.value
+    .filter((destination: Destination) => {
+      return destination.stateName === state;
+    })
+    .map((destination: Destination) => {
+      return {
+        link: `/destinations/${stringToSlug(
+          `${destination.country}-${destination.stateName}`
+        )}/${stringToSlug(`${destination.city}`)}`,
+        image: destination.previewImage.filename,
+        label: `${destination.city}, ${destination.stateName}`,
+        countryCode: destination.country,
+      };
+    });
+};
 </script>
 <template>
   <section class="destinations">
@@ -157,7 +175,7 @@ const statesList = computed(() => {
           <h2 class="subtitles">Fly to {{ state.name }}</h2>
           <span class="destinations__top__category__link__line"></span
         ></NuxtLink>
-        <CarouselComponent :carouselElements="carouselElements" />
+        <CarouselComponent :carouselElements="filterByState(state.name)" />
       </div>
     </div>
   </section>
