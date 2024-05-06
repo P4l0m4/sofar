@@ -106,6 +106,16 @@ const carouselElements = computed(() => {
       });
   }
 });
+
+//list of all states
+const statesList = computed(() => {
+  return story.value.content.statesList.map((state: State) => {
+    return {
+      name: state.name,
+      country: state.country,
+    };
+  });
+});
 </script>
 <template>
   <section class="destinations">
@@ -132,6 +142,23 @@ const carouselElements = computed(() => {
       <Transition>
         <CarouselComponent :carouselElements="carouselElements"
       /></Transition>
+
+      <div
+        class="destinations__top__category"
+        v-for="state in statesList"
+        :key="state.name"
+      >
+        <NuxtLink
+          class="destinations__top__category__link"
+          :to="`/destinations/${stringToSlug(
+            `${state.country}-${state.name}`
+          )}`"
+          ><span class="destinations__top__category__link__line"></span>
+          <h2 class="subtitles">Fly to {{ state.name }}</h2>
+          <span class="destinations__top__category__link__line"></span
+        ></NuxtLink>
+        <CarouselComponent :carouselElements="carouselElements" />
+      </div>
     </div>
   </section>
 </template>
@@ -186,6 +213,27 @@ const carouselElements = computed(() => {
 
     @media (min-width: $big-tablet-screen) {
       margin-left: -2rem;
+    }
+    &__category {
+      &__link {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        padding-top: 1rem;
+
+        & .subtitles {
+          display: flex;
+          align-items: center;
+          text-align: center;
+          white-space: nowrap;
+        }
+
+        &__line {
+          width: 100%;
+          height: 1px;
+          background-color: $text-color;
+        }
+      }
     }
   }
 }

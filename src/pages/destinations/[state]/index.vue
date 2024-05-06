@@ -170,6 +170,9 @@ const state = story.value.content.statesList.find(
     height: 300px;
     object-fit: cover;
     max-width: 500px;
+    @media (min-width: $big-tablet-screen) {
+      min-width: 500px;
+    }
   }
 
   &__headlines {
