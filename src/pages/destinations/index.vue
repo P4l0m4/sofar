@@ -118,7 +118,7 @@ const statesList = computed(() => {
 });
 
 const filterByState = (state: string) => {
-  return matchingDestinations.value
+  return destinations.value
     .filter((destination: Destination) => {
       return destination.stateName === state;
     })
