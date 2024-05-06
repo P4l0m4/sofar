@@ -22,9 +22,17 @@ const article = story.value.content.articles.find(
     </div>
 
     <Container>
-      <div class="article__txt" v-for="paragraph in article.paragraphs">
-        <h3 class="subtitles">{{ paragraph.subtitle }}</h3>
-        <div class="paragraphs" v-html="renderRichText(paragraph.text)"></div>
+      <div class="article__content" v-for="paragraph in article.paragraphs">
+        <img
+          v-if="paragraph.image?.filename"
+          class="article__content__img"
+          :src="paragraph.image?.filename"
+          :alt="paragraph.image?.alt"
+        />
+        <div class="article__content__txt">
+          <h3 class="subtitles">{{ paragraph.subtitle }}</h3>
+          <div class="paragraphs" v-html="renderRichText(paragraph.text)"></div>
+        </div>
       </div>
     </Container>
   </article>
@@ -93,20 +101,47 @@ const article = story.value.content.articles.find(
       margin-top: 2rem;
     }
   }
-  &__txt {
+  &__content {
     display: flex;
-    flex-direction: column;
     gap: 1rem;
+    flex-direction: column;
 
-    &:deep(ul) {
-      list-style: square;
-      padding-top: 1rem;
-      padding-left: 1rem;
+    @media (min-width: $big-tablet-screen) {
+      gap: 2rem;
+      flex-direction: row;
     }
-    &:deep(a) {
-      text-decoration: line-through;
-      text-decoration-color: $secondary-color-faded;
-      text-decoration-thickness: 10px;
+
+    &__img {
+      width: 100%;
+      max-width: 500px;
+      height: 300px;
+      object-fit: cover;
+
+      @media (min-width: $big-tablet-screen) {
+        height: 100%;
+        max-height: 500px;
+        min-width: 500px;
+      }
+    }
+
+    &__txt {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      &:deep(ul) {
+        list-style: square;
+        padding-top: 1rem;
+        padding-left: 1rem;
+      }
+      &:deep(a) {
+        text-decoration: line-through;
+        text-decoration-color: $secondary-color-faded;
+        text-decoration-thickness: 10px;
+      }
+      &:deep(span) {
+        color: $text-color !important;
+      }
     }
   }
 }

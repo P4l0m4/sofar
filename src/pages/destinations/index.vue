@@ -117,7 +117,6 @@ const statesList = computed(() => {
   });
 });
 
-//function to add to the carousel only the cities that match a given state
 const filterByState = (state: string) => {
   return matchingDestinations.value
     .filter((destination: Destination) => {
