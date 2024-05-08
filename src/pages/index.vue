@@ -1,4 +1,6 @@
 <script setup>
+import CarouselComponent from "~/components/CarouselComponent.vue";
+
 const message = "%c 🌵TEKILAWEBFACTORY.COM🌵";
 console.log(message, `color: #1EB2BC; font-weight: bold; font-size: 16px;`);
 const carouselElements = [
@@ -48,11 +50,14 @@ const carouselElements = [
   <OurBases />
 
   <HomeOurBirds />
-  <h2 class="fleet titles">Sofar Fleet</h2>
+  <h2 class="section-title titles">Sofar Fleet</h2>
   <CarouselComponent :carouselElements="carouselElements" />
   <HomeWhyFlyWithSofar />
 
   <ClientReviews />
+  <h2 class="section-title titles">Top Destinations</h2>
+  <h3 class="section-subtitle subtitles">Book your next flight with us!</h3>
+  <CarouselComponent :carouselElements="carouselElements" />
   <BlogArticlesCarousel />
   <EmptysForm />
 </template>
@@ -172,11 +177,19 @@ const carouselElements = [
   }
 }
 
-.fleet {
+.section-title {
   padding: 2rem 1rem;
   padding-bottom: 0;
   @media (min-width: $big-tablet-screen) {
     padding: 4rem 2rem;
+    padding-bottom: 0;
+  }
+}
+.section-subtitle {
+  padding: 1rem;
+  padding-bottom: 0;
+  @media (min-width: $big-tablet-screen) {
+    padding: 1rem 2rem;
     padding-bottom: 0;
   }
 }
