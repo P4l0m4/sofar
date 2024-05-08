@@ -1,9 +1,33 @@
-<script setup>
-import CarouselComponent from "~/components/CarouselComponent.vue";
+<script setup lang="ts">
+import { stringToSlug } from "~/utils/slugify";
+const story = await useAsyncStoryblok("destinations", { version: "published" });
+const destinations = computed(() => {
+  return story.value.content.statesList.flatMap((state: State) => {
+    return state.destinationsList.map((destination) => {
+      return {
+        ...destination,
+        stateName: state.name,
+        country: state.country,
+      };
+    });
+  });
+});
 
+const destinationsCarouselElements = computed(() => {
+  return destinations.value.map((destination: Destination) => {
+    return {
+      link: `/destinations/${stringToSlug(
+        `${destination.country}-${destination.stateName}`
+      )}/${stringToSlug(`${destination.city}`)}`,
+      image: destination.previewImage.filename,
+      label: `${destination.city}, ${destination.stateName}`,
+      countryCode: destination.country,
+    };
+  });
+});
 const message = "%c 🌵TEKILAWEBFACTORY.COM🌵";
 console.log(message, `color: #1EB2BC; font-weight: bold; font-size: 16px;`);
-const carouselElements = [
+const fleetCarouselElements = [
   {
     link: "/aircraft/phenom-100",
     image: "/assets/images/100.webp",
@@ -51,13 +75,13 @@ const carouselElements = [
 
   <HomeOurBirds />
   <h2 class="section-title titles">Sofar Fleet</h2>
-  <CarouselComponent :carouselElements="carouselElements" />
+  <CarouselComponent :carouselElements="fleetCarouselElements" />
   <HomeWhyFlyWithSofar />
 
   <ClientReviews />
   <h2 class="section-title titles">Top Destinations</h2>
   <h3 class="section-subtitle subtitles">Book your next flight with us!</h3>
-  <CarouselComponent :carouselElements="carouselElements" />
+  <CarouselComponent :carouselElements="destinationsCarouselElements" />
   <BlogArticlesCarousel />
   <EmptysForm />
 </template>
