@@ -45,13 +45,18 @@ function closePopUp() {
   >
     {{ props.label }}
   </button>
-  <div class="pop-up-form" v-if="showQuoteForm" @click="showQuoteForm = false">
-    <QuoteForm
-      parent="quote-popup"
-      @click.stop
-      @form-submitted="closePopUp()"
-    />
-  </div>
+  <Teleport to="body">
+    <div
+      class="pop-up-form"
+      v-if="showQuoteForm"
+      @click="showQuoteForm = false"
+    >
+      <QuoteForm
+        parent="quote-popup"
+        @click.stop
+        @form-submitted="closePopUp()"
+      /></div
+  ></Teleport>
 </template>
 <style lang="scss" scoped>
 .pop-up-form {

@@ -16,9 +16,13 @@ const article = story.value.content.articles.find(
     >
       <h1 class="titles">{{ article.title }}</h1>
       <h2 class="subtitles">{{ article.TLDR }}</h2>
+
       <span class="article__banner__date">{{
         dayjs(article.date).format("MMMM DD, YYYY")
       }}</span>
+      <div class="article__banner__buttons">
+        <QuotePopUpButton color="#fffdfa" />
+      </div>
     </div>
 
     <Container>
@@ -71,7 +75,7 @@ const article = story.value.content.articles.find(
     padding: 2rem 1rem;
     // align-items: center;
     color: $text-color-alt;
-    height: 400px;
+    height: 100svh;
     gap: 1rem;
     position: relative;
     text-shadow: $shadow-text;
@@ -99,6 +103,29 @@ const article = story.value.content.articles.find(
     &__date {
       font-size: 1rem;
       margin-top: 2rem;
+    }
+
+    &__buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      width: 100%;
+      margin-top: 1rem;
+      z-index: 1;
+
+      @media (min-width: $big-tablet-screen) {
+        flex-direction: row;
+        margin-top: 2rem;
+      }
+
+      .button-primary {
+        background-color: $primary-color;
+        color: $text-color;
+
+        @media (min-width: $big-tablet-screen) {
+          width: fit-content;
+        }
+      }
     }
   }
   &__content {
