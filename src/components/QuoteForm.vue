@@ -143,6 +143,7 @@ function searchAirports(searchQuery) {
     .filter(
       (airport) =>
         normalizeString(airport.name).includes(normalizeString(searchQuery)) ||
+        normalizeString(airport.ident).includes(normalizeString(searchQuery)) ||
         normalizeString(airport.municipality).includes(
           normalizeString(searchQuery)
         ) ||
