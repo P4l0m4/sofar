@@ -151,7 +151,7 @@ function searchAirports(searchQuery) {
           airport.municipality
         ).slice(0, -1)}`.includes(normalizeString(searchQuery))
     )
-    .slice(0, 10);
+    .slice(0, 12);
 }
 
 function handleCloseOriginSearchResults() {
