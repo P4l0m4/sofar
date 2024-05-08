@@ -740,7 +740,7 @@ onMounted(() => {
           v-model="contactState.info"
           id="info"
           label="Additional information"
-          placeholder="I am flexible on the schedule, I have a pet, etc."
+          placeholder="Flexible schedule, pets, special luggages, others information..."
           :required="false"
           name="info"
         />

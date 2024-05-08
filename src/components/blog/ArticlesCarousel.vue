@@ -42,7 +42,7 @@ const scroll = (direction: "left" | "right") => {
 </script>
 <template>
   <section class="wrapper">
-    <h2 class="titles">Our latest news and articles</h2>
+    <h2 class="titles">Our Blog</h2>
     <div class="carousel">
       <Transition>
         <button

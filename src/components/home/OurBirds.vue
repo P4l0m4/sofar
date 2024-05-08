@@ -14,7 +14,7 @@
 
     <div class="our-birds__buttons">
       <NuxtLink class="button-primary" to="/aircraft"
-        >Learn more about our birds</NuxtLink
+        >Learn more about our aircraft</NuxtLink
       >
       <QuotePopUpButton color="#fffdfa" />
     </div>

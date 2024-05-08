@@ -29,11 +29,12 @@ const carouselElements = [
       <NuxtLink class="index__banner__headlines__logo" to="/">
         <img src="@/assets/images/logo-light.svg"
       /></NuxtLink>
-
-      <h1 class="index__banner__headlines__title titles">
-        Private Jet Charter
-      </h1>
+      <h2 class="index__banner__headlines__subtitle subtitles">
+        Make It Anywhere ™
+      </h2>
     </div>
+
+    <h1 class="index__banner__title titles">Book your next flight with us!</h1>
 
     <QuoteForm parent="home" />
 
@@ -42,13 +43,12 @@ const carouselElements = [
       src="@/assets/images/landscape-mobile.webp"
       alt="banner image"
     />
-    <h2 class="index__banner__subtitle subtitles">Make It Anywhere</h2></picture
-  >
+  </picture>
   <HomeWelcomeToSofar />
   <OurBases />
 
   <HomeOurBirds />
-  <h2 class="fleet titles">SoFar Fleet</h2>
+  <h2 class="fleet titles">Sofar Fleet</h2>
   <CarouselComponent :carouselElements="carouselElements" />
   <HomeWhyFlyWithSofar />
 
@@ -65,8 +65,10 @@ const carouselElements = [
   max-height: 800px;
   width: 100%;
   padding: 1rem;
+  padding-bottom: 3rem;
   flex-direction: column;
-  justify-content: center;
+  justify-content: end;
+
   gap: 1rem;
   position: relative;
 
@@ -99,12 +101,17 @@ const carouselElements = [
 
   &__headlines {
     display: flex;
-    flex-direction: column;
     gap: 1rem;
-    z-index: 1;
     color: $text-color-alt;
+    position: absolute;
+    inset: 1rem;
+    bottom: inherit;
+    margin: auto;
+    align-items: end;
 
     @media (min-width: $big-tablet-screen) {
+      inset: 2rem;
+      bottom: inherit;
       gap: 2rem;
     }
 
@@ -117,38 +124,43 @@ const carouselElements = [
         height: 60px;
 
         @media (min-width: $big-tablet-screen) {
-          width: 200px;
-          height: 90px;
+          width: 150px;
+          height: 70px;
         }
       }
     }
-
-    &__title {
-      // white-space: nowrap;
-      display: flex;
-      line-height: 2.5rem;
+    &__subtitle {
       color: $text-color-alt;
-      height: fit-content;
+      line-height: 1.6rem;
       width: fit-content;
+      height: fit-content;
+      opacity: 0.8;
+      font-family: "Custom";
+      font-weight: 100;
+      white-space: nowrap;
 
       @media (min-width: $big-tablet-screen) {
-        line-height: 2rem;
+        gap: 2rem;
+        display: flex;
+        line-height: 1.4rem;
+        justify-content: center;
+        width: 100%;
       }
     }
   }
-  &__subtitle {
+  &__title {
+    // white-space: nowrap;
+    display: flex;
+    line-height: 2.5rem;
     color: $text-color-alt;
-    line-height: 1.6rem;
-    position: absolute;
-    inset: 2rem;
-    bottom: inherit;
-    margin: auto;
-    width: fit-content;
     height: fit-content;
-    opacity: 0.8;
-    font-family: "Custom";
-    font-weight: 100;
+    width: fit-content;
+
+    @media (min-width: $big-tablet-screen) {
+      line-height: 2rem;
+    }
   }
+
   &__img {
     position: absolute;
     top: 0;
