@@ -3,36 +3,6 @@
     <source media="(min-width: 1100px)" srcset="@/assets/images/birds.webp" />
 
     <h2 class="plane__title titles">Phenom 100</h2>
-    <div class="plane__stats">
-      <div class="plane__stats__stat">
-        <p class="plane__stats__stat__name paragraphs">Cruise speed</p>
-        <p class="plane__stats__stat__figure subtitles">
-          290
-          <span class="plane__stats__stat__figure__small-text">Knots /</span>
-          333,726
-          <span class="plane__stats__stat__figure__small-text">Mph</span>
-        </p>
-      </div>
-      <div class="plane__stats__stat">
-        <p class="plane__stats__stat__name paragraphs">Range</p>
-        <p class="plane__stats__stat__figure subtitles">
-          1,803 <span class="plane__stats__stat__figure__small-text">Nm</span>
-        </p>
-      </div>
-      <div class="plane__stats__stat">
-        <p class="plane__stats__stat__name paragraphs">Payload</p>
-        <p class="plane__stats__stat__figure subtitles">
-          2204 <span class="plane__stats__stat__figure__small-text">Lbs</span>
-        </p>
-      </div>
-      <div class="plane__stats__stat">
-        <p class="plane__stats__stat__name paragraphs">Seating</p>
-        <p class="plane__stats__stat__figure subtitles">
-          6
-          <span class="plane__stats__stat__figure__small-text">+ 2 pilots</span>
-        </p>
-      </div>
-    </div>
 
     <div class="plane__tags">
       <span class="plane__tags__tag tags"
@@ -92,7 +62,7 @@
     </div>
     <img
       class="plane-info-horizontal__img"
-      src="@/assets/images/phenom-100/phenom-100-plane-specs.webp"
+      src="@/assets/images/phenom-100/phenom-100-blue-dots.svg"
       alt="plane info image"
     />
   </section>

@@ -6,36 +6,6 @@ import OurBases from '~/components/OurBases.vue';
       srcset="@/assets/images/phenom-300/phenom-300-banner.webp" />
 
     <h2 class="plane__title titles">Phenom 300</h2>
-    <div class="plane__stats">
-      <div class="plane__stats__stat">
-        <p class="plane__stats__stat__name paragraphs">Cruise speed</p>
-        <p class="plane__stats__stat__figure subtitles">
-          290
-          <span class="plane__stats__stat__figure__small-text">Knots /</span>
-          333,726
-          <span class="plane__stats__stat__figure__small-text">Mph</span>
-        </p>
-      </div>
-      <div class="plane__stats__stat">
-        <p class="plane__stats__stat__name paragraphs">Range</p>
-        <p class="plane__stats__stat__figure subtitles">
-          1,803 <span class="plane__stats__stat__figure__small-text">Nm</span>
-        </p>
-      </div>
-      <div class="plane__stats__stat">
-        <p class="plane__stats__stat__name paragraphs">Payload</p>
-        <p class="plane__stats__stat__figure subtitles">
-          2204 <span class="plane__stats__stat__figure__small-text">Lbs</span>
-        </p>
-      </div>
-      <div class="plane__stats__stat">
-        <p class="plane__stats__stat__name paragraphs">Seating</p>
-        <p class="plane__stats__stat__figure subtitles">
-          6
-          <span class="plane__stats__stat__figure__small-text">+ 2 pilots</span>
-        </p>
-      </div>
-    </div>
 
     <div class="plane__tags">
       <span class="plane__tags__tag tags"
@@ -74,7 +44,7 @@ import OurBases from '~/components/OurBases.vue';
     </div>
     <img
       class="plane-info-horizontal__img"
-      src="@/assets/images/phenom-300/phenom-300-plane-specs.webp"
+      src="@/assets/images/phenom-300/phenom-300-blue-dots.svg"
       alt="plane info image"
     />
   </section>
@@ -107,22 +77,12 @@ import OurBases from '~/components/OurBases.vue';
       alt="plane info image"
     />
   </section>
-  <section class="plane-info-vertical">
-    <div class="plane-info-vertical__txt">
-      <h3 class="subtitles">Aircraft Specifics and Cabin Capability</h3>
 
-      <img
-        class="plane-info-vertical__txt__img"
-        src="@/assets/images/phenom-300/phenom-300-cabin-inside.svg"
-        alt="private jet cabin image"
-      />
-    </div>
-    <img
-      class="plane-info-vertical__img"
-      src="@/assets/images/phenom-300/phenom-300-cabin-2.webp"
-      alt="private jet cabin image"
-    />
-  </section>
+  <img
+    class="full-width-img"
+    src="@/assets/images/phenom-300/phenom-300-cabin-inside.webp"
+    alt="private jet cabin image"
+  />
 
   <section class="plane-gallery">
     <div class="plane-gallery__img">

@@ -1,38 +1,10 @@
 <template>
   <picture class="plane">
-    <source media="(min-width: 1100px)" srcset="@/assets/images/pc12.webp" />
+    <source
+      media="(min-width: 1100px)"
+      srcset="@/assets/images/pc-12/pc-12-banner.webp" />
 
     <h1 class="plane__title titles">PILATUS PC 12</h1>
-    <div class="plane__stats">
-      <div class="plane__stats__stat">
-        <p class="plane__stats__stat__name paragraphs">Cruise speed</p>
-        <p class="plane__stats__stat__figure subtitles">
-          290
-          <span class="plane__stats__stat__figure__small-text">Knots /</span>
-          333,726
-          <span class="plane__stats__stat__figure__small-text">Mph</span>
-        </p>
-      </div>
-      <div class="plane__stats__stat">
-        <p class="plane__stats__stat__name paragraphs">Range</p>
-        <p class="plane__stats__stat__figure subtitles">
-          1,803 <span class="plane__stats__stat__figure__small-text">Nm</span>
-        </p>
-      </div>
-      <div class="plane__stats__stat">
-        <p class="plane__stats__stat__name paragraphs">Payload</p>
-        <p class="plane__stats__stat__figure subtitles">
-          2204 <span class="plane__stats__stat__figure__small-text">Lbs</span>
-        </p>
-      </div>
-      <div class="plane__stats__stat">
-        <p class="plane__stats__stat__name paragraphs">Seating</p>
-        <p class="plane__stats__stat__figure subtitles">
-          6
-          <span class="plane__stats__stat__figure__small-text">+ 2 pilots</span>
-        </p>
-      </div>
-    </div>
 
     <div class="plane__tags">
       <span class="plane__tags__tag tags"
@@ -52,7 +24,10 @@
       >
     </div>
 
-    <img class="plane__img" src="@/assets/images/pc12.webp" alt="banner image"
+    <img
+      class="plane__img"
+      src="@/assets/images/pc-12/pc-12-banner.webp"
+      alt="banner image"
   /></picture>
   <section class="plane-info-horizontal">
     <div class="plane-info-horizontal__txt">
@@ -66,9 +41,10 @@
         the trust of countless travelers worldwide.
       </p>
     </div>
+
     <img
       class="plane-info-horizontal__img"
-      src="@/assets/images/pc-12/pc-12-plane-specs.webp"
+      src="@/assets/images/pc-12/pc-12-blue-dots.svg"
       alt="plane info image"
     />
   </section>
