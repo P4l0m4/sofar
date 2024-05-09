@@ -14,7 +14,7 @@ const mapRef = ref();
 const originAirport = ref(null);
 const destinationAirport = ref(null);
 const map = ref(null);
-const midpoint = ref([-60.55174117682346, 40.15790888688196]);
+const midpoint = ref([-120.55174117682346, 39.15790888688196]);
 
 const originLat = computed(() =>
   originAirport.value ? Number(originAirport.value.latitude_deg) : 0
@@ -23,10 +23,12 @@ const originLon = computed(() =>
   originAirport.value ? Number(originAirport.value.longitude_deg) : 0
 );
 const destinationLat = computed(() =>
-  destinationAirport.value ? Number(destinationAirport.value.latitude_deg) : 0
+  destinationAirport.value ? Number(destinationAirport.value.latitude_deg) : 39
 );
 const destinationLon = computed(() =>
-  destinationAirport.value ? Number(destinationAirport.value.longitude_deg) : 0
+  destinationAirport.value
+    ? Number(destinationAirport.value.longitude_deg)
+    : -140
 );
 
 const pathGeoJSON = ref({
@@ -50,12 +52,13 @@ function calculateMidpoint(lat1, lon1, lat2, lon2) {
     map.value.flyTo({
       center: midpoint.value,
       essential: true,
-      zoom: 1.5,
+      zoom: 3,
     });
   }
 }
 
 function getEmittedOriginAirport(airport) {
+  removeMarkersAndPopUp();
   originAirport.value = airport;
   calculateMidpoint(
     originLat.value,
@@ -66,6 +69,7 @@ function getEmittedOriginAirport(airport) {
   placeMarker(originAirport.value, destinationAirport.value);
 }
 function getEmittedDestinationAirport(airport) {
+  removeMarkersAndPopUp();
   destinationAirport.value = airport;
   calculateMidpoint(
     originLat.value,
@@ -84,7 +88,7 @@ function createMap() {
     container: mapRef.value,
     style: "mapbox://styles/flysofar/cluvditjb006w01r5enddch7y",
     center: midpoint.value,
-    zoom: 1,
+    zoom: 2,
     projection: "mercator",
     scrollZoom: false,
   });
@@ -122,7 +126,7 @@ function placeMarker() {
     .setLngLat([originLon.value, originLat.value])
     .addTo(map.value);
 
-  if (destinationLat.value !== 0 && destinationLon.value !== 0) {
+  if (destinationLat.value !== 39 && destinationLon.value !== -140) {
     destinationMarker.value = new mapboxgl.Marker({
       color: "#06067c",
       anchor: "center",
@@ -133,8 +137,8 @@ function placeMarker() {
   if (
     originLat.value !== 0 &&
     originLon.value !== 0 &&
-    destinationLat.value !== 0 &&
-    destinationLon.value !== 0
+    destinationLat.value !== 39 &&
+    destinationLon.value !== -140
   ) {
     const distanceKm = haversineDistance(
       [originLon.value, originLat.value],
