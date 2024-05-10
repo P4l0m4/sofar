@@ -7,12 +7,16 @@ const isMenuOpen = ref(true);
 let lastScrollTop = 0;
 const currentIndex = ref(null);
 const childrenToDisplay = ref([]);
+const menuItemsRef = ref(null);
 
 const props = defineProps({
   menuItems: Array,
 });
 
-props.menuItems.forEach((item) => {
+menuItemsRef.value = props.menuItems;
+menuItemsRef.value[0].link = "/";
+
+menuItemsRef.value.forEach((item) => {
   childrenToDisplay.value.push(item.children);
 });
 
