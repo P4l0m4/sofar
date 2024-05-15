@@ -13,10 +13,10 @@
     </p>
 
     <div class="our-birds__buttons">
-      <NuxtLink class="button-primary" to="/aircraft"
+      <NuxtLink class="button-primary--light" to="/aircraft"
         >Learn more about our aircraft</NuxtLink
       >
-      <QuotePopUpButton color="#fffdfa" />
+      <QuotePopUpButton :style="`light`" />
     </div>
 
     <img
@@ -90,10 +90,7 @@
       margin-top: 2rem;
     }
 
-    .button-primary {
-      background-color: $primary-color;
-      color: $text-color;
-
+    .button-primary--light {
       @media (min-width: $big-tablet-screen) {
         width: fit-content;
       }

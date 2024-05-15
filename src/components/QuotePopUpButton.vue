@@ -3,14 +3,12 @@ import { ref } from "vue";
 
 const showQuoteForm = ref(false);
 interface Props {
-  color?: string;
-  background?: string;
+  style?: string;
   label?: string;
   primary?: boolean;
 }
 const props = withDefaults(defineProps<Props>(), {
-  color: "#06067c",
-  background: "#fffdfa",
+  style: "dark",
   label: "Request a quote",
   primary: false,
 });
@@ -21,27 +19,34 @@ function closePopUp() {
 </script>
 <template>
   <button
-    v-if="props.primary"
-    class="button-primary"
+    v-if="props.primary && props.style === 'light'"
+    class="button-primary--light"
     @click="showQuoteForm = !showQuoteForm"
     @click.prevent
-    :style="{
-      backgroundColor: props.background,
-      borderColor: props.color,
-      color: props.color,
-    }"
   >
     {{ props.label }}
   </button>
   <button
-    v-if="!props.primary"
-    class="button-secondary"
+    v-if="props.primary && props.style === 'dark'"
+    class="button-primary--dark"
     @click="showQuoteForm = !showQuoteForm"
     @click.prevent
-    :style="{
-      color: props.color,
-      borderColor: props.color,
-    }"
+  >
+    {{ props.label }}
+  </button>
+  <button
+    v-if="!props.primary && props.style === 'light'"
+    class="button-secondary--light"
+    @click="showQuoteForm = !showQuoteForm"
+    @click.prevent
+  >
+    {{ props.label }}
+  </button>
+  <button
+    v-if="!props.primary && props.style === 'dark'"
+    class="button-secondary--dark"
+    @click="showQuoteForm = !showQuoteForm"
+    @click.prevent
   >
     {{ props.label }}
   </button>
@@ -77,15 +82,10 @@ function closePopUp() {
   }
 }
 
-.button-secondary {
-  border-color: $primary-color;
-  color: $text-color-alt;
-  @media (min-width: $big-tablet-screen) {
-    width: fit-content;
-  }
-}
-
-.button-primary {
+.button-secondary--light,
+.button-secondary--dark,
+.button-primary--light,
+.button-primary--dark {
   @media (min-width: $big-tablet-screen) {
     width: fit-content;
   }

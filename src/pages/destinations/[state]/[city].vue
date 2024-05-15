@@ -72,10 +72,10 @@ onMounted(() => {
     <div class="city-description__txt">
       <h2 class="titles">{{ city.city }}</h2>
       <p class="paragraphs">{{ city.description }}</p>
+
       <QuotePopUpButton
         :label="`Fly to ${city.city}`"
-        color="#06067c"
-        background="#fffdfa"
+        :style="`light`"
         :primary="true"
       />
     </div>
@@ -132,7 +132,11 @@ onMounted(() => {
         <p class="paragraphs">
           {{ element.details }}
         </p>
-        <NuxtLink class="button-primary" :to="element.link" target="_blank">
+        <NuxtLink
+          class="button-primary--light"
+          :to="element.link"
+          target="_blank"
+        >
           Know more
         </NuxtLink>
       </div>
@@ -291,6 +295,9 @@ onMounted(() => {
     height: 300px;
     object-fit: cover;
     max-width: 500px;
+    @media (min-width: $big-tablet-screen) {
+      min-width: 400px;
+    }
   }
 
   &__headlines {
@@ -376,7 +383,7 @@ onMounted(() => {
         text-shadow: $shadow-text;
       }
 
-      & .button-primary {
+      & .button-primary--light {
         color: $text-color;
         border: 1px solid $text-color-alt;
         background-color: $primary-color;

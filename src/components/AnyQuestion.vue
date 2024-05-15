@@ -1,7 +1,7 @@
 <template>
   <section class="any-question">
     <h2 class="titles">Any question ?</h2>
-    <a class="button-primary" href="tel:+19144686800"
+    <a class="button-primary--light" href="tel:+19144686800"
       >Get in touch with our team</a
     >
   </section>
@@ -26,9 +26,7 @@
     color: $text-color-alt;
   }
 
-  & .button-primary {
-    background-color: $primary-color;
-    color: $text-color;
+  & .button-primary--light {
     width: 100%;
 
     @media (min-width: $big-tablet-screen) {

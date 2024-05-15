@@ -21,7 +21,7 @@ const article = story.value.content.articles.find(
         dayjs(article.date).format("MMMM DD, YYYY")
       }}</span>
       <div class="article__banner__buttons">
-        <QuotePopUpButton color="#fffdfa" />
+        <QuotePopUpButton :style="`light`" />
       </div>
     </div>
 
@@ -118,10 +118,7 @@ const article = story.value.content.articles.find(
         margin-top: 2rem;
       }
 
-      .button-primary {
-        background-color: $primary-color;
-        color: $text-color;
-
+      .button-primary--light {
         @media (min-width: $big-tablet-screen) {
           width: fit-content;
         }

@@ -155,7 +155,7 @@ async function validEmptyState() {
         </div>
       </div>
       <button
-        class="emptys-form__fields__button button-primary"
+        class="emptys-form__fields__button button-primary--dark"
         @click="validEmptyState()"
         v-if="!wasSent"
       >
@@ -169,7 +169,7 @@ async function validEmptyState() {
         /></Transition>
       </button>
       <button
-        class="emptys-form__fields__button emptys-form__fields__button--sent button-primary"
+        class="emptys-form__fields__button emptys-form__fields__button--sent button-primary--dark"
         v-if="wasSent"
       >
         <span>Thank you !</span

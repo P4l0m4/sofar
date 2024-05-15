@@ -126,10 +126,10 @@ const scroll = (direction: "left" | "right") => {
     position: absolute;
     top: 0;
     bottom: 0;
-    left: 2rem;
+    left: 12rem;
     margin: auto;
-    width: 80px;
-    height: 80px;
+    width: 40px;
+    height: 40px;
     background-color: $base-color;
     z-index: 1;
     border: none;
@@ -141,6 +141,7 @@ const scroll = (direction: "left" | "right") => {
 
     & img {
       transform: rotate(90deg);
+      width: 1rem;
     }
 
     @media (min-width: $big-tablet-screen) {
@@ -149,7 +150,7 @@ const scroll = (direction: "left" | "right") => {
 
     &:nth-of-type(2) {
       left: auto;
-      right: 2rem;
+      right: 12rem;
       background-image: linear-gradient(-90deg, $base-color, transparent);
       & img {
         transform: rotate(-90deg);

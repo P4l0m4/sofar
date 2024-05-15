@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from "vue";
-import IconComponent from "./IconComponent.vue";
 
 const scrollableElement = ref({});
 const arrow = ref(null);
@@ -8,10 +7,13 @@ const isMenuOpen = ref(true);
 let lastScrollTop = 0;
 const currentIndex = ref(null);
 const currentIndexSublinks = ref(null);
+const desktopMenuItemsRef = ref(null);
 
 const props = defineProps({
   menuItems: Array,
 });
+desktopMenuItemsRef.value = props.menuItems;
+desktopMenuItemsRef.value[0].link = "/booking";
 
 function scrolling(index) {
   const element = scrollableElement.value[`sublinks-${index}`];
@@ -54,7 +56,7 @@ function shouldDisplayArrow(index) {
         </NuxtLink>
         <ul class="aside__nav__ul" @mouseleave="currentIndex === null">
           <li
-            v-for="(item, i) in menuItems"
+            v-for="(item, i) in desktopMenuItemsRef"
             :key="i"
             class="aside__nav__ul__li scale-on-hover"
             :class="{

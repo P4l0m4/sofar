@@ -66,9 +66,17 @@
       alt="plane info image"
     />
   </section>
+  <iframe
+    class="full-screen-video"
+    src="https://www.youtube.com/embed/uxzphXYWoQI?si=P1hoPbxjJONbZ5ZF"
+    title="YouTube video player"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+  ></iframe>
   <section class="plane-info-vertical">
     <div class="plane-info-vertical__txt">
-      <h3 class="subtitles">Exceptional comfort and spaciousness</h3>
+      <h3 class="subtitles">The cabin</h3>
       <p class="paragraphs">
         The Phenom 100 also claims to have the tallest and widest cross section,
         cabin dimensions in its class, offering more head and leg room than its
@@ -89,11 +97,6 @@
         room for 4 to 6 passengers in the cabin without feeling cramped. The
         large windows give the cabin a light and bright feel-good ambience.
       </p>
-      <img
-        class="plane-info-vertical__txt__img"
-        src="@/assets/images/phenom-100/phenom-100-cabin-inside.webp"
-        alt="private jet cabin image"
-      />
     </div>
     <img
       class="plane-info-vertical__img"
@@ -110,109 +113,16 @@
       <p class="paragraphs">At Cruise Altitude of 41,000ft</p>
       <p class="paragraphs">110V Outlets (2)</p>
       <p class="paragraphs">Satellite Phone/Text Capability/Airtext</p>
-      <img
-        class="plane-info-vertical__txt__img"
-        src="@/assets/images/phenom-100/phenom-100-luggage-capacity.svg"
-        alt="private jet cabin image"
-      />
     </div>
-    <video class="plane-info-vertical__video" autoplay muted loop>
-      <source src="@/assets/images/phenom-100/video.mp4" type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
+    <img
+      class="plane-info-vertical__img"
+      src="@/assets/images/placeholder.svg"
+      alt="private jet cabin image"
+    />
   </section>
-
-  <section class="plane-gallery">
-    <div class="plane-gallery__img">
-      <img
-        src="@/assets/images/phenom-100/phenom-100-1.webp"
-        alt="phenom-100"
-      />
-    </div>
-    <div class="plane-gallery__img">
-      <img
-        src="@/assets/images/phenom-100/phenom-100-2.webp"
-        alt="phenom-100"
-      />
-    </div>
-    <div class="plane-gallery__img">
-      <img
-        src="@/assets/images/phenom-100/phenom-100-3.webp"
-        alt="phenom-100"
-      />
-    </div>
-    <div class="plane-gallery__img">
-      <img
-        src="@/assets/images/phenom-100/phenom-100-4.webp"
-        alt="phenom-100"
-      />
-    </div>
-    <div class="plane-gallery__img">
-      <img
-        src="@/assets/images/phenom-100/phenom-100-1.webp"
-        alt="phenom-100"
-      />
-    </div>
-    <div class="plane-gallery__img">
-      <img
-        src="@/assets/images/phenom-100/phenom-100-5.webp"
-        alt="phenom-100"
-      />
-    </div>
-    <div class="plane-gallery__img">
-      <img
-        src="@/assets/images/phenom-100/phenom-100-6.webp"
-        alt="phenom-100"
-      />
-    </div>
-    <div class="plane-gallery__img">
-      <img
-        src="@/assets/images/phenom-100/phenom-100-7.webp"
-        alt="phenom-100"
-      />
-    </div>
-    <div class="plane-gallery__img">
-      <img
-        src="@/assets/images/phenom-100/phenom-100-8.webp"
-        alt="phenom-100"
-      />
-    </div>
-    <div class="plane-gallery__img">
-      <img
-        src="@/assets/images/phenom-100/phenom-100-9.webp"
-        alt="phenom-100"
-      />
-    </div>
-    <div class="plane-gallery__img">
-      <img
-        src="@/assets/images/phenom-100/phenom-100-10.webp"
-        alt="phenom-100"
-      />
-    </div>
-    <div class="plane-gallery__img">
-      <img
-        src="@/assets/images/phenom-100/phenom-100-11.webp"
-        alt="phenom-100"
-      />
-    </div>
-    <div class="plane-gallery__img">
-      <img
-        src="@/assets/images/phenom-100/phenom-100-12.webp"
-        alt="phenom-100"
-      />
-    </div>
-    <div class="plane-gallery__img">
-      <img
-        src="@/assets/images/phenom-100/phenom-100-13.webp"
-        alt="phenom-100"
-      />
-    </div>
-    <div class="plane-gallery__img">
-      <img
-        src="@/assets/images/phenom-100/phenom-100-14.webp"
-        alt="phenom-100"
-      />
-    </div>
+  <section class="standard-spacing centered-content">
+    <h2 class="titles">Have you been impressed by the Phenom 100 ?</h2>
+    <QuotePopUpButton :primary="true" />
   </section>
   <OurBases />
   <EmptysForm />

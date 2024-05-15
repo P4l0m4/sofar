@@ -617,7 +617,7 @@ onMounted(() => {
         </div>
         <Transition>
           <button
-            class="form__fields__button button-primary"
+            class="form__fields__button button-primary--dark"
             @click="validFlightState()"
           >
             Next step
@@ -746,7 +746,7 @@ onMounted(() => {
         />
 
         <button
-          class="form__fields__button button-primary"
+          class="form__fields__button button-primary--dark"
           @click="validContactState()"
           v-if="!wasSent"
         >
@@ -760,7 +760,7 @@ onMounted(() => {
           /></Transition>
         </button>
         <button
-          class="form__fields__button form__fields__button--sent button-primary"
+          class="form__fields__button form__fields__button--sent button-primary--dark"
           v-if="wasSent"
         >
           <span>Thank you !</span

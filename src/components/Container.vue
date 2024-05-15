@@ -13,7 +13,7 @@
   animation: fading 0.4s;
   gap: 2rem;
 
-  @media (min-width: $big-tablet-screen) {
+  @media (min-width: $laptop-screen) {
     width: calc(100vw - 18rem);
     padding: 4rem 2rem;
     gap: 4rem;

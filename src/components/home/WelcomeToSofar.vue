@@ -20,7 +20,7 @@
       dimension of private jet travel and turning travel dreams into reality.
     </p>
     <div class="welcome-to-sofar__buttons">
-      <NuxtLink class="button-primary" to="/services"
+      <NuxtLink class="button-primary--dark" to="/services"
         >Learn more about our services</NuxtLink
       >
       <QuotePopUpButton />
@@ -81,10 +81,7 @@
       max-width: calc(100% - 160px);
     }
 
-    .button-primary {
-      background-color: $secondary-color;
-      color: $text-color-alt;
-
+    .button-primary--dark {
       @media (min-width: $big-tablet-screen) {
         width: fit-content;
       }

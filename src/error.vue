@@ -10,7 +10,7 @@ defineProps(["error"]);
       <h2 class="subtitles">We didn't find the page you where looking for.</h2>
       <NuxtLink
         to="/"
-        class="button-primary"
+        class="button-primary--dark"
         aria-label="retour à la page d'accueil"
         >Go back to home page</NuxtLink
       >

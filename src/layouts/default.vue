@@ -78,7 +78,7 @@ const menuItems = [
   },
   {
     label: "Aircraft",
-    link: "/aircraft",
+    link: "",
     icon: "airlines",
     alt: "menu icon aircraft",
     children: [
@@ -100,17 +100,17 @@ const menuItems = [
         icon: "airplanemode_active",
         alt: "menu icon phenom 300",
       },
-      {
-        label: "Safety",
-        link: "/aircraft/safety",
-        icon: "health_and_safety",
-        alt: "menu icon safety",
-      },
+      // {
+      //   label: "Safety",
+      //   link: "/aircraft/safety",
+      //   icon: "health_and_safety",
+      //   alt: "menu icon safety",
+      // },
     ],
   },
   {
     label: "About us",
-    link: "/about-us",
+    link: "",
     icon: "info",
     alt: "menu icon about-us",
     children: [
@@ -126,12 +126,12 @@ const menuItems = [
         icon: "article",
         alt: "menu icon blog",
       },
-      {
-        label: "Contact",
-        link: "/about-us/contact",
-        icon: "alternate_email",
-        alt: "menu icon contact",
-      },
+      // {
+      //   label: "Contact",
+      //   link: "/about-us/contact",
+      //   icon: "alternate_email",
+      //   alt: "menu icon contact",
+      // },
     ],
   },
 ];

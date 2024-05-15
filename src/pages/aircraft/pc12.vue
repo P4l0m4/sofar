@@ -1,3 +1,4 @@
+import QuotePopUpButton from '~/components/QuotePopUpButton.vue';
 <template>
   <picture class="plane">
     <source
@@ -47,6 +48,17 @@
       src="@/assets/images/pc-12/pc-12-blue-dots.svg"
       alt="plane info image"
     />
+  </section>
+  <section class="plane-gallery-book">
+    <div class="plane-gallery-book__wrapper">
+      <img src="@/assets/images/placeholder.svg" alt="private jet image" />
+      <img src="@/assets/images/placeholder.svg" alt="private jet image" />
+    </div>
+    <div class="plane-gallery-book__wrapper">
+      <span class="titles">Make It Anywhere ™</span>
+      <img src="@/assets/images/placeholder.svg" alt="private jet image" />
+      <img src="@/assets/images/placeholder.svg" alt="private jet image" />
+    </div>
   </section>
   <section class="plane-info-vertical">
     <div class="plane-info-vertical__txt">
@@ -154,41 +166,9 @@
       alt="plane info image"
     />
   </section>
-
-  <section class="plane-gallery">
-    <div class="plane-gallery__img">
-      <img src="@/assets/images/pc-12/pc-12-1.webp" alt="pilatus pc 12" />
-    </div>
-    <div class="plane-gallery__img">
-      <img src="@/assets/images/pc-12/pc-12-2.webp" alt="pilatus pc 12" />
-    </div>
-    <div class="plane-gallery__img">
-      <img src="@/assets/images/pc-12/pc-12-3.webp" alt="pilatus pc 12" />
-    </div>
-    <div class="plane-gallery__img">
-      <img src="@/assets/images/pc-12/pc-12-4.webp" alt="pilatus pc 12" />
-    </div>
-    <div class="plane-gallery__img">
-      <img src="@/assets/images/pc-12/pc-12-1.webp" alt="pilatus pc 12" />
-    </div>
-    <div class="plane-gallery__img">
-      <img src="@/assets/images/pc-12/pc-12-5.webp" alt="pilatus pc 12" />
-    </div>
-    <div class="plane-gallery__img">
-      <img src="@/assets/images/pc-12/pc-12-1.webp" alt="pilatus pc 12" />
-    </div>
-    <div class="plane-gallery__img">
-      <img src="@/assets/images/pc-12/pc-12-6.webp" alt="pilatus pc 12" />
-    </div>
-    <div class="plane-gallery__img">
-      <img src="@/assets/images/pc-12/pc-12-1.webp" alt="pilatus pc 12" />
-    </div>
-    <div class="plane-gallery__img">
-      <img src="@/assets/images/pc-12/pc-12-7.webp" alt="pilatus pc 12" />
-    </div>
-    <div class="plane-gallery__img">
-      <img src="@/assets/images/pc-12/pc-12-8.webp" alt="pilatus pc 12" />
-    </div>
+  <section class="standard-spacing centered-content">
+    <h2 class="titles">Book your next flight with us!</h2>
+    <QuotePopUpButton :primary="true" />
   </section>
   <OurBases />
   <EmptysForm />
