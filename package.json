@@ -21,7 +21,8 @@
     "nuxt-jsonld": "^2.0.8",
     "nuxt-simple-sitemap": "^2.4.11",
     "pinia": "^2.0.30",
-    "ress": "^5.0.2"
+    "ress": "^5.0.2",
+    "yarn": "^1.22.22"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",

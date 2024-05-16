@@ -74,8 +74,10 @@ const fleetCarouselElements = [
   <OurBases />
 
   <HomeOurBirds />
-  <h2 class="section-title titles">Sofar Fleet</h2>
-  <CarouselComponent :carouselElements="fleetCarouselElements" />
+  <section>
+    <h2 class="section-title titles">Sofar Fleet</h2>
+    <CarouselComponent :carouselElements="fleetCarouselElements" />
+  </section>
   <HomeWhyFlyWithSofar />
 
   <ClientReviews />
@@ -201,14 +203,6 @@ const fleetCarouselElements = [
   }
 }
 
-.section-title {
-  padding: 2rem 1rem;
-  padding-bottom: 0;
-  @media (min-width: $big-tablet-screen) {
-    padding: 4rem 2rem;
-    padding-bottom: 0;
-  }
-}
 .section-subtitle {
   padding: 1rem;
   padding-bottom: 0;

@@ -235,6 +235,15 @@ input[type="search"]::-webkit-search-results-decoration {
   color: $secondary-color;
 }
 
+.section-title {
+  padding: 2rem 1rem;
+  padding-bottom: 0;
+  @media (min-width: $big-tablet-screen) {
+    padding: 4rem 2rem;
+    padding-bottom: 0;
+  }
+}
+
 .scale-on-hover {
   transition: transform 0.4s;
 
