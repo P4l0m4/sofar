@@ -471,7 +471,7 @@ onMounted(() => {
                 @click="handleSelectOriginResult(result)"
                 ><img
                   class="search-results__result__flag"
-                  :src="`assets/flags/${result.iso_country}.svg`"
+                  :src="`/assets/flags/${result.iso_country}.svg`"
                   alt="country flag"
                 />{{ result.name }}, {{ result.municipality }}</span
               >
@@ -505,7 +505,7 @@ onMounted(() => {
                 @click="handleSelectDestinationResult(result)"
                 ><img
                   class="search-results__result__flag"
-                  :src="`assets/flags/${result.iso_country}.svg`"
+                  :src="`/assets/flags/${result.iso_country}.svg`"
                   alt="country flag"
                 />
                 {{ result.name }}, {{ result.municipality }}
@@ -670,7 +670,7 @@ onMounted(() => {
               @click="phoneCodesListIsOpen = !phoneCodesListIsOpen"
               ><img
                 class="phone-codes__selected__flag"
-                :src="`assets/flags/${selectedPhoneCode.abbreviation}.svg`"
+                :src="`/assets/flags/${selectedPhoneCode.abbreviation}.svg`"
                 alt="country flag"
                 v-if="!phoneCodesListIsOpen" />
               <span v-if="!phoneCodesListIsOpen">{{
@@ -688,7 +688,7 @@ onMounted(() => {
                 :class="{
                   'phone-codes__selected__arrow--up': phoneCodesListIsOpen,
                 }"
-                :src="`assets/icons/arrow_scroll_dark.svg`"
+                :src="`/assets/icons/arrow_scroll_dark.svg`"
                 alt="arrow icon"
             /></span>
 
@@ -711,7 +711,7 @@ onMounted(() => {
                   "
                   ><img
                     class="phone-codes__list__element__flag"
-                    :src="`assets/flags/${element.abbreviation}.svg`"
+                    :src="`/assets/flags/${element.abbreviation}.svg`"
                     alt="country flag"
                   />{{ element.country }}</span
                 >
