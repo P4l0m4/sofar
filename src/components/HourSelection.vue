@@ -33,7 +33,7 @@ const isPM = computed(() => {
         :class="{
           'hour-selection__selected__arrow--up': rangeIsOpenRef,
         }"
-        :src="`assets/icons/arrow_scroll_dark.svg`"
+        :src="`/assets/icons/arrow_scroll_dark.svg`"
         alt="arrow icon"
     /></span>
     <Transition>
