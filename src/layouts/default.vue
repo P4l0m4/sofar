@@ -149,6 +149,8 @@ main {
   display: flex;
   flex-direction: column;
   min-height: 100svh;
+  max-width: 2000px;
+  margin: auto;
 }
 .v-enter-active,
 .v-leave-active {

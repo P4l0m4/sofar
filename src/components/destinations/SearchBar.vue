@@ -19,7 +19,7 @@ const model = defineModel<string | number>();
   box-shadow: $shadow;
   border-radius: 50px;
   padding: 0 1rem;
-  width: 100%;
+  width: calc(100% - 1rem);
   max-width: 500px;
 
   & input {

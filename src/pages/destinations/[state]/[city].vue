@@ -243,6 +243,7 @@ onMounted(() => {
   @media (min-width: $big-tablet-screen) {
     flex-direction: row;
     height: 100svh;
+    max-height: 1500px;
   }
 
   &__txt {
@@ -296,7 +297,7 @@ onMounted(() => {
     object-fit: cover;
     max-width: 500px;
     @media (min-width: $big-tablet-screen) {
-      min-width: 400px;
+      min-width: 500px;
     }
   }
 

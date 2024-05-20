@@ -1,3 +1,22 @@
+<script setup>
+const fleetCarouselElements = [
+  {
+    link: "/aircraft/phenom-100",
+    image: "/assets/images/100.webp",
+    label: "Phenom 100",
+  },
+  {
+    link: "/aicraft/phenom-300",
+    image: "/assets/images/300.webp",
+    label: "Phenom 300",
+  },
+  {
+    link: "/aircraft/pc12",
+    image: "/assets/images/12.webp",
+    label: "Pilatus PC 12",
+  },
+];
+</script>
 <template>
   <picture class="our-story-banner">
     <source
@@ -18,6 +37,93 @@
   </picture>
   <HomeWelcomeToSofar />
   <AboutTimeline />
+  <section>
+    <h2 class="section-title titles">Our Fleet</h2>
+    <p class="description paragraphs">
+      With our diverse range of aircraft, including the incredibly versatile
+      Pilatus PC-12 turbo-prop, the nimble and efficent Embraer Phenom 100, and
+      long- range light jet, Embraer Phenom 300, Sofar offers flexibility and
+      comfort for every journey. Whether you're traveling solo, with a small
+      group, or a large entourage, our meticulous fleet selection ensures that
+      we have the perfect aircraft to suit your needs. Depart at your preferred
+      time, fly directly to your destination, and experience the convenience of
+      private air travel without the constraints of rigid schedules or crowded
+      airports.
+    </p>
+    <CarouselComponent :carouselElements="fleetCarouselElements" />
+  </section>
+
+  <Container
+    ><h2 class="titles">Our Team</h2>
+    <div class="team">
+      <div class="team__card">
+        <img
+          class="team__card__img"
+          src="@/assets/images/our-story/p-lafond.webp"
+          alt="circular image"
+        />
+        <div class="team__card__txt">
+          <h3 class="team__card__name subtitles">P. Lafond</h3>
+          <span class="team__card__role paragraphs">CEO founder</span>
+        </div>
+      </div>
+      <div class="team__card">
+        <img
+          class="team__card__img"
+          src="@/assets/images/our-story/h-rodriguez.webp"
+          alt="circular image"
+        />
+        <div class="team__card__txt">
+          <h3 class="team__card__name subtitles">H. Rodriguez</h3>
+          <span class="team__card__role paragraphs">Head of operations</span>
+        </div>
+      </div>
+      <div class="team__card">
+        <img
+          class="team__card__img"
+          src="@/assets/images/our-story/j-sullenberg.webp"
+          alt="circular image"
+        />
+        <div class="team__card__txt">
+          <h3 class="team__card__name subtitles">J. Sullenberg</h3>
+          <span class="team__card__role paragraphs">CEO founder</span>
+        </div>
+      </div>
+      <div class="team__card">
+        <img
+          class="team__card__img"
+          src="@/assets/images/our-story/m-lafond.webp"
+          alt="circular image"
+        />
+        <div class="team__card__txt">
+          <h3 class="team__card__name subtitles">M. Lafond</h3>
+          <span class="team__card__role paragraphs">Chief marketing</span>
+        </div>
+      </div>
+      <div class="team__card">
+        <img
+          class="team__card__img"
+          src="@/assets/images/our-story/c-king.webp"
+          alt="circular image"
+        />
+        <div class="team__card__txt">
+          <h3 class="team__card__name subtitles">C. King</h3>
+          <span class="team__card__role paragraphs">Chief pilot</span>
+        </div>
+      </div>
+      <div class="team__card">
+        <img
+          class="team__card__img"
+          src="@/assets/images/our-story/t-reyes.webp"
+          alt="circular image"
+        />
+        <div class="team__card__txt">
+          <h3 class="team__card__name subtitles">T. Reyes</h3>
+          <span class="team__card__role paragraphs">Assistant chief pilot</span>
+        </div>
+      </div>
+    </div>
+  </Container>
 </template>
 <style scoped lang="scss">
 .our-story-banner {
@@ -106,6 +212,47 @@
     height: 100%;
     object-fit: cover;
     z-index: -1;
+  }
+}
+
+.description {
+  padding: 1rem 1rem 0 1rem;
+
+  @media (min-width: $big-tablet-screen) {
+    padding: 1rem 2rem 0 2rem;
+    max-width: calc(100% - 12rem);
+  }
+}
+
+.team {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1rem;
+
+  @media (min-width: $big-tablet-screen) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  &__card {
+    display: flex;
+    align-items: center;
+    background-color: $primary-color;
+    border-radius: $radius;
+    overflow: hidden;
+    height: fit-content;
+    width: 100%;
+    gap: 1rem;
+
+    &__img {
+      width: 150px;
+      height: 150px;
+    }
+
+    &__txt {
+      display: flex;
+      flex-direction: column;
+    }
   }
 }
 </style>

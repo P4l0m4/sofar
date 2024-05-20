@@ -12,24 +12,24 @@ import OurBases from '~/components/OurBases.vue';
         ><IconComponent color="#04045c" icon="pet_supplies" />Pet friendly</span
       >
       <span class="plane__tags__tag tags"
-        ><IconComponent color="#04045c" icon="group_add" />Flexible layout</span
+        ><IconComponent
+          color="#04045c"
+          icon="airplanemode_active"
+        />Lightjet</span
       >
       <span class="plane__tags__tag tags"
         ><IconComponent
           color="#04045c"
           icon="airline_seat_recline_extra"
-        />Cargo space</span
+        />Confort</span
       >
       <span class="plane__tags__tag tags"
-        ><IconComponent color="#04045c" icon="wifi" />Internet on board</span
+        ><IconComponent color="#04045c" icon="wifi" />WIFI</span
       >
       <span class="plane__tags__tag tags"
-        ><IconComponent color="#04045c" icon="business_center" />Bagage
-        compartment</span
+        ><IconComponent color="#04045c" icon="business_center" />Bagages
+        capacity</span
       >
-      <span class="plane__tags__tag tags"
-        ><IconComponent color="#04045c" icon="cable" />USB 110V
-      </span>
     </div>
 
     <img
@@ -41,6 +41,12 @@ import OurBases from '~/components/OurBases.vue';
     <div class="plane-info-horizontal__txt">
       <h2 class="titles">The Most Trusted Light Jet in The World</h2>
       <h3 class="subtitles">Efficiency, Performance, Comfort.</h3>
+      <p class="paragraphs">
+        The Phenom 300 offers luxury and efficiency. With its spacious
+        nine-passenger cabin, ergonomic seating and top-of-the-line
+        entertainment, this light jet ensures comfort and performance for your
+        business or leisure travels.
+      </p>
     </div>
     <img
       class="plane-info-horizontal__img"

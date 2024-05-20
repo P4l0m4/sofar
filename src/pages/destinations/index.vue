@@ -2,6 +2,7 @@
 import { ref, computed } from "vue";
 import { stringToSlug } from "~/utils/slugify";
 import { normalizeString } from "@/utils/normalize";
+import type QuotePopUpButton from "~/components/QuotePopUpButton.vue";
 const story = await useAsyncStoryblok("destinations", { version: "published" });
 
 //type for destination
@@ -137,7 +138,7 @@ const filterByState = (state: string) => {
 <template>
   <section class="destinations">
     <div class="destinations__header">
-      <h1 class="titles">Browse destinations</h1>
+      <h1 class="titles" style="padding-right: 1rem">Browse destinations</h1>
 
       <DestinationsSearchBar v-model="queryRef" />
       <div class="destinations__header__filtering">
@@ -159,7 +160,18 @@ const filterByState = (state: string) => {
       <Transition>
         <CarouselComponent :carouselElements="carouselElements"
       /></Transition>
-
+      <Transition>
+        <div
+          class="destinations__top__no-result standard-spacing"
+          v-if="carouselElements.length === 0"
+        >
+          <span class="paragraphs"
+            >The destination you searched does not exist on our listing, but you
+            can still request a quote to fly to {{ queryRef }}</span
+          >
+          <QuotePopUpButton primary />
+        </div>
+      </Transition>
       <div
         class="destinations__top__category"
         v-for="state in statesList"
@@ -184,6 +196,7 @@ const filterByState = (state: string) => {
   display: flex;
   flex-direction: column;
   padding: 2rem 1rem;
+  padding-right: 0;
 
   @media (min-width: $big-tablet-screen) {
     padding: 4rem 2rem;
@@ -231,6 +244,12 @@ const filterByState = (state: string) => {
     @media (min-width: $big-tablet-screen) {
       margin-left: -2rem;
     }
+
+    &__no-result {
+      align-items: center;
+      text-align: center;
+    }
+
     &__category {
       &__link {
         display: flex;

@@ -82,7 +82,12 @@ watch(
             :key="i"
             class="aside__nav__ul__li"
           >
-            <NuxtLink class="aside__nav__ul__li__link" :to="item.link" exact>
+            <NuxtLink
+              class="aside__nav__ul__li__link"
+              :to="item.link"
+              exact
+              :class="{ 'router-link-exact-active': currentIndex === i }"
+            >
               <IconComponent :icon="item.icon" color="#fffdfa" size="1rem" />
               {{ item.label }}
             </NuxtLink>

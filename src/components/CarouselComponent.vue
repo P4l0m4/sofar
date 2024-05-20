@@ -35,11 +35,10 @@ const leftArrowRef = ref<HTMLButtonElement | null>(null);
 const rightArrowRef = ref<HTMLButtonElement | null>(null);
 const showArrows = ref(false);
 const scrollableContainerRef = ref<HTMLDivElement | null>(null);
+const scrollAmount = 300;
 
 const scroll = (direction: "left" | "right") => {
   if (scrollableContainerRef.value) {
-    const scrollAmount = 300;
-
     if (direction === "left") {
       scrollableContainerRef.value.scrollTo({
         left: scrollableContainerRef.value.scrollLeft - scrollAmount,
@@ -60,10 +59,13 @@ const scroll = (direction: "left" | "right") => {
       <button
         class="carousel__button"
         ref="leftArrowRef"
-        v-if="showArrows && props.carouselElements.length > 4"
+        v-show="
+          showArrows &&
+          props.carouselElements.length > 4 &&
+          scrollableContainerRef.scrollLeft > 0
+        "
         @click="scroll('left')"
         @mouseenter="showArrows = true"
-        @mouseleave="showArrows = false"
       >
         <img
           src="/assets/icons/arrow_scroll_dark.svg"
@@ -97,10 +99,9 @@ const scroll = (direction: "left" | "right") => {
       <button
         class="carousel__button"
         ref="rightArrowRef"
-        v-if="showArrows && props.carouselElements.length > 4"
+        v-show="showArrows && props.carouselElements.length > 4"
         @click="scroll('right')"
         @mouseenter="showArrows = true"
-        @mouseleave="showArrows = false"
       >
         <img
           src="/assets/icons/arrow_scroll_dark.svg"
@@ -131,6 +132,7 @@ const scroll = (direction: "left" | "right") => {
     margin: auto;
     width: 40px;
     height: 40px;
+    padding: 20px;
     background-color: $base-color;
     z-index: 1;
     border: none;
@@ -152,7 +154,7 @@ const scroll = (direction: "left" | "right") => {
     &:nth-of-type(2) {
       left: auto;
       right: 12rem;
-      background-image: linear-gradient(-90deg, $base-color, transparent);
+
       & img {
         transform: rotate(-90deg);
       }

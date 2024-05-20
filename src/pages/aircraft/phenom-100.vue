@@ -9,24 +9,24 @@
         ><IconComponent color="#04045c" icon="pet_supplies" />Pet friendly</span
       >
       <span class="plane__tags__tag tags"
-        ><IconComponent color="#04045c" icon="group_add" />Flexible layout</span
+        ><IconComponent
+          color="#04045c"
+          icon="airplanemode_active"
+        />Lightjet</span
       >
       <span class="plane__tags__tag tags"
         ><IconComponent
           color="#04045c"
           icon="airline_seat_recline_extra"
-        />Cargo space</span
+        />Confort</span
       >
       <span class="plane__tags__tag tags"
-        ><IconComponent color="#04045c" icon="wifi" />Internet on board</span
+        ><IconComponent color="#04045c" icon="flight_class" />Club seat</span
       >
       <span class="plane__tags__tag tags"
-        ><IconComponent color="#04045c" icon="business_center" />Bagage
-        compartment</span
+        ><IconComponent color="#04045c" icon="business_center" />Bagages
+        capacity</span
       >
-      <span class="plane__tags__tag tags"
-        ><IconComponent color="#04045c" icon="cable" />USB 110V
-      </span>
     </div>
 
     <img class="plane__img" src="@/assets/images/birds.webp" alt="banner image"

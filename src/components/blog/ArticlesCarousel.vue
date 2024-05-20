@@ -48,7 +48,11 @@ const scroll = (direction: "left" | "right") => {
         <button
           class="carousel__button"
           ref="leftArrowRef"
-          v-if="showArrows && articlesToDisplay.length > 4"
+          v-show="
+            showArrows &&
+            articlesToDisplay.length > 4 &&
+            scrollableContainerRef.scrollLeft > 0
+          "
           @click="scroll('left')"
           @mouseenter="showArrows = true"
           @mouseleave="showArrows = false"
@@ -88,7 +92,7 @@ const scroll = (direction: "left" | "right") => {
         <button
           class="carousel__button"
           ref="rightArrowRef"
-          v-if="showArrows && articlesToDisplay.length > 4"
+          v-show="showArrows && articlesToDisplay.length > 4"
           @click="scroll('right')"
           @mouseenter="showArrows = true"
           @mouseleave="showArrows = false"
@@ -111,6 +115,7 @@ const scroll = (direction: "left" | "right") => {
 
   @media (min-width: $big-tablet-screen) {
     padding: 4rem 2rem;
+    padding-right: 0;
     gap: 2rem;
   }
 }
@@ -212,7 +217,7 @@ const scroll = (direction: "left" | "right") => {
         flex-wrap: wrap;
         gap: 1rem;
         width: 100%;
-        min-width: 300px;
+        // min-width: 300px;
         height: fit-content;
         text-align: center;
         overflow: hidden;
