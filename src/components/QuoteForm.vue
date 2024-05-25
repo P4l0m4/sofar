@@ -46,7 +46,7 @@ const currentStep = ref(0);
 const isSubmitting = ref(false);
 const wasSent = ref(false);
 
-const todaysDate = dayjs().format("YYYY-MM-DDTHH:mm");
+//const todaysDate = dayjs().format("YYYY-MM-DDTHH:mm");
 const todaysDatePlusTwoHours = dayjs()
   .add(2, "hour")
   .format("YYYY-MM-DDTHH:mm");
@@ -198,16 +198,16 @@ const phoneCodesSearchResults = computed(() => {
   );
 });
 
-function checkIfAirportExists(airport) {
-  return airports.value.some(
-    (a) =>
-      `${normalizeString(a.name)}, ${normalizeString(a.municipality)}` ===
-      normalizeString(airport)
-  );
-}
+//function checkIfAirportExists(airport) {
+//return airports.value.some(
+//(a) =>
+// `${normalizeString(a.name)}, ${normalizeString(a.municipality)}` ===
+//  normalizeString(airport)
+//);
+//}
 
 // Custom validator that checks if the airport exists
-const airportExistsValidator = (value) => checkIfAirportExists(value);
+//const airportExistsValidator = (value) => checkIfAirportExists(value);
 const notSameAsDestination = (value) => value !== flightState.destination;
 const notSameAsOrigin = (value) => value !== flightState.origin;
 const greaterThan = (value) => value > todaysDatePlusTwoHours;
@@ -226,12 +226,12 @@ const isPhoneNumber = (value) => phoneRegex.test(value);
 const flightRules = {
   origin: {
     required,
-    airportExistsValidator,
+    //airportExistsValidator,
     notSameAsDestination,
   },
   destination: {
     required,
-    airportExistsValidator,
+    //airportExistsValidator,
     notSameAsOrigin,
   },
   passengers: {
@@ -278,8 +278,8 @@ const originErrors = computed(() => {
   const errors = [];
   if (!vFlight$.value.origin.$dirty) return errors;
   vFlight$.value.origin.required.$invalid && errors.push("This field is empty");
-  vFlight$.value.origin.airportExistsValidator.$invalid &&
-    errors.push("Please select an existing airport");
+  // vFlight$.value.origin.airportExistsValidator.$invalid &&
+  //   errors.push("Please select an existing airport");
   vFlight$.value.origin.notSameAsDestination.$invalid &&
     errors.push("The departure and arrival airports must be different");
   return errors;
@@ -290,8 +290,8 @@ const destinationErrors = computed(() => {
   if (!vFlight$.value.destination.$dirty) return errors;
   vFlight$.value.destination.required.$invalid &&
     errors.push("This field is empty");
-  vFlight$.value.destination.airportExistsValidator.$invalid &&
-    errors.push("Please select an existing airport");
+  // vFlight$.value.destination.airportExistsValidator.$invalid &&
+  //   errors.push("Please select an existing airport");
   vFlight$.value.destination.notSameAsOrigin.$invalid &&
     errors.push("The departure and arrival airports must be different");
   return errors;
