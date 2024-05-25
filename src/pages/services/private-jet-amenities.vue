@@ -50,6 +50,15 @@ const fleetCarouselElements = [
     <h2 class="section-title titles">Sofar Fleet</h2>
     <CarouselComponent :carouselElements="fleetCarouselElements" />
   </section>
+  <ServicesContentBlok
+    v-for="contentBlok in story.content?.ContentBloks"
+    :key="contentBlok._uid"
+    :title="contentBlok.title"
+    :text="contentBlok.text"
+    :image="contentBlok.image.filename"
+    :alt="contentBlok.image.alt"
+  />
+
   <ServicesWhyChooseUs />
   <HomeWhyFlyWithSofar />
   <ClientReviews />
