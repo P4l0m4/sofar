@@ -116,13 +116,48 @@
     </div>
     <img
       class="plane-info-vertical__img"
-      src="@/assets/images/placeholder.svg"
+      src="@/assets/images/phenom-100/phenom-100-cabin4.webp"
       alt="private jet cabin image"
     />
   </section>
   <section class="standard-spacing centered-content">
     <h2 class="titles">Have you been impressed by the Phenom 100 ?</h2>
     <QuotePopUpButton :primary="true" />
+  </section>
+  <section class="plane-gallery-book">
+    <div class="plane-gallery-book__wrapper">
+      <img
+        src="@/assets/images/phenom-100/phenom-100-g1.webp"
+        alt="private jet image"
+      />
+      <img
+        src="@/assets/images/phenom-100/phenom-100-g2.webp"
+        alt="private jet image"
+      />
+      <img
+        src="@/assets/images/phenom-100/phenom-100-g3.webp"
+        alt="private jet image"
+      />
+    </div>
+    <div class="plane-gallery-book__wrapper">
+      <span class="titles">Make It Anywhere ™</span>
+      <img
+        src="@/assets/images/phenom-100/phenom-100-g4.webp"
+        alt="private jet image"
+      />
+      <img
+        src="@/assets/images/phenom-100/phenom-100-g5.webp"
+        alt="private jet image"
+      />
+      <img
+        src="@/assets/images/phenom-100/phenom-100-g6.webp"
+        alt="private jet image"
+      />
+      <img
+        src="@/assets/images/phenom-100/phenom-100-g7.webp"
+        alt="private jet image"
+      />
+    </div>
   </section>
   <OurBases />
   <EmptysForm />
