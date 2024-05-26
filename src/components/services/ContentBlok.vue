@@ -26,18 +26,19 @@ defineProps({
   color: $text-color-alt;
   background-color: $secondary-color;
   flex-direction: column;
-  padding: 2rem 1rem;
   gap: 1rem;
 
   @media (min-width: $big-tablet-screen) {
     flex-direction: row;
-    padding: 4rem 2rem;
     gap: 2rem;
   }
 
   &__img {
     width: 100%;
     height: auto;
+    object-fit: cover;
+    object-position: center;
+    max-height: 100svh;
   }
 
   &__text {
@@ -45,6 +46,10 @@ defineProps({
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    padding: 2rem 1rem;
+    @media (min-width: $big-tablet-screen) {
+      padding: 4rem 2rem;
+    }
   }
 }
 </style>
