@@ -1,4 +1,15 @@
-import OurBases from '~/components/OurBases.vue';
+<script setup lang="ts">
+useHead({
+  title: "Phenom 300 | Sofar",
+  meta: [
+    {
+      name: "description",
+      content:
+        "The Phenom 300 offers luxury and efficiency. With its spacious nine-passenger cabin, ergonomic seating and top-of-the-line entertainment, this light jet ensures comfort and performance for your business or leisure travels.",
+    },
+  ],
+});
+</script>
 <template>
   <picture class="plane">
     <source

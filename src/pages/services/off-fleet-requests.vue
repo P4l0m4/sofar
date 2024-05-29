@@ -2,23 +2,15 @@
 const story = await useAsyncStoryblok("off-fleet-requests", {
   version: "published",
 });
-const fleetCarouselElements = [
-  {
-    link: "/aircraft/phenom-100",
-    image: "/assets/images/100.webp",
-    label: "Phenom 100",
-  },
-  {
-    link: "/aicraft/phenom-300",
-    image: "/assets/images/300.webp",
-    label: "Phenom 300",
-  },
-  {
-    link: "/aircraft/pc12",
-    image: "/assets/images/12.webp",
-    label: "Pilatus PC 12",
-  },
-];
+useHead({
+  title: "Off-fleet requests | Sofar",
+  meta: [
+    {
+      name: "description",
+      content: "Contact us today to learn more about our off-fleet requests.",
+    },
+  ],
+});
 </script>
 <template>
   <picture class="services-banner">
@@ -46,10 +38,7 @@ const fleetCarouselElements = [
     :title="story.content.textSectionTitle"
     :text="story.content.textSectionParagraph"
   />
-  <section>
-    <h2 class="section-title titles">Sofar Fleet</h2>
-    <CarouselComponent :carouselElements="fleetCarouselElements" />
-  </section>
+
   <ServicesContentBlok
     v-for="contentBlok in story.content?.ContentBloks"
     :key="contentBlok._uid"
@@ -59,6 +48,10 @@ const fleetCarouselElements = [
     :alt="contentBlok.image.alt"
   />
   <ServicesWhyChooseUs />
+  <section>
+    <h2 class="section-title titles">Sofar Fleet</h2>
+    <CarouselComponent />
+  </section>
   <HomeWhyFlyWithSofar />
   <ClientReviews />
 

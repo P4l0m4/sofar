@@ -2,23 +2,16 @@
 const story = await useAsyncStoryblok("family-jet-charters", {
   version: "published",
 });
-const fleetCarouselElements = [
-  {
-    link: "/aircraft/phenom-100",
-    image: "/assets/images/100.webp",
-    label: "Phenom 100",
-  },
-  {
-    link: "/aicraft/phenom-300",
-    image: "/assets/images/300.webp",
-    label: "Phenom 300",
-  },
-  {
-    link: "/aircraft/pc12",
-    image: "/assets/images/12.webp",
-    label: "Pilatus PC 12",
-  },
-];
+useHead({
+  title: "Family jet charters | Sofar",
+  meta: [
+    {
+      name: "description",
+      content:
+        "Sofar offers premium family jet charter services that are tailored to your needs. Whether you're flying for business or pleasure, our team of experts will ensure that your journey is smooth, comfortable, and stress-free. Contact us today to learn more about our family jet charter services.",
+    },
+  ],
+});
 </script>
 <template>
   <picture class="services-banner">
@@ -46,10 +39,7 @@ const fleetCarouselElements = [
     :title="story.content.textSectionTitle"
     :text="story.content.textSectionParagraph"
   />
-  <section>
-    <h2 class="section-title titles">Sofar Fleet</h2>
-    <CarouselComponent :carouselElements="fleetCarouselElements" />
-  </section>
+
   <ServicesContentBlok
     v-for="contentBlok in story.content?.ContentBloks"
     :key="contentBlok._uid"
@@ -59,6 +49,10 @@ const fleetCarouselElements = [
     :alt="contentBlok.image.alt"
   />
   <ServicesWhyChooseUs />
+  <section>
+    <h2 class="section-title titles">Sofar Fleet</h2>
+    <CarouselComponent />
+  </section>
   <HomeWhyFlyWithSofar />
   <ClientReviews />
 

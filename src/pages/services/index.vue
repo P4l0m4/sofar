@@ -1,6 +1,17 @@
 <script setup>
 import { useMenuItemsStore } from "@/stores/menuItems";
 const menuItemsStore = useMenuItemsStore();
+
+useHead({
+  title: "Services | Sofar",
+  meta: [
+    {
+      name: "description",
+      content:
+        "Sofar offers a wide range of services to meet your needs. Whether you're looking for aircraft management, business charters, family jet charters, or empty leg flights, we have you covered. Contact us today to learn more about our services.",
+    },
+  ],
+});
 </script>
 <template>
   <section class="services">

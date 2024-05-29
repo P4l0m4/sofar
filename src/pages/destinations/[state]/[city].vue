@@ -49,6 +49,16 @@ onMounted(() => {
     }
   });
 });
+
+useHead({
+  title: `${city.city} | Sofar`,
+  meta: [
+    {
+      name: "description",
+      content: city.description,
+    },
+  ],
+});
 </script>
 <template>
   <picture class="city-banner">

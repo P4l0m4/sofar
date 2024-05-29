@@ -1,3 +1,15 @@
+<script setup lang="ts">
+useHead({
+  title: "Phenom 100 | Sofar",
+  meta: [
+    {
+      name: "description",
+      content:
+        "Designed for business trips and family getaways, this small aircraft harmoniously combines the need for speed with uncompromising comfort, all at an incredibly attractive price. Despite its compact size, the Phenom 100 ensures that you don't have to sacrifice luxury for efficiency.",
+    },
+  ],
+});
+</script>
 <template>
   <picture class="plane">
     <source media="(min-width: 1100px)" srcset="@/assets/images/birds.webp" />

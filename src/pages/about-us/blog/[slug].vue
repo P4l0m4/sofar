@@ -7,6 +7,16 @@ const articleSlug = route.params.slug;
 const article = story.value.content.articles.find(
   (a) => stringToSlug(a.title) === articleSlug
 );
+
+useHead({
+  title: `${article.title} | Sofar`,
+  meta: [
+    {
+      name: "description",
+      content: article.TLDR,
+    },
+  ],
+});
 </script>
 <template>
   <article class="article">

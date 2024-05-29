@@ -8,19 +8,19 @@ const reviews = [
   {
     name: "John Doe",
     review:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies.",
+      "Exceptional service and attentive crew. An unparalleled private flight experience!",
     stars: 5,
   },
   {
     name: "Jane Doe",
     review:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies.",
+      "Pleasant and comfortable flight. I highly recommend it for a carefree trip.",
     stars: 5,
   },
   {
     name: "John Smith",
     review:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies.",
+      "Simple booking and perfect flight. Excellent company, I've recommended it to everyone.",
     stars: 5,
   },
 ];

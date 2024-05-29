@@ -1,4 +1,15 @@
-import QuotePopUpButton from '~/components/QuotePopUpButton.vue';
+<script setup lang="ts">
+useHead({
+  title: "PC 12 | Sofar",
+  meta: [
+    {
+      name: "description",
+      content:
+        "When selecting the perfect aircraft for your upcoming trip, you'll find that the PC-12 offers a world of advantages waiting to enhance your travel experience. This isn't just any aircraft; it's a promise of versatility, safety, reliability, and a proven track record that has won the trust of countless travelers worldwide.",
+    },
+  ],
+});
+</script>
 <template>
   <picture class="plane">
     <source

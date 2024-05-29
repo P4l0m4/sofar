@@ -27,23 +27,17 @@ const destinationsCarouselElements = computed(() => {
 });
 const message = "%c 🌵TEKILAWEBFACTORY.COM🌵";
 console.log(message, `color: #1EB2BC; font-weight: bold; font-size: 16px;`);
-const fleetCarouselElements = [
-  {
-    link: "/aircraft/phenom-100",
-    image: "/assets/images/100.webp",
-    label: "Phenom 100",
-  },
-  {
-    link: "/aicraft/phenom-300",
-    image: "/assets/images/300.webp",
-    label: "Phenom 300",
-  },
-  {
-    link: "/aircraft/pc12",
-    image: "/assets/images/12.webp",
-    label: "Pilatus PC 12",
-  },
-];
+
+useHead({
+  title: "Sofar, private jet charter services",
+  meta: [
+    {
+      name: "description",
+      content:
+        "Sofar offers premium private jet charter services that are tailored to your needs. Whether you're flying for business or pleasure, our team of experts will ensure that your journey is smooth, comfortable, and stress-free. Contact us today to learn more about our private jet charter services.",
+    },
+  ],
+});
 </script>
 <template>
   <picture class="index__banner">
@@ -76,7 +70,7 @@ const fleetCarouselElements = [
   <HomeOurBirds />
   <section>
     <h2 class="section-title titles">Sofar Fleet</h2>
-    <CarouselComponent :carouselElements="fleetCarouselElements" />
+    <CarouselComponent />
   </section>
   <HomeWhyFlyWithSofar />
 

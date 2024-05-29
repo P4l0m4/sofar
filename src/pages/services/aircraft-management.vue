@@ -1,24 +1,18 @@
-<script setup>
+<script setup lang="ts">
 const story = await useAsyncStoryblok("aircraft-management", {
   version: "published",
 });
-const fleetCarouselElements = [
-  {
-    link: "/aircraft/phenom-100",
-    image: "/assets/images/100.webp",
-    label: "Phenom 100",
-  },
-  {
-    link: "/aicraft/phenom-300",
-    image: "/assets/images/300.webp",
-    label: "Phenom 300",
-  },
-  {
-    link: "/aircraft/pc12",
-    image: "/assets/images/12.webp",
-    label: "Pilatus PC 12",
-  },
-];
+
+useHead({
+  title: "Aircraft management | Sofar",
+  meta: [
+    {
+      name: "description",
+      content:
+        "Sofar offers a comprehensive aircraft management service that ensures your aircraft is always ready to fly. Our team of experts will take care of all the details, from maintenance to flight planning, so you can focus on enjoying your flight. Contact us today to learn more about our aircraft management services.",
+    },
+  ],
+});
 </script>
 <template>
   <picture class="services-banner">
@@ -46,10 +40,7 @@ const fleetCarouselElements = [
     :title="story.content.textSectionTitle"
     :text="story.content.textSectionParagraph"
   />
-  <section>
-    <h2 class="section-title titles">Sofar Fleet</h2>
-    <CarouselComponent :carouselElements="fleetCarouselElements" />
-  </section>
+
   <ServicesContentBlok
     v-for="contentBlok in story.content?.ContentBloks"
     :key="contentBlok._uid"
@@ -59,6 +50,10 @@ const fleetCarouselElements = [
     :alt="contentBlok.image.alt"
   />
   <ServicesWhyChooseUs />
+  <section>
+    <h2 class="section-title titles">Sofar Fleet</h2>
+    <CarouselComponent />
+  </section>
   <HomeWhyFlyWithSofar />
   <ClientReviews />
 

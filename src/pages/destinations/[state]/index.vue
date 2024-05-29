@@ -18,6 +18,16 @@ interface Destination {
 const state = story.value.content.statesList.find(
   (s) => `${stringToSlug(s.country)}-${stringToSlug(s.name)}` === stateSlug
 );
+
+useHead({
+  title: `${state.name} | Sofar`,
+  meta: [
+    {
+      name: "description",
+      content: `Fly to ${state.name} with Sofar. Choose your destination`,
+    },
+  ],
+});
 </script>
 <template>
   <picture class="state-banner">

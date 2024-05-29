@@ -15,19 +15,19 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   carouselElements: () => [
     {
-      link: "/",
+      link: "/aircraft/phenom-100",
       image: "/assets/images/100.webp",
       label: "Phenom 100",
     },
     {
-      link: "/",
-      image: "/assets/images/100.webp",
-      label: "Phenom 100",
+      link: "/aicraft/phenom-300",
+      image: "/assets/images/300.webp",
+      label: "Phenom 300",
     },
     {
-      link: "/",
-      image: "/assets/images/100.webp",
-      label: "Phenom 100",
+      link: "/aircraft/pc12",
+      image: "/assets/images/12.webp",
+      label: "Pilatus PC 12",
     },
   ],
 });

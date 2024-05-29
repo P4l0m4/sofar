@@ -1,21 +1,14 @@
 <script setup>
-const fleetCarouselElements = [
-  {
-    link: "/aircraft/phenom-100",
-    image: "/assets/images/100.webp",
-    label: "Phenom 100",
-  },
-  {
-    link: "/aicraft/phenom-300",
-    image: "/assets/images/300.webp",
-    label: "Phenom 300",
-  },
-  {
-    link: "/aircraft/pc12",
-    image: "/assets/images/12.webp",
-    label: "Pilatus PC 12",
-  },
-];
+useHead({
+  title: "Our story | Sofar",
+  meta: [
+    {
+      name: "description",
+      content:
+        "Learn more about our journey and our team. Sofar is a private jet charter company that offers premium private jet charter services at unbeatable prices. Whether you're flying for business or pleasure, our team of experts will ensure that your journey is smooth, comfortable, and stress-free. Contact us today to learn more about our private jet charter services.",
+    },
+  ],
+});
 </script>
 <template>
   <picture class="our-story-banner">
@@ -50,7 +43,7 @@ const fleetCarouselElements = [
       private air travel without the constraints of rigid schedules or crowded
       airports.
     </p>
-    <CarouselComponent :carouselElements="fleetCarouselElements" />
+    <CarouselComponent />
   </section>
 
   <Container

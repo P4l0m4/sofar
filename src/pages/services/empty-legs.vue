@@ -2,23 +2,17 @@
 const story = await useAsyncStoryblok("empty-legs", {
   version: "published",
 });
-const fleetCarouselElements = [
-  {
-    link: "/aircraft/phenom-100",
-    image: "/assets/images/100.webp",
-    label: "Phenom 100",
-  },
-  {
-    link: "/aicraft/phenom-300",
-    image: "/assets/images/300.webp",
-    label: "Phenom 300",
-  },
-  {
-    link: "/aircraft/pc12",
-    image: "/assets/images/12.webp",
-    label: "Pilatus PC 12",
-  },
-];
+
+useHead({
+  title: "Empty legs | Sofar",
+  meta: [
+    {
+      name: "description",
+      content:
+        "Sofar offers empty leg flights at unbeatable prices. Whether you're flying for business or pleasure, our empty leg flights are the perfect way to travel in style and comfort. Contact us today to learn more about our empty leg flights.",
+    },
+  ],
+});
 </script>
 <template>
   <picture class="services-banner">
@@ -46,10 +40,7 @@ const fleetCarouselElements = [
     :title="story.content.textSectionTitle"
     :text="story.content.textSectionParagraph"
   />
-  <section>
-    <h2 class="section-title titles">Sofar Fleet</h2>
-    <CarouselComponent :carouselElements="fleetCarouselElements" />
-  </section>
+
   <ServicesContentBlok
     v-for="contentBlok in story.content?.ContentBloks"
     :key="contentBlok._uid"
@@ -58,7 +49,12 @@ const fleetCarouselElements = [
     :image="contentBlok.image.filename"
     :alt="contentBlok.image.alt"
   />
+  <EmptyLegs />
   <ServicesWhyChooseUs />
+  <section>
+    <h2 class="section-title titles">Sofar Fleet</h2>
+    <CarouselComponent />
+  </section>
   <HomeWhyFlyWithSofar />
   <ClientReviews />
 

@@ -192,6 +192,17 @@ function placeMarker() {
 onMounted(() => {
   createMap();
 });
+
+useHead({
+  title: "Booking | Sofar",
+  meta: [
+    {
+      name: "description",
+      content:
+        "Choose your destination, select your dates and let us take care of the rest",
+    },
+  ],
+});
 </script>
 <template>
   <section class="booking">

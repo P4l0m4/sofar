@@ -134,6 +134,16 @@ const filterByState = (state: string) => {
       };
     });
 };
+
+useHead({
+  title: " Destinations | Sofar",
+  meta: [
+    {
+      name: "description",
+      content: "Browse our destinations and request a quote to fly with us.",
+    },
+  ],
+});
 </script>
 <template>
   <section class="destinations">
