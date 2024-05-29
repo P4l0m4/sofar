@@ -95,6 +95,11 @@ useHead({
     />
   </section>
 
+  <section class="standard-spacing centered-content">
+    <h2 class="titles">Have you been impressed by the Phenom 300 ?</h2>
+    <QuotePopUpButton :primary="true" />
+  </section>
+
   <img
     class="full-width-img"
     src="@/assets/images/phenom-300/phenom-300-cabin-inside.webp"

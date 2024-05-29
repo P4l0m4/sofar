@@ -5,7 +5,6 @@ type CarouselElement = {
   link: string;
   image: string;
   label: string;
-  countryCode?: string;
 };
 
 interface Props {
@@ -89,10 +88,6 @@ const scroll = (direction: "left" | "right") => {
         <span class="carousel__container__slide__arrow"
           ><img src="/assets/icons/arrow_upward_alt.svg" alt="icon arrow"
         /></span>
-
-        <span class="carousel__container__slide__country-code">{{
-          slide.countryCode
-        }}</span>
       </NuxtLink>
     </div>
     <Transition>

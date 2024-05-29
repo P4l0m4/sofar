@@ -130,6 +130,7 @@ useHead({
       class="plane-info-vertical__img"
       src="@/assets/images/phenom-100/phenom-100-cabin4.webp"
       alt="private jet cabin image"
+      style="max-height: 400px"
     />
   </section>
   <section class="standard-spacing centered-content">
