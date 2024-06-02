@@ -6,19 +6,16 @@ const showArrows = ref(false);
 const scrollableContainerRef = ref<HTMLDivElement | null>(null);
 const reviews = [
   {
-    name: "John Doe",
     review:
       "Exceptional service and attentive crew. An unparalleled private flight experience!",
     stars: 5,
   },
   {
-    name: "Jane Doe",
     review:
       "Pleasant and comfortable flight. I highly recommend it for a carefree trip.",
     stars: 5,
   },
   {
-    name: "John Smith",
     review:
       "Simple booking and perfect flight. Excellent company, I've recommended it to everyone.",
     stars: 5,
@@ -67,9 +64,6 @@ const scroll = (direction: "left" | "right") => {
       @mouseleave="showArrows = false"
     >
       <div class="satisfied-clients__reviews__review" v-for="review in reviews">
-        <span class="satisfied-clients__reviews__review__name subtitles">{{
-          review.name
-        }}</span>
         <p class="paragraphs">{{ review.review }}</p>
         <span class="satisfied-clients__reviews__review__stars"
           ><img

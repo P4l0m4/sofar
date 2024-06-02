@@ -1,8 +1,22 @@
+<script setup>
+import { ref } from "vue";
+const label = ref("Get in touch with our team");
+function copyToClipboard() {
+  navigator.clipboard.writeText("hq@flysofar.com");
+  label.value = "Email copied to clipboard!";
+  setTimeout(() => {
+    label.value = "Get in touch with our team";
+  }, 1000);
+}
+</script>
 <template>
   <section class="any-question">
     <h2 class="titles">Any question ?</h2>
-    <a class="button-primary--light" href="tel:+19144686800"
-      >Get in touch with our team</a
+    <a
+      class="button-primary--light"
+      href="mailto:hq@flysofar.com"
+      @click="copyToClipboard()"
+      >{{ label }}</a
     >
   </section>
 </template>

@@ -8,9 +8,5 @@ iframe {
   width: 100%;
   height: 2100px;
   border: none;
-
-  @media (min-width: $big-tablet-screen) {
-    max-width: 1030px;
-  }
 }
 </style>

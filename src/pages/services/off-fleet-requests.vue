@@ -33,7 +33,7 @@ useHead({
       alt="banner image"
     />
   </picture>
-
+  <ServicesWhyChooseUs />
   <TextComponent
     :title="story.content.textSectionTitle"
     :text="story.content.textSectionParagraph"
@@ -47,15 +47,11 @@ useHead({
     :image="contentBlok.image.filename"
     :alt="contentBlok.image.alt"
   />
-  <ServicesWhyChooseUs />
-  <section>
-    <h2 class="section-title titles">Sofar Fleet</h2>
-    <CarouselComponent />
+  <section class="standard-spacing centered-content">
+    <h2 class="titles">Book your next flight with us!</h2>
+    <QuotePopUpButton :primary="true" />
   </section>
-  <HomeWhyFlyWithSofar />
-  <ClientReviews />
-
-  <BlogArticlesCarousel />
+  <OurBases />
 </template>
 <style lang="scss" scoped>
 @import "@/styles/planes.scss";

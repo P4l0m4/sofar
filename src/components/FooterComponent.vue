@@ -1,6 +1,22 @@
 <script setup lang="ts">
-import type AnyQuestion from "./AnyQuestion.vue";
-
+const story = await useAsyncStoryblok("destinations", { version: "published" });
+import { stringToSlug } from "~/utils/slugify";
+//type for destination
+interface Destination {
+  city: string;
+  stateName: string;
+  country: string;
+  geographicalCategories: string[];
+  previewImage: {
+    filename: string;
+  };
+}
+//type for state
+interface State {
+  name: string;
+  destinationsList: Destination[];
+  country: string;
+}
 type MenuItem = {
   label: string;
   link: string;
@@ -16,12 +32,53 @@ interface Props {
   menuItems: MenuItem[];
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
+
+//list of all states
+const statesList = computed(() => {
+  return story.value.content.statesList.map((state: State) => {
+    return {
+      name: state.name,
+      country: state.country,
+    };
+  });
+});
+
+const menuItemsWithStates = computed(() => {
+  const newMenuItems = [...props.menuItems];
+
+  // Limit the statesList to the first 6 items
+  const limitedStatesList = statesList.value.slice(0, 6);
+
+  // Map the limited list to the new format
+  const statesWithLinks = limitedStatesList.map((state) => {
+    return {
+      label: state.name,
+      link: `/destinations/${stringToSlug(state.country)}-${stringToSlug(
+        state.name
+      )}`,
+    };
+  });
+
+  // Add the "Others" item
+  statesWithLinks.push({
+    label: "Others",
+    link: "/destinations",
+  });
+
+  // Assign to children
+  newMenuItems[2] = {
+    ...newMenuItems[2],
+    children: statesWithLinks,
+  };
+
+  return newMenuItems;
+});
 </script>
 <template>
   <footer class="footer">
     <section class="footer__content">
-      <div class="footer__content__links" v-for="item in menuItems">
+      <div class="footer__content__links" v-for="item in menuItemsWithStates">
         <NuxtLink
           class="footer__content__links__title subtitles"
           :to="item.link"
@@ -43,6 +100,9 @@ defineProps<Props>();
         <span>KHPN | KTEB | KOPF</span>
         <span>HQ@flysofar.com</span>
         <span>10 New King St West Harrison, NY 10604</span>
+        <a class="button-tertiary" href="/documents/pp.pdf" target="_blank"
+          >Privacy policy</a
+        >
       </div>
     </section>
     <div class="footer__content">
