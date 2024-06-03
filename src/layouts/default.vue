@@ -110,7 +110,7 @@ const menuItems = [
   },
   {
     label: "About us",
-    link: "",
+    link: "/about-us",
     icon: "info",
     alt: "menu icon about-us",
     children: [
@@ -126,12 +126,12 @@ const menuItems = [
         icon: "article",
         alt: "menu icon blog",
       },
-      // {
-      //   label: "Contact",
-      //   link: "/about-us/contact",
-      //   icon: "alternate_email",
-      //   alt: "menu icon contact",
-      // },
+      {
+        label: "Careers",
+        link: "/about-us/careers",
+        icon: "alternate_email",
+        alt: "menu icon contact",
+      },
     ],
   },
 ];

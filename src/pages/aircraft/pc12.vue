@@ -173,7 +173,7 @@ useHead({
     </div>
     <img
       class="plane-info-vertical__img"
-      src="@/assets/images/pc-12/pc-12-cabin-structure-slice.svg"
+      src="@/assets/images/pc-12/pc-12-cabin-structure-slice.webp"
       alt="plane info image"
     />
   </section>

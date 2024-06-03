@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { stringToSlug } from "~/utils/slugify";
 const story = await useAsyncStoryblok("destinations", { version: "published" });
+const storyHome = await useAsyncStoryblok("home-page", {
+  version: "published",
+});
+
 const destinations = computed(() => {
   return story.value.content.statesList.flatMap((state: State) => {
     return state.destinationsList.map((destination) => {
@@ -43,7 +47,7 @@ useHead({
   <picture class="index__banner">
     <source
       media="(min-width: 1100px)"
-      srcset="@/assets/images/landscape.webp"
+      :srcset="storyHome.content.bannerImageDesktop.filename"
     />
     <div class="index__banner__headlines">
       <NuxtLink class="index__banner__headlines__logo" to="/">
@@ -60,7 +64,7 @@ useHead({
 
     <img
       class="index__banner__img"
-      src="@/assets/images/landscape-mobile.webp"
+      :src="storyHome.content.bannerImageMobile.filename"
       alt="banner image"
     />
   </picture>
