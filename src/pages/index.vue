@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { stringToSlug } from "~/utils/slugify";
+
 const story = await useAsyncStoryblok("destinations", { version: "published" });
 const storyHome = await useAsyncStoryblok("home-page", {
   version: "published",

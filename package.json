@@ -19,16 +19,16 @@
     "@vuelidate/validators": "^2.0.4",
     "mapbox-gl": "^3.2.0",
     "nuxt-jsonld": "^2.0.8",
-    "nuxt-simple-sitemap": "^2.4.11",
     "pinia": "^2.0.30",
     "ress": "^5.0.2",
     "yarn": "^1.22.22"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
+    "@nuxtjs/sitemap": "^5.1.0",
     "@storyblok/nuxt": "^6.0.6",
     "dayjs-nuxt": "^1.1.2",
-    "nuxt": "^3.11.1",
+    "nuxt": "^3.9.0",
     "sass": "^1.58.0",
     "sass-loader": "^13.2.0"
   }
