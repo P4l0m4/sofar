@@ -84,7 +84,7 @@ function toggleQuestion(index) {
       justify-content: space-between;
       align-items: center;
       width: 100%;
-      font-size: $subtitles;
+      font-size: 1.4rem;
       font-weight: $thick;
       align-self: stretch;
 
