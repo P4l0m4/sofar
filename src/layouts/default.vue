@@ -78,7 +78,7 @@ const menuItems = [
   },
   {
     label: "Aircraft",
-    link: "",
+    link: "/aircraft",
     icon: "airlines",
     alt: "menu icon aircraft",
     children: [

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import OurBases from "~/components/OurBases.vue";
-
 const story = await useAsyncStoryblok("aircraft-management", {
   version: "published",
 });
