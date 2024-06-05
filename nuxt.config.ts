@@ -1,4 +1,4 @@
-// import { getNews, getStates, getCities } from "./src/utils/sitemap.js";
+import { getNews, getStates, getCities } from "./src/utils/sitemap.js";
 
 // const fetchUrls = async () => {
 //   try {
@@ -45,15 +45,14 @@ export default defineNuxtConfig({
       },
     },
   },
-  // sitemap: {
-  //   sources: [],
-  //   urls: async () => {
-  //     const newsPages = await getNews();
-  //     const statesPages = await getStates();
-  //     const citiesPages = await getCities();
-  //     return [...newsPages, ...statesPages, ...citiesPages];
-  //   },
-  // },
+  sitemap: {
+    urls: async () => {
+      const newsPages = await getNews();
+      const statesPages = await getStates();
+      const citiesPages = await getCities();
+      return [...newsPages, ...statesPages, ...citiesPages];
+    },
+  },
 
   site: {
     url: "https://flysofar.com/",

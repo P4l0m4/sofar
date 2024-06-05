@@ -1,6 +1,6 @@
 import { stringToSlug } from "./slugify.js";
+
 const StoryblokClient = require("storyblok-js-client");
-// import StoryblokClient from "storyblok-js-client";
 
 const Storyblok = new StoryblokClient({
   accessToken: "EnRhwF6FbbFy29gtg3NYhQtt",
@@ -8,13 +8,13 @@ const Storyblok = new StoryblokClient({
     clear: "auto",
     type: "memory",
   },
+  region: "us",
 });
 
 export async function getNews() {
   const { data } = await Storyblok.get("cdn/stories/blog", {});
-
   const articles = data.story.content.articles;
-  console.log(articles);
+  // console.log(articles);
   return articles.map((article) => ({
     loc: `/about-us/blog/${stringToSlug(article.title)}`,
     changefreq: "daily",

@@ -20,13 +20,12 @@
     "mapbox-gl": "^3.2.0",
     "nuxt-jsonld": "^2.0.8",
     "pinia": "^2.0.30",
-    "ress": "^5.0.2",
-    "yarn": "^1.22.22"
+    "ress": "^5.0.2"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
     "@nuxtjs/sitemap": "^5.1.0",
-    "@storyblok/nuxt": "^6.0.6",
+    "@storyblok/nuxt": "^5.4.4",
     "dayjs-nuxt": "^1.1.2",
     "nuxt": "^3.9.0",
     "sass": "^1.58.0",

@@ -13,7 +13,7 @@ useHead({
 <template>
   <Container>
     <h1 class="titles">About us</h1>
-    <FAQ />
+    <AboutFAQ />
   </Container>
   <section class="standard-spacing centered-content">
     <h2 class="titles">Book your next flight with us!</h2>

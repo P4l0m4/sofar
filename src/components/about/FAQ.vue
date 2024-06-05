@@ -104,6 +104,7 @@ function toggleQuestion(index) {
       font-weight: $skinny;
       animation: fading 0.4s;
       width: 100%;
+      line-height: 1.2rem;
     }
 
     &__link {
