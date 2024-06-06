@@ -19,7 +19,7 @@ onMounted(() => {
 
   if (window.innerWidth < 768) {
     map.setCenter([-96.55174117682346, 35.15790888688196]);
-    map.setZoom(2.2);
+    map.setZoom(2.3);
   }
 
   // Marker for New York

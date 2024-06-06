@@ -141,6 +141,17 @@ const menuItems = [
   <DesktopNavigation :menuItems="menuItems" />
   <main>
     <slot />
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-NJGG6P35"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+        title="Google Tag Manager"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
   </main>
   <FooterComponent :menuItems="menuItems" />
 </template>
@@ -149,7 +160,6 @@ main {
   display: flex;
   flex-direction: column;
   min-height: 100svh;
-  max-width: 2000px;
   margin: auto;
 }
 .v-enter-active,

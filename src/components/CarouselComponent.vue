@@ -19,7 +19,7 @@ const props = withDefaults(defineProps<Props>(), {
       label: "Phenom 100",
     },
     {
-      link: "/aicraft/phenom-300",
+      link: "/aircraft/phenom-300",
       image: "/assets/images/300.webp",
       label: "Phenom 300",
     },

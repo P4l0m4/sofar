@@ -67,7 +67,7 @@ watch(
           exact
           ><img
             class="aside__mobile-sublinks__link__icon"
-            :src="`assets/icons/${child.icon}.svg`"
+            :src="`/assets/icons/${child.icon}.svg`"
             :alt="child.alt"
           />
           {{ child.label }}</NuxtLink

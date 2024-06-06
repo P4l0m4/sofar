@@ -29,7 +29,6 @@
 .our-birds {
   display: flex;
   flex-direction: column;
-
   gap: 1rem;
   padding: 2rem 1rem;
   width: 100%;
@@ -64,6 +63,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: 60%;
     z-index: -1;
   }
 
