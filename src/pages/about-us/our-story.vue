@@ -79,7 +79,7 @@ useHead({
         />
         <div class="team__card__txt">
           <h3 class="team__card__name subtitles">J. Sullenberg</h3>
-          <span class="team__card__role paragraphs">CEO founder</span>
+          <span class="team__card__role paragraphs">Sales operations</span>
         </div>
       </div>
       <div class="team__card">
