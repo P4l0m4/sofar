@@ -14,7 +14,7 @@ useHead({
 });
 const label = ref("Apply");
 function copyToClipboard() {
-  navigator.clipboard.writeText("hq@flysofar.com");
+  navigator.clipboard.writeText("people@flysofar.com");
   label.value = "Email copied to clipboard!";
   setTimeout(() => {
     label.value = "Apply";
