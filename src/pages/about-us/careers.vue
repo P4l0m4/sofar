@@ -1,4 +1,5 @@
 <script setup>
+import { ref } from "vue";
 const story = await useAsyncStoryblok("careers", { version: "published" });
 
 useHead({
@@ -11,6 +12,14 @@ useHead({
     },
   ],
 });
+const label = ref("Apply");
+function copyToClipboard() {
+  navigator.clipboard.writeText("hq@flysofar.com");
+  label.value = "Email copied to clipboard!";
+  setTimeout(() => {
+    label.value = "Apply";
+  }, 1000);
+}
 </script>
 <template>
   <Container>
@@ -34,6 +43,16 @@ useHead({
       </div>
     </div>
   </Container>
+  <section class="standard-spacing centered-content">
+    <h2 class="titles">Interested by our opportunities ?</h2>
+    <a
+      class="button-primary--dark"
+      href="mailto:hq@flysofar.com"
+      style="margin-top: auto"
+      @click="copyToClipboard()"
+      >{{ label }}</a
+    >
+  </section>
 </template>
 <style lang="scss" scoped>
 .headlines {

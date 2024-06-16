@@ -105,6 +105,13 @@ fbq('init', '903478557619150');
 fbq('track', 'PageView');`,
         },
       ],
+      link: [
+        {
+          rel: "apple-touch-icon",
+          sizes: "180x180",
+          href: "/apple-touch-icon-180x180.png",
+        },
+      ],
     },
   },
   runtimeConfig: {

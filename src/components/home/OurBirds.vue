@@ -63,7 +63,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: 60%;
+    object-position: 70%;
     z-index: -1;
   }
 
@@ -83,7 +83,7 @@
     flex-direction: column;
     gap: 1rem;
     width: 100%;
-    margin-top: 1rem;
+    margin-top: auto;
 
     @media (min-width: $big-tablet-screen) {
       flex-direction: row;

@@ -76,10 +76,11 @@ useHead({
           class="team__card__img"
           src="@/assets/images/our-story/j-sullenberg.webp"
           alt="circular image"
+          style="filter: blur(8px)"
         />
         <div class="team__card__txt">
-          <h3 class="team__card__name subtitles">J. Sullenberg</h3>
-          <span class="team__card__role paragraphs">Sales operations</span>
+          <h3 class="team__card__name subtitles">D. Kwasniak</h3>
+          <span class="team__card__role paragraphs">Chief of maintenance</span>
         </div>
       </div>
       <div class="team__card">

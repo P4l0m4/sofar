@@ -61,7 +61,7 @@ useHead({
     </div>
     <img
       class="plane-info-horizontal__img"
-      src="@/assets/images/phenom-300/phenom-300-blue-dots.svg"
+      src="@/assets/images/phenom-300/phenom-300-blue-dots.webp"
       alt="plane info image"
     />
   </section>
@@ -78,7 +78,7 @@ useHead({
         Large windows fill the cabin with natural light. This jet features an
         enclosed bathroom and the widest cabin in its category, offering both
         privacy and roominess. With a generous luggage capacity of 76ft³, it
-        comfortably accommodates up to 8 passengers.
+        comfortably accommodates up to 7 passengers.
       </p>
       <p class="paragraphs">
         Maintaining a low cabin pressure altitude, even at cruising altitudes of

@@ -19,6 +19,10 @@ const topEvents = [
     eventName: "Reception of 2nd Phenom 100",
     eventDate: "January 2023",
   },
+  {
+    eventName: "Opening of Los Angeles base",
+    eventDate: "April 2024",
+  },
 ];
 const bottomEvents = [
   {
