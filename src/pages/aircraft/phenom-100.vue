@@ -30,7 +30,7 @@ useHead({
         ><IconComponent
           color="#04045c"
           icon="airline_seat_recline_extra"
-        />Confort</span
+        />Comfort</span
       >
       <span class="plane__tags__tag tags"
         ><IconComponent color="#04045c" icon="flight_class" />Club seat</span
