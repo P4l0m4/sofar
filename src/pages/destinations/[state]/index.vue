@@ -24,7 +24,7 @@ useHead({
   meta: [
     {
       name: "description",
-      content: `Fly to ${state.name} with Sofar. Choose your destination`,
+      content: `Discover top ${state.name} private jet destinations with Sofar. Explore exclusive locations for your next getaway.`,
     },
   ],
 });

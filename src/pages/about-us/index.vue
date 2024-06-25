@@ -1,11 +1,11 @@
 <script setup lang="ts">
 useHead({
-  title: "About us | Sofar",
+  title: "Private Jet Frequently Asked Questions | Sofar",
   meta: [
     {
       name: "description",
       content:
-        "Sofar is a private jet charter company that offers premium private jet charter services at unbeatable prices. Whether you're flying for business or pleasure, our team of experts will ensure that your journey is smooth, comfortable, and stress-free. Contact us today to learn more about our private jet charter services.",
+        "Find the answers to your questions about Sofar's private jet services. You'll find information on reservations, services, rates and much more in our FAQ section.",
     },
   ],
 });

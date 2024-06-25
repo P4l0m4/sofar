@@ -194,12 +194,12 @@ onMounted(() => {
 });
 
 useHead({
-  title: "Booking | Sofar",
+  title: "Book a Private Jet | Sofar",
   meta: [
     {
       name: "description",
       content:
-        "Choose your destination, select your dates and let us take care of the rest",
+        "Book your private jet online with Sofar. Enjoy flexible planning, personalized service and a seamless travel experience. Book your private flight now.",
     },
   ],
 });

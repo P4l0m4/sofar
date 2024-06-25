@@ -6,12 +6,12 @@ const story = await useAsyncStoryblok("services", {
 });
 
 useHead({
-  title: "Services | Sofar",
+  title: "Private Jet Charter Services | Sofar",
   meta: [
     {
       name: "description",
       content:
-        "Sofar offers a wide range of services to meet your needs. Whether you're looking for aircraft management, business charters, family jet charters, or empty leg flights, we have you covered. Contact us today to learn more about our services.",
+        "Explore Sofar's private jet charter services for business, family, and personal travel. Experience reliable, flexible, and efficient private air travel tailored to your needs.",
     },
   ],
 });

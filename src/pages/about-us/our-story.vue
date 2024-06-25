@@ -1,11 +1,11 @@
 <script setup>
 useHead({
-  title: "Our story | Sofar",
+  title: "Our Story | Sofar",
   meta: [
     {
       name: "description",
       content:
-        "Learn more about our journey and our team. Sofar is a private jet charter company that offers premium private jet charter services at unbeatable prices. Whether you're flying for business or pleasure, our team of experts will ensure that your journey is smooth, comfortable, and stress-free. Contact us today to learn more about our private jet charter services.",
+        "Learn about the history and mission of Sofar. Discover how we became a leading provider of private jet charter services, focused on safety, reliability, and customer satisfaction.",
     },
   ],
 });

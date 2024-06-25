@@ -136,11 +136,12 @@ const filterByState = (state: string) => {
 };
 
 useHead({
-  title: " Destinations | Sofar",
+  title: "Top Private Jet Destinations | Sofar",
   meta: [
     {
       name: "description",
-      content: "Browse our destinations and request a quote to fly with us.",
+      content:
+        "Discover the top destinations for private jet travel with Sofar. Explore popular routes and exclusive locations tailored for business and leisure.",
     },
   ],
 });

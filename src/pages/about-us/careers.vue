@@ -3,12 +3,12 @@ import { ref } from "vue";
 const story = await useAsyncStoryblok("careers", { version: "published" });
 
 useHead({
-  title: "Careers | Sofar",
+  title: "Careers at Sofar | Join Our Team",
   meta: [
     {
       name: "description",
       content:
-        "At Sofar, we are always looking for talented individuals to join our team. If you are passionate about aviation and are looking for a rewarding career in the private jet charter industry, we would love to hear from you.",
+        "Discover career opportunities at Sofar. Join our dedicated team and help us provide exceptional private jet services. Apply now and take your career to the next level.",
     },
   ],
 });

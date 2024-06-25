@@ -1,11 +1,11 @@
 <script setup lang="ts">
 useHead({
-  title: "Phenom 300 | Sofar",
+  title: "Embraer Phenom 300 | Sofar",
   meta: [
     {
       name: "description",
       content:
-        "The Phenom 300 offers luxury and efficiency. With its spacious nine-passenger cabin, ergonomic seating and top-of-the-line entertainment, this light jet ensures comfort and performance for your business or leisure travels.",
+        "Learn about the Embraer Phenom 300 at Sofar Aviation. Discover its advanced features, exceptional performance, and luxurious comfort for longer regional flights.",
     },
   ],
 });

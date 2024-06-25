@@ -1,11 +1,11 @@
 <script setup lang="ts">
 useHead({
-  title: "Phenom 100 | Sofar",
+  title: "Embraer Phenom 100 | Sofar",
   meta: [
     {
       name: "description",
       content:
-        "Designed for business trips and family getaways, this small aircraft harmoniously combines the need for speed with uncompromising comfort, all at an incredibly attractive price. Despite its compact size, the Phenom 100 ensures that you don't have to sacrifice luxury for efficiency.",
+        "Explore the Embraer Phenom 100 with Sofar. Learn about the features, performance, and comfort of this light jet, perfect for short regional flights.",
     },
   ],
 });

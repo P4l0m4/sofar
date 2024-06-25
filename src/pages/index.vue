@@ -34,12 +34,13 @@ const message = "%c 🌵TEKILAWEBFACTORY.COM🌵";
 console.log(message, `color: #1EB2BC; font-weight: bold; font-size: 16px;`);
 
 useHead({
-  title: "Sofar, private jet charter services",
+  title:
+    "Sofar | Private jet charter | On-demand private flights | Reliable Company",
   meta: [
     {
       name: "description",
       content:
-        "Sofar offers premium private jet charter services that are tailored to your needs. Whether you're flying for business or pleasure, our team of experts will ensure that your journey is smooth, comfortable, and stress-free. Contact us today to learn more about our private jet charter services.",
+        "Private jet travel with Sofar - Reliable air charter for business, family and individuals on the east and west coasts. Book now and travel with confidence.",
     },
   ],
 });

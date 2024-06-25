@@ -4,12 +4,12 @@ const story = await useAsyncStoryblok("aircraft", {
 });
 
 useHead({
-  title: "Aircraft | Sofar",
+  title: "Our Private Jet Aircraft Fleet | Sofar",
   meta: [
     {
       name: "description",
       content:
-        "Sofar offers a competitive aircraft choice that ensures you will always be ready to fly. Our team of experts will take care of all the details, from maintenance to flight planning, so you can focus on enjoying your flight. Contact us today to learn more about our aircraft and find the perfect jet for your trip.",
+        "Explore Sofar's fleet of private jets. Discover the specifications and amenities of our aircraft to find the perfect jet for your travel needs.",
     },
   ],
 });

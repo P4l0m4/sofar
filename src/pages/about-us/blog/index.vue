@@ -23,12 +23,12 @@ const articlesMatchingCategory = computed(() => {
 });
 
 useHead({
-  title: "Blog | Sofar",
+  title: "Blog | Private Jet Charter | Sofar",
   meta: [
     {
       name: "description",
       content:
-        "Learn about our latest news, travels and trends. Sofar is a private jet charter company that offers premium private jet charter services at unbeatable prices. Whether you're flying for business or pleasure, our team of experts will ensure that your journey is smooth, comfortable, and stress-free. Contact us today to learn more about our private jet charter services.",
+        "Stay up to date with the latest news, tips and ideas on private jet travel from Sofar. Read our blog for expert advice and industry updates.",
     },
   ],
 });
