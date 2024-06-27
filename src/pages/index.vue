@@ -83,8 +83,7 @@ useHead({
   <ClientReviews />
   <h2 class="section-title titles">Top Destinations</h2>
   <h3 class="section-subtitle subtitles">
-    Sofar is a private jet company offering customized, tailored and reliable
-    travel.
+    Choose from our most popular destinations
   </h3>
   <CarouselComponent :carouselElements="destinationsCarouselElements" />
   <BlogArticlesCarousel />

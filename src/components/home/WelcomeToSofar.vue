@@ -2,8 +2,8 @@
   <div class="welcome-to-sofar">
     <h2 class="welcome-to-sofar__title titles">Welcome to Sofar</h2>
     <p class="welcome-to-sofar__text subtitles">
-      Sofar is a specialized private jet charter offering tailor-made travel
-      experiences from Westchester or Miami.
+      Sofar is a private jet company offering customized, tailored and reliable
+      travel.
     </p>
     <p class="welcome-to-sofar__text paragraphs">
       Founded in 2019, this small scale company distinguishes itself through its
