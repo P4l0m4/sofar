@@ -80,7 +80,9 @@ useHead({
         />
         <div class="team__card__txt">
           <h3 class="team__card__name subtitles">D. Kwasniak</h3>
-          <span class="team__card__role paragraphs">Chief of maintenance</span>
+          <span class="team__card__role paragraphs"
+            >Director of maintenance</span
+          >
         </div>
       </div>
       <div class="team__card">
@@ -91,7 +93,9 @@ useHead({
         />
         <div class="team__card__txt">
           <h3 class="team__card__name subtitles">M. Lafond</h3>
-          <span class="team__card__role paragraphs">Chief marketing</span>
+          <span class="team__card__role paragraphs"
+            >Chief marketing officer</span
+          >
         </div>
       </div>
       <div class="team__card">
