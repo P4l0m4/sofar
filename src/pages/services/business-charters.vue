@@ -11,7 +11,7 @@ useHead({
     {
       name: "description",
       content:
-        "Sofar offers premium business charter services that are tailored to your needs. Whether you're flying for business or pleasure, our team of experts will ensure that your journey is smooth, comfortable, and stress-free. Contact us today to learn more about our business charter services.",
+        "Sofar offers you the opportunity to charter efficient and reliable business jets. Our business travel solutions guarantee punctual, comfortable and flexible flights for your business needs.",
     },
   ],
 });

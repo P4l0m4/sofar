@@ -8,7 +8,7 @@ useHead({
     {
       name: "description",
       content:
-        "Sofar offers premium private jet charter services that are tailored to your needs. Whether you're flying for business or pleasure, our team of experts will ensure that your journey is smooth, comfortable, and stress-free. Contact us today to learn more about our private jet charter services.",
+        "Experience the convenience and reliability of private jet charters with Sofar Aviation. Flexible scheduling and personalized services for all your travel needs.",
     },
   ],
 });

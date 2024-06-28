@@ -10,7 +10,7 @@ useHead({
     {
       name: "description",
       content:
-        "Sofar offers premium family jet charter services that are tailored to your needs. Whether you're flying for business or pleasure, our team of experts will ensure that your journey is smooth, comfortable, and stress-free. Contact us today to learn more about our family jet charter services.",
+        "With Sofar, you benefit from a safe and comfortable family jet charter. Our private jet services offer the ideal travel solution for family vacations and special occasions.",
     },
   ],
 });

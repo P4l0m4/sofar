@@ -7,7 +7,8 @@ useHead({
   meta: [
     {
       name: "description",
-      content: "Contact us today to learn more about our off-fleet requests.",
+      content:
+        "Explore off-fleet jet requests with Sofar. We provide customized private jet solutions to meet your unique travel needs, even beyond our regular fleet.",
     },
   ],
 });

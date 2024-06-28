@@ -11,7 +11,7 @@ useHead({
     {
       name: "description",
       content:
-        "Sofar offers empty leg flights at unbeatable prices. Whether you're flying for business or pleasure, our empty leg flights are the perfect way to travel in style and comfort. Contact us today to learn more about our empty leg flights.",
+        "Take advantage of discounted empty leg flights with Sofar. Enjoy the benefits of private jet travel at a fraction of the cost with our empty leg charter deals.",
     },
   ],
 });

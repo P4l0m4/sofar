@@ -8,7 +8,7 @@ useHead({
     {
       name: "description",
       content:
-        "Sofar offers a wide range of private jet amenities to make your journey as comfortable and enjoyable as possible. Whether you're flying for business or pleasure, our team of experts will ensure that your journey is smooth, comfortable, and stress-free. Contact us today to learn more about our private jet amenities.",
+        "Explore the premium amenities available on Sofar's private jets. Enjoy ultimate comfort and convenience with our tailored in-flight services. Learn more.",
     },
   ],
 });

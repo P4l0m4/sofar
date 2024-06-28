@@ -8,7 +8,7 @@ useHead({
     {
       name: "description",
       content:
-        "Sofar offers premium pet-friendly charter services that are tailored to your needs. Whether you're flying for business or pleasure, our team of experts will ensure that your journey is smooth, comfortable, and stress-free. Contact us today to learn more about our pet-friendly charter services.",
+        "Enjoy pet-friendly jet charters with Sofar. Our private jet services ensure a comfortable and safe travel experience for you and your pets. Book your pet-friendly flight today.",
     },
   ],
 });

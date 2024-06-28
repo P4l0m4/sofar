@@ -9,7 +9,7 @@ useHead({
     {
       name: "description",
       content:
-        "Sofar offers a comprehensive aircraft management service that ensures your aircraft is always ready to fly. Our team of experts will take care of all the details, from maintenance to flight planning, so you can focus on enjoying your flight. Contact us today to learn more about our aircraft management services.",
+        "Discover comprehensive aircraft management services with Sofar. We offer personalized solutions to optimize your aircraft's performance and value.",
     },
   ],
 });
