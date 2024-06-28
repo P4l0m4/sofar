@@ -3,7 +3,7 @@ const story = await useAsyncStoryblok("off-fleet-requests", {
   version: "published",
 });
 useHead({
-  title: "Off-fleet requests | Sofar",
+  title: "Off-Fleet Jet Requests | Customized Private Jet Solutions | Sofar",
   meta: [
     {
       name: "description",

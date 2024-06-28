@@ -51,7 +51,7 @@ onMounted(() => {
 });
 
 useHead({
-  title: `${city.city} | Sofar`,
+  title: `Private Jet Destinations: ${city.city}, ${state} | Sofar`,
   meta: [
     {
       name: "description",

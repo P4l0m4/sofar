@@ -4,27 +4,16 @@ const story = await useAsyncStoryblok("destinations", { version: "published" });
 const route = useRoute();
 const stateSlug = route.params.state;
 
-//type for destination
-interface Destination {
-  city: string;
-  stateName: string;
-  country: string;
-  geographicalCategories: string[];
-  previewImage: {
-    filename: string;
-  };
-}
-
 const state = story.value.content.statesList.find(
   (s) => `${stringToSlug(s.country)}-${stringToSlug(s.name)}` === stateSlug
 );
 
 useHead({
-  title: `${state.name} | Sofar`,
+  title: `Private Jet Destinations: ${state.name} | Sofar`,
   meta: [
     {
       name: "description",
-      content: `Discover top ${state.name} private jet destinations with Sofar. Explore exclusive locations for your next getaway.`,
+      content: `${state.description}`,
     },
   ],
 });

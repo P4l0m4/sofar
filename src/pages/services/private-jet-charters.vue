@@ -3,7 +3,7 @@ const story = await useAsyncStoryblok("private-jet-charter", {
   version: "published",
 });
 useHead({
-  title: "Private jet charters | Sofar",
+  title: "Private Jet Charters | Reliable & Flexible Air Travel | Sofar",
   meta: [
     {
       name: "description",

@@ -4,7 +4,7 @@ const story = await useAsyncStoryblok("aircraft-management", {
 });
 
 useHead({
-  title: "Aircraft management | Sofar",
+  title: "Aircraft Management Services | Sofar",
   meta: [
     {
       name: "description",

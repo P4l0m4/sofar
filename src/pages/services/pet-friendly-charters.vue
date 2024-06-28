@@ -3,7 +3,7 @@ const story = await useAsyncStoryblok("pet-friendly-charters", {
   version: "published",
 });
 useHead({
-  title: "Pet friendly charters | Sofar",
+  title: "Pet-Friendly Jet Charters | Safe Travel for Your Pets | Sofar ",
   meta: [
     {
       name: "description",

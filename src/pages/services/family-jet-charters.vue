@@ -5,7 +5,7 @@ const story = await useAsyncStoryblok("family-jet-charters", {
   version: "published",
 });
 useHead({
-  title: "Family jet charters | Sofar",
+  title: "Family Jet Charters | Safe and Comfortable Travel | Sofar",
   meta: [
     {
       name: "description",

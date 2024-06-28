@@ -3,7 +3,7 @@ const story = await useAsyncStoryblok("private-jet-amenities", {
   version: "published",
 });
 useHead({
-  title: "Private jet amenities | Sofar",
+  title: "Private Jet Amenities | Comfort & Convenience on Board | Sofar",
   meta: [
     {
       name: "description",

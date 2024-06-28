@@ -6,7 +6,7 @@ const story = await useAsyncStoryblok("empty-legs", {
 });
 
 useHead({
-  title: "Empty legs | Sofar",
+  title: "Empty Leg Flights | Affordable Private Jet Charters | Sofar",
   meta: [
     {
       name: "description",

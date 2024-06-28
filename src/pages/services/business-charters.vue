@@ -6,7 +6,7 @@ const story = await useAsyncStoryblok("business-charters", {
 });
 
 useHead({
-  title: "Business charters | Sofar",
+  title: "Business Jet Charters | Efficient Corporate Travel | Sofar",
   meta: [
     {
       name: "description",

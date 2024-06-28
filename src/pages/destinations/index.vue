@@ -5,7 +5,6 @@ import { normalizeString } from "@/utils/normalize";
 import type QuotePopUpButton from "~/components/QuotePopUpButton.vue";
 const story = await useAsyncStoryblok("destinations", { version: "published" });
 
-//type for destination
 interface Destination {
   city: string;
   stateName: string;
@@ -15,7 +14,7 @@ interface Destination {
     filename: string;
   };
 }
-//type for state
+
 interface State {
   name: string;
   destinationsList: Destination[];
