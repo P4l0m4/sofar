@@ -166,7 +166,7 @@ function handleCloseDestinationSearchResults() {
 }
 
 function handleSelectOriginResult(result) {
-  flightState.origin = `${result.name}, ${result.municipality}`;
+  flightState.origin = `${result.name}, ${result.municipality} (${result.ident})`;
   isOriginResultsOpen.value = false;
   if (!vFlight$.value.origin.$dirty) {
     emits("originAirport", result);
@@ -174,7 +174,7 @@ function handleSelectOriginResult(result) {
 }
 
 function handleSelectDestinationResult(result) {
-  flightState.destination = `${result.name}, ${result.municipality}`;
+  flightState.destination = `${result.name}, ${result.municipality} (${result.ident})`;
   isDestinationResultsOpen.value = false;
 
   if (!vFlight$.value.destination.$dirty) {
@@ -451,7 +451,7 @@ onMounted(() => {
               id="origin"
               label="Departure airport"
               type="search"
-              placeholder="From"
+              placeholder="From (airport code, city...)"
               icon="flight_takeoff"
               :error="originErrors[0]"
               name="origin"
@@ -483,7 +483,7 @@ onMounted(() => {
               id="destination"
               label="Arrival airport"
               type="search"
-              placeholder="To"
+              placeholder="To (airport code, city...)"
               icon="flight_land"
               :error="destinationErrors[0]"
               name="destination"
@@ -821,7 +821,9 @@ onMounted(() => {
           color: $text-color;
           border: 2px solid $text-color;
           z-index: 1;
-          transition: background-color 0.4s ease, color 0.4s ease;
+          transition:
+            background-color 0.4s ease,
+            color 0.4s ease;
 
           &--active {
             background-color: $text-color;
