@@ -473,7 +473,9 @@ onMounted(() => {
                   class="search-results__result__flag"
                   :src="`/assets/flags/${result.iso_country}.svg`"
                   alt="country flag"
-                />{{ result.name }}, {{ result.municipality }}</span
+                />{{ result.name }}, {{ result.municipality }} ({{
+                  result.ident
+                }})</span
               >
             </div>
           </div>
@@ -508,7 +510,9 @@ onMounted(() => {
                   :src="`/assets/flags/${result.iso_country}.svg`"
                   alt="country flag"
                 />
-                {{ result.name }}, {{ result.municipality }}
+                {{ result.name }}, {{ result.municipality }} ({{
+                  result.ident
+                }})
               </span>
             </div>
           </div>

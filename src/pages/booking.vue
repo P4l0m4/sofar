@@ -177,7 +177,7 @@ function placeMarker() {
     });
 
     popupRef.value = new mapboxgl.Popup({ closeOnClick: false })
-      .setLngLat(midpoint.value) // Set to midpoint or any relevant point
+      .setLngLat(midpoint.value)
       .setHTML(
         `<p>${convertKmToMiles(distanceKm).toFixed(2)} miles</p>
         <p>${distanceKm.toFixed(2)} km</p>
@@ -186,6 +186,33 @@ function placeMarker() {
       )} hours</span>`
       )
       .addTo(map.value);
+
+    // Calculate the bounding box
+    const bounds = new mapboxgl.LngLatBounds();
+    bounds.extend([originLon.value, originLat.value]);
+    bounds.extend([destinationLon.value, destinationLat.value]);
+
+    let maxZoom;
+    if (distanceKm < 1) {
+      maxZoom = 16; // Zoom in very close
+    } else if (distanceKm < 10) {
+      maxZoom = 12; // Zoom in closer for short distances
+    } else if (distanceKm < 50) {
+      maxZoom = 10; // Zoom out for medium distances
+    } else if (distanceKm < 300) {
+      maxZoom = 7; // Default zoom level for longer distances
+    } else {
+      maxZoom = 4; // Default zoom level for longer distances
+    }
+
+    console.log(distanceKm);
+
+    // Fit the map to the bounds
+    map.value.fitBounds(bounds, {
+      padding: 50,
+      maxZoom: maxZoom,
+      duration: 1000,
+    });
   }
 }
 
