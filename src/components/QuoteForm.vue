@@ -143,7 +143,9 @@ function searchAirports(searchQuery) {
     .filter(
       (airport) =>
         normalizeString(airport.name).includes(normalizeString(searchQuery)) ||
-        normalizeString(airport.ident).includes(normalizeString(searchQuery)) ||
+        normalizeString(airport.iata_code).includes(
+          normalizeString(searchQuery)
+        ) ||
         normalizeString(airport.municipality).includes(
           normalizeString(searchQuery)
         ) ||
@@ -166,7 +168,7 @@ function handleCloseDestinationSearchResults() {
 }
 
 function handleSelectOriginResult(result) {
-  flightState.origin = `${result.name}, ${result.municipality} (${result.ident})`;
+  flightState.origin = `${result.name}, ${result.municipality} (${result.iata_code})`;
   isOriginResultsOpen.value = false;
   if (!vFlight$.value.origin.$dirty) {
     emits("originAirport", result);
@@ -174,7 +176,7 @@ function handleSelectOriginResult(result) {
 }
 
 function handleSelectDestinationResult(result) {
-  flightState.destination = `${result.name}, ${result.municipality} (${result.ident})`;
+  flightState.destination = `${result.name}, ${result.municipality} (${result.iata_code})`;
   isDestinationResultsOpen.value = false;
 
   if (!vFlight$.value.destination.$dirty) {
@@ -410,7 +412,7 @@ async function changeSteps() {
 }
 
 onMounted(() => {
-  import("@/utils/airports.json").then((json) => {
+  import("@/utils/airports2.json").then((json) => {
     airports.value = json.default;
   });
 });
@@ -474,7 +476,7 @@ onMounted(() => {
                   :src="`/assets/flags/${result.iso_country}.svg`"
                   alt="country flag"
                 />{{ result.name }}, {{ result.municipality }} ({{
-                  result.ident
+                  result.iata_code
                 }})</span
               >
             </div>
@@ -511,7 +513,7 @@ onMounted(() => {
                   alt="country flag"
                 />
                 {{ result.name }}, {{ result.municipality }} ({{
-                  result.ident
+                  result.iata_code
                 }})
               </span>
             </div>
