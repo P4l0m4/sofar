@@ -47,7 +47,7 @@ function copyToClipboard() {
     <h2 class="titles">Interested by our opportunities ?</h2>
     <a
       class="button-primary--dark"
-      href="mailto:hq@flysofar.com"
+      href="mailto:people@flysofar.com"
       style="margin-top: auto"
       @click="copyToClipboard()"
       >{{ label }}</a
