@@ -168,7 +168,7 @@ function handleCloseDestinationSearchResults() {
 }
 
 function handleSelectOriginResult(result) {
-  flightState.origin = `${result.name}, ${result.municipality} (${result.iata_code})`;
+  flightState.origin = `${result.name}, ${result.municipality} ${result.iata_code}`;
   isOriginResultsOpen.value = false;
   if (!vFlight$.value.origin.$dirty) {
     emits("originAirport", result);
@@ -176,7 +176,7 @@ function handleSelectOriginResult(result) {
 }
 
 function handleSelectDestinationResult(result) {
-  flightState.destination = `${result.name}, ${result.municipality} (${result.iata_code})`;
+  flightState.destination = `${result.name}, ${result.municipality} ${result.iata_code}`;
   isDestinationResultsOpen.value = false;
 
   if (!vFlight$.value.destination.$dirty) {
@@ -475,9 +475,10 @@ onMounted(() => {
                   class="search-results__result__flag"
                   :src="`/assets/flags/${result.iso_country}.svg`"
                   alt="country flag"
-                />{{ result.name }}, {{ result.municipality }} ({{
-                  result.iata_code
-                }})</span
+                />{{ result.name }}, {{ result.municipality }}
+                <span v-if="result.iata_code"
+                  >({{ result.iata_code }})</span
+                ></span
               >
             </div>
           </div>
@@ -512,9 +513,8 @@ onMounted(() => {
                   :src="`/assets/flags/${result.iso_country}.svg`"
                   alt="country flag"
                 />
-                {{ result.name }}, {{ result.municipality }} ({{
-                  result.iata_code
-                }})
+                {{ result.name }}, {{ result.municipality }}
+                <span v-if="result.iata_code">({{ result.iata_code }})</span>
               </span>
             </div>
           </div>
