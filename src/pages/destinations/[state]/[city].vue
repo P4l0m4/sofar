@@ -188,6 +188,7 @@ useHead({
     width: 100%;
     height: 100%;
     background-image: linear-gradient(80deg, $text-color, transparent 60%);
+    opacity: 0.8;
     z-index: -1;
   }
 
@@ -364,6 +365,7 @@ useHead({
       width: 100%;
       height: 100%;
       background-image: linear-gradient(90deg, $text-color, transparent 60%);
+      opacity: 0.8;
     }
 
     &__headlines {

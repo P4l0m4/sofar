@@ -1,6 +1,6 @@
 <template>
   <picture class="our-birds">
-    <source media="(min-width: 1100px)" srcset="@/assets/images/birds.webp" />
+    <source media="(min-width: 1100px)" srcset="@/assets/images/birds2.webp" />
 
     <h2 class="our-birds__title titles">Our Birds</h2>
     <p class="our-birds__text subtitles">
@@ -13,15 +13,15 @@
     </p>
 
     <div class="our-birds__buttons">
-      <NuxtLink class="button-primary--light" to="/aircraft"
+      <NuxtLink class="button-primary--dark" to="/aircraft"
         >Learn more about our aircraft</NuxtLink
       >
-      <QuotePopUpButton :style="`light`" />
+      <QuotePopUpButton :style="`dark`" />
     </div>
 
     <img
       class="our-birds__img"
-      src="@/assets/images/birds-mobile.webp"
+      src="@/assets/images/birds-mobile2.webp"
       alt="banner image"
   /></picture>
 </template>
@@ -42,7 +42,8 @@
     inset: 0;
     width: 100%;
     height: 100%;
-    background-image: linear-gradient(80deg, $text-color, transparent 60%);
+    // background-image: linear-gradient(80deg, $text-color, transparent 60%);
+    // opacity: 0.1;
     z-index: -1;
   }
 
@@ -68,10 +69,10 @@
   }
 
   &__title {
-    color: $primary-color;
+    color: $text-color;
   }
   &__text {
-    color: $primary-color;
+    color: $text-color;
     text-wrap: balance;
     @media (min-width: $laptop-screen) {
       max-width: calc(100% - 160px);

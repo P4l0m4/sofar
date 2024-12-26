@@ -201,6 +201,7 @@ const scroll = (direction: "left" | "right") => {
         width: 100%;
         height: 100%;
         background-image: linear-gradient(45deg, $text-color, transparent 60%);
+        opacity: 0.8;
       }
 
       @media (min-width: $big-tablet-screen) {

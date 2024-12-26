@@ -163,6 +163,7 @@ const scroll = (direction: "left" | "right") => {
       left: auto;
       right: 2rem;
       background-image: linear-gradient(-90deg, $base-color, transparent);
+
       & img {
         transform: rotate(-90deg);
       }

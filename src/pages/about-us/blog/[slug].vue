@@ -102,6 +102,7 @@ useHead({
       width: 100%;
       height: 100%;
       background-image: linear-gradient(80deg, $text-color, transparent 60%);
+      opacity: 0.8;
     }
 
     .titles,
@@ -169,9 +170,10 @@ useHead({
         padding-left: 1rem;
       }
       &:deep(a) {
-        text-decoration: line-through;
-        text-decoration-color: $secondary-color-faded;
-        text-decoration-thickness: 10px;
+        // text-decoration: line-through;
+        // text-decoration-color: $sky-color-faded;
+        // text-decoration-thickness: 10px;
+        background: linear-gradient(transparent, $sky-color-faded, transparent);
       }
       &:deep(span) {
         color: $text-color !important;
