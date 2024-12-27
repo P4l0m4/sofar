@@ -448,6 +448,7 @@ onMounted(() => {
       display: flex;
       flex-direction: column;
       gap: 1rem;
+      list-style-position: inside;
 
       @media (min-width: $big-tablet-screen) {
         width: 50%;
