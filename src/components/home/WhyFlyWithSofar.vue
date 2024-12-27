@@ -83,7 +83,7 @@ const qualities = [
   padding: 1rem;
   min-height: 100svh;
   // max-height: 800px;
-  background-image: url("@/assets/images/why-fly-with-sofar.webp");
+  background-image: url("@/assets/images/why-fly-with-sofar-private-jet-mobile.webp");
   background-size: cover;
   background-position: center;
   position: relative;
@@ -94,14 +94,20 @@ const qualities = [
     inset: 0;
     width: 100%;
     height: 100%;
-    background-image: linear-gradient(80deg, $text-color, transparent 60%);
-    opacity: 0.4;
+    background-image: linear-gradient(80deg, $text-color, transparent 100%);
+    opacity: 0.9;
+
+    @media (min-width: $big-tablet-screen) {
+      background-image: linear-gradient(80deg, $text-color, transparent 60%);
+      opacity: 0.4;
+    }
   }
 
   @media (min-width: $big-tablet-screen) {
     gap: 4rem;
     padding: 2rem;
     flex-direction: row;
+    background-image: url("@/assets/images/why-fly-with-sofar.webp");
   }
 
   &__main-part {
@@ -122,11 +128,12 @@ const qualities = [
       width: fit-content;
       white-space: nowrap;
       color: $text-color-alt;
+      margin-bottom: 2rem;
     }
 
     &__qualities {
       display: flex;
-      gap: 1rem;
+      gap: 2rem;
       height: fit-content;
       flex-direction: column;
 
@@ -155,6 +162,11 @@ const qualities = [
           &__title {
             width: fit-content;
             text-shadow: $shadow-text;
+            font-size: 1.25rem;
+
+            @media (min-width: $big-tablet-screen) {
+              font-size: $subtitles;
+            }
           }
 
           &__paragraph {

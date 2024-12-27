@@ -21,7 +21,7 @@
 
     <img
       class="our-birds__img"
-      src="@/assets/images/birds-mobile2.webp"
+      src="@/assets/images/our-birds-sofar-jet-charter-mobile.webp"
       alt="banner image"
   /></picture>
 </template>
@@ -43,6 +43,7 @@
     width: 100%;
     height: 100%;
     // background-image: linear-gradient(80deg, $text-color, transparent 60%);
+    background-image: linear-gradient(120deg, $primary-color, transparent 60%);
     // opacity: 0.1;
     z-index: -1;
   }
