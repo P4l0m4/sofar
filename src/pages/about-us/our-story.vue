@@ -93,16 +93,7 @@ onMounted(() => {
         Pierre transformed a small operation into a leading private jet company,
         renowned for its personalized services and dedication to excellence.
       </li>   <li class="ul">
-        From day one, Sofar’s core has been its unwavering focus on customer
-        care, precision, and a bespoke approach to travel. This philosophy has
-        enabled continuous growth, allowing the company to expand its fleet and
-        introduce advanced aircraft like the Phenom 100 d Ph 300 Th ddi i fl i i
-        customer care, precision, and a bespoke approach to travel. This
-        philosophy has enabled continuous growth, allowing the company to expand
-        its fleet and introduce advanced aircraft like the Phenom 100 and Phenom
-        300. These additions reflect our mission to cater to the diverse needs
-        of our clients while maintaining the highest standards of safety and
-        luxury.</li>
+       From day one, Sofar’s core has been its unwavering focus on customer care, precision, and a bespoke approach to travel. This philosophy has enabled continuous growth, allowing the company to expand its fleet and introduce advanced aircraft like the Phenom 100 and Phenom 300. These additions reflect our mission to cater to the diverse needs of our clients while maintaining the highest standards of safety and luxury.</li>
         </ul>
     </div>
   </section>
@@ -136,8 +127,6 @@ onMounted(() => {
           excellence. We continually adapt, innovate, and refine our services
           to exceed client expectations.</li>
         <li>Passion and Integrity: Our passion for aviation and dedication to
-          our craft are reflected in the service we provide. We hold ourselves
-
           our craft are reflected in the service we provide. We hold ourselves
           to the highest ethical standards, building trust and delivering on our
           promises.
