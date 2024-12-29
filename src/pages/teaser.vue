@@ -346,7 +346,7 @@ useHead({
   flex-direction: column;
   align-items: center;
   gap: 2rem;
-  padding: 0 1rem 4rem 1rem;
+  padding: 0 1rem 2rem 1rem;
 
   @media (min-width: $big-tablet-screen) {
     padding: 0 2rem 4rem 2rem;
