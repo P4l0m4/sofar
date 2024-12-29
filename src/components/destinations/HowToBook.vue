@@ -23,7 +23,7 @@ const props = withDefaults(defineProps<Props>(), {});
         background="#06067c"
         :primary="true"
       />
-      <a class="emergency-button button-secondary--dark" href="tel:+19144686800"
+      <a class="emergency-button button-secondary--dark" href="tel:+12037698008"
         >Call us</a
       >
     </div>

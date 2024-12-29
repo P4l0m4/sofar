@@ -96,10 +96,10 @@ const menuItemsWithStates = computed(() => {
 
       <div class="footer__content__info">
         <span class="subtitles">Get in touch</span>
-        <a class="button-tertiary" href="tel:+19144686800">+1 914-468-6800</a>
+        <a class="button-tertiary" href="tel:+12037698008">+1 (203) 769-8008</a>
         <span>KHPN | KTEB | KOPF</span>
         <span>HQ@flysofar.com</span>
-        <span>10 New King St West Harrison, NY 10604</span>
+        <span>11911 San Vicente Blvd, Suite 340, LA 90049</span>
         <a class="button-tertiary" href="/documents/pp.pdf" target="_blank"
           >Privacy policy</a
         >
