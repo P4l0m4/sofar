@@ -101,7 +101,6 @@ useHead({
   padding-bottom: 3rem;
   flex-direction: column;
   justify-content: end;
-
   gap: 1rem;
   position: relative;
 

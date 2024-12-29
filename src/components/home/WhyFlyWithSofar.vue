@@ -162,7 +162,7 @@ const qualities = [
           &__title {
             width: fit-content;
             text-shadow: $shadow-text;
-            font-size: 1.25rem;
+            font-size: 1rem;
 
             @media (min-width: $big-tablet-screen) {
               font-size: $subtitles;
@@ -172,6 +172,7 @@ const qualities = [
           &__paragraph {
             text-wrap: balance;
             text-shadow: $shadow-text;
+            font-size: 0.8rem;
           }
         }
       }
