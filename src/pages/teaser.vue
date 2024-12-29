@@ -144,7 +144,7 @@ useHead({
     </div>
   </section>
   <EmptysForm />
-  <section class="image-with-text">
+  <section class="image-with-text" style="margin-bottom: 2rem">
     <img
       v-if="story.content.secondSectionImage.filename"
       class="image-with-text__full-width-image"
@@ -346,10 +346,10 @@ useHead({
   flex-direction: column;
   align-items: center;
   gap: 2rem;
-  padding: 4rem 1rem 4rem 1rem;
+  padding: 0 1rem 4rem 1rem;
 
   @media (min-width: $big-tablet-screen) {
-    padding: 4rem 2rem 4rem 2rem;
+    padding: 0 2rem 4rem 2rem;
   }
 
   &__subtitle {
