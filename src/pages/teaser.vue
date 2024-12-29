@@ -261,7 +261,7 @@ useHead({
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  padding: 4rem 0 4rem 0;
+  padding: 4rem 0 0 0;
 
   &__full-width-image {
     width: 100%;
@@ -313,7 +313,6 @@ useHead({
 
 .teaser {
   display: flex;
-
   padding: 4rem 1rem 4rem 1rem;
   flex-direction: column;
   gap: 2rem;
@@ -324,8 +323,12 @@ useHead({
   }
 
   &__text {
+    display: flex;
     color: $black-color;
-    padding-right: 14vw;
+
+    @media (min-width: $big-tablet-screen) {
+      padding-right: 14vw;
+    }
   }
 
   &__video {
