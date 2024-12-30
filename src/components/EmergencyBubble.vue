@@ -1,7 +1,7 @@
 <template>
   <a class="emergency-bubble" href="tel:+12037698008">
     <img class="emergency-bubble__icon" src="/assets/icons/call_quality.svg" />
-    <span class="emergency-bubble__number">+1 (203) 769-8008</span>
+    <span class="emergency-bubble__number">+1 (213) 769-8008</span>
   </a>
 </template>
 <style lang="scss" scoped>
