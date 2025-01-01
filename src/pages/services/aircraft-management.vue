@@ -1,7 +1,18 @@
 <script setup lang="ts">
+import { ref } from "vue";
+
 const story = await useAsyncStoryblok("aircraft-management", {
   version: "published",
 });
+
+const label = ref("Get in touch with our team");
+function copyToClipboard() {
+  navigator.clipboard.writeText("hq@flysofar.com");
+  label.value = "Email copied to clipboard!";
+  setTimeout(() => {
+    label.value = "Get in touch with our team";
+  }, 1000);
+}
 
 useHead({
   title: "Aircraft Management Services | Sofar",
@@ -28,7 +39,14 @@ useHead({
         {{ story.content.bannerSubtitle }}
       </h2>
     </div>
-    <QuoteForm parent="private-jet" />
+    <!-- <QuoteForm parent="private-jet" /> -->
+    <a
+      class="button-primary--light"
+      href="mailto:hq@flysofar.com"
+      style="width: fit-content"
+      @click="copyToClipboard()"
+      >{{ label }}</a
+    >
     <img
       class="services-banner__img"
       :src="story.content.bannerImageMobile.filename"
