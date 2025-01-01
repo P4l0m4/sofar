@@ -61,12 +61,9 @@ useHead({
     />
   </section>
   <section class="plane-gallery-book">
-    <div class="plane-gallery-book__wrapper">
+    <div class="plane-gallery-book__special-wrapper">
       <img src="@/assets/images/pc-12/pc-12-g1.webp" alt="private jet image" />
       <img src="@/assets/images/pc-12/pc-12-g2.webp" alt="private jet image" />
-    </div>
-    <div class="plane-gallery-book__wrapper">
-      <span class="titles">Make It Anywhere ™</span>
       <img src="@/assets/images/pc-12/pc-12-g3.webp" alt="private jet image" />
       <img src="@/assets/images/pc-12/pc-12-g4.webp" alt="private jet image" />
     </div>
