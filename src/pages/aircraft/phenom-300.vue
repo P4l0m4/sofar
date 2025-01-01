@@ -14,7 +14,7 @@ useHead({
   <picture class="plane">
     <source
       media="(min-width: 1100px)"
-      srcset="@/assets/images/phenom-300/phenom-300-banner.webp" />
+      srcset="@/assets/images/phenom-300/phenom-300-sofar-private-jet.webp" />
 
     <h2 class="plane__title titles">Phenom 300</h2>
 
@@ -45,7 +45,7 @@ useHead({
 
     <img
       class="plane__img"
-      src="@/assets/images/phenom-300/phenom-300-banner.webp"
+      src="@/assets/images/phenom-300/phenom-300-sofar-private-jet.webp"
       alt="banner image"
   /></picture>
   <section class="plane-info-horizontal">
@@ -61,7 +61,7 @@ useHead({
     </div>
     <img
       class="plane-info-horizontal__img"
-      src="@/assets/images/phenom-300/phenom-300-blue-dots.webp"
+      src="@/assets/images/phenom-300/phenom300-embraer-sofar-private-jet.webp"
       alt="plane info image"
     />
   </section>
@@ -87,6 +87,11 @@ useHead({
         connectivity. The Phenom 300 combines luxury, comfort, and practicality
         for a superior travel experience.
       </p>
+      <img
+        class="plane-info-vertical__txt__img"
+        src="@/assets/images/phenom-300/phenom-300-cabin-capability.webp"
+        alt="private jet cabin image"
+      />
     </div>
     <img
       class="plane-info-vertical__img"
@@ -100,14 +105,38 @@ useHead({
     <QuotePopUpButton :primary="true" />
   </section>
 
-  <img
+  <!-- <img
     class="full-width-img"
     src="@/assets/images/phenom-300/phenom-300-cabin-inside.webp"
     alt="private jet cabin image"
   />
 
   <OurBases />
-  <EmptysForm />
+  <EmptysForm /> -->
+  <section class="plane-gallery-book">
+    <div class="plane-gallery-book__wrapper">
+      <img
+        src="@/assets/images/phenom-300/phenom-300-embraer-sofar-cockpit.webp"
+        alt="private jet image"
+      />
+      <img
+        src="@/assets/images/phenom-300/phenom-300-embraer-sofar-window.webp"
+        alt="private jet image"
+      />
+      <img
+        src="@/assets/images/phenom-300/phenom-300-embraer-sofar (2).webp"
+        alt="private jet image"
+      />
+      <img
+        src="@/assets/images/phenom-300/phenom-300-embraer-sofar (4).webp"
+        alt="private jet image"
+      />
+      <img
+        src="@/assets/images/phenom-300/phenom-300-embraer-sofar.webp"
+        alt="private jet image"
+      />
+    </div>
+  </section>
 </template>
 <style lang="scss" scoped>
 @import "@/styles/planes.scss";

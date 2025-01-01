@@ -12,7 +12,11 @@ useHead({
 </script>
 <template>
   <picture class="plane">
-    <source media="(min-width: 1100px)" srcset="@/assets/images/birds.webp" />
+    <source
+      media="(min-width: 1100px)"
+      srcset="
+        @/assets/images/phenom-100/phenom-100-embraer-sofar-jet-charter.webp
+      " />
 
     <h2 class="plane__title titles">Phenom 100</h2>
 
@@ -74,18 +78,18 @@ useHead({
     </div>
     <img
       class="plane-info-horizontal__img"
-      src="@/assets/images/phenom-100/phenom-100-blue-dots.svg"
+      src="@/assets/images/phenom-100/phenom-100-embraer-sofar-jet-charter-blue-dots.webp"
       alt="plane info image"
     />
   </section>
-  <iframe
+  <!-- <iframe
     class="full-screen-video"
     src="https://www.youtube.com/embed/uxzphXYWoQI?si=P1hoPbxjJONbZ5ZF"
     title="YouTube video player"
     frameborder="0"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
     allowfullscreen
-  ></iframe>
+  ></iframe> -->
   <section class="plane-info-vertical">
     <div class="plane-info-vertical__txt">
       <h3 class="subtitles">The cabin</h3>
@@ -117,7 +121,7 @@ useHead({
     />
   </section>
   <section class="plane-info-vertical">
-    <div class="plane-info-vertical__txt">
+    <div class="plane-info-vertical__txt" style="position: relative">
       <h3 class="subtitles">Aircraft Specifics and Cabin Capability</h3>
       <p class="paragraphs">Enclosed Bathroom</p>
       <p class="paragraphs">Widest Cabin in Light Jet Category</p>
@@ -128,9 +132,12 @@ useHead({
     </div>
     <img
       class="plane-info-vertical__img"
-      src="@/assets/images/phenom-100/phenom-100-cabin4.webp"
+      src="@/assets/images/phenom-100/pehnom100-cabin-capability.webp"
       alt="private jet cabin image"
-      style="max-height: 400px"
+    />
+    <img
+      class="inside-img"
+      src="@/assets/images/phenom-100/phenom-100-luggage-capacity (2).webp"
     />
   </section>
   <section class="standard-spacing centered-content">
@@ -138,42 +145,47 @@ useHead({
     <QuotePopUpButton :primary="true" />
   </section>
   <section class="plane-gallery-book">
-    <div class="plane-gallery-book__wrapper">
+    <div class="plane-gallery-book__special-wrapper">
       <img
-        src="@/assets/images/phenom-100/phenom-100-g1.webp"
+        src="@/assets/images/phenom-100/phenom-100-embraer-sofar.webp"
         alt="private jet image"
       />
       <img
-        src="@/assets/images/phenom-100/phenom-100-g2.webp"
+        src="@/assets/images/phenom-100/phenom-100-embraer-sofar (1).webp"
         alt="private jet image"
       />
       <img
-        src="@/assets/images/phenom-100/phenom-100-g3.webp"
-        alt="private jet image"
-      />
-    </div>
-    <div class="plane-gallery-book__wrapper">
-      <span class="titles">Make It Anywhere ™</span>
-      <img
-        src="@/assets/images/phenom-100/phenom-100-g4.webp"
+        src="@/assets/images/phenom-100/phenom-100-embraer-sofar (2).webp"
         alt="private jet image"
       />
       <img
-        src="@/assets/images/phenom-100/phenom-100-g5.webp"
+        src="@/assets/images/phenom-100/phenom-100-embraer-sofar (3).webp"
         alt="private jet image"
       />
       <img
-        src="@/assets/images/phenom-100/phenom-100-g6.webp"
+        src="@/assets/images/phenom-100/phenom-100-embraer-sofar (4).webp"
         alt="private jet image"
       />
       <img
-        src="@/assets/images/phenom-100/phenom-100-g7.webp"
+        src="@/assets/images/phenom-100/phenom-100-embraer-sofar-jet-charter.webp"
+        alt="private jet image"
+      />
+      <img
+        src="@/assets/images/phenom-100/phenom-100-embraer-sofar (5).webp"
+        alt="private jet image"
+      />
+      <img
+        src="@/assets/images/phenom-100/phenom-100-embraer-sofar (6).webp"
+        alt="private jet image"
+      />
+      <img
+        src="@/assets/images/phenom-100/phenom-100-embraer-sofar (7).webp"
         alt="private jet image"
       />
     </div>
   </section>
-  <OurBases />
-  <EmptysForm />
+  <!-- <OurBases />
+  <EmptysForm /> -->
 </template>
 <style lang="scss" scoped>
 @import "@/styles/planes.scss";
