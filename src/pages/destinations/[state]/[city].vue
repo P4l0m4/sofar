@@ -389,11 +389,11 @@ useHead({
       }
 
       & .titles {
-        text-shadow: $shadow-text;
+        // text-shadow: $shadow-text;
       }
       & .paragraphs {
         height: 100%;
-        text-shadow: $shadow-text;
+        // text-shadow: $shadow-text;
       }
 
       & .button-primary--light {

@@ -116,7 +116,7 @@ useHead({
     </div>
     <img
       class="plane-info-vertical__img"
-      src="@/assets/images/phenom-100/phenom-100-cabin.webp"
+      src="@/assets/images/phenom-100/phenom-100-cabin-layout-sofar.webp"
       alt="plane info image"
     />
   </section>
