@@ -45,7 +45,10 @@ useHead({
       >
     </div>
 
-    <img class="plane__img" src="@/assets/images/birds.webp" alt="banner image"
+    <img
+      class="plane__img"
+      src="@/assets/images/phenom-100/phenom-100-embraer-sofar-jet-charter.webp"
+      alt="banner image"
   /></picture>
   <section class="plane-info-horizontal">
     <div class="plane-info-horizontal__txt">
