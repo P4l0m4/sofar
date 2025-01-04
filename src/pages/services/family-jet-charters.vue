@@ -1,5 +1,6 @@
 <script setup>
-import OurBases from "~/components/OurBases.vue";
+import { useCommonAssetsStore } from "@/stores/commonAssets";
+const commonAssetsStore = useCommonAssetsStore();
 
 const story = await useAsyncStoryblok("family-jet-charters", {
   version: "published",
@@ -42,6 +43,17 @@ useHead({
     :text="story.content.textSectionParagraph"
   />
 
+  <iframe
+    v-if="
+      commonAssetsStore.teaserVideo && commonAssetsStore.teaserVideo.length > 0
+    "
+    class="video"
+    :src="commonAssetsStore.teaserVideo"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+  ></iframe>
+
   <ServicesContentBlok
     v-for="contentBlok in story.content?.ContentBloks"
     :key="contentBlok._uid"
@@ -58,4 +70,13 @@ useHead({
 </template>
 <style lang="scss" scoped>
 @import "@/styles/planes.scss";
+.video {
+  width: 100%;
+  height: 400px;
+  margin: 4rem 0;
+
+  @media (min-width: $big-tablet-screen) {
+    height: 95dvh;
+  }
+}
 </style>

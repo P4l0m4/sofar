@@ -72,6 +72,7 @@ useHead({
 </template>
 <style lang="scss" scoped>
 @import "@/styles/planes.scss";
+
 .services {
   display: flex;
   flex-direction: column;
