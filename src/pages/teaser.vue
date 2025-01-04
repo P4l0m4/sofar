@@ -213,7 +213,7 @@ useHead({
     height: 100%;
     background-image: linear-gradient(80deg, $text-color, transparent 60%);
     z-index: -1;
-    opacity: 0;
+    opacity: 0.2;
   }
 
   & source {
