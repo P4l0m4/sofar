@@ -17,6 +17,13 @@ useHead({
     },
   ],
 });
+
+useJsonld(() => ({
+  "@context": "https://schema.org/",
+  "@type": "WebSite",
+  name: `Private Jet Destinations: ${state.name} | Sofar`,
+  url: window.location.origin,
+}));
 </script>
 <template>
   <picture class="state-banner">

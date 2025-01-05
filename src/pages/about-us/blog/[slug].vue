@@ -17,6 +17,32 @@ useHead({
     },
   ],
 });
+
+useJsonld(() => ({
+  "@context": "https://schema.org",
+  "@type": "NewsArticle",
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": window.location.href,
+  },
+  headline: article.title,
+  description: article.TLDR,
+  image: article.banner.filename,
+  author: {
+    "@type": "Organization",
+    name: "Sofar, private jet charter",
+    url: window.location.origin,
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "Sofar, private jet charter",
+    logo: {
+      "@type": "ImageObject",
+      url: "https://chamberycampus.com/_nuxt/logo-inseec.a0368931.svg",
+    },
+  },
+  datePublished: dayjs(article.date).format("YYYY[-]MM[-]DD[T]HH[:]mm"),
+}));
 </script>
 <template>
   <article class="article">

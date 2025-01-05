@@ -44,6 +44,13 @@ useHead({
     },
   ],
 });
+
+useJsonld(() => ({
+  "@context": "https://schema.org/",
+  "@type": "WebSite",
+  name: "Sofar | Private jet charter | On-demand private flights | Reliable Company",
+  url: window.location.origin,
+}));
 </script>
 <template>
   <picture class="index__banner">

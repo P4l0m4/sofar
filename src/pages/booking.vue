@@ -230,6 +230,13 @@ useHead({
     },
   ],
 });
+
+useJsonld(() => ({
+  "@context": "https://schema.org/",
+  "@type": "WebSite",
+  name: `Book a Private Jet | Sofar`,
+  url: window.location.origin,
+}));
 </script>
 <template>
   <section class="booking">

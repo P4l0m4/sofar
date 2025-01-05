@@ -144,6 +144,13 @@ useHead({
     },
   ],
 });
+
+useJsonld(() => ({
+  "@context": "https://schema.org/",
+  "@type": "WebSite",
+  name: `Top Private Jet Destinations | Sofar`,
+  url: window.location.origin,
+}));
 </script>
 <template>
   <section class="destinations">

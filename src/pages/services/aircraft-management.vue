@@ -27,6 +27,13 @@ useHead({
     },
   ],
 });
+
+useJsonld(() => ({
+  "@context": "https://schema.org/",
+  "@type": "WebSite",
+  name: "Aircraft Management Services | Sofar",
+  url: window.location.origin,
+}));
 </script>
 <template>
   <picture class="services-banner">

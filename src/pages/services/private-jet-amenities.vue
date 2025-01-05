@@ -15,6 +15,13 @@ useHead({
     },
   ],
 });
+
+useJsonld(() => ({
+  "@context": "https://schema.org/",
+  "@type": "WebSite",
+  name: "Private Jet Amenities | Comfort & Convenience on Board | Sofar",
+  url: window.location.origin,
+}));
 </script>
 <template>
   <picture class="services-banner">

@@ -10,6 +10,13 @@ useHead({
     },
   ],
 });
+
+useJsonld(() => ({
+  "@context": "https://schema.org/",
+  "@type": "WebSite",
+  name: "Embraer Phenom 300 | Sofar",
+  url: window.location.origin,
+}));
 </script>
 <template>
   <picture class="plane">

@@ -32,6 +32,13 @@ useHead({
     },
   ],
 });
+
+useJsonld(() => ({
+  "@context": "https://schema.org/",
+  "@type": "WebSite",
+  name: "Private Jet Frequently Asked Questions | Sofar",
+  url: window.location.origin,
+}));
 </script>
 <template>
   <section class="blog">

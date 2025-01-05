@@ -16,6 +16,13 @@ useHead({
     },
   ],
 });
+
+useJsonld(() => ({
+  "@context": "https://schema.org/",
+  "@type": "WebSite",
+  name: "Empty Leg Flights | Affordable Private Jet Charters | Sofar",
+  url: window.location.origin,
+}));
 </script>
 <template>
   <picture class="services-banner">

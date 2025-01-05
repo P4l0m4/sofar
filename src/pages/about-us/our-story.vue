@@ -48,6 +48,13 @@ onMounted(() => {
     .setLngLat([-118.243683, 34.052235])
     .addTo(map);
 });
+
+useJsonld(() => ({
+  "@context": "https://schema.org/",
+  "@type": "WebSite",
+  name: "Our Story | Sofar",
+  url: window.location.origin,
+}));
 </script>
 <template>
   <picture class="our-story-banner">

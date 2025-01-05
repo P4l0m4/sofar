@@ -9,6 +9,13 @@ useHead({
     },
   ],
 });
+
+useJsonld(() => ({
+  "@context": "https://schema.org/",
+  "@type": "WebSite",
+  name: "Embraer Pilatus PC-12 | Sofar",
+  url: window.location.origin,
+}));
 </script>
 <template>
   <picture class="plane">

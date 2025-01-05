@@ -2,6 +2,25 @@
 const story = await useAsyncStoryblok("welcome-to-sofar", {
   version: "published",
 });
+if (story.value.content.link) {
+  useJsonld(() => ({
+    "@context": "https://schema.org/",
+    "@type": "VideoObject",
+    name: "Sofar Like Never Before",
+    "@id": story.value.content.link,
+    datePublished: "2025-01-18",
+    description:
+      "This teaser isn’t just a video—it’s your exclusive invitation to discover the art of travel with Sofar. From breathtaking aerial views to the elegant details of our aircraft, this is your first look at the extraordinary experiences we offer.",
+    thumbnailURL: "https://flysofar.com/_nuxt/birds2.C4YDYjWx.webp",
+    thumbnail: "https://flysofar.com/_nuxt/birds2.C4YDYjWx.webp",
+    duration: "T1M55S",
+    uploadDate: "2025-01-18",
+    author: {
+      "@type": "Person",
+      name: "Sofar private jets",
+    },
+  }));
+}
 </script>
 <template>
   <div class="welcome-to-sofar">

@@ -20,6 +20,36 @@ function copyToClipboard() {
     label.value = "Apply";
   }, 1000);
 }
+
+useJsonld(() => ({
+  "@context": "https://schema.org/",
+  "@type": "WebSite",
+  name: `Careers at Sofar | Join Our Team`,
+  url: window.location.origin,
+}));
+
+useJsonld(() => ({
+  "@context": "https://schema.org/",
+  "@type": "JobPosting",
+  title: `${story.value.content.positions[0].title}`,
+  description: `${story.value.content.positions[0].description}`,
+  employmentType: "FULL_TIME",
+  hiringOrganization: {
+    "@type": "Organization",
+    name: "Sofar Private Jet Charter",
+  },
+  jobLocation: {
+    "@type": "Place",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "11911 San Vicente Blvd",
+      addressLocality: "Suite 340",
+      addressRegion: "LA",
+      postalCode: "90049",
+      addressCountry: "US",
+    },
+  },
+}));
 </script>
 <template>
   <Container>

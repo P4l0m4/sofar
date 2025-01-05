@@ -48,6 +48,22 @@ useHead({
     },
   ],
 });
+
+useJsonld(() => ({
+  "@context": "https://schema.org/",
+  "@type": "WebSite",
+  name: `Teaser | ${story.value.content.title}`,
+  url: window.location.origin,
+}));
+
+useJsonld(() => ({
+  "@context": "https://schema.org/",
+  "@type": "Event",
+  name: `Teaser | ${story.value.content.title}`,
+  url: window.location.origin,
+  description: story.value.content.subtitle,
+  startDate: targetDate.format("YYYY-MM-DDTHH:mm:ssZ"),
+}));
 </script>
 <template>
   <picture class="index__banner">
