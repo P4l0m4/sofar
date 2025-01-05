@@ -3,6 +3,7 @@ import { ref } from "vue";
 
 import { useCommonAssetsStore } from "@/stores/commonAssets";
 const commonAssetsStore = useCommonAssetsStore();
+await commonAssetsStore.fetchTeaserVideo();
 
 const story = await useAsyncStoryblok("aircraft-management", {
   version: "published",

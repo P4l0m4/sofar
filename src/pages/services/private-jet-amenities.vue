@@ -1,6 +1,7 @@
 <script setup>
 import { useCommonAssetsStore } from "@/stores/commonAssets";
 const commonAssetsStore = useCommonAssetsStore();
+await commonAssetsStore.fetchTeaserVideo();
 
 const story = await useAsyncStoryblok("private-jet-amenities", {
   version: "published",

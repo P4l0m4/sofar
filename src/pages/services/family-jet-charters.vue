@@ -1,6 +1,7 @@
 <script setup>
 import { useCommonAssetsStore } from "@/stores/commonAssets";
 const commonAssetsStore = useCommonAssetsStore();
+await commonAssetsStore.fetchTeaserVideo();
 
 const story = await useAsyncStoryblok("family-jet-charters", {
   version: "published",
