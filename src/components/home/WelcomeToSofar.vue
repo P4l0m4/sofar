@@ -13,19 +13,17 @@ const story = await useAsyncStoryblok("welcome-to-sofar", {
     <div class="two-columns">
       <div class="text-column">
         <p class="welcome-to-sofar__text paragraphs">
-          Founded in 2019, this small scale company distinguishes itself through
-          its customer proximity, responsiveness, and commitment to personalized
-          service.
+          Founded in 2019, Sofar has grown from humble beginnings to become a
+          trusted name in private aviation. Operating from New York, Miami, and
+          Los Angeles, we offer bespoke flights tailored to meet the unique
+          needs of each client.
         </p>
         <p class="welcome-to-sofar__text paragraphs">
-          With a fleet of state-of-the-art jets, Sofar is dedicated to providing
-          comfortable travel, with a focus on meeting the individual needs of
-          each passenger. Whether for business or leisure travel, Sofar
-          collaborates closely with its clients to customize every aspect of
-          their journey. The company regards its clients as travel partners,
-          prioritizing their comfort, safety, and satisfaction.Joining Sofar
-          means discovering a new dimension of private jet travel and turning
-          travel dreams into reality.
+          Known for our unwavering commitment to excellence, customer focus, and
+          responsiveness, Sofar redefines private jet travel by prioritizing
+          comfort, safety, and satisfaction. Whether for business or leisure,
+          every journey reflects our dedication to providing personalized and
+          reliable experiences.
         </p>
         <div class="welcome-to-sofar__buttons">
           <NuxtLink class="button-primary--dark" to="/about-us/our-story"
@@ -145,6 +143,7 @@ const story = await useAsyncStoryblok("welcome-to-sofar", {
 
     @media (min-width: $big-tablet-screen) {
       height: 400px;
+      margin-top: 4rem;
     }
   }
 }

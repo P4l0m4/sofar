@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const story = await useAsyncStoryblok("phenom-300", { version: "published" });
 useHead({
   title: "Embraer Phenom 300 | Sofar",
   meta: [
@@ -14,7 +15,7 @@ useHead({
   <picture class="plane">
     <source
       media="(min-width: 1100px)"
-      srcset="@/assets/images/phenom-300/phenom-300-sofar-private-jet.webp" />
+      :srcset="story.content.bannerImageDesktop.filename" />
 
     <h2 class="plane__title titles">Phenom 300</h2>
 
@@ -45,8 +46,8 @@ useHead({
 
     <img
       class="plane__img"
-      src="@/assets/images/phenom-300/phenom-300-sofar-private-jet.webp"
-      alt="banner image"
+      :src="story.content.bannerImageMobile.filename"
+      :alt="story.content.bannerImageMobile.alt"
   /></picture>
   <section class="plane-info-horizontal">
     <div class="plane-info-horizontal__txt">
@@ -95,7 +96,7 @@ useHead({
     </div>
     <img
       class="plane-info-vertical__img"
-      src="@/assets/images/phenom-300/phenom-300-cabin.webp"
+      src="@/assets/images/phenom-300/cabin-phenom300-embraer.webp"
       alt="plane info image"
     />
   </section>
