@@ -20,7 +20,7 @@ useJsonld(() => ({
   "@context": "https://schema.org/",
   "@type": "WebSite",
   name: "Family Jet Charters | Safe and Comfortable Travel | Sofar",
-  url: window.location.origin,
+  url: window.location.href,
 }));
 </script>
 <template>

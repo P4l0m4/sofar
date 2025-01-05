@@ -37,8 +37,23 @@ useJsonld(() => ({
   "@context": "https://schema.org/",
   "@type": "WebSite",
   name: "Private Jet Frequently Asked Questions | Sofar",
-  url: window.location.origin,
+  url: window.location.origin + "/blog",
 }));
+
+const breadcrumbs = [
+  {
+    name: "Home",
+    url: window.location.origin,
+  },
+  {
+    name: "About us",
+    url: window.location.origin + "/about-us",
+  },
+  {
+    name: "Blog",
+    url: window.location.href,
+  },
+];
 </script>
 <template>
   <section class="blog">
@@ -99,6 +114,7 @@ useJsonld(() => ({
       </NuxtLink>
     </div>
   </section>
+  <JsonldBreadcrumb :links="breadcrumbs" />
 </template>
 <style lang="scss" scoped>
 .blog {

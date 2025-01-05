@@ -50,6 +50,21 @@ useJsonld(() => ({
     },
   },
 }));
+
+const breadcrumbs = [
+  {
+    name: "Home",
+    url: window.location.origin,
+  },
+  {
+    name: "About us",
+    url: window.location.origin + "/about-us",
+  },
+  {
+    name: "Careers",
+    url: window.location.origin + "/about-us/careers",
+  },
+];
 </script>
 <template>
   <Container>
@@ -83,6 +98,7 @@ useJsonld(() => ({
       >{{ label }}</a
     >
   </section>
+  <JsonldBreadcrumb :links="breadcrumbs" />
 </template>
 <style lang="scss" scoped>
 .headlines {

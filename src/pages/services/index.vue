@@ -20,8 +20,19 @@ useJsonld(() => ({
   "@context": "https://schema.org/",
   "@type": "WebSite",
   name: "Private Jet Charter Services | Sofar",
-  url: window.location.origin,
+  url: window.location.href,
 }));
+
+const breadcrumbs = [
+  {
+    name: "Home",
+    url: window.location.origin,
+  },
+  {
+    name: "Services",
+    url: window.location.href,
+  },
+];
 </script>
 <template>
   <picture class="services-banner">
@@ -76,6 +87,7 @@ useJsonld(() => ({
     <CarouselComponent />
   </section>
   <OurBases />
+  <JsonldBreadcrumb :links="breadcrumbs" />
 </template>
 <style lang="scss" scoped>
 @import "@/styles/planes.scss";

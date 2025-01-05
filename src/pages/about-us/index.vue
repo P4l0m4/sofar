@@ -14,8 +14,19 @@ useJsonld(() => ({
   "@context": "https://schema.org/",
   "@type": "WebSite",
   name: "Private Jet Frequently Asked Questions | Sofar",
-  url: window.location.origin,
+  url: window.location.href,
 }));
+
+const breadcrumbs = [
+  {
+    name: "Home",
+    url: window.location.origin,
+  },
+  {
+    name: "About us",
+    url: window.location.href,
+  },
+];
 </script>
 <template>
   <Container>
@@ -26,4 +37,5 @@ useJsonld(() => ({
     <h2 class="titles">Book your next flight with us!</h2>
     <QuotePopUpButton :primary="true" />
   </section>
+  <JsonldBreadcrumb :links="breadcrumbs" />
 </template>

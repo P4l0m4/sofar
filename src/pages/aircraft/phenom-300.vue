@@ -15,7 +15,7 @@ useJsonld(() => ({
   "@context": "https://schema.org/",
   "@type": "WebSite",
   name: "Embraer Phenom 300 | Sofar",
-  url: window.location.origin,
+  url: window.location.href,
 }));
 </script>
 <template>

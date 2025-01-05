@@ -21,7 +21,7 @@ useJsonld(() => ({
   "@context": "https://schema.org/",
   "@type": "WebSite",
   name: "Business Jet Charters | Efficient Corporate Travel | Sofar",
-  url: window.location.origin,
+  url: window.location.href,
 }));
 </script>
 <template>

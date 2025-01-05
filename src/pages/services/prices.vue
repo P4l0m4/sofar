@@ -20,7 +20,7 @@ useJsonld(() => ({
   "@context": "https://schema.org/",
   "@type": "WebSite",
   name: "Private Jet Charter Prices | Transparent & Competitive Rates | Sofar",
-  url: window.location.origin,
+  url: window.location.href,
 }));
 </script>
 <template>

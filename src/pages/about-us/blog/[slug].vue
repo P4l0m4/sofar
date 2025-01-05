@@ -31,7 +31,7 @@ useJsonld(() => ({
   author: {
     "@type": "Organization",
     name: "Sofar, private jet charter",
-    url: window.location.origin,
+    url: window.location.origin + `/blog/${articleSlug}`,
   },
   publisher: {
     "@type": "Organization",
@@ -43,6 +43,25 @@ useJsonld(() => ({
   },
   datePublished: dayjs(article.date).format("YYYY[-]MM[-]DD[T]HH[:]mm"),
 }));
+
+const breadcrumbs = [
+  {
+    name: "Home",
+    url: window.location.origin,
+  },
+  {
+    name: "About us",
+    url: window.location.origin + "/about-us",
+  },
+  {
+    name: "Blog",
+    url: window.location.origin + "/about-us/blog",
+  },
+  {
+    name: article.title,
+    url: window.location.href,
+  },
+];
 </script>
 <template>
   <article class="article">
@@ -98,6 +117,7 @@ useJsonld(() => ({
     </div>
   </div>
   <BlogArticlesCarousel :articleTitle="article.title" />
+  <JsonldBreadcrumb :links="breadcrumbs" />
 </template>
 <style lang="scss" scoped>
 .article {

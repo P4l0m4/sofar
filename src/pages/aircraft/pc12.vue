@@ -14,7 +14,7 @@ useJsonld(() => ({
   "@context": "https://schema.org/",
   "@type": "WebSite",
   name: "Embraer Pilatus PC-12 | Sofar",
-  url: window.location.origin,
+  url: window.location.href,
 }));
 </script>
 <template>

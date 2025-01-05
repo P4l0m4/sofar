@@ -53,8 +53,23 @@ useJsonld(() => ({
   "@context": "https://schema.org/",
   "@type": "WebSite",
   name: "Our Story | Sofar",
-  url: window.location.origin,
+  url: window.location.href,
 }));
+
+const breadcrumbs = [
+  {
+    name: "Home",
+    url: window.location.origin,
+  },
+  {
+    name: "About us",
+    url: window.location.origin + "/about-us",
+  },
+  {
+    name: "Our Story",
+    url: window.location.href,
+  },
+];
 </script>
 <template>
   <picture class="our-story-banner">
@@ -262,6 +277,7 @@ useJsonld(() => ({
       </div>
     </div>
   </Container> -->
+  <JsonldBreadcrumb :links="breadcrumbs" />
 </template>
 <style scoped lang="scss">
 .our-story-banner {

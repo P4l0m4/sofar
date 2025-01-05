@@ -32,7 +32,7 @@ useJsonld(() => ({
   "@context": "https://schema.org/",
   "@type": "WebSite",
   name: "Aircraft Management Services | Sofar",
-  url: window.location.origin,
+  url: window.location.href,
 }));
 </script>
 <template>

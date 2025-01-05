@@ -235,8 +235,19 @@ useJsonld(() => ({
   "@context": "https://schema.org/",
   "@type": "WebSite",
   name: `Book a Private Jet | Sofar`,
-  url: window.location.origin,
+  url: window.location.href,
 }));
+
+const breadcrumbs = [
+  {
+    name: "Home",
+    url: window.location.origin,
+  },
+  {
+    name: "Booking",
+    url: window.location.href,
+  },
+];
 </script>
 <template>
   <section class="booking">
@@ -255,6 +266,7 @@ useJsonld(() => ({
     />
   </section>
   <BlogArticlesCarousel />
+  <JsonldBreadcrumb :links="breadcrumbs" />
 </template>
 <style lang="scss" scoped>
 .booking {

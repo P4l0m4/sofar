@@ -53,17 +53,28 @@ useJsonld(() => ({
   "@context": "https://schema.org/",
   "@type": "WebSite",
   name: `Teaser | ${story.value.content.title}`,
-  url: window.location.origin,
+  url: window.location.href,
 }));
 
 useJsonld(() => ({
   "@context": "https://schema.org/",
   "@type": "Event",
   name: `Teaser | ${story.value.content.title}`,
-  url: window.location.origin,
+  url: window.location.href,
   description: story.value.content.subtitle,
   startDate: targetDate.format("YYYY-MM-DDTHH:mm:ssZ"),
 }));
+
+const breadcrumbs = [
+  {
+    name: "Home",
+    url: window.location.origin,
+  },
+  {
+    name: "Teaser",
+    url: window.location.href,
+  },
+];
 </script>
 <template>
   <picture class="index__banner">
@@ -192,6 +203,7 @@ useJsonld(() => ({
       </p>
     </div>
   </section>
+  <JsonldBreadcrumb :links="breadcrumbs" />
 </template>
 <style lang="scss" scoped>
 .index__banner {
