@@ -69,7 +69,7 @@ useJsonld(() => ({
     </div>
     <img
       class="plane-info-horizontal__img"
-      src="@/assets/images/phenom-300/phenom300-embraer-sofar-private-jet.webp"
+      src="@/assets/images/phenom-300/phenom300-embraer-sofar-private-jet2.webp"
       alt="plane info image"
     />
   </section>
