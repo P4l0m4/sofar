@@ -47,7 +47,7 @@ useJsonld(() => ({
         ><IconComponent color="#04045c" icon="flight_class" />Club seat</span
       >
       <span class="plane__tags__tag tags"
-        ><IconComponent color="#04045c" icon="business_center" />Bagages
+        ><IconComponent color="#04045c" icon="business_center" />Baggages
         capacity</span
       >
     </div>
