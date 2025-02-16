@@ -17,6 +17,8 @@ import {
   minValue,
   maxValue,
 } from "@vuelidate/validators";
+import VueDatePicker from "@vuepic/vue-datepicker";
+import "@vuepic/vue-datepicker/dist/main.css";
 
 defineProps({
   parent: String,
@@ -520,7 +522,7 @@ onMounted(() => {
           </div>
         </div>
         <div class="form__fields__wrapper--row">
-          <InputField
+          <!-- <InputField
             v-model="flightState.departureDate"
             id="departureDate"
             label="Departure date"
@@ -528,10 +530,20 @@ onMounted(() => {
             placeholder="YYYY-MM-DD"
             icon="calendar_today"
             name="departureDate"
-          />
-
-          <!-- <HourSelection v-model="flightState.departureTime" /> -->
+          /> -->
+          <VueDatePicker
+            v-model="flightState.departureDate"
+            model-type="yyyy-MM-dd'T'HH:mm"
+            :teleport="true"
+            auto-apply
+            no-today
+            time-picker-inline
+            minutes-increment="30"
+            placeholder="Departure date"
+            :startTime="{ hours: 8, minutes: 0 }"
+          ></VueDatePicker>
         </div>
+
         <div
           class="error"
           style="margin-top: -0.5rem"
@@ -603,7 +615,7 @@ onMounted(() => {
           {{ passengersErrors[0] }}
         </div>
         <div class="form__fields__wrapper--row" v-if="isRoundTrip">
-          <InputField
+          <!-- <InputField
             v-model="flightState.returnDate"
             id="returnDate"
             label="Return date"
@@ -611,8 +623,18 @@ onMounted(() => {
             placeholder="YYYY-MM-DD"
             icon="calendar_tomorrow"
             name="returnDate"
-          />
-          <!-- <HourSelection v-model="flightState.returnTime" /> -->
+          /> -->
+          <VueDatePicker
+            v-model="flightState.returnDate"
+            model-type="yyyy-MM-dd'T'HH:mm"
+            :teleport="true"
+            auto-apply
+            no-today
+            time-picker-inline
+            minutes-increment="30"
+            placeholder="Return date"
+            :startTime="{ hours: 8, minutes: 0 }"
+          ></VueDatePicker>
         </div>
         <div
           class="error"
