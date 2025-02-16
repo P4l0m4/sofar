@@ -1,17 +1,5 @@
 import { getNews, getStates, getCities } from "./src/utils/sitemap.js";
 
-// const fetchUrls = async () => {
-//   try {
-//     const newsPages = await getNews();
-//     const statesPages = await getStates();
-//     const citiesPages = await getCities();
-//     return [...newsPages, ...statesPages, ...citiesPages];
-//   } catch (error) {
-//     console.error("Error fetching URLs for sitemap:", error);
-//     return [];
-//   }
-// };
-
 export default defineNuxtConfig({
   ssr: false,
   srcDir: "src/",
@@ -119,5 +107,8 @@ fbq('track', 'PageView');`,
       MAP_BOX_API_KEY: process.env.MAP_BOX_API_KEY,
       STORYBLOK_KEY: process.env.STORYBLOK_KEY,
     },
+  },
+  build: {
+    transpile: ["@vuepic/vue-datepicker"],
   },
 });
