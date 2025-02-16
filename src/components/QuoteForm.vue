@@ -1239,9 +1239,9 @@ onMounted(() => {
   font-size: $small-text;
   font-weight: $skinny;
   display: flex;
-  border: $error-color 1px solid;
-  background-color: rgba(255, 0, 0, 0.2);
-  padding: 0.25rem 0.5rem;
+  // border: $error-color 1px solid;
+  // background-color: rgba(255, 0, 0, 0.2);
+  // padding: 0.25rem 0.5rem;
   line-height: 1rem;
   border-radius: $radius;
   width: fit-content;
