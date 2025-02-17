@@ -535,7 +535,6 @@ onMounted(() => {
             v-model="flightState.departureDate"
             model-type="yyyy-MM-dd'T'HH:mm"
             :teleport="true"
-            auto-apply
             no-today
             time-picker-inline
             minutes-increment="30"
@@ -628,7 +627,6 @@ onMounted(() => {
             v-model="flightState.returnDate"
             model-type="yyyy-MM-dd'T'HH:mm"
             :teleport="true"
-            auto-apply
             no-today
             time-picker-inline
             minutes-increment="30"
