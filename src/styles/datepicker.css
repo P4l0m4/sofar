@@ -999,10 +999,10 @@
 }
 .dp__theme_light {
   --dp-background-color: #fffdfa;
-  --dp-text-color: #04045c;
+  --dp-text-color: #052545;
   --dp-hover-color: #f3f3f3;
-  --dp-hover-text-color: #04045c;
-  --dp-hover-icon-color: #04045c;
+  --dp-hover-text-color: #052545;
+  --dp-hover-icon-color: #052545;
   --dp-primary-color: #72a5e6;
   --dp-primary-disabled-color: #72a5e6;
   --dp-primary-text-color: #fff;
@@ -1016,7 +1016,7 @@
   --dp-scroll-bar-color: #959595;
   --dp-success-color: #76d275;
   --dp-success-color-disabled: #a3d9b1;
-  --dp-icon-color: #04045c;
+  --dp-icon-color: #052545;
   --dp-danger-color: #ff6f60;
   --dp-marker-color: #ff6f60;
   --dp-tooltip-color: #fafafa;

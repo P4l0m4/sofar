@@ -167,7 +167,7 @@ input[type="search"]::-webkit-search-results-decoration {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  border-radius: calc($radius * 4);
+  border-radius: calc(2px);
   transition: transform 0.2s ease-in-out;
   // text-shadow: black 0px 0px 1px;
   backface-visibility: hidden;
@@ -233,6 +233,10 @@ input[type="search"]::-webkit-search-results-decoration {
   font-size: $small-text;
   text-decoration: underline;
   color: $secondary-color;
+}
+
+.rounded-button {
+  border-radius: calc($radius * 4) !important;
 }
 
 .section-title {

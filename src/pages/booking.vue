@@ -2,11 +2,18 @@
 import { onMounted, ref } from "vue";
 import mapboxgl from "mapbox-gl";
 import {
-  interpolateGreatCircle,
   haversineDistance,
   convertKmToMiles,
   calculateFlightDuration,
 } from "~/utils/mapGL.js";
+
+import { isDesktop } from "~/utils/functions";
+
+const desktopScreen = ref(isDesktop());
+
+window.addEventListener("resize", () => {
+  desktopScreen.value = isDesktop();
+});
 
 const config = useRuntimeConfig();
 mapboxgl.accessToken = config.public.MAP_BOX_API_KEY;
@@ -120,7 +127,7 @@ let dashArraySeq = [0, 2];
 function placeMarker() {
   removeMarkersAndPopUp();
   originMarker.value = new mapboxgl.Marker({
-    color: "#06067c",
+    color: "#052545",
     anchor: "center",
   })
     .setLngLat([originLon.value, originLat.value])
@@ -128,7 +135,7 @@ function placeMarker() {
 
   if (destinationLat.value !== 39 && destinationLon.value !== -140) {
     destinationMarker.value = new mapboxgl.Marker({
-      color: "#06067c",
+      color: "#052545",
       anchor: "center",
     })
       .setLngLat([destinationLon.value, destinationLat.value])
@@ -170,7 +177,7 @@ function placeMarker() {
         "line-cap": "round",
       },
       paint: {
-        "line-color": "#06067c",
+        "line-color": "#052545",
         "line-width": 2,
         "line-dasharray": dashArraySeq,
       },
@@ -258,11 +265,26 @@ const breadcrumbs = [
       rest
     </h2>
 
+    <!-- <QuoteForm
+      parent="booking"
+      class="booking__form"
+      @origin-airport="getEmittedOriginAirport"
+      @destination-airport="getEmittedDestinationAirport"
+    /> -->
     <QuoteForm
       parent="booking"
       class="booking__form"
       @origin-airport="getEmittedOriginAirport"
       @destination-airport="getEmittedDestinationAirport"
+      v-if="!desktopScreen"
+    />
+    <QuoteFormDesktop
+      parent="booking"
+      class="booking__form"
+      @origin-airport="getEmittedOriginAirport"
+      @destination-airport="getEmittedDestinationAirport"
+      v-if="desktopScreen"
+      color="#052545"
     />
   </section>
   <BlogArticlesCarousel />
@@ -281,6 +303,7 @@ const breadcrumbs = [
     gap: 2rem;
     padding: 4rem 2rem;
     margin-bottom: 4rem;
+    min-height: 100vh;
   }
 
   & h2 {
@@ -307,7 +330,7 @@ const breadcrumbs = [
     height: fit-content;
     z-index: 1;
     box-shadow: $shadow;
-    margin-top: 1rem;
+    margin-top: auto;
   }
 }
 </style>

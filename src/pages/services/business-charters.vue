@@ -1,10 +1,18 @@
 <script setup>
 import { useCommonAssetsStore } from "@/stores/commonAssets";
+import { isDesktop } from "~/utils/functions";
+
 const commonAssetsStore = useCommonAssetsStore();
 await commonAssetsStore.fetchTeaserVideo();
 
 const story = await useAsyncStoryblok("business-charters", {
   version: "published",
+});
+
+const desktopScreen = ref(isDesktop());
+
+window.addEventListener("resize", () => {
+  desktopScreen.value = isDesktop();
 });
 
 useHead({
@@ -31,7 +39,7 @@ useJsonld(() => ({
       media="(min-width: 1100px)"
       :srcset="story.content.bannerImageDesktop.filename"
     />
-    <div class="services-banner__headlines">
+    <div class="services-banner__headlines-mobile">
       <h1 class="services-banner__headlines__title titles">
         {{ story.content.bannerTitle }}
       </h1>
@@ -39,7 +47,24 @@ useJsonld(() => ({
         {{ story.content.bannerSubtitle }}
       </h2>
     </div>
-    <QuoteForm parent="private-jet" />
+    <div class="services-banner__headlines">
+      <NuxtLink
+        class="button-primary--dark rounded-button"
+        to="/booking"
+        v-if="desktopScreen"
+        >Booking</NuxtLink
+      >
+      <NuxtLink class="services-banner__headlines__logo" to="/">
+        <img src="@/assets/images/logo-light.svg"
+      /></NuxtLink>
+      <EmergencyBubble v-if="desktopScreen" />
+    </div>
+    <!-- <QuoteForm parent="private-jet" /> -->
+    <QuoteFormDesktop
+      parent="business-charters"
+      v-if="desktopScreen"
+      :color="colors['primary-color']"
+    />
     <img
       class="services-banner__img"
       :src="story.content.bannerImageMobile.filename"

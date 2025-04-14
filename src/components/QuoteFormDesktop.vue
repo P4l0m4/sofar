@@ -22,6 +22,7 @@ import "@vuepic/vue-datepicker/dist/main.css";
 
 defineProps({
   parent: String,
+  color: String,
 });
 
 const emits = defineEmits([
@@ -168,6 +169,11 @@ function handleCloseDestinationSearchResults() {
     isDestinationResultsOpen.value = false;
   }
 }
+function handleClosePhoneCodesList() {
+  if (phoneCodesListIsOpen.value) {
+    phoneCodesListIsOpen.value = false;
+  }
+}
 
 function handleSelectOriginResult(result) {
   flightState.origin = `${result.name}, ${result.municipality} ${result.iata_code}`;
@@ -202,16 +208,6 @@ const phoneCodesSearchResults = computed(() => {
   );
 });
 
-//function checkIfAirportExists(airport) {
-//return airports.value.some(
-//(a) =>
-// `${normalizeString(a.name)}, ${normalizeString(a.municipality)}` ===
-//  normalizeString(airport)
-//);
-//}
-
-// Custom validator that checks if the airport exists
-//const airportExistsValidator = (value) => checkIfAirportExists(value);
 const notSameAsDestination = (value) => value !== flightState.destination;
 const notSameAsOrigin = (value) => value !== flightState.origin;
 const greaterThan = (value) => value > todaysDatePlusTwoHours;
@@ -221,8 +217,7 @@ const lowerThan = (value) => {
   }
   return value >= flightState.departureDate;
 };
-// const phoneRegex =
-//   /^(\d{10}|(\d{2}[-.\s]){4}\d{2}|\(\d{3}\)\s\d{3}-\d{4}|\d{3}[-.\s]\d{3}[-.\s]\d{4}|\d{3}\s\d{3}\s\d{3}\s\d)$/;
+
 const phoneRegex =
   /^(\d{10}|(\d{2}[-.\s]){4}\d{2}|\(\d{3}\)\s\d{3}-\d{4}|\d{3}[-.\s]\d{3}[-.\s]\d{4}|\d{3}\s\d{3}\s\d{3}\s\d)$/;
 const isPhoneNumber = (value) => phoneRegex.test(value);
@@ -230,12 +225,12 @@ const isPhoneNumber = (value) => phoneRegex.test(value);
 const flightRules = {
   origin: {
     required,
-    //airportExistsValidator,
+
     notSameAsDestination,
   },
   destination: {
     required,
-    //airportExistsValidator,
+
     notSameAsOrigin,
   },
   passengers: {
@@ -282,8 +277,6 @@ const originErrors = computed(() => {
   const errors = [];
   if (!vFlight$.value.origin.$dirty) return errors;
   vFlight$.value.origin.required.$invalid && errors.push("This field is empty");
-  // vFlight$.value.origin.airportExistsValidator.$invalid &&
-  //   errors.push("Please select an existing airport");
   vFlight$.value.origin.notSameAsDestination.$invalid &&
     errors.push("The departure and arrival airports must be different");
   return errors;
@@ -294,8 +287,6 @@ const destinationErrors = computed(() => {
   if (!vFlight$.value.destination.$dirty) return errors;
   vFlight$.value.destination.required.$invalid &&
     errors.push("This field is empty");
-  // vFlight$.value.destination.airportExistsValidator.$invalid &&
-  //   errors.push("Please select an existing airport");
   vFlight$.value.destination.notSameAsOrigin.$invalid &&
     errors.push("The departure and arrival airports must be different");
   return errors;
@@ -421,31 +412,64 @@ onMounted(() => {
 </script>
 <template>
   <form class="form" ref="form" @submit.prevent="submit">
-    <div class="form__steps">
-      <div class="form__steps__step" v-for="(step, i) in steps" :key="i">
-        <h3
-          class="form__steps__step__label"
+    <div class="form__top">
+      <div class="form__top__custom-field">
+        <button
+          class="form__top__custom-field__button"
           :class="{
-            'form__steps__step__label--active': currentStep === i,
+            'form__top__custom-field__button--transparent': isRoundTrip,
           }"
-          @click="changeSteps()"
+          @click="isRoundTrip = false"
+          :style="{ color: color }"
         >
-          <span
-            class="form__steps__step__label__number"
-            :class="{
-              'form__steps__step__label__number--active': currentStep === i,
-            }"
-          >
-            {{ i + 1 }}
-          </span>
-          {{ step.label }}
-          <div class="form__steps__step__label__corner-left"></div>
-          <div class="form__steps__step__label__corner-right"></div>
-        </h3>
+          <IconComponent
+            icon="airplanemode_active"
+            :color="color"
+            size="1rem"
+          />
+          One way
+        </button>
+        <label class="switch" :for="`${parent}-round-trip-toggle`">
+          <input
+            type="checkbox"
+            :id="`${parent}-round-trip-toggle`"
+            v-model="isRoundTrip"
+          />
+          <span class="slider round"></span>
+        </label>
+        <button
+          class="form__top__custom-field__button"
+          :class="{
+            'form__top__custom-field__button--transparent': !isRoundTrip,
+          }"
+          @click="isRoundTrip = true"
+          :style="{ color: color }"
+        >
+          <IconComponent
+            icon="connecting_airports"
+            :color="color"
+            size="1rem"
+          />
+          Round trip
+        </button>
       </div>
-      <EmergencyBubble />
-    </div>
 
+      <div class="form__top__date-picker" v-if="isRoundTrip">
+        <VueDatePicker
+          v-model="flightState.returnDate"
+          model-type="yyyy-MM-dd'T'HH:mm"
+          :teleport="true"
+          no-today
+          time-picker-inline
+          minutes-increment="30"
+          placeholder="Return date"
+          :startTime="{ hours: 8, minutes: 0 }"
+        ></VueDatePicker>
+      </div>
+      <div class="error" v-if="returnDateErrors[0]">
+        {{ returnDateErrors[0] }}
+      </div>
+    </div>
     <div class="form__fields">
       <template v-if="currentStep === 0">
         <div class="form__fields__wrapper">
@@ -521,16 +545,15 @@ onMounted(() => {
             </div>
           </div>
         </div>
-        <div class="form__fields__wrapper--row">
-          <!-- <InputField
-            v-model="flightState.departureDate"
-            id="departureDate"
-            label="Departure date"
-            type="datetime-local"
-            placeholder="YYYY-MM-DD"
-            icon="calendar_today"
-            name="departureDate"
-          /> -->
+        <div
+          class="form__fields__wrapper--row"
+          style="
+            min-width: 220px;
+            max-width: 220px;
+            flex-direction: column;
+            align-items: flex-start;
+          "
+        >
           <VueDatePicker
             v-model="flightState.departureDate"
             model-type="yyyy-MM-dd'T'HH:mm"
@@ -541,54 +564,17 @@ onMounted(() => {
             placeholder="Departure date"
             :startTime="{ hours: 8, minutes: 0 }"
           ></VueDatePicker>
+
+          <div
+            class="error"
+            style="margin-top: -0.5rem"
+            v-if="departureDateErrors[0]"
+          >
+            {{ departureDateErrors[0] }}
+          </div>
         </div>
 
-        <div
-          class="error"
-          style="margin-top: -0.5rem"
-          v-if="departureDateErrors[0]"
-        >
-          {{ departureDateErrors[0] }}
-        </div>
         <div class="form__fields__wrapper--row">
-          <div class="form__fields__wrapper--row__custom-field">
-            <button
-              class="form__fields__wrapper--row__custom-field__button"
-              :class="{
-                'form__fields__wrapper--row__custom-field__button--transparent':
-                  isRoundTrip,
-              }"
-              @click="isRoundTrip = false"
-            >
-              <img
-                src="/assets/icons/airplanemode_active-dark.svg"
-                alt="icon one way trip"
-              />
-              One way
-            </button>
-            <label class="switch" :for="`${parent}-round-trip-toggle`">
-              <input
-                type="checkbox"
-                :id="`${parent}-round-trip-toggle`"
-                v-model="isRoundTrip"
-              />
-              <span class="slider round"></span>
-            </label>
-            <button
-              class="form__fields__wrapper--row__custom-field__button"
-              :class="{
-                'form__fields__wrapper--row__custom-field__button--transparent':
-                  !isRoundTrip,
-              }"
-              @click="isRoundTrip = true"
-            >
-              <img
-                src="/assets/icons/connecting_airports.svg"
-                alt="icon one way trip"
-              />
-              Round trip
-            </button>
-          </div>
           <div class="passengers-field">
             <label for="number" class="sr-only">Number of passengers</label>
             <span class="passengers-field__span" style="cursor: default">
@@ -613,34 +599,7 @@ onMounted(() => {
         <div class="error" v-if="passengersErrors[0]">
           {{ passengersErrors[0] }}
         </div>
-        <div class="form__fields__wrapper--row" v-if="isRoundTrip">
-          <!-- <InputField
-            v-model="flightState.returnDate"
-            id="returnDate"
-            label="Return date"
-            type="datetime-local"
-            placeholder="YYYY-MM-DD"
-            icon="calendar_tomorrow"
-            name="returnDate"
-          /> -->
-          <VueDatePicker
-            v-model="flightState.returnDate"
-            model-type="yyyy-MM-dd'T'HH:mm"
-            :teleport="true"
-            no-today
-            time-picker-inline
-            minutes-increment="30"
-            placeholder="Return date"
-            :startTime="{ hours: 8, minutes: 0 }"
-          ></VueDatePicker>
-        </div>
-        <div
-          class="error"
-          style="margin-top: -0.5rem"
-          v-if="returnDateErrors[0]"
-        >
-          {{ returnDateErrors[0] }}
-        </div>
+
         <Transition>
           <button
             class="form__fields__button button-primary--dark rounded-button"
@@ -651,7 +610,10 @@ onMounted(() => {
         </Transition>
       </template>
       <template v-else-if="currentStep === 1">
-        <div class="form__fields__wrapper--row">
+        <div
+          class="form__fields__wrapper--row"
+          style="width: 100%; min-width: 320px"
+        >
           <InputField
             v-model="contactState.firstName"
             id="firstName"
@@ -685,8 +647,8 @@ onMounted(() => {
             :error="emailErrors[0]"
           />
         </div>
-        <div class="form__fields__wrapper--row">
-          <div class="phone-codes">
+        <div class="form__fields__wrapper--row" style="min-width: 270px">
+          <div class="phone-codes" v-click-outside="handleClosePhoneCodesList">
             <span
               class="phone-codes__selected"
               :class="{
@@ -802,82 +764,121 @@ onMounted(() => {
 .form {
   border-radius: 1rem;
   width: 100%;
-  max-width: 450px;
+  max-width: calc(100% - 12rem);
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  gap: 1rem;
 
-  &__steps {
+  &__top {
     display: flex;
+    gap: 1rem;
+    align-items: center;
 
-    &__step {
+    &__custom-field {
       display: flex;
+      gap: 1rem;
+      align-items: center;
+      border-radius: 130px;
+      // width: calc(50% - 0.5rem);
 
-      &__label {
-        width: fit-content;
+      &__button {
         display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         font-size: $small-text;
         font-weight: $skinny;
-        background-color: $base-color;
-        opacity: 0.8;
-        border-radius: $radius $radius 0 0;
         color: $text-color;
-        gap: 0.5rem;
-        padding: 0.5rem;
-        align-items: center;
-        cursor: pointer;
         white-space: nowrap;
-        position: relative;
         transition: opacity 0.4s ease;
+        cursor: pointer;
 
-        &--active {
-          opacity: 1;
+        padding-bottom: 2px;
+        padding-top: 1rem;
+        margin-top: -1rem;
+        border-radius: 0 !important;
+
+        &--transparent {
+          opacity: 0.5;
+          border-color: transparent;
         }
 
-        &__number {
-          display: flex;
-          font-size: $small-text;
-          font-weight: $skinny;
-          height: 24px;
-          width: 24px;
-          padding-top: 0.1rem;
-          border-radius: 50%;
-          align-items: center;
-          justify-content: center;
-          color: $text-color;
-          border: 2px solid $text-color;
-          z-index: 1;
-          transition:
-            background-color 0.4s ease,
-            color 0.4s ease;
-
-          &--active {
-            background-color: $text-color;
-            color: $text-color-alt;
-          }
+        & img {
+          width: 1rem;
+          height: 1rem;
         }
+      }
 
-        &__corner-left,
-        &__corner-right {
-          background-color: transparent;
-          height: 30px;
-          width: 20px;
-          box-shadow: 10px -10px 0 0 $base-color;
-          border-bottom-right-radius: calc($radius * 2);
-          border-top-right-radius: calc($radius * 2);
+      &__icon {
+        width: 1.2rem;
+        height: 1.2rem;
+      }
+
+      .switch {
+        position: relative;
+        width: 60px;
+        height: 34px;
+        border-radius: $radius;
+        box-shadow: $shadow;
+        display: inline-block;
+
+        input {
+          opacity: 0;
+          width: 0;
+          height: 0;
+        }
+      }
+
+      /* The slider */
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: $primary-color;
+        -webkit-transition: 0.4s;
+        transition: 0.4s;
+
+        &:before {
           position: absolute;
+          content: "";
+          height: 26px;
+          width: 26px;
+          left: 4px;
+          bottom: 4px;
+          background-color: $secondary-color;
+          -webkit-transition: 0.4s;
+          transition: 0.4s ease;
         }
+      }
 
-        &__corner-left {
-          bottom: -5px;
-          left: -23px;
-          transform: rotate(70deg);
+      input:checked + .slider {
+        background-color: $secondary-color;
+
+        &:before {
+          background-color: $primary-color;
         }
-        &__corner-right {
-          bottom: -1px;
-          right: -20px;
-          transform: rotate(170deg);
-        }
+      }
+
+      input:focus + .slider {
+        box-shadow: $shadow;
+      }
+
+      input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+      }
+
+      /* Rounded sliders */
+      .slider.round {
+        border-radius: 34px;
+      }
+
+      .slider.round:before {
+        border-radius: 50%;
       }
     }
   }
@@ -886,14 +887,13 @@ onMounted(() => {
     display: flex;
     gap: 1rem;
     padding: 1rem;
-    border-radius: 0 $radius $radius $radius;
+    border-radius: 50px;
     background-color: $base-color;
-    flex-wrap: wrap;
+    align-items: flex-start;
 
     &__wrapper {
       display: flex;
       align-items: center;
-      flex-wrap: wrap;
       gap: 1rem;
       width: 100%;
       justify-content: space-between;
@@ -910,7 +910,7 @@ onMounted(() => {
           flex-direction: column;
           grid-column: span 2;
           background-color: $primary-color;
-          border-radius: 0 0 $radius $radius;
+          border-radius: $radius $radius 0 0;
           max-height: 200px;
           width: 100%;
           overflow-y: scroll;
@@ -918,8 +918,8 @@ onMounted(() => {
           z-index: 1;
           box-shadow: $shadow;
           position: absolute;
-          top: 30px;
-          padding: 1rem 0 0 0;
+          bottom: 26px;
+          padding: 0 0 1rem 0;
 
           &__result {
             display: flex;
@@ -928,10 +928,8 @@ onMounted(() => {
             gap: 0.5rem;
             transition: background-color 0.4s ease;
 
-            @media (min-width: $big-tablet-screen) {
-              &:hover {
-                background-color: $secondary-color-faded;
-              }
+            &:hover {
+              background-color: $secondary-color-faded;
             }
 
             &__flag {
@@ -952,132 +950,8 @@ onMounted(() => {
         display: flex;
         flex-direction: row;
         gap: 1rem;
-        width: 100%;
         justify-content: space-between;
         align-items: center;
-
-        &__custom-field {
-          display: flex;
-          gap: 1rem;
-          align-items: center;
-          border-radius: $radius;
-          width: fit-content;
-
-          @media (min-width: $big-tablet-screen) {
-            width: calc(50% - 0.5rem);
-          }
-
-          &__button {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            font-size: $small-text;
-            font-weight: $skinny;
-            color: $text-color;
-            white-space: nowrap;
-            transition: opacity 0.4s ease;
-            cursor: pointer;
-            border-bottom: $text-color 2px solid;
-            padding-bottom: 2px;
-            padding-top: 1rem;
-            margin-top: -1rem;
-            border-radius: 0 !important;
-
-            &--transparent {
-              opacity: 0.5;
-              border-color: transparent;
-            }
-
-            & img {
-              width: 1rem;
-              height: 1rem;
-            }
-          }
-
-          &__icon {
-            width: 1.2rem;
-            height: 1.2rem;
-          }
-
-          .switch {
-            position: relative;
-            width: 60px;
-            height: 34px;
-            border-radius: $radius;
-            box-shadow: $shadow;
-            display: none;
-
-            @media (min-width: $big-tablet-screen) {
-              display: inline-block;
-            }
-
-            input {
-              opacity: 0;
-              width: 0;
-              height: 0;
-            }
-          }
-
-          /* Hide default HTML checkbox */
-          // .switch input {
-          //   opacity: 0;
-          //   width: 0;
-          //   height: 0;
-          // }
-
-          /* The slider */
-          .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: $primary-color;
-            -webkit-transition: 0.4s;
-            transition: 0.4s;
-
-            &:before {
-              position: absolute;
-              content: "";
-              height: 26px;
-              width: 26px;
-              left: 4px;
-              bottom: 4px;
-              background-color: $secondary-color-faded;
-              -webkit-transition: 0.4s;
-              transition: 0.4s ease;
-            }
-          }
-
-          input:checked + .slider {
-            background-color: $secondary-color-faded;
-
-            &:before {
-              background-color: $primary-color;
-            }
-          }
-
-          input:focus + .slider {
-            box-shadow: $shadow;
-          }
-
-          input:checked + .slider:before {
-            -webkit-transform: translateX(26px);
-            -ms-transform: translateX(26px);
-            transform: translateX(26px);
-          }
-
-          /* Rounded sliders */
-          .slider.round {
-            border-radius: 34px;
-          }
-
-          .slider.round:before {
-            border-radius: 50%;
-          }
-        }
 
         .passengers-field {
           display: flex;
@@ -1102,9 +976,9 @@ onMounted(() => {
           display: flex;
           flex-direction: column;
           position: relative;
-          width: 140px;
-          min-width: 140px;
-          max-width: 140px;
+          width: 120px;
+          min-width: 120px;
+          max-width: 120px;
 
           &__selected {
             display: flex;
@@ -1117,13 +991,13 @@ onMounted(() => {
             font-size: 1rem;
             font-weight: $skinny;
             cursor: pointer;
-            width: 140px;
-            min-width: 140px;
-            max-width: 140px;
+            width: 120px;
+            min-width: 120px;
+            max-width: 120px;
 
             &--active {
-              border-bottom-left-radius: 0;
-              border-bottom-right-radius: 0;
+              border-top-left-radius: 0;
+              border-top-right-radius: 0;
             }
 
             &__flag {
@@ -1162,14 +1036,14 @@ onMounted(() => {
             display: flex;
             flex-direction: column;
             position: absolute;
-            top: 1.75rem;
+            bottom: 2.5rem;
             left: 0;
             padding: 0.25rem;
-            width: 140px;
-            min-width: 140px;
-            max-width: 140px;
+            width: 120px;
+            min-width: 120px;
+            max-width: 120px;
             background-color: $primary-color;
-            border-radius: 0 0 $radius $radius;
+            border-radius: $radius $radius 0 0;
             box-shadow: $shadow;
             z-index: 1;
             gap: 0.5rem;
@@ -1204,8 +1078,8 @@ onMounted(() => {
     }
 
     &__button {
-      width: 100%;
       gap: 1rem;
+      white-space: nowrap;
 
       &--sent {
         background-color: green;
@@ -1237,9 +1111,6 @@ onMounted(() => {
   font-size: $small-text;
   font-weight: $skinny;
   display: flex;
-  // border: $error-color 1px solid;
-  // background-color: rgba(255, 0, 0, 0.2);
-  // padding: 0.25rem 0.5rem;
   line-height: 1rem;
   border-radius: $radius;
   width: fit-content;

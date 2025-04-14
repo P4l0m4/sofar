@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from "vue";
+import { colors } from "@/utils/colors";
 
 const scrollableElement = ref({});
 const arrow = ref(null);
@@ -66,7 +67,11 @@ function shouldDisplayArrow(index) {
             @mouseover="currentIndex = i"
           >
             <NuxtLink class="aside__nav__ul__li__link" :to="item.link" exact>
-              <IconComponent :icon="item.icon" color="#fffdfa" size="1rem" />
+              <IconComponent
+                :icon="item.icon"
+                :color="colors['primary-color']"
+                size="1rem"
+              />
               {{ item.label }}
             </NuxtLink>
             <div
@@ -93,7 +98,11 @@ function shouldDisplayArrow(index) {
                 }"
                 @mouseenter="currentIndexSublinks = j"
               >
-                <IconComponent :icon="child.icon" color="#fffdfa" size="1rem" />
+                <IconComponent
+                  :icon="child.icon"
+                  :color="colors['primary-color']"
+                  size="1rem"
+                />
                 {{ child.label }}
               </NuxtLink>
               <span
@@ -104,7 +113,7 @@ function shouldDisplayArrow(index) {
               >
                 <IconComponent
                   icon="arrow_scroll"
-                  color="#fffdfa"
+                  :color="colors['primary-color']"
                   size="0.5rem"
                 />
               </span>
@@ -172,7 +181,9 @@ function shouldDisplayArrow(index) {
         border-radius: $radius;
         backdrop-filter: blur($blur);
         position: relative;
-        transition: 0.4s background-color ease, 0.4s transform ease;
+        transition:
+          0.4s background-color ease,
+          0.4s transform ease;
         &:hover,
         &:active {
           background-color: $text-color;
@@ -244,7 +255,9 @@ function shouldDisplayArrow(index) {
             backdrop-filter: blur($blur);
             border-radius: $radius;
             color: $text-color-alt;
-            transition: background-color 0.4s ease, transform 0.4s ease;
+            transition:
+              background-color 0.4s ease,
+              transform 0.4s ease;
             white-space: nowrap;
             width: 100%;
             text-shadow: $shadow-text;

@@ -14,7 +14,7 @@ interface Props {
   autocomplete?: "on" | "off";
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   type: "text",
   required: true,
   autofocus: false,
@@ -40,7 +40,9 @@ function changePassengers(amount: number) {
 <template>
   <div
     class="input-field"
-    :class="{ 'input-field--passengers': type === 'number' }"
+    :class="{
+      'input-field--passengers': type === 'number',
+    }"
   >
     <label class="input-field__label sr-only" :for="id">
       {{ label }}
@@ -164,15 +166,12 @@ function changePassengers(amount: number) {
       max-width: 400px;
       min-width: 300px;
       position: absolute;
-      // top: 0px;
       opacity: 0;
     }
     &[type="number"] {
       min-width: 50px;
       max-width: 50px;
       text-align: center;
-      // background-color: $base-color !important;
-      // border-radius: 0 !important;
     }
   }
 
@@ -203,9 +202,6 @@ function changePassengers(amount: number) {
   font-size: $small-text;
   font-weight: $skinny;
   display: flex;
-  // border: $error-color 1px solid;
-  // background-color: rgba(255, 0, 0, 0.2);
-  // padding: 0.25rem 0.5rem;
   line-height: 1rem;
   border-radius: $radius;
   width: fit-content;

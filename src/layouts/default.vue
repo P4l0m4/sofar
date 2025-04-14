@@ -100,12 +100,6 @@ const menuItems = [
         icon: "airplanemode_active",
         alt: "menu icon phenom 300",
       },
-      // {
-      //   label: "Safety",
-      //   link: "/aircraft/safety",
-      //   icon: "health_and_safety",
-      //   alt: "menu icon safety",
-      // },
     ],
   },
   {

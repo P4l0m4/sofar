@@ -7,8 +7,8 @@ $super-big-screen: 2400px;
 //COLORS
 $base-color: #f7f7f7;
 $primary-color: #fffdfa;
-$secondary-color: #06067c;
-$text-color: #04045c;
+$secondary-color: #052545;
+$text-color: #052545;
 $text-color-alt: $primary-color;
 $error-color: #bb0025;
 $sky-color: #72a5e6;
@@ -19,6 +19,7 @@ $text-color-faded-strong: rgba($text-color, 0.6);
 $primary-color-faded: rgba($primary-color, 0.8);
 $secondary-color-faded: rgba($secondary-color, 0.2);
 $sky-color-faded: rgba($sky-color, 0.6);
+$base-color-faded: rgba($base-color, 0.5);
 
 //BORDERS
 $radius: 20px;

@@ -1,6 +1,8 @@
 <script setup>
 import { ref, watch } from "vue";
+import { colors } from "@/utils/colors";
 import { useRoute } from "vue-router";
+
 const route = useRoute();
 
 const isMenuOpen = ref(true);
@@ -14,7 +16,7 @@ const props = defineProps({
 });
 
 menuItemsRef.value = props.menuItems;
-menuItemsRef.value[0].link = "/";
+menuItemsRef.value[0].link = "/request-a-charter";
 
 menuItemsRef.value.forEach((item) => {
   childrenToDisplay.value.push(item.children);
@@ -88,7 +90,11 @@ watch(
               exact
               :class="{ 'router-link-exact-active': currentIndex === i }"
             >
-              <IconComponent :icon="item.icon" color="#fffdfa" size="1rem" />
+              <IconComponent
+                :icon="item.icon"
+                :color="colors['primary-color']"
+                size="1rem"
+              />
               {{ item.label }}
             </NuxtLink>
             <span

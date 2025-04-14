@@ -5,7 +5,7 @@ interface Props {
   size?: string;
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   size: "1rem",
 });
 </script>
@@ -16,7 +16,7 @@ const props = withDefaults(defineProps<Props>(), {
 <style scoped>
 @font-face {
   font-family: "sofar-icons";
-  src: url("@/assets/fonts/sofar-icons.woff?tskar8") format("woff");
+  src: url("@/assets/fonts/icomoon.woff?tskar8") format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: block;

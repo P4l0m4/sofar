@@ -7,7 +7,7 @@ const model = defineModel<string | number>();
       type="search"
       placeholder="Search for a continent, a city..."
       v-model="model"
-    /><IconComponent icon="search" color="#04045c" size="1.5rem" />
+    /><IconComponent icon="search" color="#052545" size="1.5rem" />
   </div>
 </template>
 <style scoped lang="scss">

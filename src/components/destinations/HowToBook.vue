@@ -20,7 +20,7 @@ const props = withDefaults(defineProps<Props>(), {});
       <QuotePopUpButton
         label="Request a quote"
         color="#fffdfa"
-        background="#06067c"
+        background="#052545"
         :primary="true"
       />
       <a class="emergency-button button-secondary--dark" href="tel:+12137698008"

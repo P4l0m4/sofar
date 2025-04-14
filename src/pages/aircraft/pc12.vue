@@ -27,19 +27,20 @@ useJsonld(() => ({
 
     <div class="plane__tags">
       <span class="plane__tags__tag tags"
-        ><IconComponent color="#04045c" icon="group_add" />6 passengers</span
+        ><IconComponent color="##052545" icon="group_add" />6 passengers</span
       >
       <span class="plane__tags__tag tags"
         ><IconComponent
-          color="#04045c"
+          color="##052545"
           icon="airplanemode_active"
         />Turboprop</span
       >
       <span class="plane__tags__tag tags"
-        ><IconComponent color="#04045c" icon="pet_supplies" />Pet friendly</span
+        ><IconComponent color="##052545" icon="pet_supplies" />Pet
+        friendly</span
       >
       <span class="plane__tags__tag tags"
-        ><IconComponent color="#04045c" icon="gate" />Cargo door</span
+        ><IconComponent color="##052545" icon="gate" />Cargo door</span
       >
     </div>
 

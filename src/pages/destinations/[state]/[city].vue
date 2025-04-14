@@ -38,7 +38,7 @@ onMounted(() => {
 
   city.airports.forEach((airport) => {
     if (map) {
-      new mapboxgl.Marker({ color: "#06067c", anchor: "center" })
+      new mapboxgl.Marker({ color: "#052545", anchor: "center" })
         .setLngLat([airport.longitude, airport.latitude])
         .addTo(map);
       map.flyTo({

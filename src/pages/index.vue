@@ -1,10 +1,35 @@
 <script setup lang="ts">
+import { ref } from "vue";
 import { stringToSlug } from "~/utils/slugify";
+import { isDesktop } from "~/utils/functions";
+import { colors } from "~/utils/colors";
+
+const desktopScreen = ref(isDesktop());
+
+window.addEventListener("resize", () => {
+  desktopScreen.value = isDesktop();
+});
+
+interface Destination {
+  city: string;
+  stateName: string;
+  country: string;
+  geographicalCategories: string[];
+  previewImage: {
+    filename: string;
+  };
+}
+
+interface State {
+  name: string;
+  destinationsList: Destination[];
+  country: string;
+}
 
 const story = await useAsyncStoryblok("destinations", { version: "published" });
-const storyHome = await useAsyncStoryblok("home-page", {
-  version: "published",
-});
+// const storyHome = await useAsyncStoryblok("home-page", {
+//   version: "published",
+// });
 
 const destinations = computed(() => {
   return story.value.content.statesList.flatMap((state: State) => {
@@ -61,26 +86,51 @@ const breadcrumbs = [
 </script>
 <template>
   <picture class="index__banner">
-    <source
+    <!-- <source
       media="(min-width: 1100px)"
       :srcset="storyHome.content.bannerImageDesktop.filename"
+    /> -->
+    <source
+      media="(min-width: 1100px)"
+      srcset="@/assets/images/home/preview-desktop.webp"
     />
     <div class="index__banner__headlines">
+      <NuxtLink
+        class="button-primary--dark rounded-button"
+        to="/booking"
+        v-if="desktopScreen"
+        >Booking</NuxtLink
+      >
+
       <NuxtLink class="index__banner__headlines__logo" to="/">
         <img src="@/assets/images/logo-light.svg"
       /></NuxtLink>
-      <h2 class="index__banner__headlines__subtitle subtitles">
-        Make It Anywhere ™
-      </h2>
+
+      <EmergencyBubble v-if="desktopScreen" />
     </div>
 
-    <h1 class="index__banner__title titles">Book your next flight with us!</h1>
+    <!-- <h1 class="index__banner__title titles">Book your next flight with us!</h1> -->
+    <div class="index__banner__titles" v-if="!desktopScreen">
+      <h1 class="titles">On-demand Private Jet Charter</h1>
+      <h2 class="subtitles">
+        Fast booking, flexible routes, and personalized service―ready when you
+        are
+      </h2>
+    </div>
+    <QuoteFormDesktop
+      parent="home"
+      v-if="desktopScreen"
+      :color="colors['secondary-color']"
+    />
 
-    <QuoteForm parent="home" />
-
-    <img
+    <!-- <img
       class="index__banner__img"
       :src="storyHome.content.bannerImageMobile.filename"
+      alt="banner image"
+    /> -->
+    <img
+      class="index__banner__img"
+      src="@/assets/images/home/preview.jpg"
       alt="banner image"
     />
   </picture>
@@ -138,13 +188,22 @@ const breadcrumbs = [
     inset: 0;
     width: 100%;
     height: 100%;
-    background-image: linear-gradient(80deg, $text-color, transparent 60%);
+    background-image: linear-gradient(45deg, $primary-color, transparent 100%);
     z-index: -1;
     opacity: 0.2;
   }
 
   & source {
     display: none;
+  }
+
+  &__titles {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    color: $text-color-alt;
+    position: absolute;
+    top: 40%;
   }
 
   &__headlines {
@@ -155,20 +214,22 @@ const breadcrumbs = [
     inset: 1rem;
     bottom: inherit;
     margin: auto;
-    align-items: end;
+    align-items: center;
 
     @media (min-width: $big-tablet-screen) {
       inset: 2rem;
       bottom: inherit;
       gap: 2rem;
+      padding-right: 12rem;
     }
 
     &__logo {
       width: fit-content;
       height: fit-content;
+      margin: auto;
 
       & img {
-        width: 120px;
+        width: 60px;
         height: 60px;
 
         @media (min-width: $big-tablet-screen) {

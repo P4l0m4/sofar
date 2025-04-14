@@ -23,17 +23,17 @@ onMounted(() => {
   }
 
   // Marker for New York
-  new mapboxgl.Marker({ color: "#06067c", anchor: "center" })
+  new mapboxgl.Marker({ color: "#052545", anchor: "center" })
     .setLngLat([-74.006, 40.7128])
     .addTo(map);
 
   // Marker for Miami
-  new mapboxgl.Marker({ color: "#06067c", anchor: "center" })
+  new mapboxgl.Marker({ color: "#052545", anchor: "center" })
     .setLngLat([-80.1918, 25.7617])
     .addTo(map);
 
   // Marker for Los Angeles
-  new mapboxgl.Marker({ color: "#06067c", anchor: "center" })
+  new mapboxgl.Marker({ color: "#052545", anchor: "center" })
     .setLngLat([-118.243683, 34.052235])
     .addTo(map);
 });
