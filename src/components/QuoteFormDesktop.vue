@@ -1,6 +1,5 @@
 <script setup>
-import { ref, reactive, onMounted, watch } from "vue";
-// import airports from "@/utils/airports.json";
+import { ref, reactive, onMounted } from "vue";
 import phoneCodes from "@/utils/phoneCodes.json";
 import dayjs from "dayjs";
 import { useVuelidate } from "@vuelidate/core";
@@ -79,6 +78,10 @@ const formattedReturnDate = computed(() => {
     return "";
   }
   return dayjs(flightState.returnDate).format("MMMM DD, YYYY [at] h:mm A");
+});
+
+const minReturnDate = computed(() => {
+  return flightState.departureDate ? new Date(flightState.departureDate) : null;
 });
 
 const templateParams = computed(() => ({
@@ -276,7 +279,8 @@ const form = ref(null);
 const originErrors = computed(() => {
   const errors = [];
   if (!vFlight$.value.origin.$dirty) return errors;
-  vFlight$.value.origin.required.$invalid && errors.push("This field is empty");
+  vFlight$.value.origin.required.$invalid &&
+    errors.push("No origin airport selected");
   vFlight$.value.origin.notSameAsDestination.$invalid &&
     errors.push("The departure and arrival airports must be different");
   return errors;
@@ -286,7 +290,7 @@ const destinationErrors = computed(() => {
   const errors = [];
   if (!vFlight$.value.destination.$dirty) return errors;
   vFlight$.value.destination.required.$invalid &&
-    errors.push("This field is empty");
+    errors.push("No destination airport selected");
   vFlight$.value.destination.notSameAsOrigin.$invalid &&
     errors.push("The departure and arrival airports must be different");
   return errors;
@@ -296,7 +300,7 @@ const passengersErrors = computed(() => {
   const errors = [];
   if (!vFlight$.value.passengers.$dirty) return errors;
   vFlight$.value.passengers.required.$invalid &&
-    errors.push("This field is empty");
+    errors.push("Select at least 1 passenger");
   vFlight$.value.passengers.minValue.$invalid &&
     errors.push("Passengers must be between 1 and 99");
   vFlight$.value.passengers.maxValue.$invalid &&
@@ -308,7 +312,7 @@ const departureDateErrors = computed(() => {
   const errors = [];
   if (!vFlight$.value.departureDate.$dirty) return errors;
   vFlight$.value.departureDate.required.$invalid &&
-    errors.push("This field is empty");
+    errors.push("No departure time specified");
   vFlight$.value.departureDate.greaterThan.$invalid &&
     errors.push("Your departure time must be at least 2 hours from now");
   return errors;
@@ -318,10 +322,10 @@ const returnDateErrors = computed(() => {
   const errors = [];
   if (!vFlight$.value.returnDate.$dirty) return errors;
   vFlight$.value.returnDate.required.$invalid &&
-    errors.push("This field is empty");
+    errors.push("No return date specified");
   vFlight$.value.returnDate.lowerThan.$invalid &&
     errors.push(
-      "Your return date must be the same day of after your departure"
+      "Your return date must be the same day or after your departure"
     );
   return errors;
 });
@@ -453,22 +457,6 @@ onMounted(() => {
           Round trip
         </button>
       </div>
-
-      <div class="form__top__date-picker" v-if="isRoundTrip">
-        <VueDatePicker
-          v-model="flightState.returnDate"
-          model-type="yyyy-MM-dd'T'HH:mm"
-          :teleport="true"
-          no-today
-          time-picker-inline
-          minutes-increment="30"
-          placeholder="Return date"
-          :startTime="{ hours: 8, minutes: 0 }"
-        ></VueDatePicker>
-      </div>
-      <div class="error" v-if="returnDateErrors[0]">
-        {{ returnDateErrors[0] }}
-      </div>
     </div>
     <div class="form__fields">
       <template v-if="currentStep === 0">
@@ -481,7 +469,6 @@ onMounted(() => {
               type="search"
               placeholder="From (airport code, city...)"
               icon="flight_takeoff"
-              :error="originErrors[0]"
               name="origin"
               autocomplete="off"
               @update:modelValue="handleOriginSearch"
@@ -516,7 +503,6 @@ onMounted(() => {
               type="search"
               placeholder="To (airport code, city...)"
               icon="flight_land"
-              :error="destinationErrors[0]"
               name="destination"
               autocomplete="off"
               @update:modelValue="handleDestinationSearch"
@@ -548,8 +534,8 @@ onMounted(() => {
         <div
           class="form__fields__wrapper--row"
           style="
-            min-width: 220px;
-            max-width: 220px;
+            min-width: 210px;
+            max-width: 210px;
             flex-direction: column;
             align-items: flex-start;
           "
@@ -564,14 +550,28 @@ onMounted(() => {
             placeholder="Departure date"
             :startTime="{ hours: 8, minutes: 0 }"
           ></VueDatePicker>
-
-          <div
-            class="error"
-            style="margin-top: -0.5rem"
-            v-if="departureDateErrors[0]"
-          >
-            {{ departureDateErrors[0] }}
-          </div>
+        </div>
+        <div
+          class="form__fields__wrapper--row"
+          style="
+            min-width: 210px;
+            max-width: 210px;
+            flex-direction: column;
+            align-items: flex-start;
+          "
+          v-if="isRoundTrip"
+        >
+          <VueDatePicker
+            v-model="flightState.returnDate"
+            model-type="yyyy-MM-dd'T'HH:mm"
+            :teleport="true"
+            no-today
+            time-picker-inline
+            minutes-increment="30"
+            placeholder="Return date"
+            :min-date="minReturnDate"
+            :startTime="{ hours: 8, minutes: 0 }"
+          ></VueDatePicker>
         </div>
 
         <div class="form__fields__wrapper--row">
@@ -595,9 +595,6 @@ onMounted(() => {
               name="passengers"
             />
           </div>
-        </div>
-        <div class="error" v-if="passengersErrors[0]">
-          {{ passengersErrors[0] }}
         </div>
 
         <Transition>
@@ -757,6 +754,59 @@ onMounted(() => {
           /></Transition>
         </button>
       </template>
+    </div>
+
+    <div
+      class="form__bottom"
+      v-if="
+        (returnDateErrors[0] ||
+          departureDateErrors[0] ||
+          passengersErrors[0] ||
+          originErrors[0] ||
+          destinationErrors[0]) &&
+        currentStep === 0
+      "
+    >
+      <div class="error" v-if="returnDateErrors[0]">
+        {{ returnDateErrors[0] }}
+      </div>
+      <div class="error" v-if="departureDateErrors[0]">
+        {{ departureDateErrors[0] }}
+      </div>
+
+      <div class="error" v-if="originErrors[0]">
+        {{ originErrors[0] }}
+      </div>
+      <div class="error" v-if="passengersErrors[0]">
+        {{ passengersErrors[0] }}
+      </div>
+      <div class="error" v-if="destinationErrors[0]">
+        {{ destinationErrors[0] }}
+      </div>
+    </div>
+    <div
+      class="form__bottom"
+      v-if="
+        (firstNameAndLastNameErrors[0] ||
+          phoneNumberErrors[0] ||
+          emailErrors[0] ||
+          originErrors[0]) &&
+        currentStep === 1
+      "
+    >
+      <div class="error" v-if="firstNameAndLastNameErrors[0]">
+        {{ firstNameAndLastNameErrors[0] }}
+      </div>
+      <div class="error" v-if="phoneNumberErrors[0]">
+        {{ phoneNumberErrors[0] }}
+      </div>
+
+      <div class="error" v-if="originErrors[0]">
+        {{ originErrors[0] }}
+      </div>
+      <div class="error" v-if="emailErrors[0]">
+        {{ emailErrors[0] }}
+      </div>
     </div>
   </form>
 </template>
@@ -1090,6 +1140,13 @@ onMounted(() => {
         height: 1.2rem;
       }
     }
+  }
+
+  &__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
   }
 
   &__thanks {

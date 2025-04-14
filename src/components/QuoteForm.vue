@@ -330,7 +330,7 @@ const returnDateErrors = computed(() => {
     errors.push("This field is empty");
   vFlight$.value.returnDate.lowerThan.$invalid &&
     errors.push(
-      "Your return date must be the same day of after your departure"
+      "Your return date must be the same day or after your departure"
     );
   return errors;
 });
