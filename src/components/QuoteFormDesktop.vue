@@ -355,7 +355,7 @@ const phoneNumberErrors = computed(() => {
   vContact$.value.phoneNumber.required.$invalid &&
     errors.push("Please enter your phone number");
   vContact$.value.phoneNumber.isPhoneNumber.$invalid &&
-    errors.push("This field must contain a valid phone number");
+    errors.push("Invalid phone number");
 
   return errors;
 });
@@ -365,8 +365,7 @@ const emailErrors = computed(() => {
   if (!vContact$.value.email.$dirty) return errors;
   vContact$.value.email.required.$invalid &&
     errors.push("Please enter an email address");
-  vContact$.value.email.email.$invalid &&
-    errors.push("Please enter a valid email address");
+  vContact$.value.email.email.$invalid && errors.push("Invalid email address");
   return errors;
 });
 
@@ -626,13 +625,13 @@ onMounted(() => {
             name="lastName"
           />
         </div>
-        <div
+        <!-- <div
           class="error"
           style="margin-top: -0.5rem"
           v-if="firstNameAndLastNameErrors[0]"
         >
           {{ firstNameAndLastNameErrors[0] }}
-        </div>
+        </div> -->
         <div class="form__fields__wrapper__not-relative">
           <InputField
             v-model="contactState.email"
@@ -641,7 +640,6 @@ onMounted(() => {
             placeholder="emailadress@domain.com"
             type="email"
             name="email"
-            :error="emailErrors[0]"
           />
         </div>
         <div class="form__fields__wrapper--row" style="min-width: 270px">
@@ -713,13 +711,13 @@ onMounted(() => {
             name="phoneNumber"
           />
         </div>
-        <div
+        <!-- <div
           class="error"
           style="margin-top: -0.5rem"
           v-if="phoneNumberErrors[0]"
         >
           {{ phoneNumberErrors[0] }}
-        </div>
+        </div> -->
 
         <InputField
           v-model="contactState.info"
