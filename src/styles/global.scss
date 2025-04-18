@@ -266,12 +266,17 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .auto-video {
   width: 100vw;
-  height: 100vh;
+  height: 100svh;
+  max-height: 800px;
   position: absolute;
   top: 0;
   left: 0;
   object-fit: cover;
   display: block;
+
+  @media (min-width: $big-tablet-screen) {
+    height: 100vh;
+  }
 }
 
 //SCROLLBAR
