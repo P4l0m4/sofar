@@ -202,6 +202,7 @@ async function validEmptyState() {
     gap: 1rem;
     flex-direction: column;
     width: 100%;
+    align-items: center;
 
     @media (min-width: $big-tablet-screen) {
       flex-direction: row;
@@ -219,6 +220,8 @@ async function validEmptyState() {
       width: 100%;
       gap: 1rem;
       height: fit-content;
+      border-radius: 24px;
+      height: 38px;
 
       &--sent {
         background-color: green;

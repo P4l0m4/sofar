@@ -21,6 +21,8 @@ $secondary-color-faded: rgba($secondary-color, 0.2);
 $sky-color-faded: rgba($sky-color, 0.6);
 $base-color-faded: rgba($base-color, 0.5);
 
+$secondary-color-lighter: #062a4e;
+
 //BORDERS
 $radius: 20px;
 
@@ -42,6 +44,6 @@ $golden-number: 1.618;
 //FONT SIZES
 $small-text: 0.75rem;
 $subtitles: calc(1rem * $golden-number);
-$titles: calc($subtitles * $golden-number);
+$titles: calc($subtitles * $golden-number + 0.5rem);
 
 $blur: 2px;

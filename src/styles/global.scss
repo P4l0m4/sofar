@@ -264,6 +264,16 @@ input[type="search"]::-webkit-search-results-decoration {
   }
 }
 
+.auto-video {
+  width: 100vw;
+  height: 100dvh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  display: block;
+}
+
 //SCROLLBAR
 /* width */
 ::-webkit-scrollbar {

@@ -1,30 +1,28 @@
 <script setup lang="ts">
 const qualities = [
   {
-    img: "award_star",
     title: "Expert pilots",
     txt: "Expert pilots, passionate about precision and your travel experience.",
   },
   {
-    img: "health_and_safety",
+    title: "Flexible schedules",
+    txt: "Save valuable time and enjoy flexible schedules tailored to your needs and agenda.",
+  },
+  {
     title: "Unrivalled reliability",
     txt: "Travel with confidence on our aircraft of unrivalled reliability, where safety and peace of mind define every flight.",
   },
   {
-    img: "flight_class",
-    title: "Comfort and style",
-    txt: "Fly in unparalleled comfort and style – comfort seats, curated refreshments, snacks, and WiFi at your fingertips. Elevate your travel experience.",
+    title: "24/7 Availability",
+    txt: "Our team is available 24/7 to cater to your needs, fostering a close and attentive relationship, and always striving to fulfill your requests.",
   },
-
   {
-    img: "straighten",
     title: "Tailored journey",
     txt: "From travel essentials to specialized gear, our flexible luggage policy ensures your journey is tailored to your passions and preferences.",
   },
   {
-    img: "connecting_airports_light",
-    title: "Flexible schedules",
-    txt: "Save valuable time and enjoy flexible schedules tailored to your needs and agenda.",
+    title: "Seamless journey",
+    txt: "Sofar's private jets ensure access to convenient regional airports, saving time and money on ground transportation for a seamless journey.",
   },
 ];
 </script>
@@ -38,18 +36,18 @@ const qualities = [
       <div class="why-fly-with-sofar__main-part__qualities">
         <div
           class="why-fly-with-sofar__main-part__qualities__element"
+          :class="{ hr: argument.type === 'hr' }"
           v-for="argument in qualities"
         >
-          <span class="why-fly-with-sofar__main-part__qualities__element__img"
-            ><img :src="`/assets/icons/${argument.img}.svg`"
-          /></span>
           <div class="why-fly-with-sofar__main-part__qualities__element__txt">
-            <h3
+            <!-- <h3
+              v-if="argument.title"
               class="why-fly-with-sofar__main-part__qualities__element__txt__title subtitles"
             >
               {{ argument.title }}
-            </h3>
+            </h3> -->
             <p
+              v-if="argument.txt"
               class="why-fly-with-sofar__main-part__qualities__element__txt__paragraph paragraphs"
             >
               {{ argument.txt }}
@@ -58,22 +56,9 @@ const qualities = [
         </div>
       </div>
     </div>
-    <div class="masked-image"></div>
   </section>
 </template>
 <style lang="scss" scoped>
-.masked-image {
-  background-repeat: no-repeat;
-  -webkit-mask-image: url("@/assets/images/logo-light-vertical.svg");
-  mask-image: url("@/assets/images/logo-light-vertical.svg");
-  mask-size: contain;
-  mask-repeat: no-repeat;
-  background-color: $base-color;
-  width: 400px;
-  height: 100%;
-  transform: rotate(180deg);
-  opacity: 0.5;
-}
 .why-fly-with-sofar {
   display: flex;
   align-items: center;
@@ -82,42 +67,23 @@ const qualities = [
   justify-content: space-between;
   padding: 1rem;
   min-height: 100svh;
-  // max-height: 800px;
-  background-image: url("@/assets/images/why-fly-with-sofar-private-jet-mobile.webp");
   background-size: cover;
   background-position: center;
   position: relative;
-
-  &::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    background-image: linear-gradient(80deg, $text-color, transparent 100%);
-    opacity: 0.9;
-
-    @media (min-width: $big-tablet-screen) {
-      background-image: linear-gradient(80deg, $text-color, transparent 60%);
-      opacity: 0.4;
-    }
-  }
+  background-color: $secondary-color;
 
   @media (min-width: $big-tablet-screen) {
     gap: 4rem;
     padding: 2rem;
     flex-direction: row;
-    background-image: url("@/assets/images/why-fly-with-sofar.webp");
   }
 
   &__main-part {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    width: 100%;
-    max-width: 760px;
+    width: 100% !important;
     height: fit-content;
-    z-index: 1;
     padding: 1rem 0;
 
     @media (min-width: $big-tablet-screen) {
@@ -126,53 +92,97 @@ const qualities = [
     }
     &__title {
       width: fit-content;
-      white-space: nowrap;
+
       color: $text-color-alt;
       margin-bottom: 2rem;
     }
 
     &__qualities {
-      display: flex;
-      gap: 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 3rem;
       height: fit-content;
-      flex-direction: column;
+
+      @media (min-width: $big-tablet-screen) {
+        grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      }
 
       &__element {
         display: flex;
+        width: 100%;
         height: fit-content;
-        align-items: center;
         color: $text-color-alt;
-        gap: 1rem;
+        position: relative;
 
-        &__img {
-          width: 40px;
-          min-width: 40px;
-          height: 40px;
+        @media (min-width: $tablet-screen) {
+          &:nth-of-type(1),
+          &:nth-of-type(2),
+          &:nth-of-type(3),
+          &:nth-of-type(4) {
+            height: 100px;
 
-          & img {
-            width: 100%;
-            height: 100%;
+            &::after {
+              content: "";
+              display: block;
+              width: 100%;
+              height: 2px;
+              background-color: $base-color-faded;
+              position: absolute;
+              bottom: -2rem;
+            }
+          }
+          &:nth-of-type(3),
+          &:nth-of-type(4),
+          &:nth-of-type(5),
+          &:nth-of-type(6) {
+            margin-top: 4rem;
+          }
+        }
+
+        @media (min-width: $desktop-screen) {
+          &:nth-of-type(1),
+          &:nth-of-type(2),
+          &:nth-of-type(3) {
+            height: 100px;
+            margin-top: 0;
+
+            &::after {
+              content: "";
+              display: block;
+              width: 100%;
+              height: 2px;
+              background-color: $base-color-faded;
+              position: absolute;
+              bottom: -2rem;
+            }
+          }
+          &:nth-of-type(4),
+          &:nth-of-type(5),
+          &:nth-of-type(6) {
+            margin-top: 4rem;
+
+            &::after {
+              content: "";
+              display: none;
+            }
           }
         }
 
         &__txt {
           display: flex;
           flex-direction: column;
+          gap: 0.5rem;
+          width: 100%;
 
           &__title {
             width: fit-content;
             text-shadow: $shadow-text;
             font-size: 1rem;
-
-            @media (min-width: $big-tablet-screen) {
-              font-size: $subtitles;
-            }
+            font-size: $subtitles;
           }
 
           &__paragraph {
             text-wrap: balance;
-            text-shadow: $shadow-text;
-            font-size: 0.8rem;
           }
         }
       }

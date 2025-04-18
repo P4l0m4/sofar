@@ -816,6 +816,7 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  z-index: 1;
 
   &__top {
     display: flex;
@@ -840,7 +841,6 @@ onMounted(() => {
         white-space: nowrap;
         transition: opacity 0.4s ease;
         cursor: pointer;
-
         padding-bottom: 2px;
         padding-top: 1rem;
         margin-top: -1rem;
