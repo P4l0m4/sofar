@@ -260,6 +260,7 @@ const index = ref(0);
           <NuxtLink
             class="button-primary--light"
             :to="`/aircraft${slides[index].buttonLink}`"
+            style="max-width: 300px"
             >More information</NuxtLink
           >
         </div>
