@@ -21,7 +21,6 @@ withDefaults(defineProps<Props>(), {
   src:
     url("@/assets/fonts/icomoon.eot?xyz#iefix") format("embedded-opentype"),
     url("@/assets/fonts/icomoon.woff?tskar8") format("woff"),
-    url("@/assets/fonts/icomoon.woff2?xyz") format("woff2"),
     url("@/assets/fonts/icomoon.ttf?xyz") format("truetype"),
     url("@/assets/fonts/icomoon.svg?xyz#icomoon") format("svg");
   font-weight: normal;
