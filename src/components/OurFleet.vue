@@ -37,7 +37,7 @@ const slides = [
       pictograms: [
         {
           label: "Take-Off Distance",
-          icon: "airplane-takeoff",
+          icon: "airplane_takeoff",
           data: "3.199 ft",
         },
         {
@@ -52,7 +52,7 @@ const slides = [
         },
         {
           label: "Max Altitude",
-          icon: "cloud-arrow-up",
+          icon: "cloud_arrow_up",
           data: "41.000 ft",
         },
         {
@@ -86,7 +86,7 @@ const slides = [
       pictograms: [
         {
           label: "Take-Off Distance",
-          icon: "airplane-takeoff",
+          icon: "airplane_takeoff",
           data: "3.209 ft",
         },
         {
@@ -101,7 +101,7 @@ const slides = [
         },
         {
           label: "Max Altitude",
-          icon: "cloud-arrow-up",
+          icon: "cloud_arrow_up",
           data: "45.000 ft",
         },
         {
@@ -136,7 +136,7 @@ const slides = [
       pictograms: [
         {
           label: "Take-Off Distance",
-          icon: "airplane-takeoff",
+          icon: "airplane_takeoff",
           data: "2.485 ft",
         },
         {
@@ -151,7 +151,7 @@ const slides = [
         },
         {
           label: "Max Altitude",
-          icon: "cloud-arrow-up",
+          icon: "cloud_arrow_up",
           data: "3.000 ft",
         },
         {
@@ -419,6 +419,7 @@ const index = ref(0);
         gap: 2rem;
         flex-direction: column;
         width: 100%;
+        align-items: end;
 
         @media (min-width: $big-tablet-screen) {
           width: 450px;
