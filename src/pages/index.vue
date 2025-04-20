@@ -291,6 +291,12 @@ function onError(e: Event) {
       width: fit-content;
       height: fit-content;
       margin: auto;
+      z-index: 1;
+
+      // @media (min-width: $big-tablet-screen) {
+      //   padding-left: 4rem;
+      //   border: red solid 2px;
+      // }
 
       & img {
         width: 60px;

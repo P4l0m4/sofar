@@ -121,7 +121,7 @@ const slides = [
     planeName: "Pilatus PC 12",
     description:
       "When selecting the perfect aircraft for your upcoming trip, you'll find that the PC-12 offers a world of advantages waiting to enhance your travel experience. This isn't just any aircraft; it's a promise of versatility, safety, reliability, and a proven track record that has won the trust of countless travelers worldwide.",
-    buttonLink: "/pilatus-pc-12",
+    buttonLink: "/pc12",
     planeImage: pilatus,
     secondTitle: "Range. Space. Comfort.",
     paragraph:
@@ -257,7 +257,9 @@ const index = ref(0);
               </div>
             </div>
           </div>
-          <NuxtLink class="button-primary--light" :to="slides[index].buttonLink"
+          <NuxtLink
+            class="button-primary--light"
+            :to="`/aircraft${slides[index].buttonLink}`"
             >More information</NuxtLink
           >
         </div>
@@ -390,6 +392,7 @@ const index = ref(0);
           display: grid;
           grid-template-columns: repeat(1, 1fr);
           gap: 2rem;
+          max-width: 500px;
 
           @media (min-width: $big-tablet-screen) {
             grid-template-columns: repeat(2, 1fr);
@@ -418,7 +421,7 @@ const index = ref(0);
         width: 100%;
 
         @media (min-width: $big-tablet-screen) {
-          width: 400px;
+          width: 450px;
         }
 
         .schema {

@@ -1,7 +1,36 @@
 <script setup lang="ts">
 import { colors } from "@/utils/colors";
 import { useMenuItemsStore } from "@/stores/menuItems";
+
+type ServiceItem = {
+  label: string;
+  link: string;
+  icon: string;
+  alt: string;
+  parent?: string;
+};
+
 const menuItemsStore = useMenuItemsStore();
+
+const VISIBLE_SERVICE_LABELS: string[] = [
+  "Private jet charters",
+  "Corporate jet charter",
+  "Family jet charters",
+  "Empty legs",
+  "Pet-friendly charters",
+  "Aircraft management",
+];
+
+function filterDisplayedServices(items?: ServiceItem[]): ServiceItem[] {
+  if (!items) return [];
+  const keepSet = new Set<string>(VISIBLE_SERVICE_LABELS);
+  return items.filter((i) => keepSet.has(i.label));
+}
+
+const displayedServices = computed(() => {
+  const services = menuItemsStore.menuItems.find((m) => m.label === "Services");
+  return services ? filterDisplayedServices(services.children) : [];
+});
 </script>
 <template>
   <section class="services">
@@ -10,7 +39,7 @@ const menuItemsStore = useMenuItemsStore();
       <NuxtLink
         class="services__list__link scale-on-hover"
         :to="item.link"
-        v-for="item in menuItemsStore.menuItems[1].children"
+        v-for="item in displayedServices"
         :key="item.label"
         ><IconComponent
           :color="colors['primary-color']"
@@ -41,10 +70,15 @@ const menuItemsStore = useMenuItemsStore();
   &__list {
     gap: 1rem;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(1, 1fr);
 
     @media (min-width: $big-tablet-screen) {
-      max-width: calc(100vw - 18rem);
+      gap: 2rem;
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (min-width: $laptop-screen) {
+      grid-template-columns: repeat(3, 1fr);
     }
 
     &__link {

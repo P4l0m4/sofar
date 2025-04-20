@@ -36,16 +36,9 @@ const qualities = [
       <div class="why-fly-with-sofar__main-part__qualities">
         <div
           class="why-fly-with-sofar__main-part__qualities__element"
-          :class="{ hr: argument.type === 'hr' }"
           v-for="argument in qualities"
         >
           <div class="why-fly-with-sofar__main-part__qualities__element__txt">
-            <!-- <h3
-              v-if="argument.title"
-              class="why-fly-with-sofar__main-part__qualities__element__txt__title subtitles"
-            >
-              {{ argument.title }}
-            </h3> -->
             <p
               v-if="argument.txt"
               class="why-fly-with-sofar__main-part__qualities__element__txt__paragraph paragraphs"
