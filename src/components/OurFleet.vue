@@ -260,7 +260,6 @@ const index = ref(0);
           <NuxtLink
             class="button-primary--light"
             :to="`/aircraft${slides[index].buttonLink}`"
-            style="max-width: 300px"
             >More information</NuxtLink
           >
         </div>
@@ -354,7 +353,7 @@ const index = ref(0);
       max-width: 400px;
 
       @media (min-width: $big-tablet-screen) {
-        max-width: 280px;
+        max-width: 300px;
       }
     }
 
