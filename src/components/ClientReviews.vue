@@ -121,7 +121,7 @@ const scroll = (direction: "left" | "right") => {
 .satisfied-clients {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
   padding: 2rem 1rem;
   padding-right: 0;
   position: relative;
