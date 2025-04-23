@@ -178,7 +178,16 @@ function onError(e: Event) {
   </picture>
   <PrivateJetCharter />
   <OurBases />
-  <img class="gif" src="@/assets/videos/sofar-fleet.gif" alt="private jets" />
+
+  <video
+    class="auto-video2"
+    src="@/assets/videos/sofar-fleet-formation.mp4"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="auto"
+  />
 
   <OurFleet />
   <section class="photo-grid">

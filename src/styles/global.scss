@@ -279,6 +279,19 @@ input[type="search"]::-webkit-search-results-decoration {
   }
 }
 
+.auto-video2 {
+  width: 100vw;
+  height: 50svh;
+  max-height: 600px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+
+  @media (min-width: $big-tablet-screen) {
+    height: 70vh;
+  }
+}
+
 //SCROLLBAR
 /* width */
 ::-webkit-scrollbar {
