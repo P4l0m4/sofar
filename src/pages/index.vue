@@ -85,10 +85,19 @@ const breadcrumbs = [
 ];
 
 const videoRef = ref<HTMLVideoElement>();
+const videoRef2 = ref<HTMLVideoElement>();
 
 onMounted(() => {
   if (videoRef.value) {
     const p = videoRef.value.play();
+    if (p instanceof Promise) {
+      p.catch((err) => {
+        console.warn("Autoplay bloqué par le navigateur :", err);
+      });
+    }
+  }
+  if (videoRef2.value) {
+    const p = videoRef2.value.play();
     if (p instanceof Promise) {
       p.catch((err) => {
         console.warn("Autoplay bloqué par le navigateur :", err);
@@ -180,6 +189,7 @@ function onError(e: Event) {
   <OurBases />
 
   <video
+    ref="videoRef2"
     class="auto-video2"
     src="@/assets/videos/sofar-fleet-formation.mp4"
     autoplay
@@ -187,6 +197,7 @@ function onError(e: Event) {
     loop
     playsinline
     preload="auto"
+    @error="onError"
   />
 
   <OurFleet />
