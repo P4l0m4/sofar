@@ -1,6 +1,6 @@
-# Nuxt 3 Minimal Starter
+## This website is Live on ✨ https://sofar.com ✨
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+⚠️ As it is hosted on a US located server, it might take more time to load if you are in Europe.
 
 ## Setup
 
