@@ -191,7 +191,7 @@ function onError(e: Event) {
   <video
     ref="videoRef2"
     class="auto-video2"
-    src="@/assets/videos/sofar-fleet-formation.mp4"
+    src="@/assets/videos/sofar-fleet.mp4"
     muted
     preload="auto"
     controls
