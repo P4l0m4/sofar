@@ -388,7 +388,7 @@ function onError(e: Event) {
   background-image: url("@/assets/images/home/sofar-fleet-mobile.webp");
 
   @media (min-width: $big-tablet-screen) {
-    background-image: url("@/assets/images/home/sofar-fleet.webp");
+    background-image: url("@/assets/images/home/sofar-fleet-desktop.webp");
     width: 100vw !important;
   }
 }
