@@ -43,9 +43,11 @@
     color: $text-color-alt;
     align-items: center;
   }
+
   .titles {
     text-align: center;
   }
+
   .paragraphs {
     color: $text-color-alt;
     max-width: 800px;

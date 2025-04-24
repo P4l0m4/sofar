@@ -85,29 +85,52 @@ const qualities = [
     }
     &__title {
       width: fit-content;
-
       color: $text-color-alt;
       margin-bottom: 2rem;
     }
 
     &__qualities {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 3rem;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 4rem;
       height: fit-content;
+      width: fit-content;
 
       @media (min-width: $big-tablet-screen) {
-        grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3rem;
+        grid-column-gap: 3rem;
+      }
+
+      @media (min-width: $laptop-screen) {
+        grid-template-columns: repeat(3, 1fr);
+        width: 100%;
+        grid-column-gap: 5rem;
       }
 
       &__element {
         display: flex;
-        width: 100%;
+        width: fit-content;
         height: fit-content;
         color: $text-color-alt;
         position: relative;
+        &:nth-of-type(1),
+        &:nth-of-type(2),
+        &:nth-of-type(3),
+        &:nth-of-type(4),
+        &:nth-of-type(5) {
+          &::after {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: $base-color-faded;
+            position: absolute;
+            bottom: -2rem;
+          }
+        }
 
-        @media (min-width: $tablet-screen) {
+        @media (min-width: $big-tablet-screen) {
           &:nth-of-type(1),
           &:nth-of-type(2),
           &:nth-of-type(3),
@@ -130,9 +153,16 @@ const qualities = [
           &:nth-of-type(6) {
             margin-top: 4rem;
           }
+
+          &:nth-of-type(5),
+          &:nth-of-type(6) {
+            &::after {
+              display: none;
+            }
+          }
         }
 
-        @media (min-width: $desktop-screen) {
+        @media (min-width: $laptop-screen) {
           &:nth-of-type(1),
           &:nth-of-type(2),
           &:nth-of-type(3) {
@@ -165,7 +195,7 @@ const qualities = [
           display: flex;
           flex-direction: column;
           gap: 0.5rem;
-          width: 100%;
+          width: fit-content;
 
           &__title {
             width: fit-content;
@@ -175,7 +205,11 @@ const qualities = [
           }
 
           &__paragraph {
-            text-wrap: balance;
+            width: fit-content;
+
+            @media (min-width: $big-tablet-screen) {
+              text-wrap: balance;
+            }
           }
         }
       }
