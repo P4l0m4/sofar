@@ -34,7 +34,7 @@ const displayedServices = computed(() => {
 </script>
 <template>
   <section class="services">
-    <h1 class="titles">Our services</h1>
+    <h2 class="titles">Our services</h2>
     <div class="services__list">
       <NuxtLink
         class="services__list__link scale-on-hover"

@@ -1,7 +1,7 @@
 <template>
   <section class="private-jet-charter">
     <div class="private-jet-charter__headlines">
-      <h3 class="titles">Private Jet Charter</h3>
+      <h2 class="titles">Private Jet Charter</h2>
       <span class="subtitles">Make it Anywhere</span>
     </div>
     <p class="paragraphs">

@@ -85,7 +85,6 @@ const breadcrumbs = [
 ];
 
 const videoRef = ref<HTMLVideoElement>();
-const videoRef2 = ref<HTMLVideoElement>();
 
 onMounted(() => {
   if (videoRef.value) {
@@ -96,14 +95,6 @@ onMounted(() => {
       });
     }
   }
-  // if (videoRef2.value) {
-  //   const p = videoRef2.value.play();
-  //   if (p instanceof Promise) {
-  //     p.catch((err) => {
-  //       console.warn("Autoplay bloqué par le navigateur :", err);
-  //     });
-  //   }
-  // }
 });
 
 function onError(e: Event) {
@@ -136,7 +127,7 @@ function onError(e: Event) {
       <EmergencyBubble v-if="desktopScreen" style="z-index: 1" />
     </div>
 
-    <div class="index__banner__titles" v-if="!desktopScreen">
+    <div class="index__banner__titles">
       <h1 class="titles">On-demand Private Jet Charter</h1>
       <h2 class="subtitles">
         Fast booking, flexible routes, and personalized service―ready when you
@@ -174,11 +165,6 @@ function onError(e: Event) {
       :color="colors['secondary-color']"
     />
 
-    <!-- <img
-      class="index__banner__img"
-      :src="storyHome.content.bannerImageMobile.filename"
-      alt="banner image"
-    /> -->
     <img
       class="index__banner__img"
       src="@/assets/images/home/preview.jpg"
@@ -188,15 +174,6 @@ function onError(e: Event) {
   <PrivateJetCharter />
   <OurBases />
 
-  <!-- <video
-    ref="videoRef2"
-    class="auto-video2"
-    src="@/assets/videos/sofar-fleet.mp4"
-    muted
-    preload="auto"
-    controls
-    @error="onError"
-  /> -->
   <div class="fleet-image"></div>
   <OurFleet />
   <section class="photo-grid">
