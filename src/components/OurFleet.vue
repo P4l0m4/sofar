@@ -401,6 +401,10 @@ const index = ref(0);
           &__illustration {
             width: 100%;
 
+            &:nth-child(n + 2) {
+              width: 30%;
+            }
+
             @media (min-width: $big-tablet-screen) {
               &:nth-child(1) {
                 grid-column: 1 / -1;
@@ -408,6 +412,8 @@ const index = ref(0);
 
               &:nth-child(n + 2) {
                 grid-column: auto;
+                width: 100%;
+                max-height: 180px;
               }
             }
           }
