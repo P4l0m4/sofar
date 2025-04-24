@@ -188,7 +188,7 @@ function onError(e: Event) {
   <PrivateJetCharter />
   <OurBases />
 
-  <video
+  <!-- <video
     ref="videoRef2"
     class="auto-video2"
     src="@/assets/videos/sofar-fleet.mp4"
@@ -196,8 +196,8 @@ function onError(e: Event) {
     preload="auto"
     controls
     @error="onError"
-  />
-
+  /> -->
+  <div class="fleet-image"></div>
   <OurFleet />
   <section class="photo-grid">
     <img
@@ -378,10 +378,19 @@ function onError(e: Event) {
   }
 }
 
-.gif {
+.fleet-image {
+  background-size: cover;
+  background-position: center;
+  min-height: 70svh;
+  max-height: 800px;
   width: 100%;
-  height: 70svh;
-  object-fit: cover;
+  min-width: 100%;
+  background-image: url("@/assets/images/home/sofar-fleet-mobile.webp");
+
+  @media (min-width: $big-tablet-screen) {
+    background-image: url("@/assets/images/home/sofar-fleet.webp");
+    width: 100vw !important;
+  }
 }
 
 .photo-grid {
