@@ -43,7 +43,9 @@
     color: $text-color-alt;
     align-items: center;
   }
-
+  .titles {
+    text-align: center;
+  }
   .paragraphs {
     color: $text-color-alt;
     max-width: 800px;
@@ -57,11 +59,7 @@
 
   .button-primary--light {
     width: 100%;
-    max-width: 400px;
-
-    @media (min-width: $big-tablet-screen) {
-      max-width: 250px;
-    }
+    max-width: 250px;
   }
 }
 </style>

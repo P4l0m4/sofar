@@ -91,8 +91,13 @@ onMounted(() => {
   });
 
   if (window.innerWidth < 768) {
-    map.setCenter([-96.55174117682346, 35.15790888688196]);
-    map.setZoom(2.3);
+    map.setCenter([-96.55174117682346, 40.15790888688196]);
+    map.setZoom(2);
+    map.on("load", () => {
+      map.dragPan.disable();
+      map.touchZoomRotate.disable();
+      map.doubleClickZoom.disable();
+    });
   }
 
   map.on("load", () => {
@@ -184,5 +189,6 @@ onMounted(() => {
   inset: 0;
   height: 100%;
   width: 100%;
+  overscroll-behavior: contain;
 }
 </style>
