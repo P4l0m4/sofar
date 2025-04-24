@@ -83,6 +83,32 @@ const breadcrumbs = [
     url: window.location.origin,
   },
 ];
+
+const videoRef = ref<HTMLVideoElement>();
+const videoRef2 = ref<HTMLVideoElement>();
+
+onMounted(() => {
+  if (videoRef.value) {
+    const p = videoRef.value.play();
+    if (p instanceof Promise) {
+      p.catch((err) => {
+        console.warn("Autoplay bloqué par le navigateur :", err);
+      });
+    }
+  }
+  // if (videoRef2.value) {
+  //   const p = videoRef2.value.play();
+  //   if (p instanceof Promise) {
+  //     p.catch((err) => {
+  //       console.warn("Autoplay bloqué par le navigateur :", err);
+  //     });
+  //   }
+  // }
+});
+
+function onError(e: Event) {
+  console.error("Erreur de chargement de la vidéo :", e);
+}
 </script>
 <template>
   <picture class="index__banner">
@@ -99,6 +125,7 @@ const breadcrumbs = [
         class="button-primary--dark rounded-button"
         to="/booking"
         v-if="desktopScreen"
+        style="z-index: 1"
         >Booking</NuxtLink
       >
 
@@ -106,10 +133,9 @@ const breadcrumbs = [
         <img src="@/assets/images/logo-light.svg"
       /></NuxtLink>
 
-      <EmergencyBubble v-if="desktopScreen" />
+      <EmergencyBubble v-if="desktopScreen" style="z-index: 1" />
     </div>
 
-    <!-- <h1 class="index__banner__title titles">Book your next flight with us!</h1> -->
     <div class="index__banner__titles" v-if="!desktopScreen">
       <h1 class="titles">On-demand Private Jet Charter</h1>
       <h2 class="subtitles">
@@ -117,6 +143,31 @@ const breadcrumbs = [
         are
       </h2>
     </div>
+    <video
+      ref="videoRef"
+      class="auto-video"
+      src="@/assets/videos/homepage-desktop.mp4"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+      @error="onError"
+      v-if="desktopScreen"
+    />
+    <video
+      ref="videoRef"
+      class="auto-video"
+      src="@/assets/videos/homepage-mobile.mp4"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+      @error="onError"
+      v-else
+    />
+
     <QuoteFormDesktop
       parent="home"
       v-if="desktopScreen"
@@ -134,24 +185,55 @@ const breadcrumbs = [
       alt="banner image"
     />
   </picture>
-  <HomeWelcomeToSofar />
+  <PrivateJetCharter />
   <OurBases />
 
-  <HomeOurBirds />
-  <section>
-    <h2 class="section-title titles">Sofar Fleet</h2>
-    <CarouselComponent />
+  <!-- <video
+    ref="videoRef2"
+    class="auto-video2"
+    src="@/assets/videos/sofar-fleet.mp4"
+    muted
+    preload="auto"
+    controls
+    @error="onError"
+  /> -->
+  <div class="fleet-image"></div>
+  <OurFleet />
+  <section class="photo-grid">
+    <img
+      src="@/assets/images/home/private-jet-charter-sofar6865.webp"
+      alt="sofar jet charter"
+    />
+    <img
+      src="@/assets/images/phenom-100/phenom-100-embraer-sofar (4).webp"
+      alt="sofar jet charter"
+    />
+    <img
+      src="@/assets/images/home/private-jet-charter-sofar6487.webp"
+      alt="sofar jet charter"
+    />
+    <img
+      src="@/assets/images/home/private-jet-charter-sofar0474.webp"
+      alt="sofar jet charter"
+    />
+    <img
+      src="@/assets/images/home/private-jet-charter-sofar8167.webp"
+      alt="sofar jet charter"
+    />
+    <img
+      src="@/assets/images/home/private-jet-charter-sofar6190.webp"
+      alt="sofar jet charter"
+    />
   </section>
   <HomeWhyFlyWithSofar />
-
+  <EmptysForm />
+  <ServicesOurServices />
   <ClientReviews />
   <h2 class="section-title titles">Top Destinations</h2>
   <h3 class="section-subtitle subtitles">
     Choose from our most popular destinations
   </h3>
   <CarouselComponent :carouselElements="destinationsCarouselElements" />
-  <BlogArticlesCarousel />
-  <EmptysForm />
   <JsonldBreadcrumb :links="breadcrumbs" />
 </template>
 <style lang="scss" scoped>
@@ -170,8 +252,8 @@ const breadcrumbs = [
   position: relative;
 
   @media (min-width: $big-tablet-screen) {
-    padding: 2rem;
-    gap: 2rem;
+    // padding: 2rem;
+    // gap: 2rem;
   }
   &::before {
     content: "";
@@ -227,6 +309,12 @@ const breadcrumbs = [
       width: fit-content;
       height: fit-content;
       margin: auto;
+      z-index: 1;
+
+      // @media (min-width: $big-tablet-screen) {
+      //   padding-left: 4rem;
+      //   border: red solid 2px;
+      // }
 
       & img {
         width: 60px;
@@ -287,6 +375,77 @@ const breadcrumbs = [
   @media (min-width: $big-tablet-screen) {
     padding: 1rem 2rem;
     padding-bottom: 0;
+  }
+}
+
+.fleet-image {
+  background-size: cover;
+  background-position: center;
+  min-height: 50svh;
+  max-height: 600px;
+  width: 100%;
+  min-width: 100%;
+  background-image: url("@/assets/images/home/sofar-fleet-mobile.webp");
+
+  @media (min-width: $big-tablet-screen) {
+    background-image: url("@/assets/images/home/sofar-fleet-desktop.webp");
+    width: 100vw !important;
+    max-height: 800px;
+    min-height: 70svh;
+  }
+}
+
+.photo-grid {
+  display: grid;
+  gap: 1rem;
+  width: 100%;
+  height: fit-content;
+  grid-template-columns: repeat(1, 1fr);
+  grid-auto-rows: 200px;
+  background-color: $secondary-color;
+  padding: 2rem 1rem;
+
+  @media (min-width: $big-tablet-screen) {
+    grid-template-columns: repeat(5, 1fr);
+    padding: 4rem 2rem;
+    grid-auto-rows: 80px;
+  }
+
+  & img {
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    height: 100%;
+    // border-radius: $radius;
+
+    @media (min-width: $big-tablet-screen) {
+      &:nth-child(1) {
+        grid-column: span 1;
+        grid-row: span 2;
+      }
+
+      &:nth-child(2) {
+        grid-column: span 3;
+        grid-row: span 7;
+      }
+
+      &:nth-child(3) {
+        grid-column: span 1;
+        grid-row: span 2;
+      }
+      &:nth-child(4) {
+        grid-column: span 1;
+        grid-row: span 5;
+      }
+      &:nth-child(5) {
+        grid-column: span 1;
+        grid-row: span 3;
+      }
+      &:nth-child(6) {
+        grid-column: span 1;
+        grid-row: span 2;
+      }
+    }
   }
 }
 </style>

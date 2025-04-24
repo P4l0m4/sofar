@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
+import { colors } from "@/utils/colors";
+
 const leftArrowRef = ref<HTMLButtonElement | null>(null);
 const rightArrowRef = ref<HTMLButtonElement | null>(null);
 const showArrows = ref(false);
@@ -8,17 +10,23 @@ const reviews = [
   {
     review:
       "Exceptional service and attentive crew. An unparalleled private flight experience!",
-    stars: 5,
+    origin: "VNY",
+    destination: "LAS",
+    name: "Chris. K",
   },
   {
     review:
       "Pleasant and comfortable flight. I highly recommend it for a carefree trip.",
-    stars: 5,
+    origin: "HPN",
+    destination: "BOS",
+    name: "Lila. J",
   },
   {
     review:
       "Simple booking and perfect flight. Excellent company, I've recommended it to everyone.",
-    stars: 5,
+    origin: "JFK",
+    destination: "OPF",
+    name: "James. V",
   },
 ];
 
@@ -64,13 +72,33 @@ const scroll = (direction: "left" | "right") => {
       @mouseleave="showArrows = false"
     >
       <div class="satisfied-clients__reviews__review" v-for="review in reviews">
-        <p class="paragraphs">{{ review.review }}</p>
-        <span class="satisfied-clients__reviews__review__stars"
+        <div class="satisfied-clients__reviews__review__header">
+          <span class="satisfied-clients__reviews__review__header__tag"
+            >Bag tag</span
           ><img
-            v-for="star in review.stars"
-            src="/assets/icons/star.svg"
-            alt="star icon"
-        /></span>
+            class="satisfied-clients__reviews__review__header__logo"
+            src="@/assets/images/logo-dark.svg"
+            alt="sofar logo dark"
+          />
+        </div>
+        <div class="wrapper">
+          <div class="journey">
+            <span class="journey__location">{{ review.origin }}</span>
+
+            <IconComponent
+              class="journey__icon"
+              :color="colors['secondary-color']"
+              icon="airplanemode_active"
+              size="1.5rem"
+            />
+            <span class="journey__location">{{ review.destination }}</span>
+          </div>
+          <hr />
+          <p class="paragraphs">{{ review.review }}</p>
+          <span class="name">{{ review.name }}</span>
+          <hr />
+          <span class="flight">EMB-500</span>
+        </div>
       </div>
     </div>
     <Transition>
@@ -93,20 +121,31 @@ const scroll = (direction: "left" | "right") => {
 .satisfied-clients {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
   padding: 2rem 1rem;
   padding-right: 0;
   position: relative;
+  background-color: $secondary-color;
 
   @media (min-width: $big-tablet-screen) {
-    gap: 2rem;
+    gap: 4rem;
     padding: 4rem 2rem;
+    align-items: center;
+  }
+
+  .titles {
+    color: $text-color-alt;
+    text-align: center;
   }
 
   &__reviews {
     display: flex;
     overflow: scroll;
     gap: 1rem;
+
+    @media (min-width: $big-tablet-screen) {
+      gap: 2rem;
+    }
 
     &::-webkit-scrollbar {
       display: none;
@@ -115,20 +154,104 @@ const scroll = (direction: "left" | "right") => {
     &__review {
       display: flex;
       flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
       gap: 0.5rem;
-      max-width: 400px;
-      min-width: 240px;
-      text-wrap: wrap;
-      height: 100%;
+      width: 100%;
+      max-width: 300px;
+      min-width: 250px;
+      background-color: $base-color;
+      position: relative;
+      height: 410px;
+      clip-path: polygon(
+        32px 0,
+        /* coin haut‑gauche */ calc(100% - 32px) 0,
+        /* coin haut‑droite */ 100% 32px,
+        /* côté droit haut */ 100% calc(100% - 32px),
+        /* coin bas‑droite */ calc(100% - 32px) 100%,
+        /* bas‑droite */ 32px 100%,
+        /* bas‑gauche */ 0 calc(100% - 32px),
+        /* côté gauche bas */ 0 32px /* côté gauche haut */
+      );
 
-      &__stars {
+      &::before {
+        content: "";
+        position: absolute;
+        top: 16px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 32px;
+        height: 32px;
+        background: $secondary-color;
+        border-radius: 50%;
+      }
+
+      &__header {
         display: flex;
-        gap: 0.5rem;
-        margin-top: auto;
+        justify-content: space-between;
+        width: 100%;
+        padding: 0 1rem;
+        gap: 1rem;
+        align-items: center;
 
-        & img {
-          width: 1rem;
-          height: 1rem;
+        &__tag {
+          white-space: nowrap;
+          font-size: $small-text;
+          font-weight: $skinny;
+        }
+
+        &__logo {
+          width: 40px;
+        }
+      }
+
+      .wrapper {
+        display: flex;
+        flex-direction: column;
+        height: calc(100% - 80px);
+        padding: 1rem;
+        gap: 1rem;
+        border: $secondary-color 1px solid;
+        justify-content: center;
+
+        hr {
+          color: $secondary-color;
+          opacity: 0.4;
+        }
+
+        .journey {
+          display: flex;
+          gap: 1rem;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0 1rem;
+
+          &__location {
+            font-weight: $thick;
+            font-size: 1.25rem;
+          }
+
+          &__icon {
+            transform: rotate(90deg);
+          }
+        }
+
+        .paragraphs {
+          text-align: center;
+          text-wrap: balance;
+          height: 100%;
+        }
+
+        .name {
+          font-weight: $thick;
+          text-align: center;
+        }
+
+        .flight {
+          text-align: center;
+          font-weight: $thick;
+          font-size: 1.25rem;
         }
       }
     }

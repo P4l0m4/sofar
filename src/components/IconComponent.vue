@@ -16,7 +16,13 @@ withDefaults(defineProps<Props>(), {
 <style scoped>
 @font-face {
   font-family: "sofar-icons";
-  src: url("@/assets/fonts/icomoon.woff?tskar8") format("woff");
+  /* src: url("@/assets/fonts/icomoon.woff?tskar8") format("woff"); */
+  src: url("@/assets/fonts/icomoon.eot?xyz");
+  src:
+    url("@/assets/fonts/icomoon.eot?xyz#iefix") format("embedded-opentype"),
+    url("@/assets/fonts/icomoon.woff?tskar8") format("woff"),
+    url("@/assets/fonts/icomoon.ttf?xyz") format("truetype"),
+    url("@/assets/fonts/icomoon.svg?xyz#icomoon") format("svg");
   font-weight: normal;
   font-style: normal;
   font-display: block;

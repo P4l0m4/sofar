@@ -16,23 +16,10 @@ export const useMenuItemsStore = defineStore("menu", {
           alt: "menu icon services",
           children: [
             {
-              label: "Private jet charters",
-              link: "/services/private-jet-charters",
-              icon: "award_star",
-              alt: "menu icon private jet charters",
-            },
-            {
-              label: "Business charters",
+              label: "Corporate jet charter",
               link: "/services/business-charters",
               icon: "business_center",
               alt: "menu icon business charters",
-            },
-            {
-              parent: "services",
-              label: "Family jet charters",
-              link: "/services/family-jet-charters",
-              icon: "group_add",
-              alt: "menu icon family jet charters",
             },
             {
               parent: "services",
@@ -42,11 +29,31 @@ export const useMenuItemsStore = defineStore("menu", {
               alt: "menu icon empty legs",
             },
             {
+              parent: "services",
+              label: "Family jet charters",
+              link: "/services/family-jet-charters",
+              icon: "group_add",
+              alt: "menu icon family jet charters",
+            },
+            {
+              label: "Aircraft management",
+              link: "/services/aircraft-management",
+              icon: "service_toolbox",
+              alt: "menu icon aircraft management",
+            },
+            {
               label: "Pet-friendly charters",
               link: "/services/pet-friendly-charters",
               icon: "pet_supplies",
               alt: "menu icon pet-friendly charters",
             },
+            {
+              label: "Private jet charters",
+              link: "/services/private-jet-charters",
+              icon: "award_star",
+              alt: "menu icon private jet charters",
+            },
+
             {
               label: "Private jet amenities",
               link: "/services/private-jet-amenities",
@@ -64,12 +71,6 @@ export const useMenuItemsStore = defineStore("menu", {
               link: "/services/prices",
               icon: "attach_money",
               alt: "menu icon prices",
-            },
-            {
-              label: "Aircraft management",
-              link: "/services/aircraft-management",
-              icon: "service_toolbox",
-              alt: "menu icon aircraft management",
             },
           ],
         },

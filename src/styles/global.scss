@@ -264,6 +264,34 @@ input[type="search"]::-webkit-search-results-decoration {
   }
 }
 
+.auto-video {
+  width: 100vw;
+  height: 100svh;
+  max-height: 800px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  display: block;
+
+  @media (min-width: $big-tablet-screen) {
+    height: 100vh;
+  }
+}
+
+.auto-video2 {
+  width: 100vw;
+  height: 50svh;
+  max-height: 600px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+
+  @media (min-width: $big-tablet-screen) {
+    height: 70vh;
+  }
+}
+
 //SCROLLBAR
 /* width */
 ::-webkit-scrollbar {
@@ -306,7 +334,7 @@ details > summary::-webkit-details-marker /* Safari */ {
 }
 
 .titles {
-  font-size: calc($titles - 0.5rem);
+  font-size: calc($titles - 1rem);
   font-weight: $thick;
 
   @media (min-width: $tablet-screen) {
