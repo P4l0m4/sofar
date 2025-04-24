@@ -381,8 +381,8 @@ function onError(e: Event) {
 .fleet-image {
   background-size: cover;
   background-position: center;
-  min-height: 70svh;
-  max-height: 800px;
+  min-height: 50svh;
+  max-height: 600px;
   width: 100%;
   min-width: 100%;
   background-image: url("@/assets/images/home/sofar-fleet-mobile.webp");
@@ -390,6 +390,8 @@ function onError(e: Event) {
   @media (min-width: $big-tablet-screen) {
     background-image: url("@/assets/images/home/sofar-fleet-desktop.webp");
     width: 100vw !important;
+    max-height: 800px;
+    min-height: 70svh;
   }
 }
 
