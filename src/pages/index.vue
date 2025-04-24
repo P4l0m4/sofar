@@ -96,14 +96,14 @@ onMounted(() => {
       });
     }
   }
-  if (videoRef2.value) {
-    const p = videoRef2.value.play();
-    if (p instanceof Promise) {
-      p.catch((err) => {
-        console.warn("Autoplay bloqué par le navigateur :", err);
-      });
-    }
-  }
+  // if (videoRef2.value) {
+  //   const p = videoRef2.value.play();
+  //   if (p instanceof Promise) {
+  //     p.catch((err) => {
+  //       console.warn("Autoplay bloqué par le navigateur :", err);
+  //     });
+  //   }
+  // }
 });
 
 function onError(e: Event) {
@@ -192,11 +192,9 @@ function onError(e: Event) {
     ref="videoRef2"
     class="auto-video2"
     src="@/assets/videos/sofar-fleet-formation.mp4"
-    autoplay
     muted
-    loop
-    playsinline
     preload="auto"
+    controls
     @error="onError"
   />
 
