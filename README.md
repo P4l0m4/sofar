@@ -1,4 +1,4 @@
-## This website is Live on ✨ https://sofar.com ✨
+## This website is Live on ✨ https://flysofar.com ✨
 
 ⚠️ As it is hosted on a US located server, it might take more time to load if you are in Europe.
 
