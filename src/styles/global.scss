@@ -267,6 +267,7 @@ input[type="search"]::-webkit-search-results-decoration {
 .auto-video {
   width: 100vw;
   height: 100svh;
+  min-height: 100svh;
   max-height: 800px;
   position: absolute;
   top: 0;
