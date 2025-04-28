@@ -213,7 +213,7 @@ function onError(e: Event) {
   <CarouselComponent :carouselElements="destinationsCarouselElements" />
   <JsonldBreadcrumb :links="breadcrumbs" />
 </template>
-<style lang="scss" scoped>
+<style lang="scss">
 .index__banner {
   display: flex;
   background-size: cover;
