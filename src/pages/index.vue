@@ -229,8 +229,9 @@ function onError(e: Event) {
   position: relative;
 
   @media (min-width: $big-tablet-screen) {
-    // padding: 2rem;
-    // gap: 2rem;
+    height: 100vh;
+    max-height: 100vh;
+    min-height: 100vh;
   }
   &::before {
     content: "";
