@@ -264,6 +264,11 @@ function onError(e: Event) {
     color: $text-color-alt;
     position: absolute;
     top: 40%;
+    padding: 0 1rem;
+
+    @media (min-width: $big-tablet-screen) {
+      padding: 0 2rem;
+    }
   }
 
   &__headlines {
