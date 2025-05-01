@@ -166,11 +166,23 @@ const carouselElements = [
     controls
   />
   <OurFleet />
-  <CarouselComponent :carouselElements v-if="!desktopScreen" />
-  <ServicesSlidesGrid
-    :carouselElements="carouselElements"
-    v-if="desktopScreen"
-  />
+  <div class="slides-wrapper">
+    <div class="slides-wrapper__headlines">
+      <h3 class="slides-wrapper__headlines__title titles">
+        Family Jet Charter Destinations
+      </h3>
+      <p class="slides-wrapper__headlines__text paragraphs">
+        From coastal escapes to adventure-filled retreats, Sofar provides
+        private jet travel to top family-friendly destinationsacross the U.S.
+        and beyond.
+      </p>
+    </div>
+    <CarouselComponent :carouselElements v-if="!desktopScreen" />
+    <ServicesSlidesGrid
+      :carouselElements="carouselElements"
+      v-if="desktopScreen"
+    />
+  </div>
   <video
     class="full-width-video"
     src="@/assets/videos/homepage-desktop.mp4"
@@ -224,6 +236,27 @@ const carouselElements = [
 </template>
 <style lang="scss" scoped>
 @import "@/styles/planes.scss";
+
+.slides-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  &__headlines {
+    padding: 2rem 1rem 0 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    @media (min-width: $big-tablet-screen) {
+      padding: 4rem 2rem 0 2rem;
+    }
+
+    &__text {
+      text-wrap: balance;
+      max-width: 800px;
+    }
+  }
+}
 
 .video {
   width: 100%;
