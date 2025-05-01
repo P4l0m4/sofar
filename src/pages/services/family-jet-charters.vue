@@ -214,25 +214,6 @@ const carouselElements = [
       },
     ]"
   />
-  <!-- <iframe
-    v-if="
-      commonAssetsStore.teaserVideo && commonAssetsStore.teaserVideo.length > 0
-    "
-    class="video"
-    :src="commonAssetsStore.teaserVideo"
-    frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen
-  ></iframe> -->
-
-  <!-- <ServicesContentBlok
-    v-for="contentBlok in story.content?.ContentBloks"
-    :key="contentBlok._uid"
-    :title="contentBlok.title"
-    :text="contentBlok.text"
-    :image="contentBlok.image.filename"
-    :alt="contentBlok.image.alt"
-  /> -->
 </template>
 <style lang="scss" scoped>
 @import "@/styles/planes.scss";
