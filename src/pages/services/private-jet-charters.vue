@@ -51,29 +51,6 @@ onMounted(() => {
 function onError(e: Event) {
   console.error("Erreur de chargement de la vidéo :", e);
 }
-
-const carouselElements = [
-  {
-    link: "/destinations/us-caribbean",
-    image: "/assets/images/carribean.webp",
-    label: "Carribean",
-  },
-  {
-    link: "/destinations/us-colorado",
-    image: "/assets/images/colorado.webp",
-    label: "Colorado",
-  },
-  {
-    link: "/destinations/us-new-york",
-    image: "/assets/images/new-york.webp",
-    label: "New York",
-  },
-  {
-    link: "/destinations/us-california",
-    image: "/assets/images/california.webp",
-    label: "California",
-  },
-];
 </script>
 <template>
   <picture class="index__banner">
