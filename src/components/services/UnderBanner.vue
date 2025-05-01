@@ -9,8 +9,8 @@ defineProps({
 <template>
   <section class="under-banner">
     <div class="under-banner__text">
-      <h2 class="titles">{{ title }}</h2>
-      <h3 class="subtitles">{{ subtitle }}</h3>
+      <h1 class="titles">{{ title }}</h1>
+      <h2 class="subtitles">{{ subtitle }}</h2>
       <p class="paragraphs">{{ text }}</p>
     </div>
     <img class="under-banner__img" :src="image" alt="sofar jet charter" />

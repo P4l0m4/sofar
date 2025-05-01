@@ -51,6 +51,29 @@ onMounted(() => {
 function onError(e: Event) {
   console.error("Erreur de chargement de la vidéo :", e);
 }
+
+const carouselElements = [
+  {
+    link: "/destinations/us-caribbean",
+    image: "/assets/images/carribean.webp",
+    label: "Carribean",
+  },
+  {
+    link: "/destinations/us-colorado",
+    image: "/assets/images/colorado.webp",
+    label: "Colorado",
+  },
+  {
+    link: "/destinations/us-new-york",
+    image: "/assets/images/new-york.webp",
+    label: "New York",
+  },
+  {
+    link: "/destinations/us-california",
+    image: "/assets/images/california.webp",
+    label: "California",
+  },
+];
 </script>
 <template>
   <picture class="index__banner">
@@ -75,12 +98,12 @@ function onError(e: Event) {
       <EmergencyBubble v-if="desktopScreen" style="z-index: 1" />
     </div>
 
-    <div class="index__banner__titles">
+    <!-- <div class="index__banner__titles">
       <h1 class="titles">{{ story.content.bannerTitle }}</h1>
       <h2 class="subtitles">
         {{ story.content.bannerSubtitle }}
       </h2>
-    </div>
+    </div> -->
 
     <video
       ref="videoRef"
@@ -92,6 +115,20 @@ function onError(e: Event) {
       playsinline
       preload="auto"
       @error="onError"
+      v-if="desktopScreen"
+    />
+
+    <video
+      ref="videoRef"
+      class="auto-video"
+      src="@/assets/videos/family-jet-charter-mobile.mp4"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+      @error="onError"
+      v-if="!desktopScreen"
     />
 
     <QuoteFormDesktop
@@ -129,6 +166,11 @@ function onError(e: Event) {
     controls
   />
   <OurFleet />
+  <CarouselComponent :carouselElements v-if="!desktopScreen" />
+  <ServicesSlidesGrid
+    :carouselElements="carouselElements"
+    v-if="desktopScreen"
+  />
   <video
     class="full-width-video"
     src="@/assets/videos/homepage-desktop.mp4"
@@ -141,22 +183,22 @@ function onError(e: Event) {
       {
         title: 'Is there a luggage limit?',
         answer:
-          'A Family Jet Charter is a private jet service designed for families, offering convenience, comfort, and privacy during travel.',
+          'Yes, there is a luggage limit based on the aircraft type and number of passengers. Our team will advise you on the baggage allowance for your specific flight to ensure a comfortable and safe journey.',
       },
       {
         title: 'Can I bring my pet?',
         answer:
-          'Sofar prioritizes safety by adhering to strict aviation regulations and conducting thorough pre-flight checks.',
+          'Yes, pets are welcome on SOFAR flights! We love to make your entire family feel at home. Please inform us in advance so we can prepare accordingly and meet all safety and comfort requirements.',
       },
       {
         title: 'Are family charter safer than commercial?',
         answer:
-          'Yes, Sofar allows pets on board, ensuring a comfortable experience for all family members.',
+          'Yes, private family charters are considered very safe. At SOFAR, we adhere to the highest safety standards, offering you a secure, personalized, and stress-free flying experience compared to the complexities of commercial air travel.',
       },
       {
         title: 'How far in advance should I book?',
         answer:
-          'Booking is easy! Simply visit our website or contact our customer service team for assistance.',
+          'We recommend booking as early as possible to secure your preferred schedule and aircraft, especially during peak travel seasons. However, SOFAR can also accommodate last-minute bookings depending on availability.',
       },
     ]"
   />
