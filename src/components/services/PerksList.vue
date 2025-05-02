@@ -3,11 +3,11 @@ import { colors } from "@/utils/colors";
 const perks = [
   {
     title: "No Membership Required",
-    icon: "user-circle-cross-fill",
+    icon: "user_circle_cross_fill",
   },
   {
     title: "Transparent Pricing",
-    icon: "credit-card-fill",
+    icon: "credit_card_fill",
   },
   {
     title: "Fast & Efficient",
@@ -15,7 +15,7 @@ const perks = [
   },
   {
     title: "Top Safety Standard",
-    icon: "hard-hat-fill",
+    icon: "hard_hat_fill",
   },
 ];
 </script>
