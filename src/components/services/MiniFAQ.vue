@@ -47,7 +47,7 @@ function toggleQuestion(index) {
         <h5 class="faq__questions__card__question">
           <IconComponent
             :icon="
-              questionOpened === index ? 'caret-down-bold' : 'caret-right-bold'
+              questionOpened === index ? 'caret_down_bold' : 'caret_right_bold'
             "
             size="1.5rem"
           />

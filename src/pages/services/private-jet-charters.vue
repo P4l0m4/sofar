@@ -36,10 +36,28 @@ useJsonld(() => ({
 }));
 
 const videoRef = ref<HTMLVideoElement>();
+const videoRef2 = ref<HTMLVideoElement>();
+const videoRef3 = ref<HTMLVideoElement>();
 
 onMounted(() => {
   if (videoRef.value) {
     const p = videoRef.value.play();
+    if (p instanceof Promise) {
+      p.catch((err) => {
+        console.warn("Autoplay bloqué par le navigateur :", err);
+      });
+    }
+  }
+  if (videoRef2.value) {
+    const p = videoRef2.value.play();
+    if (p instanceof Promise) {
+      p.catch((err) => {
+        console.warn("Autoplay bloqué par le navigateur :", err);
+      });
+    }
+  }
+  if (videoRef3.value) {
+    const p = videoRef3.value.play();
     if (p instanceof Promise) {
       p.catch((err) => {
         console.warn("Autoplay bloqué par le navigateur :", err);
@@ -127,6 +145,8 @@ function onError(e: Event) {
     text="Luxury, efficiency, and flexibility—Sofar redefines private aviation by offering on-demand private jet charters tailored to your schedule. Whether for business, leisure, or last-minute travel, our fleet ensures a smooth and stress-free journey."
     :image="family"
   />
+
+  <ServicesRequestProcess />
   <!-- <ServicesTicksList
     :list="[
       'Direct Flights to Your Destination – Avoid unnecessary layovers and connections.',
@@ -140,7 +160,10 @@ function onError(e: Event) {
     src="@/assets/videos/family jet charter sofar.mp4"
     playsinline
     preload="auto"
-    controls
+    ref="videoRef2"
+    autoplay
+    muted
+    loop
     v-if="desktopScreen"
   />
   <video
@@ -148,10 +171,15 @@ function onError(e: Event) {
     src="@/assets/videos/family-jet-charter-mobile.mp4"
     playsinline
     preload="auto"
-    controls
+    ref="videoRef2"
+    autoplay
+    muted
+    loop
     v-if="!desktopScreen"
   />
   <OurFleet />
+
+  <ServicesPerksList />
 
   <ServicesOurServices />
 
@@ -160,7 +188,10 @@ function onError(e: Event) {
     src="@/assets/videos/homepage-desktop.mp4"
     playsinline
     preload="auto"
-    controls
+    ref="videoRef2"
+    autoplay
+    muted
+    loop
   />
   <ServicesMiniFAQ
     :questions="[

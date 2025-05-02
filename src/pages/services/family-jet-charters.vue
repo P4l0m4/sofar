@@ -36,10 +36,28 @@ useJsonld(() => ({
 }));
 
 const videoRef = ref<HTMLVideoElement>();
+const videoRef2 = ref<HTMLVideoElement>();
+const videoRef3 = ref<HTMLVideoElement>();
 
 onMounted(() => {
   if (videoRef.value) {
     const p = videoRef.value.play();
+    if (p instanceof Promise) {
+      p.catch((err) => {
+        console.warn("Autoplay bloqué par le navigateur :", err);
+      });
+    }
+  }
+  if (videoRef2.value) {
+    const p = videoRef2.value.play();
+    if (p instanceof Promise) {
+      p.catch((err) => {
+        console.warn("Autoplay bloqué par le navigateur :", err);
+      });
+    }
+  }
+  if (videoRef3.value) {
+    const p = videoRef3.value.play();
     if (p instanceof Promise) {
       p.catch((err) => {
         console.warn("Autoplay bloqué par le navigateur :", err);
@@ -159,11 +177,15 @@ const carouselElements = [
     ]"
   />
   <video
+    @error="onError"
+    ref="videoRef2"
     class="full-width-video"
     src="@/assets/videos/family-jet-charter.mp4"
     playsinline
     preload="auto"
-    controls
+    autoplay
+    muted
+    loop
   />
   <OurFleet />
   <div class="slides-wrapper">
@@ -188,7 +210,11 @@ const carouselElements = [
     src="@/assets/videos/homepage-desktop.mp4"
     playsinline
     preload="auto"
-    controls
+    muted
+    loop
+    autoplay
+    @error="onError"
+    ref="videoRef2"
   />
   <ServicesMiniFAQ
     :questions="[
