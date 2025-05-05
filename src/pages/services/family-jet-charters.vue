@@ -214,7 +214,7 @@ const carouselElements = [
     loop
     autoplay
     @error="onError"
-    ref="videoRef2"
+    ref="videoRef3"
   />
   <ServicesMiniFAQ
     :questions="[
