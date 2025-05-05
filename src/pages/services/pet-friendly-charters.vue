@@ -55,7 +55,7 @@ useJsonld(() => ({
   <picture class="services-banner">
     <source
       media="(min-width: 1100px)"
-      srcset="@/assets/images/pet-friendly-jet-charter.webp"
+      srcset="@/assets/images/pet-friendly-charter-desktop.webp"
     />
 
     <div class="services-banner__headlines">
@@ -78,7 +78,7 @@ useJsonld(() => ({
     />
     <img
       class="services-banner__img"
-      src="@/assets/images/pet-friendly-jet-charter.webp"
+      src="@/assets/images/pet-friendly-jet-charter-mobile.webp"
       alt="banner image"
     />
   </picture>
