@@ -40,15 +40,15 @@ defineProps({
   padding: 2rem 1rem;
   gap: 2rem;
 
-  @media (min-width: $big-tablet-screen) {
+  @media (min-width: $laptop-screen) {
     padding: 4rem;
+    padding-left: 0;
     flex-direction: row;
-    gap: 4rem;
     align-items: center;
   }
-  @media (min-width: $desktop-screen) {
-    gap: 8rem;
-  }
+  // @media (min-width: $desktop-screen) {
+  //   gap: 8rem;
+  // }
 
   &__list {
     display: flex;
@@ -56,9 +56,15 @@ defineProps({
     gap: 1rem;
     width: 100%;
     list-style: none;
+    order: -1;
 
     @media (min-width: $big-tablet-screen) {
+      order: inherit;
+    }
+
+    @media (min-width: $laptop-screen) {
       gap: 2rem;
+      padding-left: 4rem;
     }
 
     &__element {
@@ -66,12 +72,16 @@ defineProps({
       align-items: center;
       gap: 1rem;
       font-size: 1rem;
-      text-wrap: balance;
+      // text-wrap: balance;
       font-weight: $skinny;
 
       @media (min-width: $big-tablet-screen) {
-        font-size: 2rem;
+        font-size: 1.5rem;
         gap: 2rem;
+      }
+
+      @media (min-width: $desktop-screen) {
+        font-size: 1.75rem;
       }
 
       &__icon {
@@ -89,7 +99,7 @@ defineProps({
 
   &__img {
     width: 100%;
-    height: auto;
+    height: 100%;
     object-fit: cover;
     object-position: center;
 

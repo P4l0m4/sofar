@@ -13,7 +13,11 @@ defineProps({
       <h2 class="subtitles">{{ subtitle }}</h2>
       <p class="paragraphs">{{ text }}</p>
     </div>
-    <img class="under-banner__img" :src="image" alt="sofar jet charter" />
+    <img
+      class="under-banner__img"
+      :src="image"
+      alt="sofar private jet charter"
+    />
   </section>
 </template>
 <style lang="scss" scoped>
