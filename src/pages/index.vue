@@ -127,13 +127,13 @@ function onError(e: Event) {
       <EmergencyBubble v-if="desktopScreen" style="z-index: 1" />
     </div>
 
-    <div class="index__banner__titles">
+    <!-- <div class="index__banner__titles">
       <h1 class="titles">On-demand Private Jet Charter</h1>
       <h2 class="subtitles">
         Fast booking, flexible routes, and personalized service―ready when you
         are
       </h2>
-    </div>
+    </div> -->
     <video
       ref="videoRef"
       class="auto-video"
@@ -213,7 +213,7 @@ function onError(e: Event) {
   <CarouselComponent :carouselElements="destinationsCarouselElements" />
   <JsonldBreadcrumb :links="breadcrumbs" />
 </template>
-<style lang="scss" scoped>
+<style lang="scss">
 .index__banner {
   display: flex;
   background-size: cover;

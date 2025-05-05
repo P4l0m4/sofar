@@ -165,6 +165,7 @@ const menuItemsWithStates = computed(() => {
   flex-direction: column;
   position: relative;
   overflow: hidden;
+  border-top: 1px solid rgba($base-color, 0.4);
 
   @media (min-width: $big-tablet-screen) {
     padding: 4rem 2rem;
