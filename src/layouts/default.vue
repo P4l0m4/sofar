@@ -19,10 +19,10 @@ const menuItems = [
         alt: "menu icon private jet charters",
       },
       {
-        label: "Business charters",
-        link: "/services/business-charters",
+        label: "Corporate charters",
+        link: "/services/corporate-jet-charters",
         icon: "business_center",
-        alt: "menu icon business charters",
+        alt: "menu icon corporate charters",
       },
       {
         parent: "services",

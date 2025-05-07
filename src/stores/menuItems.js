@@ -17,9 +17,9 @@ export const useMenuItemsStore = defineStore("menu", {
           children: [
             {
               label: "Corporate jet charter",
-              link: "/services/business-charters",
+              link: "/services/corporate-jet-charters",
               icon: "business_center",
-              alt: "menu icon business charters",
+              alt: "menu icon corporate charters",
             },
             {
               parent: "services",
