@@ -320,6 +320,7 @@
     bottom: inherit;
     margin: auto;
     align-items: center;
+    z-index: 2;
 
     @media (min-width: $big-tablet-screen) {
       inset: 2rem;
