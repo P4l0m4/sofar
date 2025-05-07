@@ -1,11 +1,9 @@
-<script setup>
-import { useCommonAssetsStore } from "@/stores/commonAssets";
+<script setup lang="ts">
 import { isDesktop } from "~/utils/functions";
-
 import { colors } from "@/utils/colors";
-
-const commonAssetsStore = useCommonAssetsStore();
-await commonAssetsStore.fetchTeaserVideo();
+import { ref, onMounted } from "vue";
+import preview from "@/assets/images/empty-legs-flight.webp";
+import preview2 from "@/assets/images/corporate-jet-charter-sofar-preview.webp";
 
 const desktopScreen = ref(isDesktop());
 
@@ -34,6 +32,19 @@ useJsonld(() => ({
   name: "Empty Leg Flights | Affordable Private Jet Charters | Sofar",
   url: window.location.href,
 }));
+
+const videoRef = ref<HTMLVideoElement>();
+
+onMounted(() => {
+  if (videoRef.value) {
+    const p = videoRef.value.play();
+    if (p instanceof Promise) {
+      p.catch((err) => {
+        console.warn("Autoplay bloqué par le navigateur :", err);
+      });
+    }
+  }
+});
 </script>
 <template>
   <picture class="services-banner">
@@ -41,14 +52,7 @@ useJsonld(() => ({
       media="(min-width: 1100px)"
       :srcset="story.content.bannerImageDesktop.filename"
     />
-    <div class="services-banner__headlines-mobile">
-      <h1 class="services-banner__headlines__title titles">
-        {{ story.content.bannerTitle }}
-      </h1>
-      <h2 class="services-banner__headlines__title subtitles">
-        {{ story.content.bannerSubtitle }}
-      </h2>
-    </div>
+
     <div class="services-banner__headlines">
       <NuxtLink
         class="button-primary--dark rounded-button"
@@ -62,10 +66,37 @@ useJsonld(() => ({
 
       <EmergencyBubble v-if="desktopScreen" />
     </div>
+
+    <video
+      ref="videoRef"
+      class="auto-video"
+      src="@/assets/videos/empty-legs.mp4"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+      @error="onError"
+      v-if="desktopScreen"
+    />
+
+    <video
+      ref="videoRef"
+      class="auto-video"
+      src="@/assets/videos/empty-legs-mobile.mp4"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+      @error="onError"
+      v-if="!desktopScreen"
+    />
+
     <QuoteFormDesktop
       parent="private-jet"
       v-if="desktopScreen"
-      :color="colors['secondary-color']"
+      :color="colors['primary-color']"
     />
     <img
       class="services-banner__img"
@@ -73,37 +104,47 @@ useJsonld(() => ({
       alt="banner image"
     />
   </picture>
-  <ServicesWhyChooseUs />
-  <TextComponent
-    :title="story.content.textSectionTitle"
-    :text="story.content.textSectionParagraph"
+
+  <ServicesUnderBanner
+    title="Empty Legs"
+    subtitle="Fly Private for Less"
+    text="When a private jet needs to reposition after dropping off a client or returning to base, it often flies empty. These flights, known as Empty Legs, are available at significantly reduced prices, making them a cost-effective way to fly privatewithout compromising on luxury."
+    :image="preview"
   />
-
-  <iframe
-    v-if="
-      commonAssetsStore.teaserVideo && commonAssetsStore.teaserVideo.length > 0
-    "
-    class="video"
-    :src="commonAssetsStore.teaserVideo"
-    frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen
-  ></iframe>
-
-  <ServicesContentBlok
-    v-for="contentBlok in story.content?.ContentBloks"
-    :key="contentBlok._uid"
-    :title="contentBlok.title"
-    :text="contentBlok.text"
-    :image="contentBlok.image.filename"
-    :alt="contentBlok.image.alt"
+  <ServicesTicksList
+    :list="[
+      'Exclusive Discounts – Save up to 75% on private jet flights.',
+      'Same Luxury, Lower Price – Enjoy the comfort and speed of a private jet.',
+      'Last-Minute Availability – New routes added daily.',
+      'Flexible Routes – Fly to top destinations at reduced rates.',
+    ]"
+    :image="preview2"
   />
   <EmptyLegs />
-  <section class="standard-spacing centered-content">
-    <h2 class="titles">Book your next flight with us!</h2>
-    <QuotePopUpButton :primary="true" />
-  </section>
-  <OurBases />
+  <ServicesMiniFAQ
+    :questions="[
+      {
+        title: 'How much can I save with an empty leg flight?',
+        answer:
+          'Empty leg flights can offer savings of up to 75% compared to standard charter prices. It’s a great opportunity to enjoy private jet travel at a more accessible rate.',
+      },
+      {
+        title: 'Can I request an empty leg on a specific route?',
+        answer:
+          'Yes. You can let us know your preferred route and dates, and we’ll notify you if a matching empty leg becomes available. While we can’t guarantee availability, our team will do its best to accommodate your request.',
+      },
+      {
+        title: 'Are empty leg flights guaranteed?',
+        answer:
+          'Empty legs are subject to change or cancellation, as they depend on the original booked flight. While we’ll always inform you promptly of any changes, flexibility is key when booking an empty leg.',
+      },
+      {
+        title: 'Can I change the departure time of an empty leg flight?',
+        answer:
+          'In most cases, the departure time is fixed due to the aircraft’s positioning schedule. However, if timing adjustments are possible, they may incur additional costs. Our team will inform you of any available options.',
+      },
+    ]"
+  />
 </template>
 <style lang="scss" scoped>
 @import "@/styles/planes.scss";
