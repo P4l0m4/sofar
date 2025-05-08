@@ -136,6 +136,12 @@ export const useMenuItemsStore = defineStore("menu", {
               icon: "alternate_email",
               alt: "menu icon contact",
             },
+            {
+              label: "our fleet",
+              link: "/about-us/our-fleet",
+              icon: "airplanemode_active",
+              alt: "menu icon our fleet",
+            },
           ],
         },
       ],

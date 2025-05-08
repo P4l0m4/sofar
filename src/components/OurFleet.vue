@@ -18,6 +18,13 @@ import pilatusCabin from "@/assets/images/pc-12/pc12-floor-plan.svg";
 import pilatusCabin2 from "@/assets/images/pc-12/pc12-cabin-size1.svg";
 import pilatusCabin3 from "@/assets/images/pc-12/pc12-cabin-size2.svg";
 
+defineProps({
+  gallery: {
+    type: Array,
+    required: false,
+  },
+});
+
 const slides = [
   {
     planeName: "Phenom 100 Embraer",
@@ -261,11 +268,13 @@ const index = ref(0);
             class="button-primary--light"
             style="max-width: 250px; margin: auto"
             :to="`/aircraft${slides[index].buttonLink}`"
+            v-if="!gallery"
             >More information</NuxtLink
           >
         </div>
       </div>
     </div>
+    <h1 v-if="gallery">Gallery</h1>
   </section>
 </template>
 <style lang="scss" scoped>
