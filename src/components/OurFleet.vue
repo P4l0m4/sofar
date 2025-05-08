@@ -18,9 +18,29 @@ import pilatusCabin from "@/assets/images/pc-12/pc12-floor-plan.svg";
 import pilatusCabin2 from "@/assets/images/pc-12/pc12-cabin-size1.svg";
 import pilatusCabin3 from "@/assets/images/pc-12/pc12-cabin-size2.svg";
 
+// gallery images
+
+import gPhenom100 from "@/assets/images/phenom-100/phenom-100-embraer-sofar (1).webp";
+import gPhenom1001 from "@/assets/images/phenom-100/phenom100-our-fleet.webp";
+import gPhenom1002 from "@/assets/images/phenom-100/phenom100-our-fleet (2).webp";
+import gPhenom1003 from "@/assets/images/phenom-100/phenom-100-embraer-sofar (6).webp";
+import gPhenom1004 from "@/assets/images/phenom-100/phenom100-our-fleet (1).webp";
+
+import gPhenom300 from "@/assets/images/phenom-300/phenom-300-embraer-sofar-cockpit.webp";
+import gPhenom3001 from "@/assets/images/phenom-300/phenom300-our-fleet.webp";
+import gPhenom3002 from "@/assets/images/phenom-300/phenom-300-embraer-sofar (2).webp";
+import gPhenom3003 from "@/assets/images/phenom-300/phenom-300-embraer-sofar (4).webp";
+import gPhenom3004 from "@/assets/images/phenom-300/phenom-300-embraer-sofar.webp";
+
+import gPC12 from "@/assets/images/pc-12/pilatus-pc12-sofar (3).webp";
+import gPC121 from "@/assets/images/pc-12/pilatus-pc12-sofar (2).webp";
+import gPC122 from "@/assets/images/pc-12/pilatus-pc12-sofar (1).webp";
+import gPC123 from "@/assets/images/pc-12/pilatus-pc12-sofar (4).webp";
+import gPC124 from "@/assets/images/pc-12/pilatus-pc12-sofar (5).webp";
+
 defineProps({
-  gallery: {
-    type: Array,
+  showGallery: {
+    type: Boolean,
     required: false,
   },
 });
@@ -177,6 +197,18 @@ const slides = [
 ];
 
 const index = ref(0);
+
+const gallery = [
+  {
+    images: [gPhenom1004, gPhenom1002, gPhenom100, gPhenom1003, gPhenom1001],
+  },
+  {
+    images: [gPhenom300, gPhenom3001, gPhenom3002, gPhenom3003, gPhenom3004],
+  },
+  {
+    images: [gPC12, gPC121, gPC122, gPC123, gPC124],
+  },
+];
 </script>
 <template>
   <section class="our-fleet">
@@ -268,13 +300,21 @@ const index = ref(0);
             class="button-primary--light"
             style="max-width: 250px; margin: auto"
             :to="`/aircraft${slides[index].buttonLink}`"
-            v-if="!gallery"
+            v-if="!showGallery"
             >More information</NuxtLink
           >
         </div>
       </div>
     </div>
-    <h1 v-if="gallery">Gallery</h1>
+    <section class="plane-gallery-book" v-if="showGallery">
+      <div class="plane-gallery-book__wrapper">
+        <img
+          :src="image"
+          alt="private jet image"
+          v-for="image in gallery[index].images"
+        />
+      </div>
+    </section>
   </section>
 </template>
 <style lang="scss" scoped>
@@ -493,6 +533,68 @@ const index = ref(0);
               }
             }
           }
+        }
+      }
+    }
+  }
+}
+
+.plane-gallery-book {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  padding: 2rem 0;
+  width: 100%;
+
+  @media (min-width: $big-tablet-screen) {
+    flex-direction: row;
+    gap: 1rem;
+    padding: 4rem 0;
+  }
+
+  &__wrapper {
+    display: grid;
+    gap: 1rem;
+    width: 100%;
+    height: fit-content;
+    grid-template-columns: repeat(1, 1fr);
+    grid-auto-rows: 250px;
+
+    @media (min-width: $big-tablet-screen) {
+      grid-template-columns: repeat(7, 1fr);
+      grid-template-rows: repeat(5, 120px);
+    }
+
+    & img {
+      width: 100%;
+      object-fit: cover;
+      object-position: center;
+      height: 100%;
+      border-radius: $radius;
+
+      @media (min-width: $big-tablet-screen) {
+        &:nth-child(1) {
+          grid-column: span 5;
+          grid-row: span 2;
+        }
+
+        &:nth-child(2) {
+          grid-column: span 2;
+          grid-row: span 3;
+        }
+
+        &:nth-child(3) {
+          grid-column: span 3;
+          grid-row: span 3;
+        }
+        &:nth-child(4) {
+          grid-column: span 2;
+          grid-row: span 3;
+        }
+        &:nth-child(5) {
+          grid-column: span 2;
+          grid-row: span 2;
         }
       }
     }

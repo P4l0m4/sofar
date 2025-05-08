@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { isDesktop } from "~/utils/functions";
 import { colors } from "@/utils/colors";
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
 import preview from "@/assets/images/our-story/our-fleet.webp";
 
 const desktopScreen = ref(isDesktop());
@@ -29,17 +29,6 @@ useJsonld(() => ({
 }));
 
 const videoRef = ref<HTMLVideoElement>();
-
-onMounted(() => {
-  if (videoRef.value) {
-    const p = videoRef.value.play();
-    if (p instanceof Promise) {
-      p.catch((err) => {
-        console.warn("Autoplay bloqué par le navigateur :", err);
-      });
-    }
-  }
-});
 
 const label = ref("Get in touch");
 function copyToClipboard() {
@@ -71,32 +60,6 @@ function copyToClipboard() {
       <EmergencyBubble v-if="desktopScreen" />
     </div>
 
-    <video
-      ref="videoRef"
-      class="auto-video"
-      src="@/assets/videos/our-fleet.mp4"
-      autoplay
-      muted
-      loop
-      playsinline
-      preload="auto"
-      @error="onError"
-      v-if="desktopScreen"
-    />
-
-    <video
-      ref="videoRef"
-      class="auto-video"
-      src="@/assets/videos/our-fleet-mobile.mp4"
-      autoplay
-      muted
-      loop
-      playsinline
-      preload="auto"
-      @error="onError"
-      v-if="!desktopScreen"
-    />
-
     <QuoteFormDesktop
       parent="private-jet"
       v-if="desktopScreen"
@@ -104,7 +67,7 @@ function copyToClipboard() {
     />
     <img
       class="services-banner__img"
-      src="@/assets/images/home/sofar-fleet-mobile.webp"
+      src="@/assets/images/our-story/our-fleet-sofar-private-jet-mobile.webp"
       alt="private jet charter banner image"
     />
   </picture>
@@ -121,7 +84,7 @@ function copyToClipboard() {
       :style="{ width: mobileScreen ? '100%' : 'fit-content' }"
       >{{ label }}</NuxtLink
     ></ServicesUnderBanner
-  ><OurFleet />
+  ><OurFleet :showGallery="true" />
   <AboutMakeItAnywhere />
   <AboutSofarPilots />
   <ServicesMiniFAQ
