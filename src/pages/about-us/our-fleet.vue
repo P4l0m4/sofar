@@ -43,7 +43,9 @@ function copyToClipboard() {
   <picture class="services-banner">
     <source
       media="(min-width: 1100px)"
-      srcset="@/assets/images/home/sofar-fleet-desktop.webp"
+      srcset="
+        @/assets/images/home/our-fleet-sofar-private-jet-charter-desktop.webp
+      "
     />
 
     <div class="services-banner__headlines">
