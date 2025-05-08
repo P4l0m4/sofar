@@ -17,9 +17,9 @@ export const useMenuItemsStore = defineStore("menu", {
           children: [
             {
               label: "Corporate jet charter",
-              link: "/services/business-charters",
+              link: "/services/corporate-jet-charters",
               icon: "business_center",
-              alt: "menu icon business charters",
+              alt: "menu icon corporate charters",
             },
             {
               parent: "services",
@@ -135,6 +135,12 @@ export const useMenuItemsStore = defineStore("menu", {
               link: "/about-us/contact",
               icon: "alternate_email",
               alt: "menu icon contact",
+            },
+            {
+              label: "our fleet",
+              link: "/about-us/our-fleet",
+              icon: "airplanemode_active",
+              alt: "menu icon our fleet",
             },
           ],
         },

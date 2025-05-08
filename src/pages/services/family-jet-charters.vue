@@ -1,12 +1,8 @@
 <script setup lang="ts">
-import { useCommonAssetsStore } from "@/stores/commonAssets";
 import { isDesktop } from "~/utils/functions";
 import { colors } from "@/utils/colors";
 import { ref } from "vue";
 import family from "@/assets/images/family-jet-charter-sofar.webp";
-
-const commonAssetsStore = useCommonAssetsStore();
-await commonAssetsStore.fetchTeaserVideo();
 
 const desktopScreen = ref(isDesktop());
 
@@ -115,13 +111,6 @@ const carouselElements = [
 
       <EmergencyBubble v-if="desktopScreen" style="z-index: 1" />
     </div>
-
-    <!-- <div class="index__banner__titles">
-      <h1 class="titles">{{ story.content.bannerTitle }}</h1>
-      <h2 class="subtitles">
-        {{ story.content.bannerSubtitle }}
-      </h2>
-    </div> -->
 
     <video
       ref="videoRef"

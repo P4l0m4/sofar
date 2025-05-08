@@ -12,6 +12,7 @@ defineProps({
       <h1 class="titles">{{ title }}</h1>
       <h2 class="subtitles">{{ subtitle }}</h2>
       <p class="paragraphs">{{ text }}</p>
+      <slot />
     </div>
     <img
       class="under-banner__img"

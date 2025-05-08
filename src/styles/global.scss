@@ -342,6 +342,15 @@ details > summary::-webkit-details-marker /* Safari */ {
   user-select: none; /* Propriété standard */
 }
 
+.big-titles {
+  font-size: calc($titles - 1rem);
+  font-weight: $thick;
+
+  @media (min-width: $tablet-screen) {
+    font-size: $big-titles;
+  }
+}
+
 .titles {
   font-size: calc($titles - 1rem);
   font-weight: $thick;
