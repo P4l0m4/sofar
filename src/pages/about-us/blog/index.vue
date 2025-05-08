@@ -1,9 +1,27 @@
 <script setup lang="ts">
 import { stringToSlug } from "~/utils/slugify";
-import { ref } from "vue";
+import { ref, watch } from "vue";
+import { useRouter, useRoute } from "vue-router";
+
+const router = useRouter();
+const route = useRoute();
+
 const story = await useAsyncStoryblok("blog", { version: "published" });
 const dayjs = useDayjs();
-const categorySelected = ref("all");
+const categorySelected = ref(route.hash.slice(1) || "all");
+
+watch(
+  () => route.hash,
+  (h) => {
+    categorySelected.value = h.slice(1) || "all";
+  }
+);
+
+function selectCategory(category: string) {
+  const hash = category === "all" ? "" : `#${category}`;
+  router.replace({ hash });
+  categorySelected.value = category;
+}
 
 const allCategories = computed(() => {
   let categories = new Set();
@@ -62,21 +80,23 @@ const breadcrumbs = [
 
     <div class="blog__tags">
       <span
+        id="all"
         class="blog__tags__tag tags scale-on-hover"
         :class="{
           'blog__tags__tag--selected': categorySelected === 'all',
         }"
-        @click="categorySelected = 'all'"
+        @click="selectCategory('all')"
         >All</span
       >
       <span
+        :id="category"
         class="blog__tags__tag tags scale-on-hover"
         :class="{
           'blog__tags__tag--selected': categorySelected === category,
         }"
         v-for="(category, i) in allCategories"
         :key="i"
-        @click="categorySelected = category"
+        @click="selectCategory(category)"
         >{{ category }}</span
       >
     </div>
