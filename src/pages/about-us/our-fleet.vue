@@ -123,6 +123,7 @@ function copyToClipboard() {
     ></ServicesUnderBanner
   ><OurFleet />
   <AboutMakeItAnywhere />
+  <AboutSofarPilots />
   <ServicesMiniFAQ
     :questions="[
       {
