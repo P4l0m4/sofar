@@ -15,6 +15,46 @@ const story = await useAsyncStoryblok("empty-legs", {
   version: "published",
 });
 
+const questions = [
+  {
+    title: "How much can I save with an empty leg flight?",
+    answer:
+      "Empty leg flights can offer savings of up to 75% compared to standard charter prices. It’s a great opportunity to enjoy private jet travel at a more accessible rate.",
+  },
+  {
+    title: "Can I request an empty leg on a specific route?",
+    answer:
+      "Yes. You can let us know your preferred route and dates, and we’ll notify you if a matching empty leg becomes available. While we can’t guarantee availability, our team will do its best to accommodate your request.",
+  },
+  {
+    title: "Are empty leg flights guaranteed?",
+    answer:
+      "Empty legs are subject to change or cancellation, as they depend on the original booked flight. While we’ll always inform you promptly of any changes, flexibility is key when booking an empty leg.",
+  },
+  {
+    title: "Can I change the departure time of an empty leg flight?",
+    answer:
+      "In most cases, the departure time is fixed due to the aircraft’s positioning schedule. However, if timing adjustments are possible, they may incur additional costs. Our team will inform you of any available options.",
+  },
+];
+
+const videoRef = ref<HTMLVideoElement>();
+
+function onError(e: Event) {
+  console.error("Erreur de chargement de la vidéo :", e);
+}
+
+onMounted(() => {
+  if (videoRef.value) {
+    const p = videoRef.value.play();
+    if (p instanceof Promise) {
+      p.catch((err) => {
+        console.warn("Autoplay bloqué par le navigateur :", err);
+      });
+    }
+  }
+});
+
 useHead({
   title: "Empty Leg Flights | Affordable Private Jet Charters | Sofar",
   meta: [
@@ -27,24 +67,11 @@ useHead({
 });
 
 useJsonld(() => ({
-  "@context": "https://schema.org/",
+  "@context": "https://schema.org",
   "@type": "WebSite",
   name: "Empty Leg Flights | Affordable Private Jet Charters | Sofar",
   url: window.location.href,
 }));
-
-const videoRef = ref<HTMLVideoElement>();
-
-onMounted(() => {
-  if (videoRef.value) {
-    const p = videoRef.value.play();
-    if (p instanceof Promise) {
-      p.catch((err) => {
-        console.warn("Autoplay bloqué par le navigateur :", err);
-      });
-    }
-  }
-});
 </script>
 <template>
   <picture class="services-banner">
@@ -121,30 +148,7 @@ onMounted(() => {
     :image="preview2"
   />
   <EmptyLegs />
-  <ServicesMiniFAQ
-    :questions="[
-      {
-        title: 'How much can I save with an empty leg flight?',
-        answer:
-          'Empty leg flights can offer savings of up to 75% compared to standard charter prices. It’s a great opportunity to enjoy private jet travel at a more accessible rate.',
-      },
-      {
-        title: 'Can I request an empty leg on a specific route?',
-        answer:
-          'Yes. You can let us know your preferred route and dates, and we’ll notify you if a matching empty leg becomes available. While we can’t guarantee availability, our team will do its best to accommodate your request.',
-      },
-      {
-        title: 'Are empty leg flights guaranteed?',
-        answer:
-          'Empty legs are subject to change or cancellation, as they depend on the original booked flight. While we’ll always inform you promptly of any changes, flexibility is key when booking an empty leg.',
-      },
-      {
-        title: 'Can I change the departure time of an empty leg flight?',
-        answer:
-          'In most cases, the departure time is fixed due to the aircraft’s positioning schedule. However, if timing adjustments are possible, they may incur additional costs. Our team will inform you of any available options.',
-      },
-    ]"
-  />
+  <ServicesMiniFAQ :questions />
 </template>
 <style lang="scss" scoped>
 @import "@/styles/planes.scss";

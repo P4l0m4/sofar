@@ -7,11 +7,12 @@ const citySlug = route.params.city;
 const stateSlug = route.params.state;
 
 const state = story.value.content.statesList.find(
-  (s) => `${stringToSlug(s.country)}-${stringToSlug(s.name)}` === stateSlug
+  (s: { country: any; name: any }) =>
+    `${stringToSlug(s.country)}-${stringToSlug(s.name)}` === stateSlug
 );
 
 const city = state.destinationsList.find(
-  (d) => stringToSlug(d.city) === citySlug
+  (d: { city: string }) => stringToSlug(d.city) === citySlug
 );
 
 import mapboxgl from "mapbox-gl";
@@ -61,7 +62,7 @@ useHead({
 });
 
 useJsonld(() => ({
-  "@context": "https://schema.org/",
+  "@context": "https://schema.org",
   "@type": "WebSite",
   name: `Private Jet Destinations: ${city.city}, ${state.name} | Sofar`,
   url: window.location.href,

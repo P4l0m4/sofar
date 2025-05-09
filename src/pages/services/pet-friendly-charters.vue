@@ -33,6 +33,29 @@ const carouselElements = [
   },
 ];
 
+const questions = [
+  {
+    title: "Can my pet sit with me in the cabin?",
+    answer:
+      "Yes, your pet can sit with you in the cabin during your SOFAR flight. We prioritize your comfort and your pet's well-being to make the journey as enjoyable as possible for both of you.",
+  },
+  {
+    title: "Are there any breed or size restrictions?",
+    answer:
+      "Generally, there are no breed restrictions, but size may be a consideration depending on the aircraft and number of passengers. Please let us know your pet’s details when booking, and we’ll make sure to plan the best setup for your trip.",
+  },
+  {
+    title: "Do I need special paperwork to fly with my pet?",
+    answer:
+      "Depending on your destination, you may need to provide vaccination records, health certificates, or other documentation. Our team will guide you through the necessary requirements to ensure a smooth travel experience.",
+  },
+  {
+    title: "Are there pet-friendly amenities onboard?",
+    answer:
+      "Yes! Upon request, we can provide pet-friendly amenities such as blankets, treats, and water bowls to make your pet feel right at home during the flight. Let us know in advance so we can prepare everything for your furry companion.",
+  },
+];
+
 useHead({
   title: "Pet-Friendly Jet Charters | Safe Travel for Your Pets | Sofar ",
   meta: [
@@ -70,7 +93,7 @@ useJsonld(() => ({
       /></NuxtLink>
       <EmergencyBubble v-if="desktopScreen" />
     </div>
-    <!-- <QuoteForm parent="private-jet" /> -->
+
     <QuoteFormDesktop
       parent="private-jet"
       v-if="desktopScreen"
@@ -114,30 +137,7 @@ useJsonld(() => ({
     />
   </div>
   <OurFleet />
-  <ServicesMiniFAQ
-    :questions="[
-      {
-        title: 'Can my pet sit with me in the cabin?',
-        answer:
-          'Yes, your pet can sit with you in the cabin during your SOFAR flight. We prioritize your comfort and your pet\'s well-being to make the journey as enjoyable as possible for both of you.',
-      },
-      {
-        title: 'Are there any breed or size restrictions?',
-        answer:
-          'Generally, there are no breed restrictions, but size may be a consideration depending on the aircraft and number of passengers. Please let us know your pet’s details when booking, and we’ll make sure to plan the best setup for your trip.',
-      },
-      {
-        title: 'Do I need special paperwork to fly with my pet?',
-        answer:
-          'Depending on your destination, you may need to provide vaccination records, health certificates, or other documentation. Our team will guide you through the necessary requirements to ensure a smooth travel experience.',
-      },
-      {
-        title: 'Are there pet-friendly amenities onboard?',
-        answer:
-          'Yes! Upon request, we can provide pet-friendly amenities such as blankets, treats, and water bowls to make your pet feel right at home during the flight. Let us know in advance so we can prepare everything for your furry companion.',
-      },
-    ]"
-  />
+  <ServicesMiniFAQ :questions />
 </template>
 <style lang="scss" scoped>
 @import "@/styles/planes.scss";
@@ -162,16 +162,6 @@ useJsonld(() => ({
       text-wrap: balance;
       max-width: 800px;
     }
-  }
-}
-
-.video {
-  width: 100%;
-  height: 400px;
-  margin: 4rem 0;
-
-  @media (min-width: $big-tablet-screen) {
-    height: 95dvh;
   }
 }
 </style>

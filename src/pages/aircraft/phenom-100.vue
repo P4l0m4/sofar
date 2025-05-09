@@ -12,7 +12,7 @@ useHead({
 });
 
 useJsonld(() => ({
-  "@context": "https://schema.org/",
+  "@context": "https://schema.org",
   "@type": "WebSite",
   name: "Embraer Phenom 100 | Sofar",
   url: window.location.href,
@@ -93,14 +93,7 @@ useJsonld(() => ({
       alt="plane info image"
     />
   </section>
-  <!-- <iframe
-    class="full-screen-video"
-    src="https://www.youtube.com/embed/uxzphXYWoQI?si=P1hoPbxjJONbZ5ZF"
-    title="YouTube video player"
-    frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen
-  ></iframe> -->
+
   <section class="plane-info-vertical">
     <div class="plane-info-vertical__txt">
       <h3 class="subtitles">The cabin</h3>

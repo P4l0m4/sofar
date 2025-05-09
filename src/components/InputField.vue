@@ -56,7 +56,8 @@ function changePassengers(amount: number) {
     <button
       class="passengers-arrows__button"
       :class="{
-        'passengers-arrows__button--disabled': model <= 1 || model === null,
+        'passengers-arrows__button--disabled':
+          Number(model) <= 1 || model === null,
       }"
       @click="changePassengers(-1)"
       v-if="type === 'number'"
@@ -95,7 +96,8 @@ function changePassengers(amount: number) {
     <button
       class="passengers-arrows__button"
       :class="{
-        'passengers-arrows__button--disabled': model >= 99 || model === null,
+        'passengers-arrows__button--disabled':
+          Number(model) >= 99 || model === null,
       }"
       @click="changePassengers(1)"
       v-if="type === 'number'"
@@ -216,7 +218,6 @@ function changePassengers(amount: number) {
     width: 1.5rem;
     height: 100%;
     cursor: pointer;
-    // border: $text-color 2px solid;
     background-color: $primary-color;
     box-shadow: $shadow;
     color: $text-color;

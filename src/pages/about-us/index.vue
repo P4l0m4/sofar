@@ -1,4 +1,15 @@
 <script setup lang="ts">
+const breadcrumbs = [
+  {
+    name: "Home",
+    url: window.location.origin,
+  },
+  {
+    name: "About us",
+    url: window.location.href,
+  },
+];
+
 useHead({
   title: "Private Jet Frequently Asked Questions | Sofar",
   meta: [
@@ -11,22 +22,11 @@ useHead({
 });
 
 useJsonld(() => ({
-  "@context": "https://schema.org/",
+  "@context": "https://schema.org",
   "@type": "WebSite",
   name: "Private Jet Frequently Asked Questions | Sofar",
   url: window.location.href,
 }));
-
-const breadcrumbs = [
-  {
-    name: "Home",
-    url: window.location.origin,
-  },
-  {
-    name: "About us",
-    url: window.location.href,
-  },
-];
 </script>
 <template>
   <Container>

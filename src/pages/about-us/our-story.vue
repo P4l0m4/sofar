@@ -5,6 +5,21 @@ const config = useRuntimeConfig();
 const mapRef = ref();
 mapboxgl.accessToken = config.public.MAP_BOX_API_KEY;
 
+const breadcrumbs = [
+  {
+    name: "Home",
+    url: window.location.origin,
+  },
+  {
+    name: "About us",
+    url: window.location.origin + "/about-us",
+  },
+  {
+    name: "Our Story",
+    url: window.location.href,
+  },
+];
+
 useHead({
   title: "Our Story | Sofar",
   meta: [
@@ -56,20 +71,7 @@ useJsonld(() => ({
   url: window.location.href,
 }));
 
-const breadcrumbs = [
-  {
-    name: "Home",
-    url: window.location.origin,
-  },
-  {
-    name: "About us",
-    url: window.location.origin + "/about-us",
-  },
-  {
-    name: "Our Story",
-    url: window.location.href,
-  },
-];
+
 </script>
 <template>
   <picture class="our-story-banner">

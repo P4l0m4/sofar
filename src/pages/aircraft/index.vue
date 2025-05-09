@@ -6,9 +6,21 @@ const desktopScreen = ref(isDesktop());
 window.addEventListener("resize", () => {
   desktopScreen.value = isDesktop();
 });
+
 const story = await useAsyncStoryblok("aircraft", {
   version: "published",
 });
+
+const breadcrumbs = [
+  {
+    name: "Home",
+    url: window.location.origin,
+  },
+  {
+    name: "Aircraft",
+    url: window.location.href,
+  },
+];
 
 useHead({
   title: "Our Private Jet Aircraft Fleet | Sofar",
@@ -22,22 +34,11 @@ useHead({
 });
 
 useJsonld(() => ({
-  "@context": "https://schema.org/",
+  "@context": "https://schema.org",
   "@type": "WebSite",
   name: "Our Private Jet Aircraft Fleet | Sofar",
   url: window.location.href,
 }));
-
-const breadcrumbs = [
-  {
-    name: "Home",
-    url: window.location.origin,
-  },
-  {
-    name: "Aircraft",
-    url: window.location.href,
-  },
-];
 </script>
 <template>
   <picture class="services-banner">

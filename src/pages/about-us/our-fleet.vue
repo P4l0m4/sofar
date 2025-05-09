@@ -1,14 +1,49 @@
 <script setup lang="ts">
-import { isDesktop } from "~/utils/functions";
+import { isDesktop, isMobile } from "~/utils/functions";
 import { colors } from "@/utils/colors";
 import { ref } from "vue";
 import preview from "@/assets/images/our-story/our-fleet.webp";
 
 const desktopScreen = ref(isDesktop());
+const mobileScreen = ref(isMobile());
 
 window.addEventListener("resize", () => {
   desktopScreen.value = isDesktop();
+  mobileScreen.value = isMobile();
 });
+
+const questions = [
+  {
+    title: "Can I bring luggage on board?",
+    answer:
+      "Yes, you can bring luggage on board. Each aircraft in the Sofar fleet has a specific luggage capacity, and we’ll advise you on what fits best depending on your destination and number of passengers. Let us know your needs in advance to ensure smooth boarding.",
+  },
+  {
+    title: "Are pets allowed on Sofar flights?",
+    answer:
+      "Absolutely. Pets are welcome on all Sofar flights. We kindly ask you to provide your pet’s details during booking so we can prepare the aircraft accordingly and ensure a comfortable experience for both of you.",
+  },
+  {
+    title: "What amenities are available onboard?",
+    answer:
+      "Sofar flights offer premium comfort and essentials: inflight refreshments, phone charging outlets, and, upon request, tailored amenities such as snacks, drinks, and pet-friendly accessories. While our flights are short, your experience remains refined and seamless.",
+  },
+  {
+    title: "How far can I travel with Sofar’s fleet?",
+    answer:
+      "Sofar specializes in regional flights of up to 2 hours. With bases in New York, Miami, and Los Angeles, our fleet covers a wide range of popular destinations such as The Hamptons, Palm Beach, Las Vegas, and the Caribbean. Our team will help you find the best route based on your needs.",
+  },
+];
+
+const label = ref("Get in touch");
+
+function copyToClipboard() {
+  navigator.clipboard.writeText("hq@flysofar.com");
+  label.value = "Email copied to clipboard!";
+  setTimeout(() => {
+    label.value = "Get in touch";
+  }, 1000);
+}
 
 useHead({
   title: "Our fleet | Premium private jets for every journey | Sofar",
@@ -22,22 +57,11 @@ useHead({
 });
 
 useJsonld(() => ({
-  "@context": "https://schema.org/",
+  "@context": "https://schema.org",
   "@type": "WebSite",
   name: "Our fleet | Premium private jets for every journey | Sofar",
   url: window.location.href,
 }));
-
-const videoRef = ref<HTMLVideoElement>();
-
-const label = ref("Get in touch");
-function copyToClipboard() {
-  navigator.clipboard.writeText("hq@flysofar.com");
-  label.value = "Email copied to clipboard!";
-  setTimeout(() => {
-    label.value = "Get in touch";
-  }, 1000);
-}
 </script>
 <template>
   <picture class="services-banner">
@@ -89,30 +113,7 @@ function copyToClipboard() {
   ><OurFleet :showGallery="true" />
   <AboutMakeItAnywhere />
   <AboutSofarPilots />
-  <ServicesMiniFAQ
-    :questions="[
-      {
-        title: 'Can I bring luggage on board?',
-        answer:
-          'Yes, you can bring luggage on board. Each aircraft in the Sofar fleet has a specific luggage capacity, and we’ll advise you on what fits best depending on your destination and number of passengers. Let us know your needs in advance to ensure smooth boarding.',
-      },
-      {
-        title: 'Are pets allowed on Sofar flights?',
-        answer:
-          'Absolutely. Pets are welcome on all Sofar flights. We kindly ask you to provide your pet’s details during booking so we can prepare the aircraft accordingly and ensure a comfortable experience for both of you.',
-      },
-      {
-        title: 'What amenities are available onboard?',
-        answer:
-          'Sofar flights offer premium comfort and essentials: inflight refreshments, phone charging outlets, and, upon request, tailored amenities such as snacks, drinks, and pet-friendly accessories. While our flights are short, your experience remains refined and seamless.',
-      },
-      {
-        title: 'How far can I travel with Sofar’s fleet?',
-        answer:
-          'Sofar specializes in regional flights of up to 2 hours. With bases in New York, Miami, and Los Angeles, our fleet covers a wide range of popular destinations such as The Hamptons, Palm Beach, Las Vegas, and the Caribbean. Our team will help you find the best route based on your needs.',
-      },
-    ]"
-  />
+  <ServicesMiniFAQ :questions />
 </template>
 <style lang="scss" scoped>
 @import "@/styles/planes.scss";

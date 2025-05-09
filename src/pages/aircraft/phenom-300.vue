@@ -12,7 +12,7 @@ useHead({
 });
 
 useJsonld(() => ({
-  "@context": "https://schema.org/",
+  "@context": "https://schema.org",
   "@type": "WebSite",
   name: "Embraer Phenom 300 | Sofar",
   url: window.location.href,
@@ -113,14 +113,6 @@ useJsonld(() => ({
     <QuotePopUpButton :primary="true" />
   </section>
 
-  <!-- <img
-    class="full-width-img"
-    src="@/assets/images/phenom-300/phenom-300-cabin-inside.webp"
-    alt="private jet cabin image"
-  />
-
-  <OurBases />
-  <EmptysForm /> -->
   <section class="plane-gallery-book">
     <div class="plane-gallery-book__wrapper">
       <img

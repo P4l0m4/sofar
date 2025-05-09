@@ -16,15 +16,6 @@ window.addEventListener("resize", () => {
   desktopScreen.value = isDesktop();
 });
 
-const label = ref("Get in touch with our team");
-function copyToClipboard() {
-  navigator.clipboard.writeText("hq@flysofar.com");
-  label.value = "Email copied to clipboard!";
-  setTimeout(() => {
-    label.value = "Get in touch with our team";
-  }, 1000);
-}
-
 useHead({
   title: "Aircraft Management Services | Sofar",
   meta: [
@@ -37,7 +28,7 @@ useHead({
 });
 
 useJsonld(() => ({
-  "@context": "https://schema.org/",
+  "@context": "https://schema.org",
   "@type": "WebSite",
   name: "Aircraft Management Services | Sofar",
   url: window.location.href,

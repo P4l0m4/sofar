@@ -11,7 +11,7 @@ useHead({
 });
 
 useJsonld(() => ({
-  "@context": "https://schema.org/",
+  "@context": "https://schema.org",
   "@type": "WebSite",
   name: "Embraer Pilatus PC-12 | Sofar",
   url: window.location.href,

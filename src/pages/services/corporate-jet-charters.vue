@@ -29,6 +29,50 @@ window.addEventListener("resize", () => {
   mobileScreen.value = isMobile();
 });
 
+const questions = [
+  {
+    title: "How much does a corporate jet charter cost?",
+    answer:
+      "The cost of a corporate jet charter depends on the route, aircraft type, and schedule flexibility. At Sofar, prices typically start around $5,000 for short regional flights. Contact our team for a personalized quote based on your needs.",
+  },
+  {
+    title: "Can I hold meetings onboard?",
+    answer:
+      "Yes. Our aircraft offers a quiet, private environment ideal for work and meetings. Whether you need to review documents, take calls, or hold a discussion with your team, the cabin is perfectly suited for productive travel. All our aircraft have Starlink - Wifi.",
+  },
+  {
+    title: "How soon can I book a flight?",
+    answer:
+      "Sofar can accommodate bookings with just a few hours’ notice, subject to aircraft availability. For guaranteed options and best timing, we recommend booking at least 24–48 hours in advance.",
+  },
+  {
+    title: "What airports can I fly into?",
+    answer:
+      "You can fly into thousands of airports across the U.S. and beyond—often closer to your final destination than commercial flights allow. Sofar operates from major business hubs as well as smaller regional airports for added convenience.",
+  },
+];
+
+const previews = [
+  {
+    title: "Executive & C-Level Travel",
+    description:
+      "Ensure your CEOs, executives, and high-profile clients travel in comfort, privacy, and efficiency.",
+    image: picture1,
+  },
+  {
+    title: "Multi-City Business Travel",
+    description:
+      "Need to visit multiple offices, clients, or investors in one trip? We create optimized travel plans for corporate teams on tight schedules.",
+    image: picture2,
+  },
+  {
+    title: "Corporate Event & Team Travel",
+    description:
+      "Whether it’s a conference, seminar, or leadership retreat, we offer private flights for small corporate groups to travel together seamlessly.",
+    image: picture3,
+  },
+];
+
 useHead({
   title: "Corporate Jet Charters | Efficient Corporate Travel | Sofar",
   meta: [
@@ -41,7 +85,7 @@ useHead({
 });
 
 useJsonld(() => ({
-  "@context": "https://schema.org/",
+  "@context": "https://schema.org",
   "@type": "WebSite",
   name: "Corporate Jet Charters | Efficient Corporate Travel | Sofar",
   url: window.location.href,
@@ -49,6 +93,10 @@ useJsonld(() => ({
 
 const videoRef = ref<HTMLVideoElement>();
 const videoRef2 = ref<HTMLVideoElement>();
+
+function onError(e: Event) {
+  console.error("Erreur de chargement de la vidéo :", e);
+}
 
 onMounted(() => {
   if (videoRef.value) {
@@ -158,28 +206,7 @@ onMounted(() => {
     @error="onError"
     ref="videoRef2"
   />
-  <ServicesJetsPreviews
-    title="Business Jet Solutions"
-    :previews="[
-      {
-        title: 'Executive & C-Level Travel',
-        description:
-          'Ensure your CEOs, executives, and high-profile clients travel in comfort, privacy, and efficiency.',
-        image: picture1,
-      },
-      {
-        title: 'Multi-City Business Travel',
-        description:
-          'Need to visit multiple offices, clients, or investors in one trip? We create optimized travel plans for corporate teams on tight schedules.',
-        image: picture2,
-      },
-      {
-        title: 'Corporate Event & Team Travel',
-        description:
-          'Whether it’s a conference, seminar, or leadership retreat, we offer private flights for small corporate groups to travel together seamlessly.',
-        image: picture3,
-      },
-    ]"
+  <ServicesJetsPreviews title="Business Jet Solutions" :previews
     ><NuxtLink
       class="button-primary--light"
       href="mailto:hq@flysofar.com"
@@ -188,30 +215,7 @@ onMounted(() => {
       >{{ label }}</NuxtLink
     ></ServicesJetsPreviews
   >
-  <ServicesMiniFAQ
-    :questions="[
-      {
-        title: 'How much does a corporate jet charter cost?',
-        answer:
-          'The cost of a corporate jet charter depends on the route, aircraft type, and schedule flexibility. At Sofar, prices typically start around $5,000 for short regional flights. Contact our team for a personalized quote based on your needs.',
-      },
-      {
-        title: 'Can I hold meetings onboard?',
-        answer:
-          'Yes. Our aircraft offers a quiet, private environment ideal for work and meetings. Whether you need to review documents, take calls, or hold a discussion with your team, the cabin is perfectly suited for productive travel. All our aircraft have Starlink - Wifi.',
-      },
-      {
-        title: 'How soon can I book a flight?',
-        answer:
-          'Sofar can accommodate bookings with just a few hours’ notice, subject to aircraft availability. For guaranteed options and best timing, we recommend booking at least 24–48 hours in advance.',
-      },
-      {
-        title: 'What airports can I fly into?',
-        answer:
-          'You can fly into thousands of airports across the U.S. and beyond—often closer to your final destination than commercial flights allow. Sofar operates from major business hubs as well as smaller regional airports for added convenience.',
-      },
-    ]"
-  />
+  <ServicesMiniFAQ :questions />
 </template>
 <style lang="scss" scoped>
 @import "@/styles/planes.scss";

@@ -13,27 +13,60 @@ window.addEventListener("resize", () => {
 const story = await useAsyncStoryblok("family-jet-charters", {
   version: "published",
 });
-useHead({
-  title: "Family Jet Charters | Safe and Comfortable Travel | Sofar",
-  meta: [
-    {
-      name: "description",
-      content:
-        "With Sofar, you benefit from a safe and comfortable family jet charter. Our private jet services offer the ideal travel solution for family vacations and special occasions.",
-    },
-  ],
-});
 
-useJsonld(() => ({
-  "@context": "https://schema.org/",
-  "@type": "WebSite",
-  name: "Family Jet Charters | Safe and Comfortable Travel | Sofar",
-  url: window.location.href,
-}));
+const questions = [
+  {
+    title: "Is there a luggage limit?",
+    answer:
+      "Yes, there is a luggage limit based on the aircraft type and number of passengers. Our team will advise you on the baggage allowance for your specific flight to ensure a comfortable and safe journey.",
+  },
+  {
+    title: "Can I bring my pet?",
+    answer:
+      "Yes, pets are welcome on SOFAR flights! We love to make your entire family feel at home. Please inform us in advance so we can prepare accordingly and meet all safety and comfort requirements.",
+  },
+  {
+    title: "Are family charter safer than commercial?",
+    answer:
+      "Yes, private family charters are considered very safe. At SOFAR, we adhere to the highest safety standards, offering you a secure, personalized, and stress-free flying experience compared to the complexities of commercial air travel.",
+  },
+  {
+    title: "How far in advance should I book?",
+    answer:
+      "We recommend booking as early as possible to secure your preferred schedule and aircraft, especially during peak travel seasons. However, SOFAR can also accommodate last-minute bookings depending on availability.",
+  },
+];
+
+const carouselElements = [
+  {
+    link: "/destinations/us-caribbean",
+    image: "/assets/images/carribean.webp",
+    label: "Carribean",
+  },
+  {
+    link: "/destinations/us-colorado",
+    image: "/assets/images/colorado.webp",
+    label: "Colorado",
+  },
+  {
+    link: "/destinations/us-new-york",
+    image: "/assets/images/new-york.webp",
+    label: "New York",
+  },
+  {
+    link: "/destinations/us-california",
+    image: "/assets/images/california.webp",
+    label: "California",
+  },
+];
 
 const videoRef = ref<HTMLVideoElement>();
 const videoRef2 = ref<HTMLVideoElement>();
 const videoRef3 = ref<HTMLVideoElement>();
+
+function onError(e: Event) {
+  console.error("Erreur de chargement de la vidéo :", e);
+}
 
 onMounted(() => {
   if (videoRef.value) {
@@ -62,32 +95,23 @@ onMounted(() => {
   }
 });
 
-function onError(e: Event) {
-  console.error("Erreur de chargement de la vidéo :", e);
-}
+useHead({
+  title: "Family Jet Charters | Safe and Comfortable Travel | Sofar",
+  meta: [
+    {
+      name: "description",
+      content:
+        "With Sofar, you benefit from a safe and comfortable family jet charter. Our private jet services offer the ideal travel solution for family vacations and special occasions.",
+    },
+  ],
+});
 
-const carouselElements = [
-  {
-    link: "/destinations/us-caribbean",
-    image: "/assets/images/carribean.webp",
-    label: "Carribean",
-  },
-  {
-    link: "/destinations/us-colorado",
-    image: "/assets/images/colorado.webp",
-    label: "Colorado",
-  },
-  {
-    link: "/destinations/us-new-york",
-    image: "/assets/images/new-york.webp",
-    label: "New York",
-  },
-  {
-    link: "/destinations/us-california",
-    image: "/assets/images/california.webp",
-    label: "California",
-  },
-];
+useJsonld(() => ({
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Family Jet Charters | Safe and Comfortable Travel | Sofar",
+  url: window.location.href,
+}));
 </script>
 <template>
   <picture class="index__banner">
@@ -205,30 +229,7 @@ const carouselElements = [
     @error="onError"
     ref="videoRef3"
   />
-  <ServicesMiniFAQ
-    :questions="[
-      {
-        title: 'Is there a luggage limit?',
-        answer:
-          'Yes, there is a luggage limit based on the aircraft type and number of passengers. Our team will advise you on the baggage allowance for your specific flight to ensure a comfortable and safe journey.',
-      },
-      {
-        title: 'Can I bring my pet?',
-        answer:
-          'Yes, pets are welcome on SOFAR flights! We love to make your entire family feel at home. Please inform us in advance so we can prepare accordingly and meet all safety and comfort requirements.',
-      },
-      {
-        title: 'Are family charter safer than commercial?',
-        answer:
-          'Yes, private family charters are considered very safe. At SOFAR, we adhere to the highest safety standards, offering you a secure, personalized, and stress-free flying experience compared to the complexities of commercial air travel.',
-      },
-      {
-        title: 'How far in advance should I book?',
-        answer:
-          'We recommend booking as early as possible to secure your preferred schedule and aircraft, especially during peak travel seasons. However, SOFAR can also accommodate last-minute bookings depending on availability.',
-      },
-    ]"
-  />
+  <ServicesMiniFAQ :questions />
 </template>
 <style lang="scss" scoped>
 @import "@/styles/planes.scss";

@@ -107,7 +107,6 @@ const carouselElements = computed(() => {
   }
 });
 
-//list of all states
 const statesList = computed(() => {
   return story.value.content.statesList.map((state: State) => {
     return {
@@ -134,6 +133,17 @@ const filterByState = (state: string) => {
     });
 };
 
+const breadcrumbs = [
+  {
+    name: "Home",
+    url: window.location.origin,
+  },
+  {
+    name: "Destinations",
+    url: window.location.href,
+  },
+];
+
 useHead({
   title: "Top Private Jet Destinations | Sofar",
   meta: [
@@ -146,22 +156,11 @@ useHead({
 });
 
 useJsonld(() => ({
-  "@context": "https://schema.org/",
+  "@context": "https://schema.org",
   "@type": "WebSite",
   name: `Top Private Jet Destinations | Sofar`,
   url: window.location.href,
 }));
-
-const breadcrumbs = [
-  {
-    name: "Home",
-    url: window.location.origin,
-  },
-  {
-    name: "Destinations",
-    url: window.location.href,
-  },
-];
 </script>
 <template>
   <section class="destinations">

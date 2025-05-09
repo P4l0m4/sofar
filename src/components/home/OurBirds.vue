@@ -42,9 +42,7 @@
     inset: 0;
     width: 100%;
     height: 100%;
-    // background-image: linear-gradient(80deg, $text-color, transparent 60%);
     background-image: linear-gradient(120deg, $primary-color, transparent 60%);
-    // opacity: 0.1;
     z-index: -1;
   }
 
@@ -72,6 +70,7 @@
   &__title {
     color: $text-color;
   }
+
   &__text {
     color: $text-color;
     text-wrap: balance;

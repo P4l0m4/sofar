@@ -5,7 +5,8 @@ const route = useRoute();
 const stateSlug = route.params.state;
 
 const state = story.value.content.statesList.find(
-  (s) => `${stringToSlug(s.country)}-${stringToSlug(s.name)}` === stateSlug
+  (s: { country: any; name: any }) =>
+    `${stringToSlug(s.country)}-${stringToSlug(s.name)}` === stateSlug
 );
 
 useHead({
@@ -19,7 +20,7 @@ useHead({
 });
 
 useJsonld(() => ({
-  "@context": "https://schema.org/",
+  "@context": "https://schema.org",
   "@type": "WebSite",
   name: `Private Jet Destinations: ${state.name} | Sofar`,
   url: window.location.href,
