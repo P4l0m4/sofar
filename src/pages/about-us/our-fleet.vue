@@ -105,7 +105,7 @@ useJsonld(() => ({
     :image="preview"
     ><NuxtLink
       class="button-primary--light"
-      href="mailto:hq@flysofar.com"
+      to="mailto:hq@flysofar.com"
       @click="copyToClipboard()"
       :style="{ width: mobileScreen ? '100%' : 'fit-content' }"
       >{{ label }}</NuxtLink

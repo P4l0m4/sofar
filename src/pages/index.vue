@@ -71,7 +71,7 @@ useHead({
 });
 
 useJsonld(() => ({
-  "@context": "https://schema.org/",
+  "@context": "https://schema.org",
   "@type": "WebSite",
   name: "Sofar | Private jet charter | On-demand private flights | Reliable Company",
   url: window.location.href,
@@ -294,11 +294,6 @@ function onError(e: Event) {
       margin: auto;
       z-index: 1;
 
-      // @media (min-width: $big-tablet-screen) {
-      //   padding-left: 4rem;
-      //   border: red solid 2px;
-      // }
-
       & img {
         width: 60px;
         height: 60px;
@@ -329,7 +324,6 @@ function onError(e: Event) {
     }
   }
   &__title {
-    // white-space: nowrap;
     display: flex;
     line-height: 2.5rem;
     color: $text-color-alt;
