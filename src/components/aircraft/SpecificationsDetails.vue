@@ -1,21 +1,27 @@
 <script setup lang="ts">
 import { colors } from "@/utils/colors";
 
-type SpecItem = { label: string; value: string; icon: string };
+export type SpecificationDetailsItem = {
+  label: string;
+  value: string;
+  icon: string;
+};
 
-type SpecsTuple = readonly [
-  SpecItem, // Passenger capacity
-  SpecItem, // Endurance
-  SpecItem, // Operating range
-  SpecItem, // Baggage capacity
-  SpecItem, // Speed
-  SpecItem, // Cruising altitude
+export type SpecificationsDetailsTuple = readonly [
+  SpecificationDetailsItem, // Passenger capacity
+  SpecificationDetailsItem, // Endurance
+  SpecificationDetailsItem, // Operating range
+  SpecificationDetailsItem, // Baggage capacity
+  SpecificationDetailsItem, // Speed
+  SpecificationDetailsItem, // Cruising altitude
 ];
 
 defineProps<{
   image: string;
   secondaryImage?: string;
-  specifications: SpecsTuple;
+  littlePlane: string;
+  specifications: SpecificationsDetailsTuple;
+  reverse?: boolean;
 }>();
 </script>
 <template>
@@ -28,7 +34,11 @@ defineProps<{
         alt="private jet details"
       />
       <h2 class="specifications-details__first-part__title subtitles">
-        SPECIFICATIONS
+        SPECIFICATIONS<img
+          class="specifications-details__first-part__title__little-plane"
+          :src="littlePlane"
+          alt="private jet miniature"
+        />
       </h2>
       <ul class="specifications-details__first-part__list">
         <li
@@ -51,6 +61,9 @@ defineProps<{
     </div>
     <img
       class="specifications-details__image"
+      :class="{
+        'specifications-details__image__reverse': reverse,
+      }"
       :src="image"
       alt="private jet specifications"
     />
@@ -64,7 +77,7 @@ defineProps<{
   padding: 2rem 1rem;
   gap: 2rem;
 
-  @media (min-width: $big-tablet-screen) {
+  @media (min-width: $laptop-screen) {
     flex-direction: row;
     padding: 4rem;
     gap: 0;
@@ -73,9 +86,25 @@ defineProps<{
   &__first-part {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 2rem;
     color: $text-color-alt;
     width: 100%;
+
+    &__title {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      justify-content: space-between;
+
+      &__little-plane {
+        width: 100px;
+
+        @media (min-width: $big-tablet-screen) {
+          width: 200px;
+        }
+      }
+    }
 
     &__secondary-image {
       width: 100%;
@@ -109,6 +138,16 @@ defineProps<{
 
   &__image {
     width: 100%;
+    object-fit: cover;
+    object-position: center;
+
+    &__reverse {
+      order: -1;
+
+      @media (min-width: $laptop-screen) {
+        margin-right: 2rem;
+      }
+    }
   }
 }
 </style>

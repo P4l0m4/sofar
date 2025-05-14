@@ -12,31 +12,24 @@ function copyToClipboard() {
   }, 1000);
 }
 
-const specs = [
-  {
-    icon: "target",
-    text: "Up to 8 passengers",
-  },
-  {
-    icon: "seat",
-    text: "Up to 2000 range",
-  },
-  {
-    icon: "airplane_takeoff",
-    text: "Up to 4 hour flights",
-  },
+export type SpecsTuple = readonly [
+  { icon: "target"; text: string }, // passenger capacity
+  { icon: "seat"; text: string }, // operating range
+  { icon: "airplane_takeoff"; text: string }, // endurance
 ];
+
+defineProps<{
+  specs: SpecsTuple;
+  title: string;
+  description: string;
+}>();
 </script>
 <template>
   <section class="jet-specs">
     <div class="jet-specs__text">
-      <h1 class="titles">Light Jets</h1>
+      <h1 class="jet-specs__text__title titles">{{ title }}</h1>
       <p class="paragraphs">
-        Light jets are the perfect balance between luxury and practicality,
-        offering speed, agility, and affordability for short-haul private
-        flights. Ideal for business executives, weekend getaways, and regional
-        travel, light jets provide a seamless flying experience with access to
-        smaller airports and reduced operating costs.
+        {{ description }}
       </p>
       <NuxtLink
         to="mailto:hq@flysofar.com"
@@ -87,6 +80,10 @@ const specs = [
 
     @media (min-width: $big-tablet-screen) {
       gap: 2rem;
+    }
+
+    &__title {
+      text-transform: uppercase;
     }
   }
 

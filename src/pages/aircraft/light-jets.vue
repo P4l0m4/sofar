@@ -1,15 +1,62 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { colors } from "@/utils/colors";
-import { isDesktop } from "~/utils/functions";
+import { isDesktop } from "@/utils/functions";
 import specsImage from "@/assets/images/aircraft/phenom300-embraer-sofar.webp";
 import specsSecondaryImage from "@/assets/images/aircraft/lightjet-cabin-phenom300-sofar.webp";
+import specsLittlePlane from "@/assets/images/aircraft/lightjet-sofar.svg";
+
+import type { SpecsTuple } from "@/components/aircraft/JetSpecs.vue";
+import type { SpecificationsDetailsTuple } from "@/components/aircraft/SpecificationsDetails.vue";
 
 const desktopScreen = ref(isDesktop());
 
 window.addEventListener("resize", () => {
   desktopScreen.value = isDesktop();
 });
+
+const specs: SpecsTuple = [
+  {
+    icon: "target",
+    text: "Up to 8 passengers",
+  },
+  {
+    icon: "seat",
+    text: "Up to 2000 range",
+  },
+  {
+    icon: "airplane_takeoff",
+    text: "Up to 4 hour flights",
+  },
+];
+
+const specsDescription =
+  "Light jets are the perfect balance between luxury and practicality, offering speed, agility, and affordability for short-haul private flights. Ideal for business executives, weekend getaways, and regional travel, light jets provide a seamless flying experience with access to smaller airports and reduced operating costs.";
+
+const specificationsDetails: SpecificationsDetailsTuple = [
+  {
+    label: "Passenger capacity",
+    value: "Up to 8 passengers",
+    icon: "seat",
+  },
+  { label: "Endurance", value: "4 hours", icon: "airplane_takeoff" },
+  {
+    label: "Operating range",
+    value: "200 NM",
+    icon: "target",
+  },
+  {
+    label: "Baggage capacity",
+    value: "76 Ft³",
+    icon: "weight",
+  },
+  { label: "Speed", value: "430 knots", icon: "speedometer" },
+  {
+    label: "Cruising altitude",
+    value: "45.000 Ft",
+    icon: "cloud_arrow_up",
+  },
+];
 
 const breadcrumbs = [
   {
@@ -27,12 +74,12 @@ const breadcrumbs = [
 ];
 
 useHead({
-  title: "Our Light Jets Fleet | Sofar",
+  title: "Light Jet Charter | Efficient Short-Haul Private Flights | Sofar",
   meta: [
     {
       name: "description",
       content:
-        "Light jets are the perfect balance between luxury and practicality, offering speed, agility, and affordability for short-haul private flights.",
+        "Discover the performance and comfort of light jets. Ideal for short flights, our light jets carry 4–6 passengers with excellent range, speed, and cabin features.",
     },
   ],
 });
@@ -40,7 +87,7 @@ useHead({
 useJsonld(() => ({
   "@context": "https://schema.org",
   "@type": "WebSite",
-  name: "Our Light Jets Fleet | Sofar",
+  name: "Light Jet Charter | Efficient Short-Haul Private Flights | Sofar",
   url: window.location.href,
 }));
 </script>
@@ -77,34 +124,12 @@ useJsonld(() => ({
       alt="light jets charter banner image"
     />
   </picture>
-  <AircraftJetSpecs />
+  <AircraftJetSpecs :specs title="Light Jets" :description="specsDescription" />
   <AircraftSpecificationsDetails
     :image="specsImage"
     :secondaryImage="specsSecondaryImage"
-    :specifications="[
-      {
-        label: 'Passenger capacity',
-        value: 'Up to 8 passengers',
-        icon: 'seat',
-      },
-      { label: 'Endurance', value: '4 hours', icon: 'airplane_takeoff' },
-      {
-        label: 'Operating range',
-        value: '200 NM',
-        icon: 'target',
-      },
-      {
-        label: 'Baggage capacity',
-        value: '76 Ft³',
-        icon: 'weight',
-      },
-      { label: 'Speed', value: '430 knots', icon: 'speedometer' },
-      {
-        label: 'Cruising altitude',
-        value: '45.000 Ft',
-        icon: 'cloud_arrow_up',
-      },
-    ]"
+    :littlePlane="specsLittlePlane"
+    :specifications="specificationsDetails"
   />
   <section class="our-fleet">
     <h2 class="our-fleet__title titles">Our Fleet</h2>

@@ -53,25 +53,24 @@ export const useMenuItemsStore = defineStore("menu", {
               icon: "award_star",
               alt: "menu icon private jet charters",
             },
-
-            {
-              label: "Private jet amenities",
-              link: "/services/private-jet-amenities",
-              icon: "coffee",
-              alt: "menu icon private jet amenities",
-            },
+            // {
+            //   label: "Private jet amenities",
+            //   link: "/services/private-jet-amenities",
+            //   icon: "coffee",
+            //   alt: "menu icon private jet amenities",
+            // },
             {
               label: "Off-fleet requests",
               link: "/services/off-fleet-requests",
               icon: "network_node",
               alt: "menu icon off fleet requests",
             },
-            {
-              label: "Prices",
-              link: "/services/prices",
-              icon: "attach_money",
-              alt: "menu icon prices",
-            },
+            // {
+            //   label: "Prices",
+            //   link: "/services/prices",
+            //   icon: "attach_money",
+            //   alt: "menu icon prices",
+            // },
           ],
         },
         {
@@ -86,6 +85,36 @@ export const useMenuItemsStore = defineStore("menu", {
           icon: "airlines",
           alt: "menu icon aircraft",
           children: [
+            {
+              label: "Light Jets",
+              link: "/aircraft/light-jets",
+              icon: "airplanemode_active",
+              alt: "menu icon light jets",
+            },
+            {
+              label: "Midsize Jets",
+              link: "/aircraft/midsize-jets",
+              icon: "airplanemode_active",
+              alt: "menu icon midsize jets",
+            },
+            {
+              label: "Super Midsize Jets",
+              link: "/aircraft/super-midsize-jets",
+              icon: "airplanemode_active",
+              alt: "menu icon super midsize jets",
+            },
+            {
+              label: "Heavy Jets",
+              link: "/aircraft/heavy-jets",
+              icon: "airplanemode_active",
+              alt: "menu icon heavy jets",
+            },
+            {
+              label: "Ultra Long Haul Jets",
+              link: "/aircraft/ultra-long-haul-jets",
+              icon: "airplanemode_active",
+              alt: "menu icon ultra long jets",
+            },
             {
               label: "PC12",
               link: "/aircraft/pc12",
