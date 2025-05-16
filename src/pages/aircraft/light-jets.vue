@@ -95,7 +95,7 @@ useJsonld(() => ({
   <picture class="services-banner">
     <source
       media="(min-width: 1100px)"
-      srcset="@/assets/images/aircraft/aircraft-privatejet-size-sofar.webp"
+      srcset="@/assets/images/aircraft/header-lightjet-sofar.webp"
       type="image/webp"
     />
 
@@ -116,11 +116,11 @@ useJsonld(() => ({
     <QuoteFormDesktop
       parent="aircraft"
       v-if="desktopScreen"
-      :color="colors['primary-color']"
+      :color="colors['secondary-color']"
     />
     <img
       class="services-banner__img"
-      src="@/assets/images/aircraft/aircraft-privatejet-size-sofar-mobile.webp"
+      src="@/assets/images/aircraft/light-jet-mobile.webp"
       alt="light jets charter banner image"
     />
   </picture>

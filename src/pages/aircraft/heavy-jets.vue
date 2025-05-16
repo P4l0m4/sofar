@@ -115,7 +115,7 @@ useJsonld(() => ({
     <QuoteFormDesktop
       parent="aircraft"
       v-if="desktopScreen"
-      :color="colors['primary-color']"
+      :color="colors['secondary-color']"
     />
     <img
       class="services-banner__img"
