@@ -163,7 +163,7 @@ const menuItems = [
         alt: "menu icon contact",
       },
       {
-        label: "our fleet",
+        label: "Our fleet",
         link: "/about-us/our-fleet",
         icon: "airplanemode_active",
         alt: "menu icon our fleet",

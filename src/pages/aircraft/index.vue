@@ -109,7 +109,7 @@ function onError(e: Event) {
     />
     <img
       class="services-banner__img"
-      src="@/assets/images/aircraft/aircraft-privatejet-size-sofar-mobile.webp"
+      src="@/assets/images/our-story/our-fleet-sofar-private-jet-mobile.webp"
       alt="private jet charter banner image"
     />
   </picture>
