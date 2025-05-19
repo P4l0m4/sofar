@@ -83,6 +83,36 @@ const menuItems = [
     alt: "menu icon aircraft",
     children: [
       {
+        label: "Light Jets",
+        link: "/aircraft/light-jets",
+        icon: "airplanemode_active",
+        alt: "menu icon light jets",
+      },
+      {
+        label: "Midsize Jets",
+        link: "/aircraft/midsize-jets",
+        icon: "airplanemode_active",
+        alt: "menu icon midsize jets",
+      },
+      {
+        label: "Super Midsize Jets",
+        link: "/aircraft/super-midsize-jets",
+        icon: "airplanemode_active",
+        alt: "menu icon super midsize jets",
+      },
+      {
+        label: "Heavy Jets",
+        link: "/aircraft/heavy-jets",
+        icon: "airplanemode_active",
+        alt: "menu icon heavy jets",
+      },
+      {
+        label: "Ultra Long Haul Jets",
+        link: "/aircraft/ultra-long-haul-jets",
+        icon: "airplanemode_active",
+        alt: "menu icon ultra long jets",
+      },
+      {
         label: "PC12",
         link: "/aircraft/pc12",
         icon: "airplanemode_active",
@@ -99,6 +129,12 @@ const menuItems = [
         link: "/aircraft/phenom-300",
         icon: "airplanemode_active",
         alt: "menu icon phenom 300",
+      },
+      {
+        label: "Safety",
+        link: "/aircraft/safety",
+        icon: "health_and_safety",
+        alt: "menu icon safety",
       },
     ],
   },
@@ -127,7 +163,7 @@ const menuItems = [
         alt: "menu icon contact",
       },
       {
-        label: "our fleet",
+        label: "Our fleet",
         link: "/about-us/our-fleet",
         icon: "airplanemode_active",
         alt: "menu icon our fleet",
