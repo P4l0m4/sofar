@@ -1,5 +1,13 @@
 <script setup lang="ts">
-const story = await useAsyncStoryblok("phenom-300", { version: "published" });
+import { isDesktop } from "@/utils/functions";
+const desktopScreen = ref(isDesktop());
+
+window.addEventListener("resize", () => {
+  desktopScreen.value = isDesktop();
+});
+
+import randomImage300 from "@/assets/images/phenom-300/phenom-300-embraer-sofar.webp";
+
 useHead({
   title: "Embraer Phenom 300 | Sofar",
   meta: [
@@ -17,127 +25,96 @@ useJsonld(() => ({
   name: "Embraer Phenom 300 | Sofar",
   url: window.location.href,
 }));
+
+const questions = [
+  {
+    title: "How many passengers can the Phenom 300 accommodate?",
+    answer:
+      "The Phenom 300 comfortably accommodates up to 7 passengers. The cabin layout offers spacious seating, a private enclosed lavatory, and a refined travel experience for business or leisure trips.",
+  },
+  {
+    title: "How far can the Phenom 300 fly?",
+    answer:
+      "The Phenom 300 has a range of approximately 2,000 nautical miles (about 4 hours of flight time), making it ideal for routes like New York to Miami, Los Angeles to Dallas, or Chicago to the Caribbean without refueling.",
+  },
+  {
+    title: "Can I bring luggage on the Phenom 300?",
+    answer:
+      "Yes, the Phenom 300 offers one of the largest baggage compartments in its category. It can easily accommodate suitcases, garment bags, golf clubs, and other essentials for your trip. Just let us know your needs when booking.",
+  },
+  {
+    title: "How quickly can I book a Phenom 300 flight?",
+    answer:
+      "You can book a Phenom 300 flight with just a few hours’ notice, depending on aircraft availability. For better coordination and aircraft positioning, we recommend booking 24–48 hours in advance.",
+  },
+];
+
+const videoRef = ref<HTMLVideoElement>();
+
+function onError(e: Event) {
+  console.error("Erreur de chargement de la vidéo :", e);
+}
+
+onMounted(() => {
+  if (videoRef.value) {
+    const p = videoRef.value.play();
+    if (p instanceof Promise) {
+      p.catch((err) => {
+        console.warn("Autoplay bloqué par le navigateur :", err);
+      });
+    }
+  }
+});
 </script>
 <template>
-  <picture class="plane">
+  <picture class="services-banner">
     <source
       media="(min-width: 1100px)"
-      :srcset="story.content.bannerImageDesktop.filename" />
-
-    <h2 class="plane__title titles">Phenom 300</h2>
-
-    <div class="plane__tags">
-      <span class="plane__tags__tag tags"
-        ><IconComponent color="#052545" icon="pet_supplies" />Pet friendly</span
-      >
-      <span class="plane__tags__tag tags"
-        ><IconComponent
-          color="#052545"
-          icon="airplanemode_active"
-        />Lightjet</span
-      >
-      <span class="plane__tags__tag tags"
-        ><IconComponent
-          color="#052545"
-          icon="airline_seat_recline_extra"
-        />Comfort</span
-      >
-      <span class="plane__tags__tag tags"
-        ><IconComponent color="#052545" icon="wifi" />WIFI</span
-      >
-      <span class="plane__tags__tag tags"
-        ><IconComponent color="#052545" icon="business_center" />Baggages
-        capacity</span
-      >
-    </div>
-
-    <img
-      class="plane__img"
-      :src="story.content.bannerImageMobile.filename"
-      :alt="story.content.bannerImageMobile.alt"
-  /></picture>
-  <section class="plane-info-horizontal">
-    <div class="plane-info-horizontal__txt">
-      <h2 class="titles">The Most Trusted Light Jet in The World</h2>
-      <h3 class="subtitles">Efficiency, Performance, Comfort.</h3>
-      <p class="paragraphs">
-        The Phenom 300 offers luxury and efficiency. With its spacious
-        nine-passenger cabin, ergonomic seating and top-of-the-line
-        entertainment, this light jet ensures comfort and performance for your
-        business or leisure travels.
-      </p>
-    </div>
-    <img
-      class="plane-info-horizontal__img"
-      src="@/assets/images/phenom-300/phenom300-embraer-sofar-private-jet2.webp"
-      alt="plane info image"
+      srcset="@/assets/images/phenom-300/phenom300-embraer-sofar.webp"
     />
-  </section>
-  <section class="plane-info-vertical">
-    <div class="plane-info-vertical__txt">
-      <h3 class="subtitles">The cabin</h3>
-      <p class="paragraphs">
-        The Phenom 300 cabin is the epitome of luxury and practicality. Designed
-        meticulously, it offers a remarkable travel experience. The cabin's
-        spaciousness, ergonomic seats, and premium finishes create an inviting
-        atmosphere.
-      </p>
-      <p class="paragraphs">
-        Large windows fill the cabin with natural light. This jet features an
-        enclosed bathroom and the widest cabin in its category, offering both
-        privacy and roominess. With a generous luggage capacity of 76ft³, it
-        comfortably accommodates up to 7 passengers.
-      </p>
-      <p class="paragraphs">
-        Maintaining a low cabin pressure altitude, even at cruising altitudes of
-        45,000ft, enhances passenger comfort. It's equipped with 110V outlets
-        (4), satellite phone/text capability, and Gogo WIFI for uninterrupted
-        connectivity. The Phenom 300 combines luxury, comfort, and practicality
-        for a superior travel experience.
-      </p>
-      <img
-        class="plane-info-vertical__txt__img"
-        src="@/assets/images/phenom-300/phenom-300-cabin-capability.webp"
-        alt="private jet cabin image"
-      />
+    <div class="services-banner__headlines">
+      <NuxtLink
+        class="button-primary--dark rounded-button"
+        to="/booking"
+        v-if="desktopScreen"
+        >Booking</NuxtLink
+      >
+      <NuxtLink class="services-banner__headlines__logo" to="/">
+        <img src="@/assets/images/logo-light.svg"
+      /></NuxtLink>
+      <EmergencyBubble v-if="desktopScreen" />
     </div>
     <img
-      class="plane-info-vertical__img"
-      src="@/assets/images/phenom-300/cabin-phenom300-embraer.webp"
-      alt="plane info image"
+      class="services-banner__img"
+      src="@/assets/images/phenom-300/phenom300-embraer-sofar.webp"
+      alt="banner image"
     />
-  </section>
+  </picture>
 
-  <section class="standard-spacing centered-content">
-    <h2 class="titles">Have you been impressed by the Phenom 300 ?</h2>
-    <QuotePopUpButton :primary="true" />
-  </section>
-
-  <section class="plane-gallery-book">
-    <div class="plane-gallery-book__wrapper">
-      <img
-        src="@/assets/images/phenom-300/phenom-300-embraer-sofar-cockpit.webp"
-        alt="private jet image"
-      />
-      <img
-        src="@/assets/images/phenom-300/phenom-300-embraer-sofar-window.webp"
-        alt="private jet image"
-      />
-      <img
-        src="@/assets/images/phenom-300/phenom-300-embraer-sofar (2).webp"
-        alt="private jet image"
-      />
-      <img
-        src="@/assets/images/phenom-300/phenom-300-embraer-sofar (4).webp"
-        alt="private jet image"
-      />
-      <img
-        src="@/assets/images/phenom-300/phenom-300-embraer-sofar.webp"
-        alt="private jet image"
-      />
-    </div>
-  </section>
+  <AircraftIndividualJet
+    title="Phenom 300 - Embraer"
+    subtitle="One of the Most Popular Business Jets"
+    description="The Embraer Phenom 300 is the best-selling light business jet in the world, offering exceptional speed, range, and luxury. Designed for executives, families, and frequent travelers, this aircraft provides superior comfort, efficiency, and state-of-the-art technology for a seamless flying experience."
+    :slide="1"
+    :showGallery="true"
+  />
+  <img :src="randomImage300" class="random-image" alt="private jet charter" />
+  <ServicesMiniFAQ :questions />
 </template>
 <style lang="scss" scoped>
 @import "@/styles/planes.scss";
+
+.random-image {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  object-position: center;
+  padding: 1rem 0;
+  background-color: $secondary-color;
+
+  @media (min-width: $big-tablet-screen) {
+    height: 100vh;
+    padding: 2rem 0;
+  }
+}
 </style>

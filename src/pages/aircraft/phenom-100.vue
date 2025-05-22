@@ -1,5 +1,13 @@
 <script setup lang="ts">
+import { isDesktop } from "@/utils/functions";
+const desktopScreen = ref(isDesktop());
+
+window.addEventListener("resize", () => {
+  desktopScreen.value = isDesktop();
+});
+
 const story = await useAsyncStoryblok("phenom-100", { version: "published" });
+
 useHead({
   title: "Embraer Phenom 100 | Sofar",
   meta: [
@@ -17,179 +25,92 @@ useJsonld(() => ({
   name: "Embraer Phenom 100 | Sofar",
   url: window.location.href,
 }));
+
+const questions = [
+  {
+    title: "How far can the Phenom 100 fly?",
+    answer:
+      "The Phenom 100 has a range of approximately 1,100 nautical miles (about 2 to 2.5 hours of flight time). It’s ideal for short regional flights such as New York to Boston, Los Angeles to Napa, or Miami to the Bahamas.",
+  },
+  {
+    title: "Can I bring pets on a private jet?",
+    answer:
+      "Yes, pets are welcome on board all Sofar flights, including the Phenom 100. Your companion can stay with you in the cabin for the duration of the flight. Let us know in advance so we can prepare accordingly.",
+  },
+  {
+    title: "Can I bring luggage on the Phenom 100?",
+    answer:
+      "Yes, you can bring luggage on board. The Phenom 100 offers sufficient space for soft bags, carry-ons, and personal items. For optimal comfort, we recommend traveling light and informing our team of your luggage needs in advance.",
+  },
+  {
+    title: "How quickly can I book a Phenom 100 flight?",
+    answer:
+      "Phenom 100 flights can be arranged within a few hours depending on availability. For more flexibility and smooth coordination, we suggest booking 24–48 hours ahead when possible.",
+  },
+];
+
+const videoRef = ref<HTMLVideoElement>();
+
+function onError(e: Event) {
+  console.error("Erreur de chargement de la vidéo :", e);
+}
+
+onMounted(() => {
+  if (videoRef.value) {
+    const p = videoRef.value.play();
+    if (p instanceof Promise) {
+      p.catch((err) => {
+        console.warn("Autoplay bloqué par le navigateur :", err);
+      });
+    }
+  }
+});
 </script>
 <template>
-  <picture class="plane">
+  <picture class="services-banner">
     <source
       media="(min-width: 1100px)"
       :srcset="story.content.bannerImageDesktop.filename"
     />
-
-    <h2 class="plane__title titles">Phenom 100</h2>
-
-    <div class="plane__tags">
-      <span class="plane__tags__tag tags"
-        ><IconComponent color="#052545" icon="pet_supplies" />Pet friendly</span
+    <div class="services-banner__headlines">
+      <NuxtLink
+        class="button-primary--dark rounded-button"
+        to="/booking"
+        v-if="desktopScreen"
+        >Booking</NuxtLink
       >
-      <span class="plane__tags__tag tags"
-        ><IconComponent
-          color="#052545"
-          icon="airplanemode_active"
-        />Lightjet</span
-      >
-      <span class="plane__tags__tag tags"
-        ><IconComponent
-          color="#052545"
-          icon="airline_seat_recline_extra"
-        />Comfort</span
-      >
-      <span class="plane__tags__tag tags"
-        ><IconComponent color="#052545" icon="flight_class" />Club seat</span
-      >
-      <span class="plane__tags__tag tags"
-        ><IconComponent color="#052545" icon="business_center" />Baggages
-        capacity</span
-      >
+      <NuxtLink class="services-banner__headlines__logo" to="/">
+        <img src="@/assets/images/logo-light.svg"
+      /></NuxtLink>
+      <EmergencyBubble v-if="desktopScreen" />
     </div>
+    <video
+      ref="videoRef"
+      class="auto-video"
+      src="@/assets/videos/phenom100-video.mp4"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+      @error="onError"
+    />
 
     <img
-      class="plane__img"
+      class="services-banner__img"
       :src="story.content.bannerImageMobile.filename"
-      :alt="story.content.bannerImageMobile.alt"
+      alt="banner image"
     />
   </picture>
-  <section class="plane-info-horizontal">
-    <div class="plane-info-horizontal__txt">
-      <h2 class="titles">
-        Experience Exceptional Travel with Sofar's Phenom 100
-      </h2>
-      <h3 class="subtitles">
-        Introducing the Phenom 100 - your ultimate ticket to travel in
-        unrivalled style.
-      </h3>
-      <p class="paragraphs">
-        Designed for business trips and family getaways, this small aircraft
-        harmoniously combines the need for speed with uncompromising comfort,
-        all at an incredibly attractive price. Despite its compact size, the
-        Phenom 100 ensures that you don't have to sacrifice luxury for
-        efficiency. Enjoy the comfort of its spacious, well appointed seats for
-        a sumptuous experience, whether you're on a business mission or escaping
-        with the family. High-speed travel becomes an uncompromising reality, as
-        the Phenom 100 sets a new benchmark for small jets, offering efficiency
-        and luxury in an elegant package.
-      </p>
-      <p class="paragraphs">
-        What really sets the Phenom 100 apart is its reliability. Count on this
-        exceptional aircraft for a journey that's not only smooth, but also
-        safe, so you can reach your destination with pinpoint accuracy. Elevate
-        your travel experience with the Phenom 100 - an unrivalled blend of
-        speed, comfort and affordability that defines the pinnacle of private
-        aviation.
-      </p>
-    </div>
-    <img
-      class="plane-info-horizontal__img"
-      src="@/assets/images/phenom-100/phenom-100-embraer-sofar-jet-charter-blue-dots.webp"
-      alt="plane info image"
-    />
-  </section>
 
-  <section class="plane-info-vertical">
-    <div class="plane-info-vertical__txt">
-      <h3 class="subtitles">The cabin</h3>
-      <p class="paragraphs">
-        The Phenom 100 also claims to have the tallest and widest cross section,
-        cabin dimensions in its class, offering more head and leg room than its
-        competitors. The Phenom 100 also possesses the largest entrance door,
-        and is unique due to the fact that most entry-level and small jets do
-        not have an air-stair option!
-      </p>
-      <p class="paragraphs">
-        The Phenom 100 windows are also the largest among entry-level and light
-        jets, measuring 1.2 square feet, and are strategically positioned to
-        provide the most natural light possible for occupants. The Phenom 100
-        contains a forward wardrobe for storing coats, jackets, and up to 4
-        laptops with 6 cubic feet of storage capacity.
-      </p>
-      <p class="paragraphs">
-        The Phenom 100 has a large cabin cross-section and offers more head and
-        legroom than many competitors. Depending on the configuration, there is
-        room for 4 to 6 passengers in the cabin without feeling cramped. The
-        large windows give the cabin a light and bright feel-good ambience.
-      </p>
-    </div>
-    <img
-      class="plane-info-vertical__img"
-      src="@/assets/images/phenom-100/phenom-100-cabin-layout-sofar.webp"
-      alt="plane info image"
-    />
-  </section>
-  <section class="plane-info-vertical">
-    <div class="plane-info-vertical__txt" style="position: relative">
-      <h3 class="subtitles">Aircraft Specifics and Cabin Capability</h3>
-      <p class="paragraphs">Enclosed Bathroom</p>
-      <p class="paragraphs">Widest Cabin in Light Jet Category</p>
-      <p class="paragraphs">Cabin Pressure Altitude as Low as 8,000ft</p>
-      <p class="paragraphs">At Cruise Altitude of 41,000ft</p>
-      <p class="paragraphs">110V Outlets (2)</p>
-      <p class="paragraphs">Satellite Phone/Text Capability/Airtext</p>
-    </div>
-    <img
-      class="plane-info-vertical__img"
-      src="@/assets/images/phenom-100/pehnom100-cabin-capability.webp"
-      alt="private jet cabin image"
-    />
-    <img
-      class="inside-img"
-      src="@/assets/images/phenom-100/phenom-100-luggage-capacity (2).webp"
-    />
-  </section>
-  <section class="standard-spacing centered-content">
-    <h2 class="titles">Have you been impressed by the Phenom 100 ?</h2>
-    <QuotePopUpButton :primary="true" />
-  </section>
-  <section class="plane-gallery-book">
-    <div class="plane-gallery-book__special-wrapper">
-      <img
-        src="@/assets/images/phenom-100/phenom-100-embraer-sofar.webp"
-        alt="private jet image"
-      />
-      <img
-        src="@/assets/images/phenom-100/phenom-100-embraer-sofar (1).webp"
-        alt="private jet image"
-      />
-      <img
-        src="@/assets/images/phenom-100/phenom-100-embraer-sofar (2).webp"
-        alt="private jet image"
-      />
-      <img
-        src="@/assets/images/phenom-100/phenom-100-embraer-sofar (3).webp"
-        alt="private jet image"
-      />
-      <img
-        src="@/assets/images/phenom-100/phenom-100-embraer-sofar (4).webp"
-        alt="private jet image"
-      />
-      <img
-        src="@/assets/images/phenom-100/phenom-100-embraer-sofar-jet-charter.webp"
-        alt="private jet image"
-      />
-      <img
-        src="@/assets/images/phenom-100/phenom-100-embraer-sofar (5).webp"
-        alt="private jet image"
-      />
-      <img
-        src="@/assets/images/phenom-100/phenom-100-embraer-sofar (6).webp"
-        alt="private jet image"
-      />
-      <img
-        src="@/assets/images/phenom-100/phenom-100-embraer-sofar (7).webp"
-        alt="private jet image"
-      />
-    </div>
-  </section>
-  <!-- <OurBases />
-  <EmptysForm /> -->
+  <AircraftIndividualJet
+    title="Phenom 100 - Embraer"
+    subtitle="The Perfect Light Jet for Short-Haul Private Travel"
+    description="The Embraer Phenom 100 is a top-tier light jet, perfect for short-haul private flights while offering luxury, efficiency, and performance. With its spacious cabin, impressive speed, and sleek design, the Phenom 100 is a top choice for business professionals, small groups, and weekend getaways."
+    :slide="0"
+    :showGallery="true"
+  />
+  <ServicesMiniFAQ :questions />
 </template>
 <style lang="scss" scoped>
 @import "@/styles/planes.scss";
