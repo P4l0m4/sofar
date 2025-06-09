@@ -51,10 +51,6 @@ const questions = [
 
 const videoRef = ref<HTMLVideoElement>();
 
-function onError(e: Event) {
-  console.error("Erreur de chargement de la vidéo :", e);
-}
-
 onMounted(() => {
   if (videoRef.value) {
     const p = videoRef.value.play();

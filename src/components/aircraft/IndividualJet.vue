@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref } from "vue";
 import { colors } from "@/utils/colors";
 import phenom100 from "@/assets/images/phenom-100/phenom-100-embraer-sofar (3).webp";
 import phenom300 from "@/assets/videos/phenom300.mp4";
@@ -9,13 +8,17 @@ import phenom100Cabin from "@/assets/images/phenom-100/phenom100-floor-plan.svg"
 import phenom100Cabin2 from "@/assets/images/phenom-100/phenom100-cabin-size.svg";
 import phenom100Miniature from "@/assets/images/phenom-100/phenom100-miniature.webp";
 import phenom100Luggage from "@/assets/images/phenom-100/phenom100-luggage.webp";
-import phenom100Capacity from "@/assets/images/phenom-100/phenom-100-luggage-capacity.svg";
+import phenom100Capacity from "@/assets/images/phenom-100/phenom-100-luggage-capacity.png";
+import phenom100CabinVideo from "@/assets/videos/Phenom 100 cabin.mp4";
 
 import phenom300Cabin2 from "@/assets/images/phenom-300/phenom-300-floor-plan.svg";
 import phenom300Cabin from "@/assets/images/phenom-300/phenom300-size-cabin.svg";
 import phenom300Miniature from "@/assets/images/phenom-300/phenom-300-miniature.webp";
+import phenom300CabinExperience from "@/assets/images/phenom-300/cabin-phenom300.webp";
+import phenom300Capability from "@/assets/images/phenom-300/phenom-300-luggage-capacity.png";
 
 import pilatusMiniature from "@/assets/images/pc-12/pilatus-miniature.webp";
+import pilatusCapability from "@/assets/images/pc-12/pc12-cabin-size.svg";
 import pilatusCabin from "@/assets/images/pc-12/pc12-floor-plan.svg";
 import pilatusCabin2 from "@/assets/images/pc-12/pc12-cabin-size1.svg";
 import pilatusCabin3 from "@/assets/images/pc-12/pc12-cabin-size2.svg";
@@ -116,11 +119,13 @@ const slides = [
     cabinExperience: {
       subtitle:
         "The Phenom 100 offers a spacious, modern interior, ensuring a luxurious and private travel experience.",
+      video: phenom100CabinVideo,
     },
     cabinCapability: {
       backgroundImage: phenom100Luggage,
       images: [phenom100Capacity],
     },
+    aircraft: "Phenom 100",
   },
   {
     planeName: "Phenom 300 Embraer",
@@ -174,10 +179,12 @@ const slides = [
     cabinExperience: {
       subtitle:
         "The Phenom 300 offers a spacious, modern interior, ensuring a luxurious and private travel experience.",
+      image: phenom300CabinExperience,
     },
     cabinCapability: {
-      images: [phenom100Capacity],
+      images: [phenom300Capability],
     },
+    aircraft: "Phenom 300",
   },
   {
     planeName: "Pilatus PC 12",
@@ -231,11 +238,13 @@ const slides = [
     cabinExperience: {
       subtitle:
         "The Phenom 100 offers a spacious, modern interior, ensuring a luxurious and private travel experience.",
+      image: gPC122,
     },
     cabinCapability: {
-      images: [phenom100Cabin],
+      images: [phenom100Capacity, pilatusCapability],
       backgroundImage: pilatusCabinBackground,
     },
+    aircraft: "Pilatus PC-12",
   },
 ];
 
@@ -250,6 +259,10 @@ const gallery = [
     images: [gPC12, gPC121, gPC122, gPC123, gPC124],
   },
 ];
+
+function onError(e: Event) {
+  console.error("Erreur de chargement de la vidéo :", e);
+}
 </script>
 <template>
   <section class="individual-jet">
@@ -335,7 +348,7 @@ const gallery = [
         </div>
       </div>
     </div>
-    <AircraftJetsMap />
+    <AircraftJetsMap :aircraft="slides[slide].aircraft" />
     <div class="cabin-experience">
       <h3 class="subtitles">Cabin Experience</h3>
       <p class="paragraphs">
@@ -630,7 +643,6 @@ const gallery = [
   &__image,
   &__video {
     width: 100%;
-    max-width: 1000px;
     height: 400px;
     object-fit: cover;
     object-position: center;
@@ -638,6 +650,8 @@ const gallery = [
 
     @media (min-width: $big-tablet-screen) {
       height: 500px;
+      min-width: 900px;
+      max-width: 1000px;
     }
   }
 }

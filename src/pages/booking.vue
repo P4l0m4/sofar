@@ -5,9 +5,10 @@ import {
   haversineDistance,
   convertKmToMiles,
   calculateFlightDuration,
-} from "~/utils/mapGL.js";
+} from "@/utils/mapGL.js";
 
-import { isDesktop } from "~/utils/functions";
+import { isDesktop } from "@/utils/functions";
+import { colors } from "@/utils/colors";
 
 const desktopScreen = ref(isDesktop());
 
@@ -93,7 +94,7 @@ function createMap() {
   }
   map.value = new mapboxgl.Map({
     container: mapRef.value,
-    style: "mapbox://styles/flysofar/cluvditjb006w01r5enddch7y",
+    style: "mapbox://styles/flysofar/cluohiwuc00x501pe1javcdf6",
     center: midpoint.value,
     zoom: 2,
     projection: "mercator",
@@ -127,7 +128,7 @@ let dashArraySeq = [0, 2];
 function placeMarker() {
   removeMarkersAndPopUp();
   originMarker.value = new mapboxgl.Marker({
-    color: "#052545",
+    color: colors["sky-color"],
     anchor: "center",
   })
     .setLngLat([originLon.value, originLat.value])
@@ -135,7 +136,7 @@ function placeMarker() {
 
   if (destinationLat.value !== 39 && destinationLon.value !== -140) {
     destinationMarker.value = new mapboxgl.Marker({
-      color: "#052545",
+      color: colors["sky-color"],
       anchor: "center",
     })
       .setLngLat([destinationLon.value, destinationLat.value])
@@ -177,7 +178,7 @@ function placeMarker() {
         "line-cap": "round",
       },
       paint: {
-        "line-color": "#052545",
+        "line-color": colors["sky-color"],
         "line-width": 2,
         "line-dasharray": dashArraySeq,
       },
@@ -265,12 +266,6 @@ const breadcrumbs = [
       rest
     </h2>
 
-    <!-- <QuoteForm
-      parent="booking"
-      class="booking__form"
-      @origin-airport="getEmittedOriginAirport"
-      @destination-airport="getEmittedDestinationAirport"
-    /> -->
     <QuoteForm
       parent="booking"
       class="booking__form"
@@ -284,7 +279,7 @@ const breadcrumbs = [
       @origin-airport="getEmittedOriginAirport"
       @destination-airport="getEmittedDestinationAirport"
       v-if="desktopScreen"
-      color="#052545"
+      :color="colors['primary-color']"
     />
   </section>
   <BlogArticlesCarousel />
@@ -314,6 +309,7 @@ const breadcrumbs = [
 
   & h1,
   & h2 {
+    color: $text-color-alt;
     z-index: 1;
   }
 

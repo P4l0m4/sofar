@@ -46,9 +46,6 @@ defineProps({
     flex-direction: row;
     align-items: center;
   }
-  // @media (min-width: $desktop-screen) {
-  //   gap: 8rem;
-  // }
 
   &__list {
     display: flex;

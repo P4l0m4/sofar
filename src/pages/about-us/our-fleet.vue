@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { isDesktop, isMobile } from "~/utils/functions";
+import { isDesktop, isMobile } from "@/utils/functions";
 import { colors } from "@/utils/colors";
 import { ref } from "vue";
 import preview from "@/assets/images/our-story/our-fleet.webp";
