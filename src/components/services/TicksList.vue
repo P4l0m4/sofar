@@ -1,6 +1,14 @@
 <script setup lang="ts">
 import { colors } from "@/utils/colors";
 defineProps({
+  title: {
+    type: String,
+    required: false,
+  },
+  subtitle: {
+    type: String,
+    required: false,
+  },
   list: {
     type: Array<String>,
     required: true,
@@ -18,6 +26,8 @@ defineProps({
       alt="sofar jet charter"
     />
     <ul class="ticks-list__list">
+      <h2 v-if="title" class="subtitles">{{ title }}</h2>
+      <p v-if="subtitle" class="paragraphs">{{ subtitle }}</p>
       <li
         class="ticks-list__list__element"
         v-for="(element, i) in list"
