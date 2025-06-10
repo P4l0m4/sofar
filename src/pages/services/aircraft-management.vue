@@ -17,22 +17,22 @@ const questions = [
   {
     title: "What aircraft can Sofar manage?",
     answer:
-      "Yes, you can bring luggage on board. Each aircraft in the Sofar fleet has a specific luggage capacity, and we’ll advise you on what fits best depending on your destination and number of passengers. Let us know your needs in advance to ensure smooth boarding.",
+      "Sofar specializes in the management of light jets and turboprops, including models such as the Phenom 100, Phenom 300, and Pilatus PC-12. Our flexible management solutions can also be tailored to other aircraft types on a case-by-case basis. Whether your aircraft is based in New York, Miami, or Los Angeles, our team ensures optimal operations, maintenance, and charter revenue generation.",
   },
   {
     title: "How does Sofar help reduce aircraft ownership costs?",
     answer:
-      "Absolutely. Pets are welcome on all Sofar flights. We kindly ask you to provide your pet’s details during booking so we can prepare the aircraft accordingly and ensure a comfortable experience for both of you.",
+      "By integrating your aircraft into our charter fleet when not in personal use, Sofar helps offset operational expenses through revenue-generating flights. Our in-house sales team, optimized scheduling, and preferred vendor network allow us to reduce repositioning costs, maintenance fees, and crew expenses. We handle every detail to maximize your jet’s performance and financial efficiency.",
   },
   {
     title: "Is chartering my jet safe and secure?",
     answer:
-      "Sofar flights offer premium comfort and essentials: inflight refreshments, phone charging outlets, and, upon request, tailored amenities such as snacks, drinks, and pet-friendly accessories. While our flights are short, your experience remains refined and seamless.",
+      "Absolutely. Safety is our top priority. Sofar maintains the highest operational standards and ensures full compliance with FAA regulations. All flights are operated by experienced, professional pilots, and every charter request is carefully vetted. We protect your aircraft, your crew, and your reputation as if it were our own.",
   },
   {
     title: "How do I get started with aircraft management?",
     answer:
-      "Sofar specializes in regional flights of up to 2 hours. With bases in New York, Miami, and Los Angeles, our fleet covers a wide range of popular destinations such as The Hamptons, Palm Beach, Las Vegas, and the Caribbean. Our team will help you find the best route based on your needs.",
+      "Getting started is simple. Contact our team to schedule a consultation. We’ll assess your aircraft, operational goals, and preferences, then provide a tailored management proposal. From there, we handle everything—from staffing and compliance to charter promotion and maintenance oversight—so you can enjoy the benefits of ownership without the stress.",
   },
 ];
 

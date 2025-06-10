@@ -32,22 +32,22 @@ const questions = [
   {
     title: "How can I get a flight quote?",
     answer:
-      "Yes, you can bring luggage on board. Each aircraft in the Sofar fleet has a specific luggage capacity, and we’ll advise you on what fits best depending on your destination and number of passengers. Let us know your needs in advance to ensure smooth boarding.",
+      "Requesting a quote is fast and easy. Simply fill out the quote form on our website with your departure and arrival locations, preferred dates, and number of passengers. Our team will respond promptly with a tailored offer based on real-time aircraft availability, ensuring the best possible option for your needs.",
   },
   {
     title: "How does Sofar ensure transparency in pricing?",
     answer:
-      "Absolutely. Pets are welcome on all Sofar flights. We kindly ask you to provide your pet’s details during booking so we can prepare the aircraft accordingly and ensure a comfortable experience for both of you.",
+      "At Sofar, we believe in clear and upfront pricing. Every quote includes all direct flight costs with no hidden fees. We provide a detailed breakdown, including positioning, crew, landing fees, and taxes—so you know exactly what you're paying for. No surprises, just honest, competitive pricing.",
   },
   {
     title: "Can I make last-minute changes to my booking?",
     answer:
-      "Sofar flights offer premium comfort and essentials: inflight refreshments, phone charging outlets, and, upon request, tailored amenities such as snacks, drinks, and pet-friendly accessories. While our flights are short, your experience remains refined and seamless.",
+      "Yes, we understand that plans can change. Our team is available 24/7 to accommodate last-minute adjustments to your itinerary whenever possible—whether it’s a time change, additional passenger, or new destination. While changes are subject to aircraft availability and operational constraints, we always do our best to find a solution.",
   },
   {
     title: "What kind of support is available during my trip?",
     answer:
-      "Sofar specializes in regional flights of up to 2 hours. With bases in New York, Miami, and Los Angeles, our fleet covers a wide range of popular destinations such as The Hamptons, Palm Beach, Las Vegas, and the Caribbean. Our team will help you find the best route based on your needs.",
+      "From takeoff to landing, our team is here for you. Sofar provides round-the-clock support to ensure every detail of your journey goes smoothly. Whether you need ground transportation, inflight preferences, or real-time updates, our operations and concierge teams are just a call or message away.",
   },
 ];
 
