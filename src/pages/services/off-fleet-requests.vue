@@ -63,7 +63,7 @@ useHead({
 useJsonld(() => ({
   "@context": "https://schema.org/",
   "@type": "WebSite",
-  name: "Off-Fleet Jet Requests | Customized Private Jet Solutions | Sofar",
+  name: "Private Jet Sourcing & Off-Fleet Requests | Sofar",
   url: window.location.href,
 }));
 </script>
