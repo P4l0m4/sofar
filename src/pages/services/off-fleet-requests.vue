@@ -105,7 +105,14 @@ useJsonld(() => ({
     subtitle="Need a Jet Outside Our Fleet? We’ll Find It for You"
     text="Expand your travel options with Sofar's off-fleet requests service. When our in-house fleet, including the Pilatus PC-12, Phenom 100, and Phenom 300, doesn't meet your specific needs, we can source additional aircraft to ensure you have the perfect private jet for your journey. Our extensive network of trusted partners allows us to provide a wide range of aircraft options, tailored to your unique travel requirements."
     :image="preview"
-  />
+  >
+    <NuxtLink
+      class="button-primary--light"
+      to="/booking"
+      :style="{ width: mobileScreen ? '100%' : 'fit-content' }"
+      >Booking</NuxtLink
+    >
+  </ServicesUnderBanner>
   <ServicesRequestProcess />
   <ServicesTicksList
     title="Why use off fleet request services?"
