@@ -4,7 +4,7 @@ import { stringToSlug } from "~/utils/slugify";
 const dayjs = useDayjs();
 
 interface Props {
-  articleTitle: string;
+  articleTitle?: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {

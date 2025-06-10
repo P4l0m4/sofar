@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { isDesktop } from "~/utils/functions";
+import { isDesktop } from "@/utils/functions";
 import { colors } from "@/utils/colors";
 import { ref } from "vue";
 import family from "@/assets/images/private-jet-charter.webp";

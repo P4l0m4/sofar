@@ -1,43 +1,3 @@
-<!-- <script setup>
-import { onMounted, ref } from "vue";
-import mapboxgl from "mapbox-gl";
-const config = useRuntimeConfig();
-const mapRef = ref();
-mapboxgl.accessToken = config.public.MAP_BOX_API_KEY;
-
-onMounted(() => {
-  const map = new mapboxgl.Map({
-    container: mapRef.value,
-    style: "mapbox://styles/flysofar/cluvditjb006w01r5enddch7y",
-    center: [-90.55174117682346, 35.15790888688196],
-    zoom: 3.5,
-    scrollZoom: false,
-    doubleClickZoom: false,
-    touchZoomRotate: false,
-    projection: "mercator",
-  });
-
-  if (window.innerWidth < 768) {
-    map.setCenter([-96.55174117682346, 35.15790888688196]);
-    map.setZoom(2.3);
-  }
-
-  // Marker for New York
-  new mapboxgl.Marker({ color: "#052545", anchor: "center" })
-    .setLngLat([-74.006, 40.7128])
-    .addTo(map);
-
-  // Marker for Miami
-  new mapboxgl.Marker({ color: "#052545", anchor: "center" })
-    .setLngLat([-80.1918, 25.7617])
-    .addTo(map);
-
-  // Marker for Los Angeles
-  new mapboxgl.Marker({ color: "#052545", anchor: "center" })
-    .setLngLat([-118.243683, 34.052235])
-    .addTo(map);
-});
-</script> -->
 <script setup>
 import { onMounted, ref } from "vue";
 import mapboxgl from "mapbox-gl";
@@ -88,6 +48,7 @@ onMounted(() => {
     doubleClickZoom: false,
     touchZoomRotate: false,
     projection: "mercator",
+    interactive: false,
   });
 
   if (window.innerWidth < 768) {

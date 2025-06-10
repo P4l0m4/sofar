@@ -133,12 +133,6 @@ export const useMenuItemsStore = defineStore("menu", {
               icon: "airplanemode_active",
               alt: "menu icon phenom 300",
             },
-            {
-              label: "Safety",
-              link: "/aircraft/safety",
-              icon: "health_and_safety",
-              alt: "menu icon safety",
-            },
           ],
         },
         {
@@ -170,6 +164,12 @@ export const useMenuItemsStore = defineStore("menu", {
               link: "/about-us/our-fleet",
               icon: "airplanemode_active",
               alt: "menu icon our fleet",
+            },
+            {
+              label: "Operations",
+              link: "/about-us/operations",
+              icon: "lifebuoy-fill",
+              alt: "menu icon operations",
             },
           ],
         },
