@@ -45,6 +45,7 @@ onMounted(() => {
         <IconComponent
           v-if="opt.icon"
           :icon="opt.icon"
+          size="0.8rem"
           class="segmented-control__icon"
         />
         <span>{{ opt.label }}</span>
@@ -74,14 +75,14 @@ onMounted(() => {
     align-items: center;
     justify-content: center;
     width: 100%;
-    padding: 0.75rem;
+    padding: 0.65rem;
     gap: 0.5rem;
     cursor: pointer;
     user-select: none;
     z-index: 1;
     color: $text-color-alt;
     transition: color 0.3s;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     white-space: nowrap;
 
     @media (min-width: $big-tablet-screen) {

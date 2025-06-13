@@ -16,7 +16,7 @@
       </p>
       <NuxtLink
         class="sofar-pilots__text__button button-primary--light"
-        to="/about-us/blog#Testimonials"
+        to="/blog#Testimonials"
         >Sofar team</NuxtLink
       >
     </div>

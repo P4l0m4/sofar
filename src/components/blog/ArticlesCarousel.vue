@@ -70,7 +70,7 @@ const scroll = (direction: "left" | "right") => {
         @mouseleave="showArrows = false"
       >
         <NuxtLink
-          :to="`/about-us/blog/${stringToSlug(slide.title)}`"
+          :to="`/blog/${stringToSlug(slide.title)}`"
           class="carousel__container__slide fading"
           v-for="slide in articlesToDisplay"
           :style="{ backgroundImage: `url(${slide.previewImage.filename})` }"

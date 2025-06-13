@@ -311,6 +311,7 @@ const breadcrumbs = [
   & h2 {
     color: $text-color-alt;
     z-index: 1;
+    text-wrap: balance;
   }
 
   &__map {

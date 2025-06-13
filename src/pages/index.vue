@@ -102,240 +102,248 @@ function onError(e: Event) {
 }
 </script>
 <template>
-  <picture class="index__banner">
-    <!-- <source
-      media="(min-width: 1100px)"
-      :srcset="storyHome.content.bannerImageDesktop.filename"
-    /> -->
-    <source
-      media="(min-width: 1100px)"
-      srcset="@/assets/images/home/preview-desktop.webp"
-    />
-    <div class="index__banner__headlines">
-      <NuxtLink
-        class="button-primary--dark rounded-button"
-        to="/booking"
+  <div class="index">
+    <picture class="index__banner">
+      <source
+        media="(min-width: 1100px)"
+        srcset="@/assets/images/home/preview-desktop.webp"
+      />
+      <div class="index__banner__headlines">
+        <NuxtLink
+          class="button-primary--dark rounded-button"
+          to="/booking"
+          v-if="desktopScreen"
+          style="z-index: 1"
+          >Booking</NuxtLink
+        >
+
+        <NuxtLink class="index__banner__headlines__logo" to="/">
+          <img src="@/assets/images/logo-light.svg"
+        /></NuxtLink>
+
+        <EmergencyBubble v-if="desktopScreen" style="z-index: 1" />
+      </div>
+
+      <video
+        ref="videoRef"
+        class="auto-video"
+        src="@/assets/videos/homepage-desktop.mp4"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+        @error="onError"
         v-if="desktopScreen"
-        style="z-index: 1"
-        >Booking</NuxtLink
-      >
+      />
+      <video
+        ref="videoRef"
+        class="auto-video"
+        src="@/assets/videos/homepage-mobile.mp4"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+        @error="onError"
+        v-else
+      />
 
-      <NuxtLink class="index__banner__headlines__logo" to="/">
-        <img src="@/assets/images/logo-light.svg"
-      /></NuxtLink>
+      <QuoteFormDesktop
+        parent="home"
+        v-if="desktopScreen"
+        :color="colors['secondary-color']"
+      />
 
-      <EmergencyBubble v-if="desktopScreen" style="z-index: 1" />
-    </div>
-
-    <video
-      ref="videoRef"
-      class="auto-video"
-      src="@/assets/videos/homepage-desktop.mp4"
-      autoplay
-      muted
-      loop
-      playsinline
-      preload="auto"
-      @error="onError"
-      v-if="desktopScreen"
-    />
-    <video
-      ref="videoRef"
-      class="auto-video"
-      src="@/assets/videos/homepage-mobile.mp4"
-      autoplay
-      muted
-      loop
-      playsinline
-      preload="auto"
-      @error="onError"
-      v-else
+      <img
+        class="index__banner__img"
+        src="@/assets/images/home/preview.jpg"
+        alt="banner image"
+      />
+    </picture>
+    <PrivateJetCharter />
+    <AircraftJetsMap
+      :aircraft="['Phenom 100', 'Phenom 300', 'Pilatus PC-12']"
     />
 
-    <QuoteFormDesktop
-      parent="home"
-      v-if="desktopScreen"
-      :color="colors['secondary-color']"
-    />
-
-    <img
-      class="index__banner__img"
-      src="@/assets/images/home/preview.jpg"
-      alt="banner image"
-    />
-  </picture>
-  <PrivateJetCharter />
-  <OurBases />
-
-  <div class="fleet-image"></div>
-  <OurFleet />
-  <section class="photo-grid">
-    <img
-      src="@/assets/images/home/private-jet-charter-sofar6865.webp"
-      alt="sofar jet charter"
-    />
-    <img
-      src="@/assets/images/phenom-100/phenom-100-embraer-sofar (4).webp"
-      alt="sofar jet charter"
-    />
-    <img
-      src="@/assets/images/home/private-jet-charter-sofar6487.webp"
-      alt="sofar jet charter"
-    />
-    <img
-      src="@/assets/images/home/private-jet-charter-sofar0474.webp"
-      alt="sofar jet charter"
-    />
-    <img
-      src="@/assets/images/home/private-jet-charter-sofar8167.webp"
-      alt="sofar jet charter"
-    />
-    <img
-      src="@/assets/images/home/private-jet-charter-sofar6190.webp"
-      alt="sofar jet charter"
-    />
-  </section>
-  <HomeWhyFlyWithSofar />
-  <EmptysForm />
-  <ServicesOurServices />
-  <ClientReviews />
-  <h2 class="section-title titles">Top Destinations</h2>
-  <h3 class="section-subtitle subtitles">
-    Choose from our most popular destinations
-  </h3>
-  <CarouselComponent :carouselElements="destinationsCarouselElements" />
-  <JsonldBreadcrumb :links="breadcrumbs" />
+    <div class="fleet-image"></div>
+    <OurFleet />
+    <section class="photo-grid">
+      <img
+        src="@/assets/images/home/private-jet-charter-sofar6865.webp"
+        alt="sofar jet charter"
+      />
+      <img
+        src="@/assets/images/phenom-100/phenom-100-embraer-sofar (4).webp"
+        alt="sofar jet charter"
+      />
+      <img
+        src="@/assets/images/home/private-jet-charter-sofar6487.webp"
+        alt="sofar jet charter"
+      />
+      <img
+        src="@/assets/images/home/private-jet-charter-sofar0474.webp"
+        alt="sofar jet charter"
+      />
+      <img
+        src="@/assets/images/home/private-jet-charter-sofar8167.webp"
+        alt="sofar jet charter"
+      />
+      <img
+        src="@/assets/images/home/private-jet-charter-sofar6190.webp"
+        alt="sofar jet charter"
+      />
+    </section>
+    <HomeWhyFlyWithSofar />
+    <EmptysForm />
+    <ServicesOurServices />
+    <ClientReviews />
+    <h2 class="section-title titles">Top Destinations</h2>
+    <h3 class="section-subtitle subtitles">
+      Choose from our most popular destinations
+    </h3>
+    <CarouselComponent :carouselElements="destinationsCarouselElements" />
+    <JsonldBreadcrumb :links="breadcrumbs" />
+  </div>
 </template>
 <style lang="scss">
-.index__banner {
-  display: flex;
-  background-size: cover;
-  background-position: center;
-  min-height: 100svh;
-  max-height: 800px;
-  width: 100%;
-  padding: 1rem;
-  padding-bottom: 3rem;
-  flex-direction: column;
-  justify-content: end;
-  gap: 1rem;
-  position: relative;
+.index {
+  background-color: $secondary-color;
 
-  @media (min-width: $big-tablet-screen) {
-    height: 100vh;
-    max-height: 100vh;
-    min-height: 100vh;
-  }
-  &::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    background-color: $text-color;
-    z-index: -1;
-  }
-  &::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    background-image: linear-gradient(45deg, $primary-color, transparent 100%);
-    z-index: -1;
-    opacity: 0.2;
-  }
-
-  & source {
-    display: none;
-  }
-
-  &__titles {
+  &__banner {
     display: flex;
+    background-size: cover;
+    background-position: center;
+    min-height: 100svh;
+    max-height: 800px;
+    width: 100%;
+    padding: 1rem;
+    padding-bottom: 3rem;
     flex-direction: column;
+    justify-content: end;
     gap: 1rem;
-    color: $text-color-alt;
-    position: absolute;
-    top: 40%;
-    padding: 0 1rem;
+    position: relative;
 
     @media (min-width: $big-tablet-screen) {
-      padding: 0 2rem;
+      height: 100vh;
+      max-height: 100vh;
+      min-height: 100vh;
     }
-  }
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background-color: $text-color;
+      z-index: -1;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background-image: linear-gradient(
+        45deg,
+        $primary-color,
+        transparent 100%
+      );
+      z-index: -1;
+      opacity: 0.2;
+    }
 
-  &__headlines {
-    display: flex;
-    gap: 1rem;
-    color: $text-color-alt;
-    position: absolute;
-    inset: 1rem;
-    bottom: inherit;
-    margin: auto;
-    align-items: center;
+    & source {
+      display: none;
+    }
 
-    @media (min-width: $big-tablet-screen) {
-      inset: 2rem;
+    &__titles {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      color: $text-color-alt;
+      position: absolute;
+      top: 40%;
+      padding: 0 1rem;
+
+      @media (min-width: $big-tablet-screen) {
+        padding: 0 2rem;
+      }
+    }
+
+    &__headlines {
+      display: flex;
+      gap: 1rem;
+      color: $text-color-alt;
+      position: absolute;
+      inset: 1rem;
       bottom: inherit;
-      gap: 2rem;
-      padding-right: 12rem;
-    }
-
-    &__logo {
-      width: fit-content;
-      height: fit-content;
       margin: auto;
-      z-index: 1;
+      align-items: center;
 
-      & img {
-        width: 60px;
-        height: 60px;
+      @media (min-width: $big-tablet-screen) {
+        inset: 2rem;
+        bottom: inherit;
+        gap: 2rem;
+        padding-right: 12rem;
+      }
+
+      &__logo {
+        width: fit-content;
+        height: fit-content;
+        margin: auto;
+        z-index: 1;
+
+        & img {
+          width: 60px;
+          height: 60px;
+
+          @media (min-width: $big-tablet-screen) {
+            width: 150px;
+            height: 70px;
+          }
+        }
+      }
+      &__subtitle {
+        color: $text-color-alt;
+        line-height: 1.6rem;
+        width: fit-content;
+        height: fit-content;
+        opacity: 0.8;
+        font-family: "Custom";
+        font-weight: 100;
+        white-space: nowrap;
 
         @media (min-width: $big-tablet-screen) {
-          width: 150px;
-          height: 70px;
+          gap: 2rem;
+          display: flex;
+          line-height: 1.4rem;
+          justify-content: center;
+          width: 100%;
         }
       }
     }
-    &__subtitle {
+    &__title {
+      display: flex;
+      line-height: 2.5rem;
       color: $text-color-alt;
-      line-height: 1.6rem;
-      width: fit-content;
       height: fit-content;
-      opacity: 0.8;
-      font-family: "Custom";
-      font-weight: 100;
-      white-space: nowrap;
+      width: fit-content;
 
       @media (min-width: $big-tablet-screen) {
-        gap: 2rem;
-        display: flex;
-        line-height: 1.4rem;
-        justify-content: center;
-        width: 100%;
+        line-height: 2rem;
       }
     }
-  }
-  &__title {
-    display: flex;
-    line-height: 2.5rem;
-    color: $text-color-alt;
-    height: fit-content;
-    width: fit-content;
 
-    @media (min-width: $big-tablet-screen) {
-      line-height: 2rem;
+    &__img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
     }
-  }
-
-  &__img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -1;
   }
 }
 

@@ -45,22 +45,10 @@ const menuItems = [
         alt: "menu icon pet-friendly charters",
       },
       {
-        label: "Private jet amenities",
-        link: "/services/private-jet-amenities",
-        icon: "coffee",
-        alt: "menu icon private jet amenities",
-      },
-      {
         label: "Off-fleet requests",
         link: "/services/off-fleet-requests",
         icon: "network_node",
         alt: "menu icon off fleet requests",
-      },
-      {
-        label: "Prices",
-        link: "/services/prices",
-        icon: "attach_money",
-        alt: "menu icon prices",
       },
       {
         label: "Aircraft management",
@@ -133,38 +121,38 @@ const menuItems = [
     ],
   },
   {
-    label: "About us",
-    link: "/about-us",
+    label: "Our story",
+    link: "/our-story",
     icon: "info",
     alt: "menu icon about-us",
     children: [
       {
         label: "Our story",
-        link: "/about-us/our-story",
+        link: "/our-story",
         icon: "book_2",
         alt: "menu icon our story",
       },
       {
         label: "Blog",
-        link: "/about-us/blog",
+        link: "/blog",
         icon: "article",
         alt: "menu icon blog",
       },
       {
         label: "Careers",
-        link: "/about-us/careers",
+        link: "/our-story/careers",
         icon: "alternate_email",
         alt: "menu icon contact",
       },
       {
         label: "Our fleet",
-        link: "/about-us/our-fleet",
+        link: "/our-story/our-fleet",
         icon: "airplanemode_active",
         alt: "menu icon our fleet",
       },
       {
         label: "Operations",
-        link: "/about-us/operations",
+        link: "/our-story/operations",
         icon: "lifebuoy-fill",
         alt: "menu icon operations",
       },
@@ -173,8 +161,7 @@ const menuItems = [
 ];
 </script>
 <template>
-  <MobileNavigation :menuItems="menuItems" />
-  <DesktopNavigation :menuItems="menuItems" />
+  <BurgerMenu />
   <main>
     <slot />
     <!-- Google Tag Manager (noscript) -->

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const story = await useAsyncStoryblok("destinations", { version: "published" });
-import { stringToSlug } from "~/utils/slugify";
-//type for destination
+import { stringToSlug } from "@/utils/slugify";
+
 interface Destination {
   city: string;
   stateName: string;
@@ -11,12 +11,13 @@ interface Destination {
     filename: string;
   };
 }
-//type for state
+
 interface State {
   name: string;
   destinationsList: Destination[];
   country: string;
 }
+
 type MenuItem = {
   label: string;
   link: string;
@@ -34,7 +35,6 @@ interface Props {
 
 const props = defineProps<Props>();
 
-//list of all states
 const statesList = computed(() => {
   return story.value.content.statesList.map((state: State) => {
     return {

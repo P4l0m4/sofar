@@ -45,7 +45,7 @@ if (story.value.content.link) {
           reliable experiences.
         </p>
         <div class="welcome-to-sofar__buttons">
-          <NuxtLink class="button-primary--dark" to="/about-us/our-story"
+          <NuxtLink class="button-primary--dark" to="/our-story"
             >Learn more about our story</NuxtLink
           >
           <QuotePopUpButton />

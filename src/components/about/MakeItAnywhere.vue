@@ -9,7 +9,7 @@
     </p>
     <NuxtLink
       class="make-it-anywhere__button button-primary--light"
-      to="/about-us/our-story"
+      to="/our-story"
       >Our story</NuxtLink
     >
   </section>

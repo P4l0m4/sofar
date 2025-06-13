@@ -69,7 +69,6 @@ function toggleQuestion(index) {
 
   &__card {
     background-color: $primary-color;
-    border-radius: $radius;
     box-shadow: $shadow;
     display: flex;
     flex-direction: column;

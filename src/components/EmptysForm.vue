@@ -185,7 +185,6 @@ async function validEmptyState() {
   display: flex;
   gap: 1rem;
   padding: 1rem;
-  border-radius: $radius;
   background-color: $base-color;
   justify-content: center;
   align-items: center;

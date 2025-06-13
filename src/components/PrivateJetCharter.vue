@@ -14,9 +14,7 @@
       leisure, every journey reflects our dedication to providing personalized
       and reliable experiences.
     </p>
-    <NuxtLink class="button-primary--light" to="/about-us/our-story"
-      >Our story</NuxtLink
-    >
+    <NuxtLink class="button-primary--light" to="/our-story">Our story</NuxtLink>
   </section>
 </template>
 <style lang="scss" scoped>

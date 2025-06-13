@@ -323,6 +323,7 @@ input[type="search"]::-webkit-search-results-decoration {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: $text-color-faded;
+  cursor: grab;
 }
 
 //DETAILS

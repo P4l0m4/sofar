@@ -16,7 +16,7 @@ export async function getNews() {
   const articles = data.story.content.articles;
   // console.log(articles);
   return articles.map((article) => ({
-    loc: `/about-us/blog/${stringToSlug(article.title)}`,
+    loc: `/blog/${stringToSlug(article.title)}`,
     changefreq: "daily",
     priority: 0.9,
   }));

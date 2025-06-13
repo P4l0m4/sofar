@@ -108,12 +108,12 @@ const scroll = (direction: "left" | "right") => {
 <style lang="scss" scoped>
 .carousel {
   display: flex;
-  // justify-content: center;
   align-items: center;
   padding: 2rem 0 2rem 1rem;
   overflow-x: hidden;
   width: 100%;
   position: relative;
+  background-color: $base-color;
 
   @media (min-width: $big-tablet-screen) {
     padding: 2rem 0 2rem 1rem;

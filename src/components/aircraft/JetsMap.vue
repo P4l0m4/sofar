@@ -10,14 +10,14 @@ import { isMobile } from "@/utils/functions";
 import type { Flight } from "@/utils/flights.ts";
 
 const props = defineProps<{
-  aircraft: string;
+  aircraft: string[];
 }>();
 
 const config = useRuntimeConfig();
 mapboxgl.accessToken = config.public.MAP_BOX_API_KEY;
 const mapRef = ref();
 const departureAirport = ref<Flight["departure"] | null>(null);
-const departureLabel = ref<string | undefined | null>(null);
+const departureLabel = ref<string | undefined>(undefined);
 
 const arrivalAirport = ref<Flight["arrival"] | null>(null);
 const map = ref(null);
@@ -55,10 +55,10 @@ const selectedFlight = ref<Flight | null>(null);
 const availableDepartureAirports = computed<string[]>(() => [
   ...new Set(
     allFlights
-      .filter(
-        (f) =>
-          normalizeString(f.aircraft) ===
-          normalizeString(selectedAircraft.value)
+      .filter((f) =>
+        selectedAircraft.value.some(
+          (ac) => normalizeString(f.aircraft) === normalizeString(ac)
+        )
       )
       .map((f) => f.departure.airport)
   ),
@@ -80,16 +80,17 @@ const options = computed(() =>
     };
   })
 );
-const visibleFlights = computed(() => {
-  if (!departureAirport.value) return [];
 
-  return allFlights.filter((f: Flight) => {
-    return (
-      normalizeString(f.aircraft) === normalizeString(selectedAircraft.value) &&
-      f.departure.airport === departureAirport.value?.airport
-    );
-  });
-});
+const visibleFlights = computed<Flight[]>(() =>
+  departureAirport.value
+    ? allFlights.filter(
+        (f) =>
+          selectedAircraft.value.some(
+            (ac) => normalizeString(f.aircraft) === normalizeString(ac)
+          ) && f.departure.airport === departureAirport.value?.airport
+      )
+    : []
+);
 
 function getEmittedarrivalAirport(label: string) {
   const f = allFlights.find((f) => f.arrival.airport === label);
@@ -253,6 +254,7 @@ watch(departureLabel, (label) => {
 <template>
   <section class="jets-map">
     <div class="jets-map__map" ref="mapRef"></div>
+
     <div class="jets-map__data" v-if="selectedFlight">
       <span class="jets-map__data__trip">
         {{ selectedFlight.departure.label }} to
@@ -324,7 +326,7 @@ watch(departureLabel, (label) => {
     top: 0;
     left: 0;
     z-index: 1;
-    padding: 1rem;
+    padding: 0.75rem;
     color: $text-color-alt;
     border: $secondary-color 1px solid;
     border-radius: $radius;
@@ -380,11 +382,11 @@ watch(departureLabel, (label) => {
     background-color: rgba(#05192c, 0.4);
     height: fit-content;
     width: 100%;
-    padding: 1rem;
+    padding: 0.75rem;
 
     @media (min-width: $big-tablet-screen) {
       width: fit-content;
-      min-width: 360px;
+      min-width: 480px;
       gap: 0.5rem;
       bottom: 1rem;
       left: 1rem;
@@ -397,6 +399,24 @@ watch(departureLabel, (label) => {
 
       @media (min-width: $big-tablet-screen) {
         flex-direction: column;
+        max-height: 260px;
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        &::-webkit-scrollbar-track {
+          background: $black-color-faded;
+          border-radius: 20px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background: $text-color;
+          border-radius: $radius;
+        }
+
+        &::-webkit-scrollbar-thumb:hover {
+          background: $secondary-color-lighter;
+          cursor: grab;
+        }
       }
 
       &__arrival {

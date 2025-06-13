@@ -125,7 +125,7 @@ const slides = [
       backgroundImage: phenom100Luggage,
       images: [phenom100Capacity],
     },
-    aircraft: "Phenom 100",
+    aircraft: ["Phenom 100"],
   },
   {
     planeName: "Phenom 300 Embraer",
@@ -184,7 +184,7 @@ const slides = [
     cabinCapability: {
       images: [phenom300Capability],
     },
-    aircraft: "Phenom 300",
+    aircraft: ["Phenom 300"],
   },
   {
     planeName: "Pilatus PC 12",
@@ -244,7 +244,7 @@ const slides = [
       images: [phenom100Capacity, pilatusCapability],
       backgroundImage: pilatusCabinBackground,
     },
-    aircraft: "Pilatus PC-12",
+    aircraft: ["Pilatus PC-12"],
   },
 ];
 
